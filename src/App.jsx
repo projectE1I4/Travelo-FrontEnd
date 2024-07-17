@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/Users/LoginPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
+import RegisterPage from './pages/Users/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 
 const App = () => {
@@ -13,7 +14,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
+      <Route path="/users/login" element={<LoginPage />} />
+      <Route path="/users/register" element={<RegisterPage />} />
       <Route
         path="/protected"
         element={

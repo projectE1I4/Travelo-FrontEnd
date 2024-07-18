@@ -1,12 +1,17 @@
 // authService : axios, 토큰 처리
 
+import { useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 
 const mailConfirm = async (username) => {
   try {
+    const formData = new URLSearchParams();
+    formData.append('username', username);
+    console.log('formData', formData);
+
     const response = await axiosInstance.post(
       '/travelo/mailConfirm',
-      new URLSearchParams({ username: username }),
+      formData,
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -37,7 +42,7 @@ const verifyCode = async (username, verifyCode) => {
         verifyCode: verifyCode,
       });
       console.log(response.data);
-      if (response.data.success) {
+      if (response.data) {
         console.log('인증 성공');
         localStorage.setItem('verifyCodeCheck', true);
         return response.data;
@@ -56,19 +61,27 @@ const verifyCode = async (username, verifyCode) => {
   }
 };
 
-const register = async (username, password, rePassword, tel) => {
+const register = async (username, password, passwordCheck, tel) => {
   if (localStorage.getItem('verifyCodeCheck')) {
     try {
-      const response = await axiosInstance.post('/travelo/join', {
-        username: username,
-        password: password,
-        passwordCheck: rePassword,
-        tel: tel,
+      const formData = new URLSearchParams();
+      formData.append('username', username);
+      formData.append('password', password);
+      formData.append('passwordCheck', passwordCheck);
+      formData.append('tel', tel);
+      console.log('tel', tel);
+
+      const response = await axiosInstance.post('/travelo/join', formData, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
       });
       console.log('회원가입 성공');
-      if (response === 'redirect:/user/login') {
-        return response.data.success;
+      console.log(response.data);
+      if (response.data === '가입 되었습니다') {
+        return true;
       }
+      return false;
     } catch (error) {
       console.error('회원가입 실패 : ', error);
       return false;

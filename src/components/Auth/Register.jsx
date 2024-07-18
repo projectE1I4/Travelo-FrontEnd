@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [rePassword, setRePassword] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
   const [tel, setTel] = useState('');
   const [mailCheckSuccess, setMailCheckSuccess] = useState(false);
   const [verifyCode, setVerifyCode] = useState('');
@@ -19,16 +19,18 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const handleVerifyCodeCheck = async (e) => {
     e.preventDefault();
     const result = await onVerifyCodeCheck(username, verifyCode);
-    setMailCheckSuccess(result.success);
+    setMailCheckSuccess(result);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (mailCheckSuccess) {
-      const success = await onRegister(username, password, rePassword, tel);
-      if (success) {
-        navigate('/login');
+      const response = await onRegister(username, password, passwordCheck, tel);
+      if (response) {
+        navigate('users/login');
+      } else {
+        console.log('회원가입 실패');
       }
     } else {
       console.log('인증 실패(Register)');
@@ -39,7 +41,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
     <div className="min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="email" className="block font-medium">
+          <label htmlFor="username" className="block font-medium">
             Email
           </label>
           <input
@@ -48,23 +50,26 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="mt-1 block w-full"
+            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
           />
-          {username && (
-            <div>
-              <button onClick={handleMailCheck}>이메일 인증</button>
-              <input
-                type="text"
-                id="verifyCode"
-                value={verifyCode}
-                onChange={(e) => setVerifyCode(e.target.value)}
-                required
-                className="mt-1 block w-full"
-              />
-              <button onClick={handleVerifyCodeCheck}>인증번호 확인</button>
-            </div>
-          )}
+          <button onClick={handleMailCheck}>이메일 인증</button>
         </div>
+        {username && (
+          <div>
+            <label htmlFor="verifyCode" className="block font-medium">
+              Verify Code
+            </label>
+            <input
+              type="text"
+              id="verifyCode"
+              value={verifyCode}
+              onChange={(e) => setVerifyCode(e.target.value)}
+              required
+              className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
+            />
+            <button onClick={handleVerifyCodeCheck}>인증번호 확인</button>
+          </div>
+        )}
         <div>
           <label htmlFor="password" className="block font-medium">
             Password
@@ -75,20 +80,20 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 block w-full"
+            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
           />
         </div>
         <div>
-          <label htmlFor="rePassword" className="block font-medium">
-            rePassword
+          <label htmlFor="passwordCheck" className="block font-medium">
+            passwordCheck
           </label>
           <input
             type="password"
-            id="rePassword"
-            value={rePassword}
-            onChange={(e) => setRePassword(e.target.value)}
+            id="passwordCheck"
+            value={passwordCheck}
+            onChange={(e) => setPasswordCheck(e.target.value)}
             required
-            className="mt-1 block w-full"
+            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
           />
         </div>
         <div>
@@ -101,7 +106,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
             value={tel}
             onChange={(e) => setTel(e.target.value)}
             required
-            className="mt-1 block w-full"
+            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
           />
         </div>
         <div>

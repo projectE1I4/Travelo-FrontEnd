@@ -19,7 +19,7 @@ const Login = ({ onLogin }) => {
     <div className="min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="email" className="block font-medium">
+          <label htmlFor="username" className="block font-medium">
             Email
           </label>
           <input
@@ -28,7 +28,7 @@ const Login = ({ onLogin }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            className="mt-1 block w-full"
+            className="mt-1 block w-full border rounded-lg border-txt400 h-10"
           />
         </div>
         <div>
@@ -41,12 +41,22 @@ const Login = ({ onLogin }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="mt-1 block w-full"
+            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
           />
         </div>
         <div>
           <button type="submit" className="btn btn_type_1">
             Login
+          </button>
+        </div>
+        <div>
+          <button type="button" className="btn btn_type_2">
+            회원가입
+          </button>
+        </div>
+        <div>
+          <button type="button" className="btn">
+            비밀번호 재설정
           </button>
         </div>
       </form>

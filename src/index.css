@@ -393,7 +393,6 @@ input[type='text'],
 input[type='search'],
 input[type='password'],
 input[type='number'] {
-  border: 1px solid #333;
   height: 40px;
   padding: 0 10px;
   /* width: 100%; */

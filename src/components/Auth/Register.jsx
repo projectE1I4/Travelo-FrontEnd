@@ -1,31 +1,26 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useMailCheck from '../../hooks/useMailCheck';
+import useVerifyCodeCheck from '../../hooks/useVerifyCodeCheck';
 
 const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [tel, setTel] = useState('');
-  const [mailCheckSuccess, setMailCheckSuccess] = useState(false);
   const [verifyCode, setVerifyCode] = useState('');
   const navigate = useNavigate();
 
-  const handleMailCheck = async (e) => {
-    e.preventDefault();
-    const result = await onMailCheck(username);
-    setMailCheckSuccess(result.success);
-  };
-
-  const handleVerifyCodeCheck = async (e) => {
-    e.preventDefault();
-    const result = await onVerifyCodeCheck(username, verifyCode);
-    setMailCheckSuccess(result);
-  };
+  const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
+  const [verifyCodeCheckSuccess, handleVerifyCodeCheck] =
+    useVerifyCodeCheck(onVerifyCodeCheck);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Mail Check Success:', mailCheckSuccess); // 디버깅용 로그
+    console.log('Verify Code Check Success:', verifyCodeCheckSuccess); // 디버깅용 로그
 
-    if (mailCheckSuccess) {
+    if (mailCheckSuccess && verifyCodeCheckSuccess) {
       const response = await onRegister(username, password, passwordCheck, tel);
       if (response) {
         navigate('users/login');
@@ -34,6 +29,8 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
       }
     } else {
       console.log('인증 실패(Register)');
+      console.log(mailCheckSuccess);
+      console.log(verifyCodeCheckSuccess);
     }
   };
 
@@ -52,7 +49,9 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
             required
             className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
           />
-          <button onClick={handleMailCheck}>이메일 인증</button>
+          <button onClick={(e) => handleMailCheck(username, e)}>
+            이메일 인증
+          </button>
         </div>
         {username && (
           <div>
@@ -67,7 +66,11 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
               required
               className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
             />
-            <button onClick={handleVerifyCodeCheck}>인증번호 확인</button>
+            <button
+              onClick={(e) => handleVerifyCodeCheck(username, verifyCode, e)}
+            >
+              인증번호 확인
+            </button>
           </div>
         )}
         <div>

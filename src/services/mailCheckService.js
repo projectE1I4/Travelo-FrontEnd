@@ -1,3 +1,5 @@
+import axiosInstance from '../utils/axiosInstance';
+
 const mailConfirm = async (username) => {
   try {
     const formData = new URLSearchParams();
@@ -24,7 +26,7 @@ const mailConfirm = async (username) => {
     }
   } catch (error) {
     console.error('인증 불가 : ', error);
-    return response.data;
+    throw error;
   }
 };
 

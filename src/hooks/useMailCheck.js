@@ -3,20 +3,19 @@ import { useState } from 'react';
 const useMailCheck = (onMailCheck) => {
   const [mailCheckSuccess, setMailCheckSuccess] = useState(false);
 
-  const handleMailCheck = async (username, e) => {
-    e.preventDefault();
-    console.log('handleMailCheck called with username:', username); // 디버깅용 로그
+  const handleMailCheck = async (username) => {
+    console.log('onMailCheck:', onMailCheck); // Check if onMailCheck is a function
     try {
+      // result는 인증 코드가 돌아옴
       const result = await onMailCheck(username);
-      console.log('result::::' + result);
 
-      if (result && result.success !== undefined) {
-        setMailCheckSuccess(result.success);
+      if (result !== undefined) {
+        setMailCheckSuccess(true);
       } else {
-        console.error('Invalid result from mailcheck:', error, result);
+        console.log('Invalid result from mailcheck:', result);
       }
     } catch (error) {
-      console.error('Mail check error:');
+      console.error('Mail check error:', error);
     }
   };
 

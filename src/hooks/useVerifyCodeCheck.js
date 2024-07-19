@@ -5,16 +5,8 @@ const useVerifyCodeCheck = (onVerifyCodeCheck) => {
 
   const handleVerifyCodeCheck = async (username, verifyCode, e) => {
     e.preventDefault();
-    console.log(
-      'handleVerifyCodeCheck called with username:',
-      username,
-      'verifyCode:',
-      verifyCode
-    ); // 디버깅용 로그
     try {
       const result = await onVerifyCodeCheck(username, verifyCode);
-      console.log('vresult::::', result); // 디버깅용 로그
-
       if (result !== undefined) {
         setVerifyCodeCheckSuccess(result);
       } else {

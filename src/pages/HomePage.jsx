@@ -5,7 +5,16 @@ import { useAuth } from '../hooks/useAuth';
 const HomePage = () => {
   const { logout } = useAuth();
 
-  return <Home onLogout={logout} />;
+  return (
+    <div>
+      <Home onLogout={logout} />
+      <a href="/users/register">회원가입</a>
+      <br />
+      <a href="/users/login">로그인</a>
+      <br />
+      <a href="/users/resetPassword">비밀번호 재설정</a>
+    </div>
+  );
 };
 
 export default HomePage;

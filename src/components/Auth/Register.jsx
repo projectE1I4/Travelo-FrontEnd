@@ -23,7 +23,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
     if (mailCheckSuccess && verifyCodeCheckSuccess) {
       const response = await onRegister(username, password, passwordCheck, tel);
       if (response) {
-        navigate('users/login');
+        navigate('/users/login');
       } else {
         console.log('회원가입 실패');
       }

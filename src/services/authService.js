@@ -1,6 +1,6 @@
 // authService : axios, 토큰 처리
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 
 const register = async (username, password, passwordCheck, tel) => {
@@ -11,7 +11,6 @@ const register = async (username, password, passwordCheck, tel) => {
       formData.append('password', password);
       formData.append('passwordCheck', passwordCheck);
       formData.append('tel', tel);
-      console.log('tel', tel);
 
       const response = await axiosInstance.post('/travelo/join', formData, {
         headers: {
@@ -61,9 +60,49 @@ const isAuthenticated = () => {
   return token !== null;
 };
 
+const checkUser = async (username) => {
+  try {
+    const formData = new URLSearchParams();
+    formData.append('username', username);
+
+    const checkUserResponse = await axiosInstance.post(
+      '/travelo/check',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    );
+    console.log('응답:', checkUserResponse.data);
+    if (checkUserResponse.data === '유효한 이메일입니다') {
+      return true;
+    }
+  } catch (error) {
+    console.error('check error 발생: ', error);
+  }
+};
+
+const resetPassword = async (newPassword, confirmPassword) => {
+  try {
+    const resetPasswordResponse = await axiosInstance.post(
+      '/travelo/resetPassword',
+      {
+        password: newPassword,
+        PasswordCheck: confirmPassword,
+      }
+    );
+    console.log('비밀번호 재설정 응답: ', resetPasswordResponse.data);
+  } catch (error) {
+    console.error('resetPassword Error', error);
+  }
+};
+
 export default {
   register,
   login,
   logout,
   isAuthenticated,
+  resetPassword,
+  checkUser,
 };

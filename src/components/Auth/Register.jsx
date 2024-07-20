@@ -12,6 +12,11 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const navigate = useNavigate();
 
   const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
+  if (typeof onMailCheck === 'function') {
+    console.log('온멜쳌 함수임');
+  } else {
+    console.log('함수 아님');
+  }
   const [verifyCodeCheckSuccess, handleVerifyCodeCheck] =
     useVerifyCodeCheck(onVerifyCodeCheck);
 

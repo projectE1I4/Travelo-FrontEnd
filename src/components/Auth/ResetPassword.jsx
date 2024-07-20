@@ -12,8 +12,12 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
-
   const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
+  if (typeof onMailCheck === 'function') {
+    console.log('온멜쳌 함수임');
+  } else {
+    console.log('함수 아님');
+  }
   const [verifyCodeCheckSuccess, handleVerifyCodeCheck] =
     useVerifyCodeCheck(onVerifyCodeCheck);
 
@@ -46,15 +50,28 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
     <div>
       <form onSubmit={handleSubmit} className="space-y-6">
         <h2>비밀번호 재설정</h2>
-        <input
-          type="text"
-          placeholder="이메일"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button type="button" onClick={(e) => handleMailCheck(e, username)}>
-          이메일 인증
-        </button>
+        <div>
+          <label htmlFor="username" className="block font-medium">
+            Email
+          </label>
+          <input
+            type="email"
+            id="username"
+            placeholder="이메일"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <button
+            type="button"
+            onClick={(e) => {
+              handleMailCheck(username, e);
+              console.log('온멜쳌', onMailCheck);
+            }}
+          >
+            이메일 인증
+          </button>
+        </div>
 
         <div>
           <input

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import authService from '../../services/authService';
 
-const CheckUser = ({ onCheckUser }) => {
+const { onCheckUser } = authService;
+
+const CheckUser = () => {
   const [username, setUsername] = useState('');
 
   const navigate = useNavigate();
@@ -10,9 +13,11 @@ const CheckUser = ({ onCheckUser }) => {
     e.preventDefault();
 
     const success = await onCheckUser(username);
+    console.log(success);
     if (success) {
       navigate('/users/resetPassword');
     } else {
+      console.log('유저 체크 실패');
       return;
     }
   };

@@ -72,7 +72,7 @@ const isAuthenticated = () => {
   return token !== null;
 };
 
-const checkUser = async (username) => {
+const onCheckUser = async (username) => {
   try {
     const formData = new URLSearchParams();
     formData.append('username', username);
@@ -89,9 +89,12 @@ const checkUser = async (username) => {
     console.log('응답:', checkUserResponse.data);
     if (checkUserResponse.data === '유효한 이메일입니다') {
       return true;
+    } else if (checkUserResponse.data === '해당하는 정보가 없습니다.') {
+      return false;
     }
   } catch (error) {
     console.error('check error 발생: ', error);
+    return false;
   }
 };
 
@@ -116,5 +119,5 @@ export default {
   logout,
   isAuthenticated,
   resetPassword,
-  checkUser,
+  onCheckUser,
 };

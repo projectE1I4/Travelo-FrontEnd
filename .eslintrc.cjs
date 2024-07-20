@@ -20,5 +20,6 @@ module.exports = {
     ],
     'prettier/prettier': 'error', // 추가
     'linebreak-style': ['error', 'unix'], // 추가
+    'react/prop-types': 'off',
   },
 };

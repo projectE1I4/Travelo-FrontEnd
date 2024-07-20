@@ -12,7 +12,7 @@ const HomePage = () => {
       <br />
       <a href="/users/login">로그인</a>
       <br />
-      <a href="/users/resetPassword">비밀번호 재설정</a>
+      <a href="/users/checkUser">비밀번호 재설정</a>
     </div>
   );
 };

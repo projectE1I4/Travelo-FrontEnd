@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import KakaoLoginButton from '../SocialAuth/KakaoLoginButton';
+import GoogleLoginButton from '../SocialAuth/GoogleLoginButton';
+import NaverLoginButton from '../SocialAuth/NaverLoginButton';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -48,6 +51,11 @@ const Login = ({ onLogin }) => {
           <button type="submit" className="btn btn_type_1">
             Login
           </button>
+        </div>
+        <div>
+          <KakaoLoginButton />
+          <GoogleLoginButton />
+          <NaverLoginButton />
         </div>
         <div>
           <button type="button" className="btn btn_type_2">

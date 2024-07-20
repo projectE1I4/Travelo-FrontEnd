@@ -12,6 +12,8 @@ const CheckUser = ({ onCheckUser }) => {
     const success = await onCheckUser(username);
     if (success) {
       navigate('/users/resetPassword');
+    } else {
+      return;
     }
   };
 

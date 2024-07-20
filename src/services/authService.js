@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import axiosInstance from '../utils/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 const register = async (username, password, passwordCheck, tel) => {
   if (localStorage.getItem('verifyCodeCheck')) {
@@ -54,8 +55,16 @@ const login = async (username, password) => {
   }
 };
 
-const logout = () => {
-  localStorage.removeItem('token');
+const logout = async () => {
+  const response = await axiosInstance.post('/user/logout');
+
+  const navigate = useNavigate();
+
+  if (response) {
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    navigate('/');
+  }
 };
 
 const isAuthenticated = () => {

@@ -42,9 +42,12 @@ const login = async (username, password) => {
 
     const token = response.data;
 
+    sessionStorage.setItem('token', token);
     localStorage.setItem('token', token);
-    if (localStorage.getItem('token')) {
+    if (sessionStorage.getItem('token')) {
       console.log('로그인 성공');
+    } else if (localStorage.getItem('token')) {
+      console.log('로그인 성공 (로컬 스토리지)');
     }
   } catch (error) {
     console.error('로그인 실패: ', error);

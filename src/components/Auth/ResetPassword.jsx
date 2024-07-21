@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMailCheck from '../../hooks/useMailCheck';
 import useVerifyCodeCheck from '../../hooks/useVerifyCodeCheck';
-import authService from '../../services/authService';
 
 const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
   const [username, setUsername] = useState('');
@@ -12,23 +11,26 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
   const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
+
   const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
-  if (typeof onMailCheck === 'function') {
-    console.log('온멜쳌 함수임');
-  } else {
-    console.log('함수 아님');
-  }
   const [verifyCodeCheckSuccess, handleVerifyCodeCheck] =
     useVerifyCodeCheck(onVerifyCodeCheck);
 
+  useEffect(() => {
+    console.log('mailCheckSuccess: ', mailCheckSuccess);
+    console.log('verifyCodeCheckSuccess: ', verifyCodeCheckSuccess);
+  }, [mailCheckSuccess, verifyCodeCheckSuccess]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    sessionStorage.setItem('username', username);
     try {
-      console.log('Mail Check Success:', mailCheckSuccess); // 디버깅용 로그
-      console.log('Verify Code Check Success:', verifyCodeCheckSuccess); // 디버깅용 로그
-
-      if (mailCheckSuccess && verifyCodeCheckSuccess) {
-        const response = await onResetPassword(newPassword, confirmPassword);
+      if (verifyCodeCheckSuccess) {
+        const response = await onResetPassword(
+          newPassword,
+          confirmPassword,
+          username
+        );
         if (response) {
           console.log('비밀번호 재설정 성공');
           navigate('/users/login');
@@ -62,13 +64,7 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          <button
-            type="button"
-            onClick={(e) => {
-              handleMailCheck(username, e);
-              console.log('온멜쳌', onMailCheck);
-            }}
-          >
+          <button onClick={(e) => handleMailCheck(username, e)}>
             이메일 인증
           </button>
         </div>
@@ -87,7 +83,7 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
             인증번호 확인
           </button>
         </div>
-        {mailCheckSuccess && verifyCodeCheckSuccess && (
+        {verifyCodeCheckSuccess && (
           <div>
             <input
               type="password"
@@ -101,7 +97,7 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <button onClick={handleResetPassword}>비밀번호 재설정</button>
+            <button onClick={handleSubmit}>비밀번호 재설정</button>
             <p>{message}</p>
           </div>
         )}

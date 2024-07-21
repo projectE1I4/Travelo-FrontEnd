@@ -13,8 +13,9 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     const success = await onLogin(username, password);
+    console.log(success);
     if (success) {
-      navigate('/');
+      navigate('/home');
     }
   };
 

@@ -12,18 +12,11 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const navigate = useNavigate();
 
   const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
-  if (typeof onMailCheck === 'function') {
-    console.log('온멜쳌 함수임');
-  } else {
-    console.log('함수 아님');
-  }
   const [verifyCodeCheckSuccess, handleVerifyCodeCheck] =
     useVerifyCodeCheck(onVerifyCodeCheck);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Mail Check Success:', mailCheckSuccess); // 디버깅용 로그
-    console.log('Verify Code Check Success:', verifyCodeCheckSuccess); // 디버깅용 로그
 
     if (mailCheckSuccess && verifyCodeCheckSuccess) {
       const response = await onRegister(username, password, passwordCheck, tel);

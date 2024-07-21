@@ -19,7 +19,7 @@ export const useAuth = () => {
   const login = async (email, password) => {
     try {
       const success = await authService.login(email, password);
-
+      console.log('success', success);
       if (success) {
         setIsAuthenticated(true);
       }

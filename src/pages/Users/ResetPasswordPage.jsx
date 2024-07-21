@@ -1,13 +1,13 @@
 import React from 'react';
 import ResetPassword from '../../components/Auth/ResetPassword';
-import mailCheckService from '../../services/mailCheckService';
 import authService from '../../services/authService';
+import mailCheckService from '../../services/mailCheckService';
 
 const ResetPasswordPage = () => {
-  const mailcheck = async (username) => {
+  const mailcheck = async (username, e) => {
     try {
       console.log('mailcheck called with username:', username); // 디버깅용 로그
-      const response = await mailCheckService.mailConfirm(username);
+      const response = await mailCheckService.mailConfirm(username, e);
       console.log('Mail check response:', response); // 디버깅용 로그
       return response;
     } catch (error) {
@@ -16,7 +16,7 @@ const ResetPasswordPage = () => {
     }
   };
 
-  const verifycodecheck = async (username, verifyCode) => {
+  const verifycodecheck = async (username, verifyCode, e) => {
     try {
       console.log(
         'verifycodecheck called with username:',
@@ -24,7 +24,11 @@ const ResetPasswordPage = () => {
         'and verifyCode:',
         verifyCode
       ); // 디버깅용 로그
-      const response = await mailCheckService.verifyCode(username, verifyCode);
+      const response = await mailCheckService.verifyCode(
+        username,
+        verifyCode,
+        e
+      );
       console.log('Verify code check response:', response); // 디버깅용 로그
       return response;
     } catch (error) {
@@ -54,6 +58,8 @@ const ResetPasswordPage = () => {
       return false;
     }
   };
+
+  console.log('mailcheck:', mailcheck);
 
   return (
     <ResetPassword

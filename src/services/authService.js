@@ -47,11 +47,14 @@ const login = async (username, password) => {
     localStorage.setItem('token', token);
     if (sessionStorage.getItem('token')) {
       console.log('로그인 성공');
+      return response;
     } else if (localStorage.getItem('token')) {
       console.log('로그인 성공 (로컬 스토리지)');
+      return response;
     }
   } catch (error) {
     console.error('로그인 실패: ', error);
+    throw error;
   }
 };
 
@@ -98,18 +101,26 @@ const onCheckUser = async (username) => {
   }
 };
 
-const resetPassword = async (newPassword, confirmPassword) => {
+const resetPassword = async (newPassword, confirmPassword, username) => {
+  console.log(newPassword, confirmPassword);
+  console.log(sessionStorage.getItem('username'));
+  sessionStorage.setItem('username', username);
   try {
     const resetPasswordResponse = await axiosInstance.post(
       '/travelo/resetPassword',
+      null,
       {
-        password: newPassword,
-        PasswordCheck: confirmPassword,
+        params: {
+          password: newPassword,
+          passwordCheck: confirmPassword,
+        },
       }
     );
     console.log('비밀번호 재설정 응답: ', resetPasswordResponse.data);
+    return resetPasswordResponse.data;
   } catch (error) {
     console.error('resetPassword Error', error);
+    throw error.response;
   }
 };
 

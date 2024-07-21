@@ -9,6 +9,7 @@ import RegisterPage from './pages/Users/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import ResetPassword from './components/Auth/ResetPassword';
 import CheckUserPage from './pages/Users/CheckUserPage';
+import ResetPasswordPage from './pages/Users/ResetPasswordPage';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -16,10 +17,11 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
       <Route path="/users/login" element={<LoginPage />} />
       <Route path="/users/register" element={<RegisterPage />} />
       <Route path="/users/checkUser" element={<CheckUserPage />} />
-      <Route path="/users/resetPassword" element={<ResetPassword />} />
+      <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
       <Route
         path="/protected"
         element={

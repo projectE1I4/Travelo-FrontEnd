@@ -12,7 +12,7 @@ export const reviewsList = async (page = 0, sortBy = 'latest') => {
       headers: {
         'Content-Type': 'application/json',
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxMzgwNDk2LCJleHAiOjE3MjEzODQwOTZ9.ty92ilg-Y3zm8j3u6ppkugmK7KbzfdWaQ9LMyW4bfuY', // 더미 토큰을 설정합니다.
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNDgxOTQ5LCJleHAiOjE3MjE0ODU1NDl9.OS53eAikxcTdF-wUK1rR0aUsL4vzrwxk7llxTgIj5is', // 더미 토큰을 설정합니다.
       },
     });
     return response.data; // API 응답 데이터를 반환합니다.

@@ -12,7 +12,7 @@ const ReviewList = () => {
   const loadReviews = useCallback(async () => {
     try {
       const data = await reviewsList(page, sortBy);
-      setReviews(data || []);
+      setReviews(data.paging.content || []);
       setLoading(false);
     } catch (err) {
       setError(err);

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import {
   reviewsList,
   updateReview,
@@ -72,7 +73,9 @@ const ReviewList = () => {
         <ul className="myReviewList">
           {reviews.map((item) => (
             <li key={item.review.reviewSeq} className="listItem">
-              <h2>{item.courseTitle}</h2>
+              <h2>
+                <Link to={`/course/${item.courseSeq}`}>{item.courseTitle}</Link>
+              </h2>
               {editReviewId === item.review.reviewSeq ? (
                 <div>
                   <textarea

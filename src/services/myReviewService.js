@@ -30,7 +30,7 @@ export const updateReview = async (reviewSeq, content) => {
         headers: {
           'Content-Type': 'application/json',
           Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNTY0OTg0LCJleHAiOjE3MjE1Njg1ODR9.DwzggnVC7qx_L7zDcJNbekKTz0gifed0LtdxE5zQVpk',
+            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNTcwMDAyLCJleHAiOjE3MjE1NzM2MDJ9.wrnbW_haySxBdAPa-yBucQUkijpXewdvHkKt9S5qjkw',
         },
       }
     );
@@ -50,7 +50,7 @@ export const deleteReview = async (reviewSeq) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNTY0OTg0LCJleHAiOjE3MjE1Njg1ODR9.DwzggnVC7qx_L7zDcJNbekKTz0gifed0LtdxE5zQVpk`, // 현재 토큰으로 대체
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNTcwMDAyLCJleHAiOjE3MjE1NzM2MDJ9.wrnbW_haySxBdAPa-yBucQUkijpXewdvHkKt9S5qjkw`, // 현재 토큰으로 대체
         },
       }
     );

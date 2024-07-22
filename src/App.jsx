@@ -1,18 +1,48 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
+import { Route, Routes } from 'react-router-dom';
+import './index.css';
+import LoginPage from './pages/Users/LoginPage';
+import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
+import RegisterPage from './pages/Users/RegisterPage';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
+import ResetPassword from './components/Auth/ResetPassword';
+import CheckUserPage from './pages/Users/CheckUserPage';
+import ResetPasswordPage from './pages/Users/ResetPasswordPage';
+import Header from './components/common/Header';
+import PlacesList from './pages/PlacesList';
 import MyReviewPage from './pages/MyReviewPage';
 import CourseDetail from './course/CourseDetail';
 
 const App = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/myReviews" element={<MyReviewPage />} />
-        <Route path="/course/:courseSeq" element={<CourseDetail />} />
-        <Route path="/" element={<h1>홈 페이지</h1>} />
-      </Routes>
-    </Router>
+    <div>
+      <Header />
+      <div className="container">
+        <Routes>
+          <Route path="/places" element={<PlacesList />} />
+          <Route path="/myReviews" element={<MyReviewPage />} />
+          <Route path="/course/:courseSeq" element={<CourseDetail />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/users/login" element={<LoginPage />} />
+          <Route path="/users/register" element={<RegisterPage />} />
+          <Route path="/users/checkUser" element={<CheckUserPage />} />
+          <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
+          <Route
+            path="/protected"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
+    </div>
   );
 };
 

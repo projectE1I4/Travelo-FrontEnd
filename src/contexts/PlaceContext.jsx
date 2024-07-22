@@ -16,28 +16,34 @@ const PlaceProvider = ({ children }) => {
     content: '',
     area: '',
   });
+  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
-  // 필터 및 정렬에 따라 장소 데이터를 가져오는 함수
   const fetchPlaces = async (updatedFilters) => {
-    setLoading(true); // 데이터를 가져오기 전 로딩 상태로 설정
+    setLoading(true);
     try {
       const response = await axiosInstance.get('/travelo/place/list', {
         params: {
-          ...filters, // 기존 필터와 정렬 상태
-          ...updatedFilters, // 새로운 필터와 정렬 상태
+          ...filters,
+          ...updatedFilters,
         },
       });
       setPlaces(response.data.paging.content);
+      setTotalPages(response.data.paging.totalPages);
     } catch (error) {
       setError(error);
     } finally {
-      setLoading(false); // 데이터 가져오기 완료 후 로딩 상태 해제
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPlaces(filters); // 컴포넌트 마운트 시 필터와 정렬 상태로 데이터 가져오기
+    fetchPlaces(filters);
   }, []);
+
+  useEffect(() => {
+    fetchPlaces({ page: currentPage });
+  }, [currentPage]);
 
   const handleDropdownClick = (title) => {
     setDropdownTitle(title);
@@ -49,10 +55,12 @@ const PlaceProvider = ({ children }) => {
       const updatedFilters = {
         ...prevFilters,
         ...newFilters,
+        page: 0,
       };
       fetchPlaces(updatedFilters);
       return updatedFilters;
     });
+    setCurrentPage(0); // 페이지 필터링 시 첫 페이지로 이동
   };
 
   const resetFilters = () => {
@@ -66,6 +74,7 @@ const PlaceProvider = ({ children }) => {
     };
     setFilters(initialFilters);
     setDropdownTitle('인기순');
+    setCurrentPage(0);
     fetchPlaces(initialFilters);
   };
 
@@ -79,6 +88,9 @@ const PlaceProvider = ({ children }) => {
         handleDropdownClick,
         updateFilters,
         resetFilters,
+        totalPages,
+        currentPage,
+        setCurrentPage,
       }}
     >
       {children}

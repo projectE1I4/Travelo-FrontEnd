@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import styles from '../../styles/ListContent.module.css';
 import PlaceCard from './PlaceCard';
+import Pagination from './Pagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { PlaceContext } from '../../contexts/PlaceContext';
@@ -37,6 +38,7 @@ const ListContent = () => {
           bookmarks={place.bookmarks || 0}
         />
       ))}
+      <Pagination />
     </div>
   );
 };

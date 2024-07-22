@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosInstance';
+import styles from '../../styles/Auth.module.css';
 
 const GoogleLoginButton = () => {
   const googleClientId = import.meta.env.VITE_API_GOOGLE_CLIENT_ID;
@@ -89,7 +90,10 @@ const GoogleLoginButton = () => {
 
   return (
     <div>
-      <button onClick={handleLogin}>구글 로그인</button>
+      <button
+        onClick={handleLogin}
+        className={styles['google-login-btn']}
+      ></button>
       {showForm && (
         <>
           <div>

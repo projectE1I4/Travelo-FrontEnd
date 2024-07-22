@@ -20,59 +20,77 @@ const Login = ({ onLogin }) => {
     }
   };
 
+  const goToRegister = (e) => {
+    e.preventDefault();
+    navigate('/users/register');
+  };
+
   return (
     <div className={styles['auth-content']}>
       <form onSubmit={handleSubmit} className={styles['form-content']}>
         <div className={styles['logo-wrap']}>
           <p className={styles['brand-logo']}> travelo</p>
         </div>
-        <div>
-          <label htmlFor="username" className="block font-medium">
-            Email
-          </label>
-          <input
-            type="email"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="mt-1 block w-full border rounded-lg border-txt400 h-10"
-            placeholder="이메일"
-          />
+        <div className={styles['input-area']}>
+          <div className={styles['input-wrap']}>
+            <label
+              htmlFor="username"
+              className={styles['input-label-required']}
+            >
+              이메일
+            </label>
+            <input
+              type="email"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className={styles['input-box']}
+              placeholder="이메일을 입력해 주세요."
+            />
+          </div>
+          <div className={styles['input-wrap']}>
+            <label
+              htmlFor="password"
+              className={styles['input-label-required']}
+            >
+              비밀번호
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={styles['input-box']}
+              placeholder="비밀번호를 입력해주세요."
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="password" className="block font-medium">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
-            placeholder="비밀번호"
-          />
-        </div>
-        <div>
-          <button type="submit" className="btn btn_type_1">
-            Login
+        <div className={styles['btn-wrap']}>
+          <button type="submit" className={styles['btn-point']}>
+            로그인
           </button>
         </div>
         <div>
-          <KakaoLoginButton />
-          <GoogleLoginButton />
-          <NaverLoginButton />
-        </div>
-        <div>
-          <button type="button" className="btn btn_type_2">
+          <button
+            type="button"
+            className={styles['btn-line']}
+            onClick={(e) => goToRegister(e)}
+          >
             회원가입
           </button>
         </div>
         <div>
-          <button type="button" className="btn">
-            비밀번호 재설정
+          <button type="button" className={styles['btn-text']}>
+            비밀번호를 잊어버리셨나요?
           </button>
+        </div>
+        <div className={styles['line-wrap']}>소셜 로그인</div>
+        <div className={styles['social-wrap']}>
+          <KakaoLoginButton />
+          <GoogleLoginButton />
+          <NaverLoginButton />
         </div>
       </form>
     </div>

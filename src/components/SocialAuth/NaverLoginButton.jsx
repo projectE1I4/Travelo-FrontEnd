@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosInstance';
+import styles from '../../styles/Auth.module.css';
 
 const NaverLoginButton = () => {
   const naverClientId = import.meta.env.VITE_API_NAVER_CLIENT_ID;
@@ -87,7 +88,10 @@ const NaverLoginButton = () => {
 
   return (
     <div>
-      <button onClick={handleLogin}>네이버 로그인</button>
+      <button
+        onClick={handleLogin}
+        className={styles['naver-login-btn']}
+      ></button>
       {showForm && (
         <>
           <div>

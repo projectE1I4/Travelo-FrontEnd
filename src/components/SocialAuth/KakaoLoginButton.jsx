@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosInstance';
+import styles from '../../styles/Auth.module.css';
 import axios from 'axios';
 
 const KakaoLoginButton = () => {
@@ -88,7 +89,10 @@ const KakaoLoginButton = () => {
 
   return (
     <div>
-      <button onClick={handleLogin}>카카오 로그인</button>
+      <button
+        onClick={handleLogin}
+        className={styles['kakao-login-btn']}
+      ></button>
       {showForm && (
         <>
           <div>

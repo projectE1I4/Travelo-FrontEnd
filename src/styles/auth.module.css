@@ -27,8 +27,16 @@
   padding: 50px 100px;
 }
 
+.form-content-register {
+  width: 600px;
+  height: 700px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+}
+
 .logo-wrap {
-  margin: 0 auto 40px;
+  margin: 0 auto 30px;
   display: flex;
   justify-content: center;
 }
@@ -39,4 +47,234 @@
   color: var(--point-color1);
   margin-right: 2rem;
   font-family: 'Odor';
+}
+.input-area {
+  margin-bottom: 10px;
+}
+.input-wrap {
+  height: 90px;
+}
+.input-label-required {
+  position: relative;
+}
+.input-label-required::after {
+  content: '*';
+  display: block;
+  font-size: 0.8rem;
+  color: #ff4040;
+  position: absolute;
+  right: -0.8rem;
+  top: 0;
+}
+.input-box {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+}
+
+.btn-wrap {
+  margin-bottom: 10px;
+}
+
+.btn-point {
+  width: 100%;
+  background: var(--accent-color);
+  color: var(--button-txt-color1);
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-point:hover {
+  background-color: #15aa8d;
+}
+
+.btn-line {
+  width: 100%;
+  background: var(--button-bg-color);
+  color: var(--txt-color-500);
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--txt-color-500);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-line:hover {
+  color: var(--accent-color);
+}
+
+.btn-text {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--txt-color-500);
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.line-wrap {
+  margin-top: 20px;
+  position: relative;
+  padding: 20px 0 5px;
+  width: 100%;
+  text-align: center;
+}
+.line-wrap::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  content: '';
+  display: block;
+  width: 40%;
+  height: 1px;
+  background: var(--txt-color-400);
+}
+.line-wrap::before {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  content: '';
+  display: block;
+  width: 40%;
+  height: 1px;
+  background: var(--txt-color-400);
+}
+.social-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.kakao-login-btn {
+  background: no-repeat center/100% url(../../public/btn_kakao.svg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.kakao-login-btn::after {
+  content: '카카오로 로그인';
+  position: absolute;
+  left: -50%;
+  top: 110%;
+  width: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.kakao-login-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.google-login-btn {
+  background: no-repeat center/90% url(../../public/btn_google.svg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.google-login-btn::after {
+  content: '구글로 로그인';
+  position: absolute;
+  left: -50%;
+  top: 110%;
+  width: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.google-login-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.naver-login-btn {
+  background: no-repeat center/100% url(../../public/btn_naver.svg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.naver-login-btn::after {
+  content: '네이버로 로그인';
+  position: absolute;
+  left: -50%;
+  top: 110%;
+  width: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.naver-login-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.input-btn-small {
+  position: relative;
+}
+
+.btn-wrap-small {
+  position: absolute;
+  right: 0;
+  top: -10px;
+}
+
+.btn-small {
+  width: 100%;
+  height: 25px;
+  padding: 0 10px;
+  background: var(--accent-color);
+  color: var(--button-txt-color1);
+  text-align: center;
+  line-height: 25px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-small:hover {
+  background-color: #15aa8d;
+}
+
+.btn-checked {
+  width: 100%;
+  height: 25px;
+  padding: 0 10px;
+  background: var(--point-color2);
+  color: var(--txt-color-400);
+  text-align: center;
+  line-height: 25px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+
+  cursor: not-allowed;
+}
+
+.register-gap {
+  margin-bottom: 20px;
+}
+
+.hidden-form {
+  height: 90px;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../../styles/Auth.module.css';
 import { useNavigate } from 'react-router-dom';
 import useMailCheck from '../../hooks/useMailCheck';
 import useVerifyCodeCheck from '../../hooks/useVerifyCodeCheck';
@@ -14,6 +15,13 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
   const [verifyCodeCheckSuccess, handleVerifyCodeCheck] =
     useVerifyCodeCheck(onVerifyCodeCheck);
+
+  const [mailChecked, setMailChecked] = useState(false);
+
+  const handleChecked = () => {
+    setMailChecked(true);
+    return 'disable = true';
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,82 +41,125 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label htmlFor="username" className="block font-medium">
-            Email
-          </label>
-          <input
-            type="email"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
-          />
-          <button onClick={(e) => handleMailCheck(username, e)}>
-            이메일 인증
-          </button>
+    <div className={styles['auth-content']}>
+      <form onSubmit={handleSubmit} className={styles['form-content-register']}>
+        <div className={styles['logo-wrap']}>
+          <p className={styles['brand-logo']}> travelo</p>
         </div>
-        {username && (
-          <div>
-            <label htmlFor="verifyCode" className="block font-medium">
-              Verify Code
+        <div className={styles['input-area']}>
+          <div
+            className={[styles['input-wrap'], styles['input-btn-small']].join(
+              ' '
+            )}
+          >
+            <div className={styles['btn-wrap-small']}>
+              <button
+                onClick={(e) => {
+                  handleMailCheck(username, e);
+                  handleChecked;
+                }}
+                className={`${mailChecked ? styles['btn-checked'] : styles['btn-small']}`}
+                disabled={'' || mailChecked}
+              >
+                이메일 인증
+              </button>
+            </div>
+            <label
+              htmlFor="username"
+              className={styles['input-label-required']}
+            >
+              이메일
             </label>
             <input
-              type="text"
-              id="verifyCode"
-              value={verifyCode}
-              onChange={(e) => setVerifyCode(e.target.value)}
+              type="email"
+              id="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               required
-              className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
+              className={styles['input-box']}
+              placeholder="이메일을 입력해 주세요."
             />
-            <button
-              onClick={(e) => handleVerifyCodeCheck(username, verifyCode, e)}
-            >
-              인증번호 확인
-            </button>
           </div>
-        )}
-        <div>
-          <label htmlFor="password" className="block font-medium">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
-          />
-        </div>
-        <div>
-          <label htmlFor="passwordCheck" className="block font-medium">
-            passwordCheck
-          </label>
-          <input
-            type="password"
-            id="passwordCheck"
-            value={passwordCheck}
-            onChange={(e) => setPasswordCheck(e.target.value)}
-            required
-            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
-          />
-        </div>
-        <div>
-          <label htmlFor="tel" className="block font-medium">
-            tel
-          </label>
-          <input
-            type="tel"
-            id="tel"
-            value={tel}
-            onChange={(e) => setTel(e.target.value)}
-            required
-            className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
-          />
+          {username && (
+            <div className={styles['hidden-form']}>
+              <div
+                className={[
+                  styles['input-wrap'],
+                  styles['input-btn-small'],
+                ].join(' ')}
+              >
+                <div className={styles['btn-wrap-small']}>
+                  <button
+                    onClick={(e) =>
+                      handleVerifyCodeCheck(username, verifyCode, e)
+                    }
+                    className={styles['btn-small']}
+                  >
+                    인증번호 확인
+                  </button>
+                </div>
+                <label
+                  htmlFor="verifyCode"
+                  className={styles['input-label-required']}
+                >
+                  인증 번호
+                </label>
+                <input
+                  type="text"
+                  id="verifyCode"
+                  value={verifyCode}
+                  onChange={(e) => setVerifyCode(e.target.value)}
+                  required
+                  className={styles['input-box']}
+                />
+              </div>
+            </div>
+          )}
+          <div className={styles['input-wrap']}>
+            <label
+              htmlFor="password"
+              className={styles['input-label-required']}
+            >
+              비밀번호
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={styles['input-box']}
+            />
+          </div>
+          <div className={styles['input-wrap']}>
+            <label
+              htmlFor="passwordCheck"
+              className={styles['input-label-required']}
+            >
+              비밀번호 확인
+            </label>
+            <input
+              type="password"
+              id="passwordCheck"
+              value={passwordCheck}
+              onChange={(e) => setPasswordCheck(e.target.value)}
+              required
+              className={styles['input-box']}
+            />
+          </div>
+          <div className={styles['input-wrap']}>
+            <label htmlFor="tel" className={styles['input-label-required']}>
+              전화번호
+            </label>
+            <input
+              type="tel"
+              id="tel"
+              value={tel}
+              onChange={(e) => setTel(e.target.value)}
+              required
+              className={styles['input-box']}
+            />
+          </div>
         </div>
         <div>
           <button type="submit" className="btn btn_type_1">

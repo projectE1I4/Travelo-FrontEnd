@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAuth } from './hooks/useAuth';
 import { Route, Routes } from 'react-router-dom';
-import './index.css';
 import LoginPage from './pages/Users/LoginPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';

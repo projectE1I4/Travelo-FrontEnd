@@ -46,7 +46,13 @@ function Header() {
           className={`btn btn-outline-primary my-2 my-sm-0 ${styles['btn-custom']}`}
           type="button"
         >
-          로그인 / 회원가입
+          {' '}
+          <Link
+            className={`nav-link ${styles['nav-link']} ${styles['nav-link-icon']}`}
+            to="/users/login"
+          >
+            로그인 / 회원가입
+          </Link>
         </button>
       </nav>
     </header>

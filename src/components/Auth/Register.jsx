@@ -18,7 +18,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (mailCheckSuccess && verifyCodeCheckSuccess) {
+    if (verifyCodeCheckSuccess) {
       const response = await onRegister(username, password, passwordCheck, tel);
       if (response) {
         navigate('/users/login');

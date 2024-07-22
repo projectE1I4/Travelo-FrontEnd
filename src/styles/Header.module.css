@@ -1,0 +1,96 @@
+/* 커스터마이징된 네비게이션 바 */
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* 다른 요소들보다 위에 오도록 설정 */
+  background-color: #fff; /* 백그라운드 컬러 설정 */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+.navbar-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--point-color1);
+  margin-right: 2rem;
+  font-family: 'Odor';
+}
+.navbar-brand:focus,
+.navbar-brand:hover {
+  color: var(--point-color1);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.navbar-ul {
+  flex-direction: row;
+}
+
+.nav-item {
+  margin: 0 1rem;
+}
+
+.nav-link {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--txt-color-600);
+}
+
+.nav-link-icon {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-icon svg {
+  margin-right: 0.5rem;
+}
+
+.nav-item:nth-child(1) .nav-link-icon svg {
+  color: #5f99de;
+}
+.nav-item:nth-child(2) .nav-link-icon svg {
+  color: #ff4040;
+}
+.nav-item:nth-child(3) .nav-link-icon svg {
+  color: #ffb800;
+}
+
+.btn-custom {
+  padding: 0;
+  display: flex;
+  width: 130px;
+  height: 38px;
+  line-height: 38px;
+  font-size: 14px;
+  color: var(--txt-color-500);
+  border: 1px solid var(--txt-color-400);
+}
+
+.btn-custom:hover {
+  background: var(--point-color1);
+  border: 1px solid var(--point-color1);
+}

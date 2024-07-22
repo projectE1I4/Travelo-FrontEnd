@@ -1,7 +1,6 @@
 import axiosInstance from '../utils/axiosInstance';
 
 export const reviewsList = async (page = 0, sortBy = 'latest') => {
-  console.log(sessionStorage.getItem('token'));
   try {
     const response = await axiosInstance.get('/user/course/myReviews', {
       params: {
@@ -15,7 +14,6 @@ export const reviewsList = async (page = 0, sortBy = 'latest') => {
     return response.data; // API 응답 데이터를 반환합니다.
   } catch (error) {
     console.error('Error fetching reviews:', error);
-    throw error;
   }
 };
 

@@ -32,6 +32,10 @@ const ReviewList = () => {
     loadReviews();
   }, [loadReviews]);
 
+  const maskUsername = (username) => {
+    return username.substring(0, 3) + '****';
+  };
+
   const reviewEdit = (reviewSeq) => {
     setEditReviewId(reviewSeq);
     const reviewToEdit = reviews.find(
@@ -61,7 +65,6 @@ const ReviewList = () => {
     }
   };
 
-  // if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading reviews: {error.message}</p>;
 
   return (
@@ -73,6 +76,7 @@ const ReviewList = () => {
         <ul className="myReviewList">
           {reviews.map((item) => (
             <li key={item.review.reviewSeq} className="listItem">
+              <p>{maskUsername(item.review.user.username)}</p>
               <h2>
                 <Link to={`/course/${item.courseSeq}`}>{item.courseTitle}</Link>
               </h2>

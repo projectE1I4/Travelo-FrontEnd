@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAuth } from './hooks/useAuth';
 import { Route, Routes } from 'react-router-dom';
 import './index.css';
@@ -6,7 +7,6 @@ import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/Users/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
-import ResetPassword from './components/Auth/ResetPassword';
 import CheckUserPage from './pages/Users/CheckUserPage';
 import ResetPasswordPage from './pages/Users/ResetPasswordPage';
 import Header from './components/common/Header';

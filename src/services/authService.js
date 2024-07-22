@@ -59,13 +59,23 @@ const login = async (username, password) => {
 };
 
 const logout = async () => {
-  const response = await axiosInstance.post('/user/logout');
-
+  const accessToken = sessionStorage.getItem('accessToken');
+  const response = await axiosInstance.post(
+    '/user/logout',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
   const navigate = useNavigate();
+  localStorage.removeItem('token');
+  sessionStorage.removeItem('token');
 
+  console.log('로그아웃 시도');
   if (response) {
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    console.log('로그아웃 성공');
     navigate('/');
   }
 };

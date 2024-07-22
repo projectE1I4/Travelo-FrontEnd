@@ -23,6 +23,8 @@ export const useAuth = () => {
       console.log('success', success);
       if (success) {
         setIsAuthenticated(true);
+        console.log(success);
+        console.log(success.data);
       }
       return success;
     } catch (error) {

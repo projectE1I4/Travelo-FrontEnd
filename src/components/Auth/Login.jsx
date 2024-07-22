@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from '../../styles/Auth.module.css';
 import { useNavigate } from 'react-router-dom';
 import KakaoLoginButton from '../SocialAuth/KakaoLoginButton';
 import GoogleLoginButton from '../SocialAuth/GoogleLoginButton';
@@ -20,8 +21,8 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="{styles['auth-content']}">
+      <form onSubmit={handleSubmit} className="{styles['form-content']}">
         <div>
           <label htmlFor="username" className="block font-medium">
             Email

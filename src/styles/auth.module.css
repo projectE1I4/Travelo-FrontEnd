@@ -1,0 +1,26 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.auth-content {
+  grid-column: 4 / span 9;
+  padding-top: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-content {
+  padding-top: 50px;
+  width: 600px;
+  height: 640px;
+}

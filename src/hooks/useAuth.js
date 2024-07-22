@@ -1,6 +1,7 @@
 // userAuth hook
 import { useEffect, useState } from 'react';
 import authService from '../services/authService.js';
+import axiosInstance from '../utils/axiosInstance.js';
 
 export const useAuth = () => {
   // 인증 상태관리
@@ -30,9 +31,37 @@ export const useAuth = () => {
     }
   };
 
-  const logout = () => {
-    authService.logout();
-    setIsAuthenticated(false);
+  const logout = async () => {
+    try {
+      const accessToken = sessionStorage.getItem('accessToken');
+      if (accessToken) {
+        await axiosInstance.post(
+          '/user/logout',
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+      }
+
+      sessionStorage.removeItem('accessToken');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('refreshToken');
+      sessionStorage.removeItem('token');
+      setIsAuthenticated(false);
+
+      console.log('토큰 지워짐');
+      if (!sessionStorage.getItem('refreshToken')) {
+        console.log('토큰 지워짐');
+      }
+
+      window.location.href = '/users/login';
+    } catch (error) {
+      console.error('로그아웃 실패 : ', error);
+    }
   };
 
   return { isAuthenticated, login, logout };

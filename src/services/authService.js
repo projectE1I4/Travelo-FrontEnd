@@ -44,6 +44,8 @@ const login = async (username, password) => {
     const token = response.data;
 
     sessionStorage.setItem('token', token);
+    sessionStorage.setItem('accessToken', token.accessToken);
+    sessionStorage.setItem('refreshToken', token.refreshToken);
     localStorage.setItem('token', token);
     if (sessionStorage.getItem('token')) {
       console.log('로그인 성공');

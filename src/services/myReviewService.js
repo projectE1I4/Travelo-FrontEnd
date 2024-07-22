@@ -1,6 +1,7 @@
 import axiosInstance from '../utils/axiosInstance';
 
 export const reviewsList = async (page = 0, sortBy = 'latest') => {
+  console.log(sessionStorage.getItem('token'));
   try {
     const response = await axiosInstance.get('/user/course/myReviews', {
       params: {
@@ -8,14 +9,13 @@ export const reviewsList = async (page = 0, sortBy = 'latest') => {
         sortBy: sortBy,
       },
       headers: {
-        'Content-Type': 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNTY0OTg0LCJleHAiOjE3MjE1Njg1ODR9.DwzggnVC7qx_L7zDcJNbekKTz0gifed0LtdxE5zQVpk',
+        Authorization: sessionStorage.getItem('token'),
       },
     });
     return response.data; // API 응답 데이터를 반환합니다.
   } catch (error) {
     console.error('Error fetching reviews:', error);
+    throw error;
   }
 };
 
@@ -29,8 +29,6 @@ export const updateReview = async (reviewSeq, content) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNTcwMDAyLCJleHAiOjE3MjE1NzM2MDJ9.wrnbW_haySxBdAPa-yBucQUkijpXewdvHkKt9S5qjkw',
         },
       }
     );
@@ -50,7 +48,6 @@ export const deleteReview = async (reviewSeq) => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InRlc3QxQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzIxNTcwMDAyLCJleHAiOjE3MjE1NzM2MDJ9.wrnbW_haySxBdAPa-yBucQUkijpXewdvHkKt9S5qjkw`, // 현재 토큰으로 대체
         },
       }
     );

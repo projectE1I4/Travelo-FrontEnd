@@ -21,8 +21,11 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="{styles['auth-content']}">
-      <form onSubmit={handleSubmit} className="{styles['form-content']}">
+    <div className={styles['auth-content']}>
+      <form onSubmit={handleSubmit} className={styles['form-content']}>
+        <div className={styles['logo-wrap']}>
+          <p className={styles['brand-logo']}> travelo</p>
+        </div>
         <div>
           <label htmlFor="username" className="block font-medium">
             Email
@@ -34,6 +37,7 @@ const Login = ({ onLogin }) => {
             onChange={(e) => setUsername(e.target.value)}
             required
             className="mt-1 block w-full border rounded-lg border-txt400 h-10"
+            placeholder="이메일"
           />
         </div>
         <div>
@@ -47,6 +51,7 @@ const Login = ({ onLogin }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
             className="mt-1 block w-full border rounded-lg  border-txt400 h-10"
+            placeholder="비밀번호"
           />
         </div>
         <div>

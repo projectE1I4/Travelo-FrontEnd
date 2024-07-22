@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../utils/axiosInstance';
 
 const NaverLoginButton = () => {
   const naverClientId = import.meta.env.VITE_API_NAVER_CLIENT_ID;

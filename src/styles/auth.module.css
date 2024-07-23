@@ -16,12 +16,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 90vh;
 }
 
 .form-content {
   width: 600px;
   height: 640px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+}
+
+.form-content-short {
+  width: 600px;
+  height: 350px;
   border: 1px solid var(--txt-color-400);
   border-radius: 10px;
   padding: 50px 100px;
@@ -54,6 +62,12 @@
 .input-wrap {
   height: 90px;
 }
+.input-wrap-short {
+  height: 80px;
+}
+.input-wrap-short2 {
+  height: 70px;
+}
 .input-label-required {
   position: relative;
 }
@@ -72,6 +86,16 @@
   border: 1px solid var(--txt-color-400);
   border-radius: 6px;
   width: 100%;
+}
+
+.input-box-readonly {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+  color: var(--txt-color-500);
+  background: var(--txt-color-400);
 }
 
 .btn-wrap {
@@ -117,6 +141,15 @@
   font-size: 0.8rem;
   color: var(--txt-color-500);
   text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-back-text {
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--txt-color-500);
+  text-align: start;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -277,4 +310,18 @@
 
 .hidden-form {
   height: 90px;
+}
+
+.hidden-form-reset {
+  margin-top: 30px;
+  height: 150px;
+}
+
+.error-message-wrap {
+  height: 20px;
+}
+
+.error-message {
+  color: var(--icon-color-red);
+  font-size: 0.8rem;
 }

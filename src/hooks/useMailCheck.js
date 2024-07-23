@@ -5,13 +5,13 @@ const useMailCheck = (onMailCheck) => {
 
   const handleMailCheck = async (username, e) => {
     e.preventDefault();
-    console.log('onMailCheck:', onMailCheck); // Check if onMailCheck is a function
     console.log('username : ', username);
     if (typeof onMailCheck === 'function') {
       try {
         // result는 인증 코드가 돌아옴
         const result = await onMailCheck(username);
-        setMailCheckSuccess(result.success);
+        setMailCheckSuccess(true);
+        return result.data;
       } catch (error) {
         console.error('Mail check error:', error);
         setMailCheckSuccess(false);

@@ -6,14 +6,13 @@ const useVerifyCodeCheck = (onVerifyCodeCheck) => {
   const handleVerifyCodeCheck = async (username, verifyCode, e) => {
     e.preventDefault();
     try {
-      const result = await onVerifyCodeCheck(username, verifyCode);
-      if (result !== undefined) {
-        setVerifyCodeCheckSuccess(result);
-      } else {
-        console.error('Invalid result from verifyCodeCheck:', result); // 오류 로그
-      }
+      const success = await onVerifyCodeCheck(username, verifyCode);
+      setVerifyCodeCheckSuccess(success);
+      return success;
     } catch (error) {
       console.error('Verify code check error:', error); // 오류 로그
+      setVerifyCodeCheckSuccess(false);
+      return false;
     }
   };
 

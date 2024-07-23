@@ -8,6 +8,7 @@ import NaverLoginButton from '../SocialAuth/NaverLoginButton';
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {

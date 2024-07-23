@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import authService from '../services/authService';
 import { useAuth } from '../hooks/useAuth';
 
 const axiosInstance = axios.create({

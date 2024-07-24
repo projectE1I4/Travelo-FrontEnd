@@ -292,7 +292,7 @@ button,
 table {
   font-family: 'Pretendard', '맑은 고딕', 'malgun gothic', 'Apple SD Gothic Neo',
     sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.5px ;
   color: var(--txt-color-600);
 }

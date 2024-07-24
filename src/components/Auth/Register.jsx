@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from '../../styles/Auth.module.css';
 import { useNavigate } from 'react-router-dom';
 import useMailCheck from '../../hooks/useMailCheck';
-import useVerifyCodeCheck from '../../hooks/useVerifyCodeCheck';
 import useValidation from '../../hooks/useValidation';
 
 const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {

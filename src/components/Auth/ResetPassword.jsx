@@ -86,11 +86,23 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
     } catch (error) {
       console.error('문제 발생:', error);
     }
+    const goToLogin = (e) => {
+      e.preventDefault();
+      navigate('/users/login');
+    };
   };
 
   return (
     <div className={styles['auth-content']}>
       <form onSubmit={handleSubmit} className={styles['form-content']}>
+        <button
+          onClick={(e) => {
+            goToLogin(e);
+          }}
+          className={styles['btn-back-text']}
+        >
+          로그인 화면으로 돌아가기
+        </button>
         <div className={styles['logo-wrap']}>
           <p className={styles['brand-logo']}> travelo</p>
         </div>
@@ -127,12 +139,20 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
         </div>
 
         <div className={styles['input-wrap-short2']}>
+          <label
+            htmlFor="verifyCode"
+            className={styles['input-label-required']}
+          >
+            인증 번호
+          </label>
           <input
             type="text"
-            placeholder="인증 코드"
+            id="verifyCode"
             value={verifyCode}
+            placeholder="인증 코드"
+            required
             onChange={(e) => setVerifyCode(e.target.value)}
-            className={styles['input-box']}
+            className={styles['input-box-verify']}
           />
         </div>
         <div className={styles['error-message-wrap']}>

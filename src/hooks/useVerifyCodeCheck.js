@@ -3,8 +3,7 @@ import { useState } from 'react';
 const useVerifyCodeCheck = (onVerifyCodeCheck) => {
   const [verifyCodeCheckSuccess, setVerifyCodeCheckSuccess] = useState(false);
 
-  const handleVerifyCodeCheck = async (username, verifyCode, e) => {
-    e.preventDefault();
+  const handleVerifyCodeCheck = async (username, verifyCode) => {
     try {
       const success = await onVerifyCodeCheck(username, verifyCode);
       setVerifyCodeCheckSuccess(success);

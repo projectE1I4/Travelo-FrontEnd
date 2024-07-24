@@ -5,7 +5,11 @@ import { useAuth } from '../../hooks/useAuth';
 const LoginPage = () => {
   const { login } = useAuth();
 
-  return <Login onLogin={login} />;
+  return (
+    <div className="grid-container">
+      <Login onLogin={login} />
+    </div>
+  );
 };
 
 export default LoginPage;

@@ -23,11 +23,21 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   } = useValidation();
 
   const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
-  const [verifyCodeCheckSuccess, handleVerifyCodeCheck] =
-    useVerifyCodeCheck(onVerifyCodeCheck);
-  const [varifyCodeError, setVarifyCodeError] = useState('');
+  const [verifyCodeCheckSuccess, setVerifyCodeCheckSuccess] = useState(null);
+  const [verifyCodeError, setVerifyCodeError] = useState('');
 
   const [mailChecked, setMailChecked] = useState(false);
+
+  const handleVerifyCodeCheck = async (username, verifyCode, e) => {
+    e.preventDefault();
+    const response = await onVerifyCodeCheck(username, verifyCode);
+    setVerifyCodeCheckSuccess(response);
+    if (!response) {
+      setVerifyCodeError('인증번호가 일치하지 않습니다.');
+    } else {
+      setVerifyCodeError('');
+    }
+  };
 
   const handleChecked = () => {
     setMailChecked(true);
@@ -61,20 +71,24 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
       return;
     }
 
+    console.log('success veri', verifyCodeCheckSuccess);
+
     if (verifyCodeCheckSuccess) {
       const response = await onRegister(username, password, passwordCheck, tel);
-      setVarifyCodeError('');
+      setVerifyCodeError('');
+      console.log('success', verifyCodeCheckSuccess);
       if (response) {
         navigate('/users/login');
       } else {
         console.log('회원가입 실패');
       }
     } else {
-      setVarifyCodeError('인증번호가 일치하지 않습니다.');
+      setVerifyCodeError('인증번호가 일치하지 않습니다.');
       console.log('인증 실패(Register)');
       console.log(mailCheckSuccess);
-      console.log(verifyCodeCheckSuccess);
+      console.log('success', verifyCodeCheckSuccess);
     }
+    console.log(verifyCodeError);
   };
 
   const goToLogin = (e) => {
@@ -94,15 +108,22 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
           로그인 화면으로 돌아가기
         </button>
         <div className={styles['logo-wrap']}>
-          <p className={styles['brand-logo']}> travelo</p>
+          <p className={styles['brand-logo']}>travelo</p>
         </div>
         <div className={styles['input-area']}>
-          <div
-            className={[styles['input-wrap'], styles['input-btn-small']].join(
-              ' '
-            )}
-          >
-            <div className={styles['btn-wrap-small']}>
+          <div className={styles['input-wrap']}>
+            <div className={styles['input-wrap-inline']}>
+              <label
+                htmlFor="username"
+                className={styles['input-label-required']}
+              >
+                이메일
+              </label>
+              {usernameError ? (
+                <span className={styles['error-message']}>{usernameError}</span>
+              ) : (
+                <span></span>
+              )}
               <button
                 onClick={(e) => {
                   handleMailCheck(username, e);
@@ -114,15 +135,6 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
                 이메일 인증
               </button>
             </div>
-            <label
-              htmlFor="username"
-              className={styles['input-label-required']}
-            >
-              이메일{' '}
-            </label>
-            {usernameError && (
-              <span className={styles['error-message']}>{usernameError}</span>
-            )}
 
             <input
               type="email"
@@ -130,19 +142,29 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
               value={username}
               onChange={(e) => handleEmailChange(e)}
               required
-              className={styles['input-box']}
+              className={[styles['input-box'], styles['input-box-inline']].join(
+                ' '
+              )}
               placeholder="이메일을 입력해 주세요."
             />
           </div>
           {username && (
             <div className={styles['hidden-form']}>
-              <div
-                className={[
-                  styles['input-wrap'],
-                  styles['input-btn-small'],
-                ].join(' ')}
-              >
-                <div className={styles['btn-wrap-small']}>
+              <div className={styles['input-wrap']}>
+                <div className={styles['input-wrap-inline']}>
+                  <label
+                    htmlFor="verifyCode"
+                    className={styles['input-label-required']}
+                  >
+                    인증 번호
+                  </label>
+                  {verifyCodeError ? (
+                    <span className={styles['error-message']}>
+                      {verifyCodeError}
+                    </span>
+                  ) : (
+                    <span></span>
+                  )}
                   <button
                     onClick={(e) =>
                       handleVerifyCodeCheck(username, verifyCode, e)
@@ -152,17 +174,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
                     인증번호 확인
                   </button>
                 </div>
-                <label
-                  htmlFor="verifyCode"
-                  className={styles['input-label-required']}
-                >
-                  인증 번호
-                </label>
-                {varifyCodeError && (
-                  <span className={styles['error-message']}>
-                    {varifyCodeError}
-                  </span>
-                )}
+
                 <input
                   type="text"
                   id="verifyCode"
@@ -175,7 +187,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
               </div>
             </div>
           )}
-          <div className={styles['input-wrap-short']}>
+          <div className={styles['input-wrap-short-password']}>
             <label
               htmlFor="password"
               className={styles['input-label-required']}
@@ -196,7 +208,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
               value={password}
               onChange={(e) => handlePasswordChange(e)}
               required
-              className={styles['input-box']}
+              className={styles['input-box-password']}
               placeholder="비밀번호를 입력해 주세요."
             />
           </div>

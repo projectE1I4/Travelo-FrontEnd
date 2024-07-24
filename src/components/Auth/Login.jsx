@@ -26,6 +26,11 @@ const Login = ({ onLogin }) => {
     navigate('/users/register');
   };
 
+  const goToCheckUser = (e) => {
+    e.preventDefault();
+    navigate('/users/checkUser');
+  };
+
   return (
     <div className={styles['auth-content']}>
       <form onSubmit={handleSubmit} className={styles['form-content']}>
@@ -73,7 +78,7 @@ const Login = ({ onLogin }) => {
             로그인
           </button>
         </div>
-        <div>
+        <div className={styles['btn-wrap']}>
           <button
             type="button"
             className={styles['btn-line']}
@@ -83,7 +88,11 @@ const Login = ({ onLogin }) => {
           </button>
         </div>
         <div>
-          <button type="button" className={styles['btn-text']}>
+          <button
+            type="button"
+            className={styles['btn-text']}
+            onClick={(e) => goToCheckUser(e)}
+          >
             비밀번호를 잊어버리셨나요?
           </button>
         </div>

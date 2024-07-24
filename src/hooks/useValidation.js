@@ -25,7 +25,7 @@ const useValidation = () => {
   const correctPassword = (value) => {
     if (!validatePassword(value)) {
       setPasswordError(
-        '최소 8자 이상, 20자 이하이며, 숫자와 소문자를 포함해야 합니다.'
+        '8자 이상, 20자 이하이며, 숫자와 소문자를 포함해야 합니다.'
       );
       return false;
     } else {

@@ -50,11 +50,13 @@ const RegisterPage = () => {
   };
 
   return (
-    <Register
-      onRegister={register}
-      onMailCheck={mailcheck}
-      onVerifyCodeCheck={verifycodecheck}
-    />
+    <div className="grid-container">
+      <Register
+        onRegister={register}
+        onMailCheck={mailcheck}
+        onVerifyCodeCheck={verifycodecheck}
+      />
+    </div>
   );
 };
 

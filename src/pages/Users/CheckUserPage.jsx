@@ -13,7 +13,11 @@ const CheckUserPage = () => {
     }
   };
 
-  return <CheckUser onCheckUser={checkUserName} />;
+  return (
+    <div className="grid-container">
+      <CheckUser onCheckUser={checkUserName} />
+    </div>
+  );
 };
 
 export default CheckUserPage;

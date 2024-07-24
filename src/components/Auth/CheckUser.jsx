@@ -58,7 +58,7 @@ const CheckUser = () => {
           <p className={styles['brand-logo']}> travelo</p>
         </div>
         <div className={styles['input-area']}>
-          <div className={styles['input-wrap']}>
+          <div className={styles['input-wrap-password']}>
             <label
               htmlFor="username"
               className={styles['input-label-required']}

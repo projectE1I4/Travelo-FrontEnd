@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance';
 
 const NaverCallback = () => {
   const location = useLocation();
@@ -9,10 +10,13 @@ const NaverCallback = () => {
 
   useEffect(() => {
     if (code && state) {
-      axios
-        .get(
-          `http://localhost:8080/travelo/naverCallback?code=${code}&state=${state}`
-        )
+      axiosInstance
+        .get(`/travelo/naverCallback`, {
+          params: {
+            code,
+            state,
+          },
+        })
         .then((response) => {
           // 로그인 성공 후 처리
           console.log(response.data);

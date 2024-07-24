@@ -43,7 +43,7 @@ const GoogleLoginButton = () => {
         try {
           const response = await axiosInstance.post(
             '/travelo/check',
-            formData,
+            { code },
             {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -72,7 +72,7 @@ const GoogleLoginButton = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        `/travelo/intergrated${provider}`,
+        `/travelo/intergrated${provider.toLowerCase()}`,
         {
           username,
         }

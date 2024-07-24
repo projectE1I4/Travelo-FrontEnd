@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance';
 
 const KakaoCallback = () => {
   const location = useLocation();
@@ -8,8 +9,12 @@ const KakaoCallback = () => {
 
   useEffect(() => {
     if (code) {
-      axios
-        .get(`http://localhost:8080/travelo/kakaoCallback?code=${code}`)
+      axiosInstance
+        .get(`/travelo/kakaoCallback`, {
+          params: {
+            code,
+          },
+        })
         .then((response) => {
           // 로그인 성공 후 처리
           console.log(response.data);

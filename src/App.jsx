@@ -10,6 +10,8 @@ import ResetPasswordPage from './pages/Users/ResetPasswordPage';
 import Header from './components/common/Header';
 import PlacesListPage from './pages/Place/PlacesListPage.jsx';
 import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
+import AccountIntergrationPage from './pages/Users/AccountIntergrationPage.jsx';
+import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -27,6 +29,11 @@ const App = () => {
           <Route path="/users/register" element={<RegisterPage />} />
           <Route path="/users/checkUser" element={<CheckUserPage />} />
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
+          <Route path="/googleCallback" element={GoogleCallback} />
+          <Route
+            path="/social/integrate"
+            element={<AccountIntergrationPage />}
+          />
           <Route
             path="/protected"
             element={

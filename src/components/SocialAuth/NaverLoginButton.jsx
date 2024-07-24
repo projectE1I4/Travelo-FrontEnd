@@ -41,7 +41,7 @@ const NaverLoginButton = () => {
         try {
           const response = await axiosInstance.post(
             '/travelo/check',
-            formData,
+            { code },
             {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAuth } from './hooks/useAuth';
 import { Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/Users/LoginPage';
@@ -9,7 +8,8 @@ import ProtectedRoute from './components/Auth/ProtectedRoute';
 import CheckUserPage from './pages/Users/CheckUserPage';
 import ResetPasswordPage from './pages/Users/ResetPasswordPage';
 import Header from './components/common/Header';
-import PlacesList from './pages/PlacesList';
+import PlacesListPage from './pages/Place/PlacesListPage.jsx';
+import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -19,7 +19,8 @@ const App = () => {
       <Header />
       <div className="container">
         <Routes>
-          <Route path="/places" element={<PlacesList />} />
+          <Route path="/places" element={<PlacesListPage />} />
+          <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/users/login" element={<LoginPage />} />

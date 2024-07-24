@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import styles from '../../styles/ListContent.module.css';
+import styles from '../../styles/components/place/ListContent.module.css';
 import PlaceCard from './PlaceCard';
 import Pagination from './Pagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ import { PlaceContext } from '../../contexts/PlaceContext';
 
 const ListContent = () => {
   const { places, loading, error, dropdownTitle, handleDropdownClick } =
+    // Context사용하여 데이터 뿌려줌
     useContext(PlaceContext);
 
   if (loading) return <span className="loader"></span>;
@@ -29,6 +30,8 @@ const ListContent = () => {
       {places.map((place) => (
         <PlaceCard
           key={place.placeSeq}
+          placeSeq={place.placeSeq}
+          contentId={place.contentId}
           image={place.imageFile1}
           type={place.type}
           title={place.title}
@@ -36,6 +39,8 @@ const ListContent = () => {
           views={place.viewCount}
           likes={place.likeCount}
           bookmarks={place.bookmarks || 0}
+          latitude={place.latitude}
+          longitude={place.longitude}
         />
       ))}
       <Pagination />

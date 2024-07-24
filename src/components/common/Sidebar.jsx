@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import styles from '../../styles/Sidebar.module.css';
+import styles from '../../styles/components/Sidebar.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faRotateRight,

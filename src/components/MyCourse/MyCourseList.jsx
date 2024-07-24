@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { myCourses } from '../../services/MyCourseService';
+import { myCourses, deleteCourse } from '../../services/MyCourseService';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import '../../css/myCourseList.css';
 
 const MyCourseList = () => {
@@ -18,6 +19,37 @@ const MyCourseList = () => {
 
     getCourses();
   }, []);
+
+  // 코스 삭제
+  const deleteBtn = async (courseSeq) => {
+    const confirmDelete = window.confirm('정말 코스를 삭제하시겠습니까?');
+    if (confirmDelete) {
+      try {
+        const response = await deleteCourse(courseSeq);
+        alert(response.message); // 성공 메시지 출력
+        setCourses(courses.filter((course) => course.courseSeq !== courseSeq));
+      } catch (err) {
+        setError(err);
+      }
+    }
+  };
+
+  //날짜 형식 변경 함수
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  };
+
+  // 제목 말줄임 처리 함수
+  const titleLength = (title, maxLength = 12) => {
+    if (title.length > maxLength) {
+      return title.substring(0, maxLength) + '...';
+    }
+    return title;
+  };
 
   if (error)
     return <div>코스를 불러오는 중 오류가 발생했습니다: {error.message}</div>;
@@ -39,19 +71,30 @@ const MyCourseList = () => {
               return (
                 <div key={course.courseSeq} className={`course ${placeClass}`}>
                   <ul className="image">
-                    {course.courseList.map((item, index) => (
-                      <li
-                        key={item.courseListSeq}
-                        className={`image-item image-item-${index + 1}`}
-                      >
-                        <img
-                          src={item.place.imageFile1}
-                          alt={item.place.title}
-                        />
-                      </li>
-                    ))}
+                    {course.courseList.slice(0, 4).map(
+                      (
+                        item,
+                        index // 최대 4개의 이미지까지만 표시
+                      ) => (
+                        <li
+                          key={item.courseListSeq}
+                          className={`image-item image-item-${index + 1}`}
+                        >
+                          <img
+                            src={item.place.imageFile1}
+                            alt={item.place.title}
+                          />
+                        </li>
+                      )
+                    )}
                   </ul>
-                  <p className="courseTitle">{course.title}</p>
+                  <p className="courseTitle" title={course.title}>
+                    {titleLength(course.title)}
+                  </p>
+                  <p className="courseDate">{formatDate(course.createDate)}</p>
+                  <button onClick={() => deleteBtn(course.courseSeq)}>
+                    <RiDeleteBin6Line />
+                  </button>
                 </div>
               );
             })}

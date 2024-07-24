@@ -1,39 +1,53 @@
 .grid-container {
-  margin-top: 150px;
-  position: relative;
+  margin-top: 70px;
+  justify-content: center; /* 가운데 정렬 */
 }
+
 .grid-container h1 {
-  position: absolute;
-  left: 315px;
-  top: -70px;
+  grid-column: 4 / span 12;
+  margin: 0 0 30px 16px;
+  font-weight: 700;
 }
 
 .courselist {
+  grid-column: 4 / span 9; /* 4~12 컬럼 사용 */
   display: grid;
-  grid-column: 4 / span 12;
-  border: 1px solid red;
-  margin-left: 16px;
+  gap: 16px;
 }
 
-.courselist .courseItem .course {
-  border: 1px solid blue;
-  width: 242px;
-  height: 300px;
+.courseItem {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.course {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--txt-color-400);
+  width: 240px;
+  height: auto;
   border-radius: 10px;
-  margin: 10px;
   overflow: hidden;
   text-align: center;
   position: relative;
+  margin: 10px auto;
+  padding: auto 10px;
 }
 
-.courselist .courseItem .image {
-  position: relative;
-  list-style-type: none;
+.image {
+  display: grid;
   width: 200px;
   height: 200px;
-  margin: 20px 0 15px 20px;
+  margin: 20px auto 20px;
+  padding: 0;
+  position: relative;
 }
-.courselist .courseItem .image .image-item {
+
+.image-item {
   position: absolute;
   overflow: hidden;
 }
@@ -45,29 +59,38 @@
 }
 
 /* 하나의 이미지일 경우 */
+.course.one .image {
+  grid-template-rows: 1fr;
+}
+
 .course.one .image-item {
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
 }
 
 /* 두 개의 이미지일 경우 */
+.course.two .image {
+  grid-template-columns: 1fr 1fr;
+}
+
 .course.two .image-item:nth-child(1) {
-  top: 0;
   left: 0;
   width: 50%;
   height: 100%;
 }
 
 .course.two .image-item:nth-child(2) {
-  top: 0;
-  left: 50%;
+  right: 0;
   width: 50%;
   height: 100%;
 }
 
 /* 세 개의 이미지일 경우 */
+.course.three .image {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
 .course.three .image-item:nth-child(1) {
   top: 0;
   left: 0;
@@ -77,19 +100,24 @@
 
 .course.three .image-item:nth-child(2) {
   top: 0;
-  left: 50%;
+  right: 0;
   width: 50%;
   height: 50%;
 }
 
 .course.three .image-item:nth-child(3) {
-  top: 50%;
+  bottom: 0;
   left: 0;
   width: 100%;
   height: 50%;
 }
 
-/* 네 개의 이미지일 경우 */
+/* 네 개 이상의 이미지일 경우 */
+.course.four .image {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
 .course.four .image-item:nth-child(1) {
   top: 0;
   left: 0;
@@ -99,21 +127,37 @@
 
 .course.four .image-item:nth-child(2) {
   top: 0;
-  left: 50%;
+  right: 0;
   width: 50%;
   height: 50%;
 }
 
 .course.four .image-item:nth-child(3) {
-  top: 50%;
+  bottom: 0;
   left: 0;
   width: 50%;
   height: 50%;
 }
 
 .course.four .image-item:nth-child(4) {
-  top: 50%;
-  left: 50%;
+  bottom: 0;
+  right: 0;
   width: 50%;
   height: 50%;
+}
+
+.courseTitle {
+  text-align: left;
+  margin: 10px auto 10px 20px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.courseDate {
+  color: var(--txt-color-400);
+  background-color: var(--point-color2);
+
+  margin: 10px auto 10px 20px;
+  border-radius: 10px;
+  width: 80px;
 }

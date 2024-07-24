@@ -9,3 +9,24 @@ export const myCourses = async () => {
     throw error;
   }
 };
+
+// 코스 삭제
+export const deleteCourse = async (courseSeq) => {
+  try {
+    console.log('여기까지는 들어오니?');
+    const response = await axiosInstance.post(
+      'user/custom/delete',
+      { courseSeq },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: sessionStorage.getItem('accessToken'),
+        },
+      }
+    );
+    return response.data; // 성공 시 메시지 반환
+  } catch (error) {
+    console.error('코스 삭제 실패:', error);
+    throw error;
+  }
+};

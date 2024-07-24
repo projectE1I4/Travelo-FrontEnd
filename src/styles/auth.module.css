@@ -58,6 +58,20 @@
   position: relative;
 }
 
+.form-content-reset {
+  width: 100%;
+  max-width: 600px;
+  min-height: 400px;
+  max-height: 800px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto;
+  row-gap: 10px;
+  position: relative;
+}
+
 .logo-wrap {
   display: grid;
   place-items: center;
@@ -116,6 +130,18 @@
 .input-wrap-inline {
   display: grid;
   grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 10px;
+}
+.input-wrap-inline-reset-check {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 10px;
+}
+.input-wrap-inline-reset {
+  display: grid;
+  grid-template-columns: auto 1fr;
   align-items: center;
   column-gap: 10px;
 }
@@ -262,7 +288,7 @@
 }
 
 .kakao-login-btn {
-  background: no-repeat center/100% url(../../public/btn_kakao.svg);
+  background: no-repeat center/100% url(/public/btn_kakao.svg);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -287,7 +313,7 @@
 }
 
 .google-login-btn {
-  background: no-repeat center/90% url(../../public/btn_google.svg);
+  background: no-repeat center/90% url(/btn_google.svg);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -312,7 +338,7 @@
 }
 
 .naver-login-btn {
-  background: no-repeat center/100% url(../../public/btn_naver.svg);
+  background: no-repeat center/100% url(/public/btn_naver.svg);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -388,8 +414,7 @@
 }
 
 .hidden-form-reset {
-  margin-top: 30px;
-  height: 150px;
+  margin-top: 5px;
 }
 
 .error-message-wrap {
@@ -402,4 +427,9 @@
   font-size: 0.8rem;
   margin-left: 5px;
   white-space: nowrap;
+}
+
+.space {
+  height: 10px;
+  width: 100%;
 }

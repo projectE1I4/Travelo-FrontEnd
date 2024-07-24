@@ -94,7 +94,7 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
 
   return (
     <div className={styles['auth-content']}>
-      <form onSubmit={handleSubmit} className={styles['form-content']}>
+      <form onSubmit={handleSubmit} className={styles['form-content-reset']}>
         <button
           onClick={(e) => {
             goToLogin(e);
@@ -107,13 +107,15 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
           <p className={styles['brand-logo']}> travelo</p>
         </div>
         <div className={styles['input-area']}>
-          <div
-            className={[
-              styles['input-wrap-short2'],
-              styles['input-btn-small'],
-            ].join(' ')}
-          >
-            <div className={styles['btn-wrap-small']}>
+          <div className={styles['input-wrap']}>
+            <div className={styles['input-wrap-inline-reset-check']}>
+              <label
+                htmlFor="username"
+                className={styles['input-label-required']}
+              >
+                이메일
+              </label>
+
               <button
                 onClick={(e) => handleMailCheck(username, e)}
                 className={styles['btn-small']}
@@ -121,12 +123,6 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
                 이메일 인증
               </button>
             </div>
-            <label
-              htmlFor="username"
-              className={styles['input-label-required']}
-            >
-              이메일
-            </label>
             <input
               type="email"
               id="username"
@@ -139,12 +135,16 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
         </div>
 
         <div className={styles['input-wrap-short2']}>
-          <label
-            htmlFor="verifyCode"
-            className={styles['input-label-required']}
-          >
-            인증 번호
-          </label>
+          <div className={styles['input-wrap-inline']}>
+            <label
+              htmlFor="verifyCode"
+              className={styles['input-label-required']}
+            >
+              인증 번호
+            </label>
+            {/* varifyCodeError 메시지를 띄움 */}
+            <span className={styles['error-message']}>{varifyCodeError}</span>
+          </div>
           <input
             type="text"
             id="verifyCode"
@@ -155,10 +155,7 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
             className={styles['input-box-verify']}
           />
         </div>
-        <div className={styles['error-message-wrap']}>
-          {/* varifyCodeError 메시지를 띄움 */}
-          <p className={styles['error-message']}>{varifyCodeError}</p>
-        </div>
+
         <div className={styles['btn-wrap']}>
           <button
             type="button"
@@ -179,20 +176,27 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
         </div>
         {verifyCodeCheckSuccess && (
           <div className={styles['hidden-form-reset']}>
-            <div className={styles['input-wrap']}>
+            <div className={styles['input-wrap-short-password']}>
               <label
                 htmlFor="password"
                 className={styles['input-label-required']}
               >
                 비밀번호
               </label>
-              <span className={styles['error-message']}>{passwordError}</span>
+              {(passwordError && (
+                <span className={styles['error-message']}>{passwordError}</span>
+              )) ||
+                (passwordConfirmError && (
+                  <span className={styles['error-message']}>
+                    {passwordConfirmError}
+                  </span>
+                ))}
               <input
                 type="password"
                 placeholder="변경 하려는 비밀번호를 입력해 주세요."
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className={styles['input-box']}
+                className={styles['input-box-password']}
               />
             </div>
             <div className={styles['input-wrap-short2']}>
@@ -204,10 +208,7 @@ const ResetPassword = ({ onResetPassword, onMailCheck, onVerifyCodeCheck }) => {
                 className={styles['input-box']}
               />
             </div>
-            <div className={styles['error-message-wrap']}>
-              <p className={styles['error-message']}>{passwordConfirmError}</p>
-            </div>
-
+            <div className={styles['space']}></div>
             <div className={styles['btn-wrap']}>
               <button onClick={handleSubmit} className={styles['btn-point']}>
                 비밀번호 재설정

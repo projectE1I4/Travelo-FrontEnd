@@ -88,6 +88,9 @@
 .btn-custom {
   padding: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
   width: 130px;
   height: 38px;
   line-height: 38px;
@@ -99,4 +102,5 @@
 .btn-custom:hover {
   background: var(--point-color1);
   border: 1px solid var(--point-color1);
+  color: var(--button-txt-color1);
 }

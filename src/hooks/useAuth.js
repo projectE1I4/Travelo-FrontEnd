@@ -14,7 +14,7 @@ export const useAuth = () => {
       setIsAuthenticated(result);
     };
 
-    checkAuth;
+    checkAuth();
   }, []);
 
   const login = async (email, password) => {

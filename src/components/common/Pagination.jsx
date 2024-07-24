@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import styles from '../../styles/Pagination.module.css';
+import styles from '../../styles/components/Pagination.module.css';
 import { PlaceContext } from '../../contexts/PlaceContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

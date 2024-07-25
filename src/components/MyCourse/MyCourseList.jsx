@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { myCourses, deleteCourse } from '../../services/MyCourseService';
+import { useNavigate } from 'react-router-dom'; // 여기서 한 번만 import
 import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import '../../css/myCourseList.css';
 
 const MyCourseList = () => {
   const [courses, setCourses] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCourses = async () => {
@@ -34,12 +36,12 @@ const MyCourseList = () => {
     }
   };
 
-  // 코스 수정 페이지 이동
+  // 코스 수정 페이지로 이동
   const editBtn = (courseSeq) => {
-    history.push(`/editCourse/${courseSeq}`);
+    navigate(`/courseEdit/${courseSeq}`);
   };
 
-  //날짜 형식 변경 함수
+  // 날짜 형식 변경 함수
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();

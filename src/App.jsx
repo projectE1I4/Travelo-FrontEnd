@@ -12,7 +12,6 @@ import PlacesListPage from './pages/Place/PlacesListPage.jsx';
 import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
 import AccountIntergrationPage from './pages/Users/AccountIntergrationPage.jsx';
 import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
-import PlacesList from './pages/PlacesList';
 import MyReviewPage from './pages/MyReviewPage';
 import CourseDetail from './course/CourseDetail';
 import MyCoursePage from './pages/MyCoursePage';
@@ -28,7 +27,6 @@ const App = () => {
         <Routes>
           <Route path="/places" element={<PlacesListPage />} />
           <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
-          <Route path="/places" element={<PlacesList />} />
           <Route path="/myReviews" element={<MyReviewPage />} />
           <Route path="/myCourses" element={<MyCoursePage />} />
           <Route path="/courseEdit/:courseSeq" element={<MyCourseEditPage />} />

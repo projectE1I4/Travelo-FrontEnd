@@ -12,7 +12,7 @@ const GoogleLoginButton = () => {
   const [provider, setProvider] = useState(false);
 
   const handleLogin = () => {
-    const googleLoginUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=http://localhost:5173/travelo/googleCallback&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`;
+    const googleLoginUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`;
     window.location.href = googleLoginUrl;
   };
 

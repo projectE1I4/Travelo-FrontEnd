@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
+import axios from 'axios';
 
 const GoogleCallback = () => {
   const location = useLocation();
@@ -14,26 +15,25 @@ const GoogleCallback = () => {
   const callBack = async () => {
     if (code) {
       try {
-        const response = axiosInstance.get(`/travelo/googleCallback`, {
-          params: { code },
-        });
-
+        const response = await axios.get(
+          'http://localhost:8080/travelo/googleCallback',
+          {
+            params: { code },
+          }
+        );
         console.log(response);
         // API 성공 후 처리
         console.log(response.data);
         // 2가지 가능성, error/username 이 들어오거나 accessToken/refreshToken이 들어오거나
         //const { error, accessToken, username } = response.data;
 
-        if ('accessToken' in response.data) {
-          const { accessToken } = response.data;
+        if (response.status === 200) {
+          const { accessToken, refreshToken } = response.data;
           sessionStorage.setItem('accessToken', accessToken);
-          console.log('response:', response);
-          console.log('response.data:', response.data);
+          sessionStorage.setItem('refreshToken', refreshToken);
           navigate('/home');
-        } else if ('error' in response.data) {
+        } else if (response.status === 400) {
           const { error, username } = response.data;
-          console.log('response:', response);
-          console.log('response.data:', response.data);
           navigate('/social/integrate', {
             state: { provider: 'google', username, error },
           });

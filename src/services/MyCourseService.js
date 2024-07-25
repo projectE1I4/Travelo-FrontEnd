@@ -13,7 +13,6 @@ export const myCourses = async () => {
 // 코스 삭제
 export const deleteCourse = async (courseSeq) => {
   try {
-    console.log('여기까지는 들어오니?');
     const response = await axiosInstance.post(
       'user/custom/delete',
       { courseSeq },

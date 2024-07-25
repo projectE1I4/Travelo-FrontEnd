@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAdminData } from '../../services/adminService';
+import { Link } from 'react-router-dom';
 
 const AdminMain = () => {
   const [data, setData] = useState(null);
@@ -28,7 +29,9 @@ const AdminMain = () => {
     <div>
       <h1>Admin Main Page</h1>
       <p>전체 회원 : {data['user count']}</p>
-      <p>전체 그룹 : {data['group count']}</p>
+      <Link to="/admin/groups">
+        <button>전체 그룹 : {data['group count']}</button>
+      </Link>
       <p>전체 코스 : {data['course count']}</p>
       <p>전체 리뷰 : {data['review count']}</p>
       <p>신고 리뷰 : {data['reported5plus count']}</p>

@@ -1,4 +1,3 @@
-// src/pages/AdminMainPage.js
 import React from 'react';
 import AdminMain from '../../components/Admin/AdminMain';
 

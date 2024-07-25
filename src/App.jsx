@@ -10,10 +10,12 @@ import ResetPasswordPage from './pages/Users/ResetPasswordPage';
 import Header from './components/common/Header';
 import PlacesListPage from './pages/Place/PlacesListPage.jsx';
 import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
-import AccountIntergrationPage from './pages/Users/AccountIntergrationPage.jsx';
+import AccountIntergrationPage from './pages/Users/AccountIntegrationPage.jsx';
 import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
 import KakaoCallback from './components/SocialAuth/KakaoCallback.jsx';
 import NaverCallback from './components/SocialAuth/NaverCallback.jsx';
+import IntegrationCompletePage from './pages/Users/IntegrationCompletePage.jsx';
+import AccountIntergration from './components/SocialAuth/AccountIntegration.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -37,6 +39,10 @@ const App = () => {
           <Route
             path="/social/integrate"
             element={<AccountIntergrationPage />}
+          />
+          <Route
+            path="/travelo/integratedKakao"
+            element={<AccountIntergration />}
           />
           <Route
             path="/protected"

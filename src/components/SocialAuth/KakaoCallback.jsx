@@ -33,6 +33,27 @@ const KakaoCallback = () => {
         }
       } catch (error) {
         console.error('Error fetching auth response:', error);
+        if (error.response && error.response.status === 400) {
+          const { error: errorMessage, username } = error.response.data;
+          let provider = 'unknown';
+          if (errorMessage.includes('kakao')) {
+            provider = 'kakao';
+          } else if (errorMessage.includes('google')) {
+            provider = 'google';
+          } else if (errorMessage.includes('naver')) {
+            provider = 'naver';
+          }
+          let currentTry = 'kakao';
+          console.log(
+            '통합 페이지로 이동, error:',
+            errorMessage,
+            'username:',
+            username
+          );
+          navigate('/social/integrate', {
+            state: { provider, currentTry, username, error: errorMessage },
+          });
+        }
       }
     };
 

@@ -43,6 +43,21 @@ const GoogleCallback = () => {
       } catch (error) {
         console.error('API 호출 중 오류 발생: ', error);
         console.error('Error response: ', error.response);
+        if (error.response && error.response.status === 400) {
+          const { error: errorMessage, username } = error.response.data;
+          let provider = 'unknown';
+          if (errorMessage.includes('kakao')) {
+            provider = 'kakao';
+          } else if (errorMessage.includes('google')) {
+            provider = 'google';
+          } else if (errorMessage.includes('naver')) {
+            provider = 'naver';
+          }
+          let currentTry = 'google';
+          navigate('/social/integrate', {
+            state: { provider, currentTry, username, error: errorMessage },
+          });
+        }
       }
 
       // if (error) {

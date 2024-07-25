@@ -288,7 +288,7 @@
 }
 
 .kakao-login-btn {
-  background: no-repeat center/100% url(/public/btn_kakao.svg);
+  background: no-repeat center/100% url(/btn_kakao.svg);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -338,7 +338,7 @@
 }
 
 .naver-login-btn {
-  background: no-repeat center/100% url(/public/btn_naver.svg);
+  background: no-repeat center/100% url(/btn_naver.svg);
   width: 50px;
   height: 50px;
   border-radius: 50%;

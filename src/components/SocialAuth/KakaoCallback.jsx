@@ -1,31 +1,45 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
+import axios from 'axios';
 
 const KakaoCallback = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const code = new URLSearchParams(location.search).get('code');
 
+  console.log('카카오');
+
   useEffect(() => {
-    if (code) {
-      axiosInstance
-        .get(`/travelo/kakaoCallback`, {
-          params: {
-            code,
-          },
-        })
-        .then((response) => {
-          // 로그인 성공 후 처리
-          console.log(response.data);
-          const { accessToken } = response.data;
+    const fetchAuthResponse = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:8080/travelo/kakaoCallback',
+          {
+            params: { code },
+          }
+        );
+
+        if (response.status === 200) {
+          const { accessToken, refreshToken } = response.data;
           sessionStorage.setItem('accessToken', accessToken);
-        })
-        .catch((error) => {
-          console.error('로그인 실패:', error);
-        });
+          sessionStorage.setItem('refreshToken', refreshToken);
+          navigate('/home');
+        } else if (response.status === 400) {
+          const { error, username } = response.data;
+          navigate('/social/integrate', {
+            state: { provider: 'kakao', username, error },
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching auth response:', error);
+      }
+    };
+
+    if (code) {
+      fetchAuthResponse();
     }
-  }, [code]);
+  }, [code, navigate]);
 
   return <div>로그인 중...</div>;
 };

@@ -9,7 +9,7 @@ const NaverLoginButton = () => {
   const [provider, setProvider] = useState(false);
 
   const handleLogin = () => {
-    const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&state=STATE_STRING&redirect_uri=http://localhost:8080/travelo/naverCallback`;
+    const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&state=STATE_STRING&redirect_uri=http://localhost:5173/travelo/naverCallback`;
     console.log('naverLoginUrl', naverLoginUrl);
     window.location.href = naverLoginUrl;
   };

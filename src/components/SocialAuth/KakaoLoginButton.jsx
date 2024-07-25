@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const KakaoLoginButton = () => {
   const kakaoKey = import.meta.env.VITE_API_KAKAO_KEY;
-  const redirectUri = 'http://localhost:8080/travelo/kakaoCallback';
+  const redirectUri = 'http://localhost:5173/travelo/kakaoCallback';
   const [username, setUsername] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [provider, setProvider] = useState(false);
@@ -49,6 +49,7 @@ const KakaoLoginButton = () => {
               },
             }
           );
+          console.log('Check response:', response.data);
           const { error, username } = response.data;
 
           if (error) {

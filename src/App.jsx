@@ -16,6 +16,7 @@ import MyReviewPage from './pages/MyReviewPage';
 import CourseDetail from './course/CourseDetail';
 import MyCoursePage from './pages/MyCoursePage';
 import MyCourseEditPage from './pages/MyCourseEditPage';
+import AdminMainPage from './pages/Admin/AdminMainPage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/users/register" element={<RegisterPage />} />
           <Route path="/users/checkUser" element={<CheckUserPage />} />
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
+          <Route path="/admin" element={<AdminMainPage />} />
           <Route path="/googleCallback" element={GoogleCallback} />
           <Route
             path="/social/integrate"

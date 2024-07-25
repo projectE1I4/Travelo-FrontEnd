@@ -14,6 +14,7 @@ import PlacesList from './pages/PlacesList';
 import MyReviewPage from './pages/MyReviewPage';
 import CourseDetail from './course/CourseDetail';
 import MyCoursePage from './pages/MyCoursePage';
+import MyCourseEditPage from './pages/MyCourseEditPage';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/places" element={<PlacesList />} />
           <Route path="/myReviews" element={<MyReviewPage />} />
           <Route path="/myCourses" element={<MyCoursePage />} />
+          <Route path="/courseEdit" element={<MyCourseEditPage />} />
           <Route path="/course/:courseSeq" element={<CourseDetail />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />

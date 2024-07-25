@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { myCourses, deleteCourse } from '../../services/MyCourseService';
-import { RiDeleteBin6Line } from 'react-icons/ri';
+import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import '../../css/myCourseList.css';
 
 const MyCourseList = () => {
@@ -32,6 +32,11 @@ const MyCourseList = () => {
         setError(err);
       }
     }
+  };
+
+  // 코스 수정 페이지 이동
+  const editBtn = (courseSeq) => {
+    history.push(`/editCourse/${courseSeq}`);
   };
 
   //날짜 형식 변경 함수
@@ -92,7 +97,16 @@ const MyCourseList = () => {
                     {titleLength(course.title)}
                   </p>
                   <p className="courseDate">{formatDate(course.createDate)}</p>
-                  <button onClick={() => deleteBtn(course.courseSeq)}>
+                  <button
+                    className="editBtn"
+                    onClick={() => editBtn(course.courseSeq)}
+                  >
+                    <RiEdit2Line />
+                  </button>
+                  <button
+                    className="deleteBtn"
+                    onClick={() => deleteBtn(course.courseSeq)}
+                  >
                     <RiDeleteBin6Line />
                   </button>
                 </div>

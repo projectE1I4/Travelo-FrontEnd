@@ -36,6 +36,12 @@
   position: relative;
   margin: 10px auto;
   padding: auto 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.course:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--accent-color);
 }
 
 .image {
@@ -147,17 +153,58 @@
 }
 
 .courseTitle {
-  text-align: left;
   margin: 10px auto 10px 20px;
   font-size: 18px;
   font-weight: 700;
+  color: var(--txt-color-600);
+  transition: color 0.3s ease;
+}
+
+.course:hover .courseTitle {
+  color: var(--accent-color);
 }
 
 .courseDate {
   color: var(--txt-color-400);
-  background-color: var(--point-color2);
-
-  margin: 10px auto 10px 20px;
+  margin: 10px 0 10px 13px;
   border-radius: 10px;
   width: 80px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.course:hover .courseDate {
+  background-color: none;
+  color: var(--accent-color);
+}
+
+.editBtn,
+.deleteBtn {
+  position: absolute;
+  bottom: 10px;
+  color: var(--accent-color);
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.editBtn {
+  right: 50px;
+}
+
+.deleteBtn {
+  right: 15px;
+}
+
+.course:hover .editBtn,
+.course:hover .deleteBtn {
+  opacity: 1;
+  visibility: visible;
 }

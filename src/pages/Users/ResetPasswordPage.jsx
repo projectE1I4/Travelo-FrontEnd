@@ -62,11 +62,13 @@ const ResetPasswordPage = () => {
   console.log('mailcheck:', mailcheck);
 
   return (
-    <ResetPassword
-      onResetPassword={resetPassword}
-      onMailCheck={mailcheck}
-      onVerifyCodeCheck={verifycodecheck}
-    />
+    <div className="grid-container">
+      <ResetPassword
+        onResetPassword={resetPassword}
+        onMailCheck={mailcheck}
+        onVerifyCodeCheck={verifycodecheck}
+      />
+    </div>
   );
 };
 

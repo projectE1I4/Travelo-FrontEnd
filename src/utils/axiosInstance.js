@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import { useAuth } from '../hooks/useAuth';
 import { useState } from 'react';
 
 const axiosInstance = axios.create({
@@ -66,6 +67,7 @@ axiosInstance.interceptors.request.use(
         } catch (error) {
           console.log('Fail to refresh token', error);
           isRefreshing = false;
+          useAuth.logout();
         }
       }
 

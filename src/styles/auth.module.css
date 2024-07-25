@@ -1,0 +1,435 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.auth-content {
+  grid-column: 4 / span 6;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-top: 32px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.form-content {
+  width: 100%;
+  max-width: 600px;
+  height: 640px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto;
+  row-gap: 20px;
+  position: relative;
+}
+
+.form-content-short {
+  width: 100%;
+  height: 350px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  row-gap: 20px;
+  position: relative;
+}
+
+.form-content-register {
+  width: 100%;
+  max-width: 600px;
+  height: 700px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto;
+  row-gap: 20px;
+  position: relative;
+}
+
+.form-content-reset {
+  width: 100%;
+  max-width: 600px;
+  min-height: 400px;
+  max-height: 800px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto;
+  row-gap: 10px;
+  position: relative;
+}
+
+.logo-wrap {
+  display: grid;
+  place-items: center;
+}
+
+.brand-logo {
+  font-size: 2rem;
+  font-weight: normal;
+  color: var(--point-color1);
+  font-family: 'Odor';
+}
+.input-area {
+  display: grid;
+  row-gap: 20px;
+  width: 100%;
+}
+.input-wrap {
+  display: grid;
+  row-gap: 5px;
+  position: relative;
+  width: 100%;
+}
+.input-wrap-short {
+  height: 80px;
+  display: grid;
+  row-gap: 5px;
+  width: 100%;
+  min-width: 0;
+}
+.input-wrap-short2 {
+  display: grid;
+  row-gap: 5px;
+  width: 100%;
+}
+.input-wrap-short-password {
+  height: 80px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: 5px;
+  width: 100%;
+  min-width: 0;
+}
+.input-label-required {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+}
+.input-label-required::after {
+  content: '*';
+  font-size: 0.8rem;
+  margin-left: 5px;
+  color: #ff4040;
+}
+
+.input-wrap-inline {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: 10px;
+}
+.input-wrap-inline-reset-check {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 10px;
+}
+.input-wrap-inline-reset {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.input-box-inline {
+  min-width: 0;
+}
+
+.input-box {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+}
+
+.input-box-verify {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+}
+
+.input-box-password {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+  grid-column: 1 / span 2;
+}
+
+.input-box-readonly {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+  color: var(--txt-color-500);
+  background: var(--txt-color-400);
+}
+
+.btn-wrap {
+  width: 100%;
+}
+
+.btn-point {
+  width: 100%;
+  background: var(--accent-color);
+  color: var(--button-txt-color1);
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-point:hover {
+  background-color: #15aa8d;
+}
+
+.btn-line {
+  width: 100%;
+  background: var(--button-bg-color);
+  color: var(--txt-color-500);
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--txt-color-500);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-line:hover {
+  color: var(--accent-color);
+}
+
+.btn-text {
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--txt-color-500);
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.btn-back-text {
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--txt-color-400);
+  text-align: start;
+  cursor: pointer;
+}
+
+.btn-back-text::before {
+  content: '<';
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-54%);
+}
+
+.line-wrap {
+  display: grid;
+  align-items: center;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+.line-wrap::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: var(--txt-color-400);
+  align-self: center;
+}
+.line-wrap::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: var(--txt-color-400);
+  align-self: center;
+}
+.social-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-items: center;
+  width: 100%;
+}
+
+.kakao-login-btn {
+  background: no-repeat center/100% url(/public/btn_kakao.svg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.kakao-login-btn::after {
+  content: '카카오로 로그인';
+  position: absolute;
+  left: -50%;
+  top: 110%;
+  width: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.kakao-login-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.google-login-btn {
+  background: no-repeat center/90% url(/btn_google.svg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.google-login-btn::after {
+  content: '구글로 로그인';
+  position: absolute;
+  left: -50%;
+  top: 110%;
+  width: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.google-login-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.naver-login-btn {
+  background: no-repeat center/100% url(/public/btn_naver.svg);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+
+.naver-login-btn::after {
+  content: '네이버로 로그인';
+  position: absolute;
+  left: -50%;
+  top: 110%;
+  width: 100px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.naver-login-btn:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.input-btn-small {
+  position: relative;
+}
+
+.btn-wrap-small {
+  position: absolute;
+  justify-self: end;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btn-small {
+  width: 100%;
+  max-width: 90px;
+  height: 25px;
+  padding: 0 10px;
+  background: var(--accent-color);
+  color: var(--button-txt-color1);
+  text-align: center;
+  line-height: 25px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-small:hover {
+  background-color: #15aa8d;
+}
+
+.btn-checked {
+  width: 100%;
+  height: 25px;
+  padding: 0 10px;
+  background: var(--point-color2);
+  color: var(--txt-color-400);
+  text-align: center;
+  line-height: 25px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  cursor: not-allowed;
+}
+
+.register-gap {
+  margin-bottom: 20px;
+}
+
+.hidden-form {
+  height: 80px;
+}
+
+.hidden-form-reset {
+  margin-top: 5px;
+}
+
+.error-message-wrap {
+  height: 20px;
+}
+
+.error-message {
+  grid-column: 2 /3;
+  color: var(--icon-color-red);
+  font-size: 0.8rem;
+  margin-left: 5px;
+  white-space: nowrap;
+}
+
+.space {
+  height: 10px;
+  width: 100%;
+}

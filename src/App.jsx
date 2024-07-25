@@ -1,15 +1,17 @@
 import { useAuth } from './hooks/useAuth';
 import { Route, Routes } from 'react-router-dom';
-import './index.css';
 import LoginPage from './pages/Users/LoginPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/Users/RegisterPage';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
-import ResetPassword from './components/Auth/ResetPassword';
 import CheckUserPage from './pages/Users/CheckUserPage';
 import ResetPasswordPage from './pages/Users/ResetPasswordPage';
 import Header from './components/common/Header';
+import PlacesListPage from './pages/Place/PlacesListPage.jsx';
+import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
+import AccountIntergrationPage from './pages/Users/AccountIntergrationPage.jsx';
+import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
 import PlacesList from './pages/PlacesList';
 import MyReviewPage from './pages/MyReviewPage';
 import CourseDetail from './course/CourseDetail';
@@ -24,6 +26,8 @@ const App = () => {
       <Header />
       <div className="container">
         <Routes>
+          <Route path="/places" element={<PlacesListPage />} />
+          <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
           <Route path="/places" element={<PlacesList />} />
           <Route path="/myReviews" element={<MyReviewPage />} />
           <Route path="/myCourses" element={<MyCoursePage />} />
@@ -35,6 +39,11 @@ const App = () => {
           <Route path="/users/register" element={<RegisterPage />} />
           <Route path="/users/checkUser" element={<CheckUserPage />} />
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
+          <Route path="/googleCallback" element={GoogleCallback} />
+          <Route
+            path="/social/integrate"
+            element={<AccountIntergrationPage />}
+          />
           <Route
             path="/protected"
             element={

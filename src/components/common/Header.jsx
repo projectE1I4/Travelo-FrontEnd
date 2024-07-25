@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from '../../styles/Header.module.css';
+import styles from '../../styles/components/Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLocationDot,
@@ -42,17 +42,9 @@ function Header() {
             </li>
           </ul>
         </div>
-        <button
-          className={`btn btn-outline-primary my-2 my-sm-0 ${styles['btn-custom']}`}
-          type="button"
-        >
+        <button className={styles['btn-custom']} type="button">
           {' '}
-          <Link
-            className={`nav-link ${styles['nav-link']} ${styles['nav-link-icon']}`}
-            to="/users/login"
-          >
-            로그인 / 회원가입
-          </Link>
+          <Link to="/users/login">로그인 / 회원가입</Link>
         </button>
       </nav>
     </header>

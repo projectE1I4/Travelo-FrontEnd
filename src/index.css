@@ -292,7 +292,7 @@ button,
 table {
   font-family: 'Pretendard', '맑은 고딕', 'malgun gothic', 'Apple SD Gothic Neo',
     sans-serif;
-  font-size: 14px;
+  font-size: 15px;
   letter-spacing: -0.5px ;
   color: var(--txt-color-600);
 }
@@ -428,9 +428,8 @@ input[type='text'],
 input[type='search'],
 input[type='password'],
 input[type='number'] {
-  border: 1px solid #333;
-  border: none;
-  height: 40px;
+  /* border: 1px solid var(--txt-color-400); */
+  height: 50px;
   /* padding: 0 10px; */
   width: 100%;
 }

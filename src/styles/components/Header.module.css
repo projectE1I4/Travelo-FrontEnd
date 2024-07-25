@@ -1,4 +1,3 @@
-/* 커스터마이징된 네비게이션 바 */
 :root {
   --point-color1: #4d76b3;
   --point-color2: #f6f6f6;
@@ -16,15 +15,22 @@
   top: 0;
   z-index: 1000; /* 다른 요소들보다 위에 오도록 설정 */
   background-color: #fff; /* 백그라운드 컬러 설정 */
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+  width: 100%; /* 헤더를 전체 너비로 설정 */
+  margin: 0;
+  padding: 0 20px; /* 좌우 패딩을 추가하여 안쪽 여백 설정 */
+  display: flex;
+  justify-content: center; /* nav를 가운데 정렬 */
+  align-items: center; /* nav를 수직 가운데 정렬 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02); /* 스크롤 시 그림자 효과 */
 }
+
 .navbar-custom {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 80px;
+  width: 100%; /* navbar를 헤더의 전체 너비로 설정 */
+  max-width: 1200px; /* 최대 너비를 설정하여 가운데 정렬 효과 */
   padding: 0;
 }
 
@@ -82,6 +88,9 @@
 .btn-custom {
   padding: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
   width: 130px;
   height: 38px;
   line-height: 38px;
@@ -93,4 +102,5 @@
 .btn-custom:hover {
   background: var(--point-color1);
   border: 1px solid var(--point-color1);
+  color: var(--button-txt-color1);
 }

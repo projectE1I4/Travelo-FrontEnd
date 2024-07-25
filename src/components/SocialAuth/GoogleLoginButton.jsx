@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosInstance';
+import styles from '../../styles/Auth.module.css';
 
 const GoogleLoginButton = () => {
   const googleClientId = import.meta.env.VITE_API_GOOGLE_CLIENT_ID;
@@ -42,7 +43,7 @@ const GoogleLoginButton = () => {
         try {
           const response = await axiosInstance.post(
             '/travelo/check',
-            formData,
+            { code },
             {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -71,7 +72,7 @@ const GoogleLoginButton = () => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post(
-        `/travelo/intergrated${provider}`,
+        `/travelo/intergrated${provider.toLowerCase()}`,
         {
           username,
         }
@@ -89,7 +90,10 @@ const GoogleLoginButton = () => {
 
   return (
     <div>
-      <button onClick={handleLogin}>구글 로그인</button>
+      <button
+        onClick={handleLogin}
+        className={styles['google-login-btn']}
+      ></button>
       {showForm && (
         <>
           <div>

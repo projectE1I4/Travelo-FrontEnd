@@ -16,6 +16,7 @@ import KakaoCallback from './components/SocialAuth/KakaoCallback.jsx';
 import NaverCallback from './components/SocialAuth/NaverCallback.jsx';
 import IntegrationCompletePage from './pages/Users/IntegrationCompletePage.jsx';
 import AccountIntergration from './components/SocialAuth/AccountIntegration.jsx';
+import AccountIntergrationKakao from './components/SocialAuth/AccountIntegrationKakao.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -41,8 +42,12 @@ const App = () => {
             element={<AccountIntergrationPage />}
           />
           <Route
-            path="/travelo/integratedKakao"
+            path="/social/integratedComplete"
             element={<AccountIntergration />}
+          />
+          <Route
+            path="/travelo/integratedKakao"
+            element={<AccountIntergrationKakao />}
           />
           <Route
             path="/protected"

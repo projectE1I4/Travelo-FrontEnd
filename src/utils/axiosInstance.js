@@ -35,7 +35,6 @@ axiosInstance.interceptors.request.use(
       '/travelo/naverCallback',
       '/travelo/resetPassword',
       '/travelo/check',
-      '/travelo/intergratedGoogle',
     ];
 
     if (excludedUrls.includes(config.url)) {

@@ -66,48 +66,12 @@ const NaverLoginButton = () => {
     }
   }, []);
 
-  const handleintergration = async (e, provider) => {
-    e.preventDefault();
-    try {
-      const response = await axiosInstance.post(
-        `/travelo/intergrated${provider}`,
-        {
-          username,
-        }
-      );
-
-      if (response.status === 200) {
-        window.location.href = '/home';
-      } else {
-        console.error('통합 실패');
-      }
-    } catch (error) {
-      console.error('통합 도중 오류 발생', error);
-    }
-  };
-
   return (
     <div>
       <button
         onClick={handleLogin}
         className={styles['naver-login-btn']}
       ></button>
-      {showForm && (
-        <>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, provider)}>
-              <button type="submit">
-                ${transProvider(provider)}로 계정 통합
-              </button>
-            </form>
-          </div>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, 'Naver')}>
-              <button type="submit">네이버로 계정 통합</button>
-            </form>
-          </div>
-        </>
-      )}
     </div>
   );
 };

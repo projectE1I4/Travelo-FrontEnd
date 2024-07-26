@@ -2,13 +2,44 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../../styles/pages/social/Social.module.css';
 
-const AccountIntergration = () => {
+import axios from 'axios';
+
+const AccountIntergrationKakao = () => {
+  const navigate = useNavigate();
   const location = useLocation();
+  const code = new URLSearchParams(location.search).get('code');
+
+  console.log('일단 카카오');
 
   const goToHome = (e) => {
     e.preventDefault;
     window.location.href = '/';
   };
+
+  useEffect(() => {
+    const fetchAuthResponse = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:8080/travelo/integratedKakao',
+          {
+            params: { code },
+          }
+        );
+        if (response.status === 200) {
+          const { accessToken, refreshToken } = response.data;
+          sessionStorage.setItem('accessToken', accessToken);
+          sessionStorage.setItem('refreshToken', refreshToken);
+          navigate('/social/complete');
+        }
+      } catch (error) {
+        console.error('Error fetching auth response:', error);
+      }
+    };
+
+    if (code) {
+      fetchAuthResponse();
+    }
+  }, [code, navigate]);
 
   return (
     <div className="grid-container">
@@ -34,4 +65,4 @@ const AccountIntergration = () => {
   );
 };
 
-export default AccountIntergration;
+export default AccountIntergrationKakao;

@@ -1,0 +1,46 @@
+.adminReviewList {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.adminReviewList h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.adminReviewList .controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.adminReviewList .controls button,
+.adminReviewList .controls select {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.adminReviewList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.adminReviewList li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.adminReviewList li:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+.adminReviewList .reviewContent {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 600px;
+  display: inline-block;
+}

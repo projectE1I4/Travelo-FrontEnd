@@ -33,7 +33,10 @@ const AdminMain = () => {
         <button>전체 그룹 : {data['group count']}</button>
       </Link>
       <p>전체 코스 : {data['course count']}</p>
-      <p>전체 리뷰 : {data['review count']}</p>
+      <Link to="/admin/reviews">
+        <button>전체 리뷰 : {data['review count']}</button>
+      </Link>
+
       <p>신고 리뷰 : {data['reported5plus count']}</p>
     </div>
   );

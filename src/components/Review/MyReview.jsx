@@ -64,6 +64,16 @@ const ReviewList = () => {
       }
     }
   };
+
+  // 날짜 형식 변경 함수
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading reviews: {error.message}</p>;
 
@@ -114,9 +124,8 @@ const ReviewList = () => {
                     삭제
                   </button>
                   <p className="content">{item.review.content}</p>
-                  <p>작성일자: {item.review.createDate}</p>
+                  <p>작성일자: {formatDate(item.review.createDate)}</p>
                   <p>추천 수: {item.review.recommendCount}</p>
-                  <p>신고 수: {item.review.reportCount}</p>
                 </>
               )}
             </li>

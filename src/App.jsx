@@ -19,6 +19,7 @@ import MyCourseEditPage from './pages/MyCourseEditPage';
 import AdminMainPage from './pages/Admin/AdminMainPage.jsx';
 import AdminGroupPage from './pages/Admin/AdminGroupPage.jsx';
 import AdminReviewPage from './pages/Admin/AdminReviewPage.jsx';
+import AdminBlindReviewPage from './pages/Admin/AdminBlindReviewPage';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -30,8 +31,8 @@ const App = () => {
         <Routes>
           <Route path="/places" element={<PlacesListPage />} />
           <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
-          <Route path="/myReviews" element={<MyReviewPage />} />
-          <Route path="/myCourses" element={<MyCoursePage />} />
+          <Route path="mypage/myReviews" element={<MyReviewPage />} />
+          <Route path="mypage/myCourses" element={<MyCoursePage />} />
           <Route path="/courseEdit/:courseSeq" element={<MyCourseEditPage />} />
           <Route path="/course/:courseSeq" element={<CourseDetail />} />
           <Route path="/" element={<HomePage />} />
@@ -43,6 +44,10 @@ const App = () => {
           <Route path="/admin" element={<AdminMainPage />} />
           <Route path="/admin/groups" element={<AdminGroupPage />} />
           <Route path="/admin/reviews" element={<AdminReviewPage />} />
+          <Route
+            path="/admin/blindReviews"
+            element={<AdminBlindReviewPage />}
+          />
           <Route path="/googleCallback" element={GoogleCallback} />
           <Route
             path="/social/integrate"

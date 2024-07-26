@@ -5,6 +5,7 @@ import {
   updateReview,
   deleteReview,
 } from '../../services/myReviewService';
+import { formatDate } from '../common/formatDate';
 import '../../css/myReviewList.css';
 
 const ReviewList = () => {
@@ -15,7 +16,7 @@ const ReviewList = () => {
   const [sortBy, setSortBy] = useState('latest');
   const [editReviewId, setEditReviewId] = useState(null);
   const [editContent, setEditContent] = useState('');
-  const [expandedReviews, setExpandedReviews] = useState([]); // 리뷰 내용 확장을 위한 상태
+  const [expandedReviews, setExpandedReviews] = useState([]); // 내용 더보기
 
   // useCallback: 중복 호출 방지
   const loadReviews = useCallback(async () => {
@@ -99,21 +100,12 @@ const ReviewList = () => {
     ]);
   };
 
-  // 날짜 형식 변경 함수
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}.${month}.${day}`;
-  };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading reviews: {error.message}</p>;
 
   return (
     <div className="myReviews">
-      <h1>Review List</h1>
+      <h1>나의 후기</h1>
       {reviews.length === 0 ? (
         <p>리뷰가 없습니다.</p>
       ) : (

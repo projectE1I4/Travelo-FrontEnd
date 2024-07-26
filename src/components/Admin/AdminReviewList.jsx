@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getReviewList } from '../../services/adminService';
+import { formatDate } from '../common/formatDate';
 import '../../css/Admin/AdminReview.css';
 
 const AdminReviewList = () => {
@@ -34,14 +35,12 @@ const AdminReviewList = () => {
     return filter === 'blind' ? review.blindYn === 'Y' : review.blindYn === 'N';
   });
 
-  // 날짜 형식 변경 함수
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}.${month}.${day}`;
-  };
+  // 전체 리뷰, 블라인드된 리뷰, 보이는 리뷰 개수 계산
+  const allCount = reviews.length;
+  const blindCount = reviews.filter((review) => review.blindYn === 'Y').length;
+  const visibleCount = reviews.filter(
+    (review) => review.blindYn === 'N'
+  ).length;
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -55,20 +54,22 @@ const AdminReviewList = () => {
           <button onClick={() => setSortBy('oldest')}>오래된 순</button>
         </div>
         <select onChange={handleFilterChange} value={filter}>
-          <option value="all">전체</option>
-          <option value="blind">블라인드된 리뷰</option>
-          <option value="visible">보이는 리뷰</option>
+          <option value="all">전체 ({allCount})</option>
+          <option value="blind">블라인드된 리뷰 ({blindCount})</option>
+          <option value="visible">보이는 리뷰 ({visibleCount})</option>
         </select>
       </div>
       <ul>
         {filteredReviews.map((review) => (
           <li key={review.reviewSeq}>
             작성자 : {review.user.username}, 작성 일자 :{' '}
-            {formatDate(review.createDate)},
+            {formatDate(review.createDate)}
+            <br />
             <span className="reviewContent">
               작성 내용 : {review.content.slice(0, 50)}...
             </span>
-            , 신고 수 : {review.reportCount}
+            <br />
+            신고 수 : {review.reportCount}
           </li>
         ))}
       </ul>

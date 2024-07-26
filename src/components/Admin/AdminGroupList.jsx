@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getGroupList, deleteGroup } from '../../services/adminService';
+import { formatDate } from '../common/formatDate.jsx';
 
 const AdminGroupList = () => {
   const [groups, setGroups] = useState([]);
@@ -35,15 +36,6 @@ const AdminGroupList = () => {
         setError(error);
       }
     }
-  };
-
-  // 날짜 형식 변경 함수
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}.${month}.${day}`;
   };
 
   if (loading) return <div>Loading...</div>;

@@ -14,9 +14,9 @@ const HomePage = () => {
       <br />
       <a href="/users/checkUser">비밀번호 재설정</a>
       <br />
-      <a href="/myCourses">나의 코스</a>
+      <a href="mypage/myCourses">나의 코스</a>
       <br />
-      <a href="/myReviews">나의 후기</a>
+      <a href="mypage/myReviews">나의 후기</a>
       <br />
       <a href="/admin">관리자 대시보드</a>
     </div>

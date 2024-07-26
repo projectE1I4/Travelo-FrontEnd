@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { myCourses, deleteCourse } from '../../services/MyCourseService';
-import { useNavigate } from 'react-router-dom'; // 여기서 한 번만 import
+import { useNavigate } from 'react-router-dom';
 import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
+import { formatDate } from '../common/formatDate';
 import '../../css/myCourseList.css';
 
 const MyCourseList = () => {
@@ -39,15 +40,6 @@ const MyCourseList = () => {
   // 코스 수정 페이지로 이동
   const editBtn = (courseSeq) => {
     navigate(`/courseEdit/${courseSeq}`);
-  };
-
-  // 날짜 형식 변경 함수
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}.${month}.${day}`;
   };
 
   // 제목 말줄임 처리 함수

@@ -36,8 +36,10 @@ const AdminMain = () => {
       <Link to="/admin/reviews">
         <button>전체 리뷰 : {data['review count']}</button>
       </Link>
-
-      <p>신고 리뷰 : {data['reported5plus count']}</p>
+      <br />
+      <Link to="/admin/blindReviews">
+        <button>신고 리뷰 : {data['reported5plus count']}</button>
+      </Link>
     </div>
   );
 };

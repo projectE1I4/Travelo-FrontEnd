@@ -1,12 +1,12 @@
 import { useAuth } from './hooks/useAuth';
 import { Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/users/LoginPage';
+import LoginPage from './pages/users/LoginPage.jsx';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
-import RegisterPage from './pages/users/RegisterPage';
-import ProtectedRoute from './components/auth/ProtectedRoute';
-import CheckUserPage from './pages/users/CheckUserPage';
-import ResetPasswordPage from './pages/users/ResetPasswordPage';
+import RegisterPage from './pages/users/RegisterPage.jsx';
+import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
+import CheckUserPage from './pages/users/CheckUserPage.jsx';
+import ResetPasswordPage from './pages/users/ResetPasswordPage.jsx';
 import Header from './components/common/Header';
 import PlacesListPage from './pages/Place/PlacesListPage.jsx';
 import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
@@ -18,6 +18,7 @@ import AccountIntergration from './components/socialAuth/AccountIntegration.jsx'
 import AccountIntergrationKakao from './components/socialAuth/AccountIntegrationKakao.jsx';
 import ModifyuserPage from './pages/users/ModifyUserPage.jsx';
 import ModifyUserPage from './pages/users/ModifyUserPage.jsx';
+import ModifyUserGooglePage from './pages/users/ModifyUserGooglePage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -52,6 +53,18 @@ const App = () => {
           />
 
           <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
+          <Route
+            path="mypage/modifyprofileGoogle"
+            element={<ModifyUserGooglePage />}
+          />
+          <Route
+            path="mypage/modifyprofileNaver"
+            element={<ModifyUserPage />}
+          />
+          <Route
+            path="mypage/modifyprofileKakao"
+            element={<ModifyUserPage />}
+          />
           <Route
             path="/protected"
             element={

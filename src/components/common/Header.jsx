@@ -10,6 +10,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 function Header() {
   const { isAuthenticated, user } = useAuth();
+
   return (
     <header className={styles['header']}>
       <nav className={`navbar ${styles['navbar-custom']}`}>
@@ -49,7 +50,19 @@ function Header() {
             {user.role === 'ADMIN' ? (
               <Link to="/admin">어드민 페이지</Link>
             ) : (
-              <Link to="/mypage/modifyprofile">마이 페이지</Link>
+              <Link
+                to={
+                  user.oauthType === 'google'
+                    ? '/mypage/modifyprofileGoogle'
+                    : user.oauthType === 'kakao'
+                      ? '/mypage/modifyprofileKakao'
+                      : user.oauthType === 'naver'
+                        ? '/mypage/modifyprofileNaver'
+                        : '/mypage/modifyprofile'
+                }
+              >
+                마이 페이지
+              </Link>
             )}
           </button>
         ) : (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../../styles/components/MypageSidebar.module.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 
 const MyPageSidebar = () => {
   const [userEdit, setUserEdit] = useState('false');
@@ -9,6 +10,7 @@ const MyPageSidebar = () => {
   const [courseBookMark, setCourseBookMark] = useState('false');
   const [myCourse, setMyCourse] = useState('false');
   const [myReview, setMyReview] = useState('false');
+  const { user } = useAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,6 +28,17 @@ const MyPageSidebar = () => {
     setBookMark((prev) => !prev);
   };
 
+  const getProfileLink = () => {
+    if (user.oauthType === 'google') {
+      return 'mypage/modifyprofileGoogle';
+    } else if (user.ouathType === 'kakao') {
+      return 'mypage/modifyprofileKakao';
+    } else if (user.oauthType === 'naver') {
+      return 'mypage/modifyprofileNaver';
+    }
+    return '/mypage/modifyprofile';
+  };
+
   return (
     <div className={styles['MS-container']}>
       <h2 className={styles['MS-title']}>마이페이지</h2>
@@ -35,7 +48,7 @@ const MyPageSidebar = () => {
             onClick={(e) => {}}
             className={`${styles['MS-item']} ${isActive('/mypage/modifyprofile')}`}
           >
-            <Link to="/mypage/modifyprofile">
+            <Link to={getProfileLink}>
               <p>회원 정보 수정</p>
             </Link>
           </li>

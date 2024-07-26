@@ -1,8 +1,9 @@
 import ModifyUser from '../../components/auth/ModifyUser';
+import ModifyUserGoogle from '../../components/auth/ModifyUserGoogle';
 import MyPageSidebar from '../../components/common/MyPageSidebar';
 import mailCheckService from '../../services/mailCheckService';
 
-const ModifyUserPage = () => {
+const ModifyUserGooglePage = () => {
   const mailcheck = async (username) => {
     try {
       console.log('mailcheck called with username:', username); // 디버깅용 로그
@@ -34,9 +35,9 @@ const ModifyUserPage = () => {
   return (
     <div className="grid-container">
       <MyPageSidebar />
-      <ModifyUser />
+      <ModifyUserGoogle />
     </div>
   );
 };
 
-export default ModifyUserPage;
+export default ModifyUserGooglePage;

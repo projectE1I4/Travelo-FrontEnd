@@ -177,3 +177,12 @@
   margin-left: 5px;
   white-space: nowrap;
 }
+
+.modify-btn-text {
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--txt-color-400);
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}

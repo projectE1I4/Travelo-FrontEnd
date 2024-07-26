@@ -5,6 +5,7 @@ const renderDetailItem = (label, value) => {
   if (!value || value === '0' || value === '없음') {
     return null;
   }
+
   const unifiedValue = value.replace(/<br\s*\/?>/gi, ', ');
   return (
     <li className={styles['info-list-item']}>
@@ -65,11 +66,12 @@ const PlaceDetailInfo = ({ type, details }) => {
         {type === '32' && (
           <>
             {renderDetailItem('수용가능인원', details.accomcountlodging)}
-            {renderDetailItem('베니키아여부', details.benikia)}
+            {/* {renderDetailItem('베니키아여부', details.benikia)} */}
             {renderDetailItem('입실시간', details.checkintime)}
             {renderDetailItem('퇴실시간', details.checkouttime)}
             {renderDetailItem('식음료장', details.foodplace)}
-            {renderDetailItem('굿스테이여부', details.goodstay)}
+            {renderDetailItem('객실내취사', details.chkcooking)}
+            {/* {renderDetailItem('굿스테이여부', details.goodstay)} */}
             {renderDetailItem('한옥여부', details.hanok)}
             {renderDetailItem('문의및안내', details.infocenterlodging)}
             {renderDetailItem('객실수', details.roomcount)}

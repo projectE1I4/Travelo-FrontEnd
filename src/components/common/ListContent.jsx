@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styles from '../../styles/components/place/ListContent.module.css';
-import PlaceCard from './PlaceCard';
+import PlaceCard from '../PlaceCard';
 import Pagination from './Pagination';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';

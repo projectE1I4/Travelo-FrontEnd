@@ -1,0 +1,35 @@
+.card-wrap {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+  padding: 50px 0 100px;
+  border-top: 1px solid var(--txt-color-400);
+}
+
+.card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid var(--point-color2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  grid-column: span 3;
+  height: 180px;
+  justify-content: center;
+}
+
+.icon {
+  color: var(--point-color1);
+}
+
+.card-label {
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.card-value {
+  font-weight: 700;
+}

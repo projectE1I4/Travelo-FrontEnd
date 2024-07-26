@@ -1,0 +1,106 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* 다른 요소들보다 위에 오도록 설정 */
+  background-color: #fff; /* 백그라운드 컬러 설정 */
+  width: 100%; /* 헤더를 전체 너비로 설정 */
+  margin: 0;
+  padding: 0 20px; /* 좌우 패딩을 추가하여 안쪽 여백 설정 */
+  display: flex;
+  justify-content: center; /* nav를 가운데 정렬 */
+  align-items: center; /* nav를 수직 가운데 정렬 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02); /* 스크롤 시 그림자 효과 */
+}
+
+.navbar-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  width: 100%; /* navbar를 헤더의 전체 너비로 설정 */
+  max-width: 1200px; /* 최대 너비를 설정하여 가운데 정렬 효과 */
+  padding: 0;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--point-color1);
+  margin-right: 2rem;
+  font-family: 'Odor';
+}
+.navbar-brand:focus,
+.navbar-brand:hover {
+  color: var(--point-color1);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+.navbar-ul {
+  flex-direction: row;
+}
+
+.nav-item {
+  margin: 0 1rem;
+}
+
+.nav-link {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--txt-color-600);
+}
+
+.nav-link-icon {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link-icon svg {
+  margin-right: 0.5rem;
+}
+
+.nav-item:nth-child(1) .nav-link-icon svg {
+  color: #5f99de;
+}
+.nav-item:nth-child(2) .nav-link-icon svg {
+  color: #ff4040;
+}
+.nav-item:nth-child(3) .nav-link-icon svg {
+  color: #ffb800;
+}
+
+.btn-custom {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  width: 130px;
+  height: 38px;
+  line-height: 38px;
+  font-size: 14px;
+  color: var(--txt-color-500);
+  border: 1px solid var(--txt-color-400);
+}
+
+.btn-custom:hover {
+  background: var(--point-color1);
+  border: 1px solid var(--point-color1);
+  color: var(--button-txt-color1);
+}

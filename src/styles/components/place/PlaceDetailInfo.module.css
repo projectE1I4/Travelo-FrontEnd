@@ -1,0 +1,30 @@
+.info-wrap {
+  margin-top: 32px;
+}
+
+.info-wrap h2 {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.info-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+.info-list-item {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.info-list-item strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  width: 200px;
+  margin-right: 10px;
+}
+.info-list-item p {
+  display: block;
+  width: 800px;
+}

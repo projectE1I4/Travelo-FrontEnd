@@ -1,35 +1,56 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { useAuth } from './hooks/useAuth';
+import { Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/Users/LoginPage';
+import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
+import RegisterPage from './pages/Users/RegisterPage';
+import ProtectedRoute from './components/Auth/ProtectedRoute';
+import CheckUserPage from './pages/Users/CheckUserPage';
+import ResetPasswordPage from './pages/Users/ResetPasswordPage';
+import Header from './components/common/Header';
+import PlacesListPage from './pages/Place/PlacesListPage.jsx';
+import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
+import AccountIntergrationPage from './pages/Users/AccountIntergrationPage.jsx';
+import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
+import KakaoCallback from './components/SocialAuth/KakaoCallback.jsx';
+import NaverCallback from './components/SocialAuth/NaverCallback.jsx';
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  const { isAuthenticated } = useAuth();
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div>
+      <Header />
+      <div className="container">
+        <Routes>
+          <Route path="/places" element={<PlacesListPage />} />
+          <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/users/login" element={<LoginPage />} />
+          <Route path="/users/register" element={<RegisterPage />} />
+          <Route path="/users/checkUser" element={<CheckUserPage />} />
+          <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
+          <Route path="/travelo/naverCallback" element={<NaverCallback />} />
+          <Route path="/travelo/googleCallback" element={<GoogleCallback />} />
+          <Route path="/travelo/kakaoCallback" element={<KakaoCallback />} />
+          <Route
+            path="/social/integrate"
+            element={<AccountIntergrationPage />}
+          />
+          <Route
+            path="/protected"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   );
-}
+};
 
 export default App;

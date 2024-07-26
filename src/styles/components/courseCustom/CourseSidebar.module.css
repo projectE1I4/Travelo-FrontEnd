@@ -1,0 +1,69 @@
+.sidebar {
+  position: sticky;
+  top: 80px; /* header의 높이만큼 설정 */
+  padding-top: 32px;
+  grid-column: 1 / span 4;
+  border: 1px solid black;
+  background-color: #fff; /* 백그라운드 컬러 설정 */
+}
+
+.map-container {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  height: 300px;
+  border: 1px solid #000;
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%; /* 반응형을 위해 width 100% */
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 0.5rem;
+  font-size: 14px;
+  color: var(--txt-color-500);
+}
+
+input[type='text'] {
+  /* border: none !important; */
+}
+
+.search-input::placeholder {
+  color: var(--txt-color-400);
+}
+
+.search-icon {
+  color: var(--point-color1);
+  margin: 0 10px;
+}
+
+.heading {
+  display: flex;
+  height: 60px;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: space-between;
+  /* border-bottom: 1px solid var(--txt-color-400); */
+}
+.heading h2 {
+  font-weight: 700;
+}

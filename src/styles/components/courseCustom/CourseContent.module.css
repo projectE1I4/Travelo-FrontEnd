@@ -1,0 +1,20 @@
+.list-content {
+  grid-column: 5 / span 8;
+  padding-left: 16px;
+  padding-top: 32px;
+}
+
+.heading {
+  display: flex;
+  background-color: pink;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #000;
+  margin-bottom: 20px;
+}
+
+.list-content-wrap {
+  padding: 32px;
+  background-color: var(--point-color2);
+  border-radius: 10px;
+}

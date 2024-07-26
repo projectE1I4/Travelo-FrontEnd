@@ -15,8 +15,9 @@ const ReviewList = () => {
   const [sortBy, setSortBy] = useState('latest');
   const [editReviewId, setEditReviewId] = useState(null);
   const [editContent, setEditContent] = useState('');
+  const [expandedReviews, setExpandedReviews] = useState([]); // 리뷰 내용 확장을 위한 상태
 
-  // useCallback을 사용하여 함수의 중복 호출을 방지합니다.
+  // useCallback: 중복 호출 방지
   const loadReviews = useCallback(async () => {
     try {
       const data = await reviewsList(page, sortBy);
@@ -32,10 +33,12 @@ const ReviewList = () => {
     loadReviews();
   }, [loadReviews]);
 
+  // username ** 처리
   const maskUsername = (username) => {
     return username.substring(0, 3) + '****';
   };
 
+  // 리뷰 수정
   const reviewEdit = (reviewSeq) => {
     setEditReviewId(reviewSeq);
     const reviewToEdit = reviews.find(
@@ -44,25 +47,56 @@ const ReviewList = () => {
     setEditContent(reviewToEdit.review.content);
   };
 
+  // 리뷰 수정사항 저장
   const editSave = async (reviewSeq) => {
+    const originalReview = reviews.find(
+      (item) => item.review.reviewSeq === reviewSeq
+    ).review.content;
+
+    if (editContent === originalReview) {
+      alert('변동 사항이 없습니다.');
+      return;
+    }
     try {
-      await updateReview(reviewSeq, editContent);
+      const updatedReview = await updateReview(reviewSeq, editContent);
+      setReviews((prevReviews) =>
+        prevReviews.map((item) =>
+          item.review.reviewSeq === reviewSeq
+            ? {
+                ...item,
+                review: {
+                  ...item.review,
+                  content: editContent,
+                  modified: true,
+                },
+              }
+            : item
+        )
+      );
       setEditReviewId(null);
-      loadReviews();
     } catch (err) {
       console.error('수정 오류 :', err);
     }
   };
 
+  // 리뷰 삭제
   const deleteItem = async (reviewSeq) => {
     if (window.confirm('정말 리뷰를 삭제하시겠습니까?')) {
       try {
         await deleteReview(reviewSeq);
-        loadReviews(); // 리뷰 목록 새로 고침
+        loadReviews();
       } catch (err) {
         console.error('삭제 오류 :', err);
       }
     }
+  };
+
+  // 리뷰 내용 더보기
+  const showMore = (reviewSeq) => {
+    setExpandedReviews((prevExpandedReviews) => [
+      ...prevExpandedReviews,
+      reviewSeq,
+    ]);
   };
 
   // 날짜 형식 변경 함수
@@ -86,7 +120,12 @@ const ReviewList = () => {
         <ul className="myReviewList">
           {reviews.map((item) => (
             <li key={item.review.reviewSeq} className="listItem">
-              <p>{maskUsername(item.review.user.username)}</p>
+              <div className="userInfo">
+                <p>{maskUsername(item.review.user.username)}</p>
+                <p>작성일자: {formatDate(item.review.createDate)}</p>
+                {item.review.modified && <p>(수정됨)</p>}
+                <p>추천 수: {item.review.recommendCount}</p>
+              </div>
               <h2>
                 <Link to={`/course/${item.courseSeq}`}>{item.courseTitle}</Link>
               </h2>
@@ -97,13 +136,13 @@ const ReviewList = () => {
                     onChange={(e) => setEditContent(e.target.value)}
                   />
                   <button
-                    className="editBtn1 btn_type_2"
+                    className="reviewSave btn_type_2"
                     onClick={() => editSave(item.review.reviewSeq)}
                   >
                     저장
                   </button>
                   <button
-                    className="editBtn1 btn_type_2"
+                    className="cancleBtn btn_type_2"
                     onClick={() => setEditReviewId(null)}
                   >
                     취소
@@ -112,20 +151,35 @@ const ReviewList = () => {
               ) : (
                 <>
                   <button
-                    className="editBtn btn_type_1"
+                    className="reviewEdit btn_type_1"
                     onClick={() => reviewEdit(item.review.reviewSeq)}
                   >
                     수정
                   </button>
                   <button
-                    className="editBtn btn_type_1"
+                    className="reviewDelete btn_type_1"
                     onClick={() => deleteItem(item.review.reviewSeq)}
                   >
                     삭제
                   </button>
-                  <p className="content">{item.review.content}</p>
-                  <p>작성일자: {formatDate(item.review.createDate)}</p>
-                  <p>추천 수: {item.review.recommendCount}</p>
+                  <p className="content">
+                    {expandedReviews.includes(item.review.reviewSeq) ? (
+                      item.review.content
+                    ) : (
+                      <>
+                        {item.review.content.length > 100
+                          ? item.review.content.substring(0, 100) + '...'
+                          : item.review.content}
+                        {item.review.content.length > 100 && (
+                          <button
+                            onClick={() => showMore(item.review.reviewSeq)}
+                          >
+                            더보기
+                          </button>
+                        )}
+                      </>
+                    )}
+                  </p>
                 </>
               )}
             </li>

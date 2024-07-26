@@ -1,22 +1,23 @@
 import { useAuth } from './hooks/useAuth';
 import { Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/Users/LoginPage';
+import LoginPage from './pages/users/LoginPage';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
-import RegisterPage from './pages/Users/RegisterPage';
-import ProtectedRoute from './components/Auth/ProtectedRoute';
-import CheckUserPage from './pages/Users/CheckUserPage';
-import ResetPasswordPage from './pages/Users/ResetPasswordPage';
+import RegisterPage from './pages/users/RegisterPage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import CheckUserPage from './pages/users/CheckUserPage';
+import ResetPasswordPage from './pages/users/ResetPasswordPage';
 import Header from './components/common/Header';
 import PlacesListPage from './pages/Place/PlacesListPage.jsx';
 import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
-import AccountIntergrationPage from './pages/Users/AccountIntegrationPage.jsx';
-import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
-import KakaoCallback from './components/SocialAuth/KakaoCallback.jsx';
-import NaverCallback from './components/SocialAuth/NaverCallback.jsx';
-import IntegrationCompletePage from './pages/Users/IntegrationCompletePage.jsx';
-import AccountIntergration from './components/SocialAuth/AccountIntegration.jsx';
-import AccountIntergrationKakao from './components/SocialAuth/AccountIntegrationKakao.jsx';
+import AccountIntergrationPage from './pages/users/AccountIntegrationPage.jsx';
+import GoogleCallback from './components/socialAuth/GoogleCallback.jsx';
+import KakaoCallback from './components/socialAuth/KakaoCallback.jsx';
+import NaverCallback from './components/socialAuth/NaverCallback.jsx';
+import AccountIntergration from './components/socialAuth/AccountIntegration.jsx';
+import AccountIntergrationKakao from './components/socialAuth/AccountIntegrationKakao.jsx';
+import ModifyuserPage from './pages/users/ModifyUserPage.jsx';
+import ModifyUserPage from './pages/users/ModifyUserPage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -49,6 +50,8 @@ const App = () => {
             path="/travelo/integratedKakao"
             element={<AccountIntergrationKakao />}
           />
+
+          <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
           <Route
             path="/protected"
             element={

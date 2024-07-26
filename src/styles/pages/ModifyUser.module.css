@@ -1,0 +1,179 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.modify-content {
+  grid-column: 4 / span 9;
+  padding-top: 32px;
+  padding-left: 16px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.modify-title {
+  font-weight: 500;
+}
+
+.form-content-modify {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 800px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 50px 100px;
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  row-gap: 20px;
+  position: relative;
+}
+
+.input-area {
+  display: grid;
+  row-gap: 20px;
+  width: 100%;
+}
+.input-wrap {
+  display: grid;
+  row-gap: 5px;
+  position: relative;
+  width: 100%;
+}
+
+.input-wrap-verify {
+  display: grid;
+  row-gap: 5px;
+  position: relative;
+  width: 100%;
+  grid-template-columns: auto 1fr;
+  margin-bottom: 10px;
+}
+
+.input-wrap-inline-email {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.input-label-required {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+}
+.input-label-required::after {
+  content: '*';
+  font-size: 0.8rem;
+  margin-left: 5px;
+  color: #ff4040;
+}
+
+.input-box-inline {
+  min-width: 0;
+}
+
+.password-wrap {
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-gap: 5px;
+}
+
+.input-box {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+}
+.input-box-verify {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+  grid-column: 1 / span 2;
+}
+
+.input-box-readonly {
+  padding: 0 20px;
+  height: 50px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 6px;
+  width: 100%;
+  color: var(--txt-color-500);
+  background: var(--txt-color-400);
+}
+
+.modify-Check-wrap {
+  border-top: 1px solid var(--txt-color-400);
+  padding-top: 30px;
+}
+
+.modify-mailCheck {
+  margin-bottom: 20px;
+}
+
+.modify-alert-message {
+  color: var(--icon-color-red);
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.button-gap {
+  margin-top: 20px;
+}
+
+.btn-wrap {
+  width: 100%;
+}
+
+.btn-point {
+  width: 100%;
+  background: var(--accent-color);
+  color: var(--button-txt-color1);
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-point:hover {
+  background-color: #15aa8d;
+}
+
+.btn-line {
+  width: 100%;
+  background: var(--button-bg-color);
+  color: var(--txt-color-500);
+  text-align: center;
+  line-height: 50px;
+  height: 50px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--txt-color-500);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-line:hover {
+  color: var(--accent-color);
+}
+
+.error-message {
+  grid-column: 2/2;
+  color: var(--icon-color-red);
+  font-size: 0.8rem;
+  margin-left: 5px;
+  white-space: nowrap;
+}

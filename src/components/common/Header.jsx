@@ -49,7 +49,7 @@ function Header() {
             {user.role === 'ADMIN' ? (
               <Link to="/admin">어드민 페이지</Link>
             ) : (
-              <Link to="/users/mypage">마이 페이지</Link>
+              <Link to="/mypage/modifyprofile">마이 페이지</Link>
             )}
           </button>
         ) : (

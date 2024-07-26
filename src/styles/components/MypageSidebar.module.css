@@ -1,0 +1,68 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.MS-container {
+  position: sticky;
+  top: 80px; /* header의 높이만큼 설정 */
+  padding-top: 32px;
+  grid-column: 1 / span 3;
+  /* border: 1px solid black; */
+  background-color: #fff; /* 백그라운드 컬러 설정 */
+}
+
+.MS-title {
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.MS-item-box {
+  border-radius: 6px;
+  border: 1px solid var(--txt-color-400);
+  overflow: hidden;
+}
+
+.MS-item {
+  height: 50px;
+  font-size: 16px;
+  position: relative;
+  line-height: 50px;
+  padding: 0 10px;
+  background: var(--point-color2);
+  color: var(--txt-color-400);
+  font-weight: 400;
+}
+.MS-item + .MS-item {
+  border-top: 1px solid var(--txt-color-400);
+}
+
+.MS-item::after {
+  content: '>';
+  position: absolute;
+  right: 20px;
+  top: 48%;
+  transform: translateY(-50%);
+}
+
+.MS-bookmark-box {
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+}
+
+.MS-item.MSactive {
+  background-color: var(--button-bg-color);
+  color: var(--point-color1);
+  font-weight: 700;
+}
+.MS-item.MSactive::after {
+  color: var(--point-color1);
+}

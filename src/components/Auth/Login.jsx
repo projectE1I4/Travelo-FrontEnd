@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Auth.module.css';
 import { useNavigate } from 'react-router-dom';
-import KakaoLoginButton from '../SocialAuth/KakaoLoginButton';
-import GoogleLoginButton from '../SocialAuth/GoogleLoginButton';
-import NaverLoginButton from '../SocialAuth/NaverLoginButton';
+import KakaoLoginButton from '../socialAuth/KakaoLoginButton';
+import GoogleLoginButton from '../socialAuth/GoogleLoginButton';
+import NaverLoginButton from '../socialAuth/NaverLoginButton';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');

@@ -1,4 +1,4 @@
-import CheckUser from '../../components/Auth/CheckUser';
+import CheckUser from '../../components/auth/CheckUser';
 import authService from '../../services/authService';
 
 const CheckUserPage = () => {

@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import KakaoLoginButton from '../../components/SocialAuth/KakaoLoginButton';
-import GoogleLoginButton from '../../components/SocialAuth/GoogleLoginButton';
-import NaverLoginButton from '../../components/SocialAuth/NaverLoginButton';
-import axiosInstance from '../../utils/axiosInstance';
 import axios from 'axios';
 import styles from '../../styles/pages/social/Social.module.css';
 

@@ -28,63 +28,26 @@ const AccountIntergrationPage = () => {
       } catch (error) {}
     } else if (provider === 'google') {
       console.log('구글 버튼 눌림');
+      // try {
       try {
-        const formData = new FormData();
-        formData.append('username', username);
+        const GoogleClientID = import.meta.env.VITE_API_GOOGLE_CLIENT_ID;
+        window.location.href = `https://accounts.google.com/o/oauth2/auth?client_id=${GoogleClientID}&redirect_uri=http://localhost:5173/travelo/integratedGoogle&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`;
+      } catch (error) {}
 
-        console.log(username);
-
-        console.log('트라이');
-        const response = await axios.post(
-          'http://localhost:8080/travelo/integratedGoogle',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          }
-        );
-        console.log('response: ', response);
-        if (response.status === 200) {
-          const { accessToken, refreshToken } = response.data;
-          sessionStorage.setItem('accessToken', accessToken);
-          sessionStorage.setItem('refreshToken', refreshToken);
-          navigate('/social/integratedComplete'); // 통합 완료 후 이동
-        } else {
-          console.error('Unexpected response status: ', response.status);
-        }
-      } catch (error) {
-        console.log('Google 통합 중 오류 발생', error);
-        if (error.response) {
-          console.error('응답 데이터: ', error.response.data);
-          console.error('응답 상태: ', error.response.status);
-        } else {
-          console.error('Error: ', error.message);
-        }
-      }
+      // } catch (error) {
+      //   console.log('Google 통합 중 오류 발생', error);
+      //   if (error.response) {
+      //     console.error('응답 데이터: ', error.response.data);
+      //     console.error('응답 상태: ', error.response.status);
+      //   } else {
+      //     console.error('Error: ', error.message);
+      //   }
+      // }
     } else if (provider === 'naver') {
       try {
-        const formData = new FormData();
-        formData.append('username', username);
-
-        const response = await axios.post(
-          'http://localhost:8080/travelo/integratedNaver',
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          }
-        );
-        if (response.status === 200) {
-          const { accessToken, refreshToken } = response.data;
-          sessionStorage.setItem('accessToken', accessToken);
-          sessionStorage.setItem('refreshToken', refreshToken);
-          navigate('/social/integratedComplete'); // 통합 완료 후 이동
-        }
-      } catch (error) {
-        console.log('네이버 통합 중 오류 발생', error);
-      }
+        const NaverClientID = import.meta.env.VITE_API_NAVER_CLIENT_ID;
+        window.location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NaverClientID}&state=STATE_STRING&redirect_uri=http://localhost:5173/travelo/integratedNaver`;
+      } catch (error) {}
     }
   };
 

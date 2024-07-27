@@ -56,6 +56,8 @@ const NaverLoginButton = () => {
             setUsername(username);
             setShowForm(true);
           } else {
+            sessionStorage.setItem('accessToken', accessToken);
+            sessionStorage.setItem('refreshToken', refreshToken);
             window.location.href = '/home';
           }
         } catch (error) {

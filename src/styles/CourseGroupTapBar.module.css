@@ -1,0 +1,43 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.cg-contents-container {
+  grid-column: 4 / span 9;
+  padding-left: 16px;
+  padding-top: 32px;
+  width: 100%;
+}
+.tapbar-container {
+}
+
+.tap-wrap {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 41px;
+  line-height: 41px;
+  text-align: center;
+  box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.3);
+}
+.tap-wrap li {
+  font-weight: 600;
+  font-size: 16px;
+  background: var(--point-color2);
+  color: var(--txt-color-500);
+}
+.tap-wrap li.CGactive {
+  background: var(--button-bg-color);
+  color: var(--point-color1);
+}

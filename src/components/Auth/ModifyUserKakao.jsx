@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import LeaveSocialUserModal from '../socialAuth/LeaveSocialUserModal';
 import axios from 'axios';
 
-const ModifyUserGoogle = () => {
+const ModifyUserKakao = () => {
   const { user } = useAuth();
   const [username, setUsername] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -21,7 +21,7 @@ const ModifyUserGoogle = () => {
 
   const handleDeleteAccount = async () => {
     try {
-      const response = await axiosInstance.get('/user/googleUnlink');
+      const response = await axiosInstance.get('/user/kakaoUnlink');
 
       console.log('response:', response.data);
       if (response.status === 200) {
@@ -85,4 +85,4 @@ const ModifyUserGoogle = () => {
   );
 };
 
-export default ModifyUserGoogle;
+export default ModifyUserKakao;

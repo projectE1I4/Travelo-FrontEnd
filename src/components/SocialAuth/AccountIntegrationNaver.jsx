@@ -4,12 +4,12 @@ import styles from '../../styles/pages/social/Social.module.css';
 
 import axios from 'axios';
 
-const AccountIntergrationKakao = () => {
+const AccountIntergrationNaver = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const code = new URLSearchParams(location.search).get('code');
 
-  console.log('일단 카카오');
+  console.log('일단 네이버');
 
   const goToHome = (e) => {
     e.preventDefault;
@@ -20,7 +20,7 @@ const AccountIntergrationKakao = () => {
     const fetchAuthResponse = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:8080/travelo/integratedKakao',
+          'http://localhost:8080/travelo/integratedNaver',
           {
             params: { code },
           }
@@ -65,4 +65,4 @@ const AccountIntergrationKakao = () => {
   );
 };
 
-export default AccountIntergrationKakao;
+export default AccountIntergrationNaver;

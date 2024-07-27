@@ -29,15 +29,19 @@ const MyPageSidebar = () => {
   };
 
   const getProfileLink = () => {
-    if (user.oauthType === 'google') {
-      return 'mypage/modifyprofileGoogle';
-    } else if (user.ouathType === 'kakao') {
-      return 'mypage/modifyprofileKakao';
-    } else if (user.oauthType === 'naver') {
-      return 'mypage/modifyprofileNaver';
+    if (user) {
+      if (user.oauthType === 'google') {
+        return '/mypage/modifyprofileGoogle';
+      } else if (user.ouathType === 'kakao') {
+        return '/mypage/modifyprofileKakao';
+      } else if (user.oauthType === 'naver') {
+        return '/mypage/modifyprofileNaver';
+      }
     }
     return '/mypage/modifyprofile';
   };
+
+  const profileLink = getProfileLink();
 
   return (
     <div className={styles['MS-container']}>
@@ -46,7 +50,7 @@ const MyPageSidebar = () => {
         <ul>
           <li
             onClick={(e) => {}}
-            className={`${styles['MS-item']} ${isActive('/mypage/modifyprofile')}`}
+            className={`${styles['MS-item']} ${isActive(profileLink)}`}
           >
             <Link to={getProfileLink}>
               <p>회원 정보 수정</p>
@@ -73,8 +77,11 @@ const MyPageSidebar = () => {
               </ul>
             </li>
           )}
-          <li className={styles['MS-item']}>
-            <Link to="/mypage/myCourses">
+          <li
+            className={`${styles['MS-item']} ${isActive('/mypage/courseGroup' || '/mypage/myCourses')}`}
+          >
+            {/* <Link to="/mypage/myCourses"> */}
+            <Link to="/mypage/courseGroup">
               <p>나의 코스</p>
             </Link>
           </li>

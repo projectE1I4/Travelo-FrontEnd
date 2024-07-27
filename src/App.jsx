@@ -19,6 +19,13 @@ import AccountIntergrationKakao from './components/socialAuth/AccountIntegration
 import ModifyuserPage from './pages/users/ModifyUserPage.jsx';
 import ModifyUserPage from './pages/users/ModifyUserPage.jsx';
 import ModifyUserGooglePage from './pages/users/ModifyUserGooglePage.jsx';
+import AccountIntergrationGoogle from './components/socialAuth/AccountIntegrationGoogle.jsx';
+import AccountIntergrationNaver from './components/socialAuth/AccountIntegrationNaver.jsx';
+import ModifyUserNaverPage from './pages/users/ModifyUserNaverPage.jsx';
+import ModifyUserKakaoPage from './pages/users/ModifyUserKakaoPage.jsx';
+import CourseGroupList from './components/courseGroup/CourseGroupList.jsx';
+import CourseGroupListPage from './pages/courseGroup/CourseGroupListPage.jsx';
+import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -51,6 +58,14 @@ const App = () => {
             path="/travelo/integratedKakao"
             element={<AccountIntergrationKakao />}
           />
+          <Route
+            path="/travelo/integratedGoogle"
+            element={<AccountIntergrationGoogle />}
+          />
+          <Route
+            path="/travelo/integratedNaver"
+            element={<AccountIntergrationNaver />}
+          />
 
           <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
           <Route
@@ -59,12 +74,13 @@ const App = () => {
           />
           <Route
             path="mypage/modifyprofileNaver"
-            element={<ModifyUserPage />}
+            element={<ModifyUserNaverPage />}
           />
           <Route
             path="mypage/modifyprofileKakao"
-            element={<ModifyUserPage />}
+            element={<ModifyUserKakaoPage />}
           />
+          <Route path="mypage/courseGroup" element={<CourseGroupListPage />} />
           <Route
             path="/protected"
             element={

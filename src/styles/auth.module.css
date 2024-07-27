@@ -119,6 +119,9 @@
   display: inline-flex;
   align-items: center;
   width: auto;
+  min-width: 30px;
+  max-height: 20px;
+  white-space: nowrap;
 }
 .input-label-required::after {
   content: '*';
@@ -425,7 +428,7 @@
   grid-column: 2 /3;
   color: var(--icon-color-red);
   font-size: 0.8rem;
-  margin-left: 5px;
+  margin-left: 2rem;
   white-space: nowrap;
 }
 

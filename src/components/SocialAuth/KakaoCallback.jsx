@@ -35,6 +35,12 @@ const KakaoCallback = () => {
         console.error('Error fetching auth response:', error);
         if (error.response && error.response.status === 400) {
           const { error: errorMessage, username } = error.response.data;
+          if (errorMessage.includes('social')) {
+            navigate('/users/login', {
+              state: { show: true, username: username },
+            });
+            return;
+          }
           let provider = 'unknown';
           if (errorMessage.includes('kakao')) {
             provider = 'kakao';

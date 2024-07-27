@@ -59,6 +59,8 @@ const GoogleLoginButton = () => {
             setShowForm(true);
           } else {
             window.location.href = '/home';
+            sessionStorage.setItem('accessToken', accessToken);
+            sessionStorage.setItem('refreshToken', refreshToken);
           }
         } catch (error) {
           console.error('Error fetching user info:', error);

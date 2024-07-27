@@ -1,15 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from '../../styles/components/courseCustom/CourseMiniCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const CourseMiniCard = ({ place }) => {
-  const navigate = useNavigate();
-
-  const handleCardClick = () => {
-    navigate(`/places/${place.placeSeq}`, {
-      state: {
+  return (
+    <Link
+      to={`/places/${place.placeSeq}`}
+      state={{
         type: place.type,
         contentId: place.contentId,
         image: place.imageFile1,
@@ -20,12 +19,10 @@ const CourseMiniCard = ({ place }) => {
         bookmarks: place.bookmarks || 0,
         latitude: place.latitude,
         longitude: place.longitude,
-      },
-    });
-  };
-
-  return (
-    <div className={styles.card} onClick={handleCardClick}>
+      }}
+      className={styles.card}
+      style={{ textDecoration: 'none', color: 'inherit' }}
+    >
       {place.imageFile1 ? (
         <img
           src={place.imageFile1}
@@ -53,7 +50,7 @@ const CourseMiniCard = ({ place }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

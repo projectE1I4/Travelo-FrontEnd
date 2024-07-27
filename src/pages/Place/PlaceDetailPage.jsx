@@ -7,6 +7,15 @@ import styles from '../../styles/pages/Place/PlaceDetail.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
+const typeMap = {
+  12: '관광지',
+  14: '문화시설',
+  28: '레저 스포츠',
+  32: '숙박',
+  38: '쇼핑',
+  39: '음식점',
+};
+
 const PlacesDetailPage = () => {
   const { placeSeq } = useParams();
   const location = useLocation();
@@ -19,11 +28,11 @@ const PlacesDetailPage = () => {
     views,
     likes,
     bookmarks,
-    typeText,
-    typeMap,
     longitude,
     latitude,
   } = location.state || {};
+
+  const typeText = typeMap[type] || '기타';
 
   const { placeDetails, loading, error } = usePlaceDetails(
     contentId,
@@ -53,8 +62,6 @@ const PlacesDetailPage = () => {
           <span>{typeText}</span>
           <h1>{title}</h1>
           <p>{address}</p>
-          {/* <p>장소고유번호: {placeSeq}</p>
-          <p>컨텐츠아이디: {contentId}</p> */}
         </section>
         <LoadingError loading={loading} error={error} />
         {placeDetails && <PlaceDetailInfo type={type} details={placeDetails} />}

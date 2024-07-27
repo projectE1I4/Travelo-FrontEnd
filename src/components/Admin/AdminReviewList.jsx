@@ -14,7 +14,7 @@ const AdminReviewList = () => {
     try {
       const data = await getAllReviews(sortOrder);
       console.log('Fetched reviews:', data);
-      setReviews(data.map((item) => item.review));
+      setReviews(data);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -31,16 +31,20 @@ const AdminReviewList = () => {
   };
 
   // 필터링된 리뷰 목록
-  const filteredReviews = reviews.filter((review) => {
+  const filteredReviews = reviews.filter((item) => {
     if (filter === 'all') return true;
-    return filter === 'blind' ? review.blindYn === 'Y' : review.blindYn === 'N';
+    return filter === 'blind'
+      ? item.review.blindYn === 'Y'
+      : item.review.blindYn === 'N';
   });
 
   // 전체 리뷰, 블라인드된 리뷰, 보이는 리뷰 개수 계산
   const allCount = reviews.length;
-  const blindCount = reviews.filter((review) => review.blindYn === 'Y').length;
+  const blindCount = reviews.filter(
+    (item) => item.review.blindYn === 'Y'
+  ).length;
   const visibleCount = reviews.filter(
-    (review) => review.blindYn === 'N'
+    (item) => item.review.blindYn === 'N'
   ).length;
 
   if (loading) return <div>Loading...</div>;
@@ -61,19 +65,18 @@ const AdminReviewList = () => {
         </select>
       </div>
       <ul>
-        {filteredReviews.map((review, index) => (
-          <li key={`${review.reviewSeq}-${index}`}>
-            {' '}
-            {/* 고유한 key prop 설정 */}
-            작성자 : {review.user?.username || 'Unknown'}, 작성 일자 :{' '}
-            {review.createDate ? formatDate(review.createDate) : '알 수 없음'}
+        {filteredReviews.map((item, index) => (
+          <li key={`${item.review.reviewSeq}-${index}`}>
+            코스 제목: {item.courseTitle}
             <br />
-            <span className="reviewContent">
-              작성 내용 :{' '}
-              {review.content ? review.content.slice(0, 50) : '내용 없음'}...
-            </span>
+            작성자: {item.review.user?.username || 'Unknown'}, 작성 일자:{' '}
+            {item.review.createDate
+              ? formatDate(item.review.createDate)
+              : '알 수 없음'}
             <br />
-            신고 수 : {review.reportCount}
+            <span className="reviewContent">댓글: {item.review.content}</span>
+            <br />
+            신고 수: {item.review.reportCount}
           </li>
         ))}
       </ul>

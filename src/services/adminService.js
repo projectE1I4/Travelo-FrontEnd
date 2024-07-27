@@ -125,20 +125,21 @@ export const resetReportCount = async (reviewSeq) => {
 };
 
 // 리뷰 블라인드 처리
-export const blindReview = async (page = 0, sortBy = 'latest') => {
+// 리뷰 블라인드 처리
+export const blindReview = async (reviewSeq) => {
   try {
-    const response = await axiosInstance.get('/admin/reviews', {
-      params: {
-        page: page,
-        sortBy: sortBy,
-      },
-      headers: {
-        Authorization: sessionStorage.getItem('accessToken'),
-      },
-    });
+    const response = await axiosInstance.post(
+      `/admin/blind/${reviewSeq}`,
+      {},
+      {
+        headers: {
+          Authorization: sessionStorage.getItem('accessToken'),
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error('Error fetching review list:', error);
+    console.error('Error blinding review:', error);
     throw error;
   }
 };

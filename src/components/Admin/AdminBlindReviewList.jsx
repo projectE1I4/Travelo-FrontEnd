@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import {
-  getBlindReviewList,
   resetReportCount,
   blindReview,
   getAllReviews,
@@ -16,18 +15,26 @@ const AdminBlindReviewList = () => {
 
   const fetchReviews = async () => {
     try {
-      const blindReviewsData = await getBlindReviewList();
-      setReviews(blindReviewsData.content);
-
-      // 전체 리뷰 목록에서 블라인드된 댓글 수 계산
       const allReviews = await getAllReviews();
-      const blindReviews = allReviews.filter(
-        (reviewData) => reviewData.blindYn === 'Y'
+
+      // 신고된 리뷰 목록
+      const blindReviewsData = allReviews.filter(
+        (reviewData) =>
+          reviewData.review.reportCount >= 5 &&
+          reviewData.review.blindYn !== 'Y'
       );
-      const reportedReviews = allReviews.filter(
-        (reviewData) => reviewData.reportCount > 0
+      setReviews(blindReviewsData);
+
+      // 전체 블라인드된 댓글 수 계산
+      const blindReviews = allReviews.filter(
+        (reviewData) => reviewData.review.blindYn === 'Y'
       );
       setBlindCount(blindReviews.length);
+
+      // 전체 신고된 댓글 수 계산
+      const reportedReviews = allReviews.filter(
+        (reviewData) => reviewData.review.reportCount >= 5
+      );
       setTotalReportedCount(reportedReviews.length);
     } catch (error) {
       setError(error);
@@ -56,9 +63,11 @@ const AdminBlindReviewList = () => {
     const confirmBlind = window.confirm('이 리뷰를 블라인드 처리하시겠습니까?');
     if (confirmBlind) {
       try {
+        console.log('블라인드 시작');
         await blindReview(reviewSeq);
         fetchReviews();
       } catch (error) {
+        console.error('Error blinding review:', error);
         setError(error);
       }
     }

@@ -125,7 +125,6 @@ export const resetReportCount = async (reviewSeq) => {
 };
 
 // 리뷰 블라인드 처리
-// 리뷰 블라인드 처리
 export const blindReview = async (reviewSeq) => {
   try {
     const response = await axiosInstance.post(

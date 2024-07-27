@@ -84,6 +84,8 @@ const AdminBlindReviewList = () => {
           (reviewData) =>
             reviewData.review.blindYn !== 'Y' && (
               <li key={reviewData.review.reviewSeq}>
+                코스 제목: {reviewData.courseTitle}
+                <br />
                 작성자 : {reviewData.review.user.username}, 작성 일자 :{' '}
                 {formatDate(reviewData.review.createDate)}
                 <br />

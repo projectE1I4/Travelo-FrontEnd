@@ -1,5 +1,6 @@
 import CourseGroupTapBar from '../../components/common/CourseGroupTapBar';
 import MyPageSidebar from '../../components/common/MyPageSidebar';
+import Pagination from '../../components/common/Pagination';
 import CourseGroupList from '../../components/courseGroup/CourseGroupList';
 import styles from '../../styles/CourseGroupTapBar.module.css';
 

@@ -57,6 +57,7 @@ export const getReviewList = async (page = 0, sortBy = 'latest') => {
         Authorization: sessionStorage.getItem('accessToken'),
       },
     });
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('Error fetching review list:', error);

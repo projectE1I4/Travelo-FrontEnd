@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getReviewList } from '../../services/adminService';
+import { getAllReviews } from '../../services/adminService';
 import { formatDate } from '../common/formatDate';
 import '../../css/Admin/AdminReview.css';
 
@@ -12,8 +12,9 @@ const AdminReviewList = () => {
 
   const fetchReviews = async (sortOrder) => {
     try {
-      const data = await getReviewList(0, sortOrder);
-      setReviews(data.content);
+      const data = await getAllReviews(sortOrder);
+      console.log('Fetched reviews:', data);
+      setReviews(data.map((item) => item.review));
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -60,13 +61,16 @@ const AdminReviewList = () => {
         </select>
       </div>
       <ul>
-        {filteredReviews.map((review) => (
-          <li key={review.reviewSeq}>
-            작성자 : {review.user.username}, 작성 일자 :{' '}
-            {formatDate(review.createDate)}
+        {filteredReviews.map((review, index) => (
+          <li key={`${review.reviewSeq}-${index}`}>
+            {' '}
+            {/* 고유한 key prop 설정 */}
+            작성자 : {review.user?.username || 'Unknown'}, 작성 일자 :{' '}
+            {review.createDate ? formatDate(review.createDate) : '알 수 없음'}
             <br />
             <span className="reviewContent">
-              작성 내용 : {review.content.slice(0, 50)}...
+              작성 내용 :{' '}
+              {review.content ? review.content.slice(0, 50) : '내용 없음'}...
             </span>
             <br />
             신고 수 : {review.reportCount}

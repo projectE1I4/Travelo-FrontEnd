@@ -1,16 +1,14 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useCourse } from '../../contexts/CourseContext';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-const CourseMap = ({ latitude, longitude }) => {
+const CourseMap = () => {
+  const { selectedRegion, regions } = useCourse();
   const mapRef = useRef();
 
-  useEffect(() => {
-    if (mapRef.current) {
-      mapRef.current.setCenter(
-        new window.kakao.maps.LatLng(latitude, longitude)
-      );
-    }
-  }, [latitude, longitude]);
+  const region = regions.find((region) => region.code === selectedRegion);
+  const latitude = region ? region.lat : 37.5665;
+  const longitude = region ? region.lng : 126.978;
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +30,7 @@ const CourseMap = ({ latitude, longitude }) => {
     <Map
       center={{ lat: latitude, lng: longitude }}
       style={{ width: '100%', height: '100%' }}
-      level={3}
+      level={7}
       ref={mapRef}
     >
       <MapMarker position={{ lat: latitude, lng: longitude }} />

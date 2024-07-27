@@ -1,11 +1,31 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/components/courseCustom/CourseMiniCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const CourseMiniCard = ({ place }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/places/${place.placeSeq}`, {
+      state: {
+        type: place.type,
+        contentId: place.contentId,
+        image: place.imageFile1,
+        title: place.title,
+        address: place.address,
+        views: place.viewCount,
+        likes: place.likeCount,
+        bookmarks: place.bookmarks || 0,
+        latitude: place.latitude,
+        longitude: place.longitude,
+      },
+    });
+  };
+
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={handleCardClick}>
       {place.imageFile1 ? (
         <img
           src={place.imageFile1}
@@ -22,7 +42,15 @@ const CourseMiniCard = ({ place }) => {
           <span className={styles.likes}>
             <FontAwesomeIcon icon={faHeart} /> {place.likeCount}
           </span>
-          <button className={styles.addButton}>+</button>
+          <button
+            className={styles.addButton}
+            onClick={(e) => {
+              e.stopPropagation();
+              alert('추가 기능을 구현하세요');
+            }}
+          >
+            +
+          </button>
         </div>
       </div>
     </div>

@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { useCourse } from '../../contexts/CourseContext';
 import CourseMiniCard from './CourseMiniCard';
+import CourseMap from './CourseMap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../styles/components/courseCustom/CourseSidebar.module.css';
 
 const CourseSidebar = () => {
-  const { selectedRegion, regions, courses, updateFilters, resetFilters } =
-    useCourse();
+  const {
+    selectedRegion,
+    regions,
+    courses,
+    updateFilters,
+    resetFilters,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    loading,
+  } = useCourse();
   const [selectedType, setSelectedType] = useState('');
   const [keyword, setKeyword] = useState('');
 
@@ -30,6 +40,12 @@ const CourseSidebar = () => {
     resetFilters({ area: selectedRegion }); // 필터 초기화 시 지역 필터 유지
   };
 
+  const loadMore = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
   const filteredCourses = selectedType
     ? courses.filter((course) => course.type === selectedType)
     : courses;
@@ -43,6 +59,10 @@ const CourseSidebar = () => {
           초기화
         </button>
       </div>
+      {/* 지도 부분 */}
+      <div className={styles['map-container']}>
+        <CourseMap />
+      </div>
       <div className={styles.searchField}>
         <input
           type="text"
@@ -53,46 +73,46 @@ const CourseSidebar = () => {
         />
         <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
       </div>
-      <div className={styles.filters}>
+      <div className={styles.typeFilter}>
         <button
           onClick={() => handleTypeClick('')}
-          className={styles.filterButton}
+          className={selectedType === '' ? styles.selected : ''}
         >
           전체
         </button>
         <button
           onClick={() => handleTypeClick('12')}
-          className={styles.filterButton}
+          className={selectedType === '12' ? styles.selected : ''}
         >
           관광지
         </button>
         <button
           onClick={() => handleTypeClick('14')}
-          className={styles.filterButton}
+          className={selectedType === '14' ? styles.selected : ''}
         >
           문화시설
         </button>
         <button
           onClick={() => handleTypeClick('28')}
-          className={styles.filterButton}
+          className={selectedType === '28' ? styles.selected : ''}
         >
           레저 스포츠
         </button>
         <button
           onClick={() => handleTypeClick('32')}
-          className={styles.filterButton}
+          className={selectedType === '32' ? styles.selected : ''}
         >
           숙박
         </button>
         <button
           onClick={() => handleTypeClick('38')}
-          className={styles.filterButton}
+          className={selectedType === '38' ? styles.selected : ''}
         >
           쇼핑
         </button>
         <button
           onClick={() => handleTypeClick('39')}
-          className={styles.filterButton}
+          className={selectedType === '39' ? styles.selected : ''}
         >
           음식점
         </button>
@@ -102,6 +122,15 @@ const CourseSidebar = () => {
           <CourseMiniCard key={course.placeSeq} place={course} />
         ))}
       </div>
+      {currentPage < totalPages - 1 && (
+        <button
+          onClick={loadMore}
+          className={styles.loadMoreButton}
+          disabled={loading}
+        >
+          더보기
+        </button>
+      )}
     </div>
   );
 };

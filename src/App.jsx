@@ -17,6 +17,7 @@ import CourseDetail from './course/CourseDetail';
 import MyCoursePage from './pages/MyCoursePage';
 import MyCourseEditPage from './pages/MyCourseEditPage';
 import AdminMainPage from './pages/Admin/AdminMainPage.jsx';
+import AdminUserPage from './pages/Admin/AdminUserPage';
 import AdminGroupPage from './pages/Admin/AdminGroupPage.jsx';
 import AdminReviewPage from './pages/Admin/AdminReviewPage.jsx';
 import AdminBlindReviewPage from './pages/Admin/AdminBlindReviewPage';
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/users/checkUser" element={<CheckUserPage />} />
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
           <Route path="/admin" element={<AdminMainPage />} />
+          <Route path="admin/users" element={<AdminUserPage />} />
           <Route path="/admin/groups" element={<AdminGroupPage />} />
           <Route path="/admin/reviews" element={<AdminReviewPage />} />
           <Route

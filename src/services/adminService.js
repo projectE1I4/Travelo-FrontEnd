@@ -10,6 +10,44 @@ export const getAdminData = async () => {
   }
 };
 
+//전체 회원 목록
+export const getUserList = async (page = 0, sortBy = 'latest') => {
+  try {
+    const response = await axiosInstance.get('/admin/getAllUser', {
+      params: {
+        page: page,
+        sortBy: sortBy,
+      },
+      headers: {
+        Authorization: sessionStorage.getItem('accessToken'),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user list:', error);
+    throw error;
+  }
+};
+
+// 회원 탈퇴
+export const deleteUser = async (userSeq) => {
+  try {
+    const response = await axiosInstance.post(
+      `/admin/deleteUser/${userSeq}`,
+      {},
+      {
+        headers: {
+          Authorization: sessionStorage.getItem('accessToken'),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('회원을 탈퇴시키는데 문제가 발생했습니다. :', error);
+    throw error;
+  }
+};
+
 //전체 그룹 목록
 export const getGroupList = async (page = 0, sortBy = 'latest') => {
   try {

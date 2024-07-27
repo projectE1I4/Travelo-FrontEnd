@@ -1,0 +1,68 @@
+.adminUserList {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.adminUserList h1 {
+  margin-bottom: 20px;
+}
+
+.adminUserList .sort {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.adminUserList .sort button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminUserList .sort button:hover {
+  background-color: #0056b3;
+}
+
+.adminUserList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.adminUserList li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.adminUserList li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.adminUserList li p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.adminUserList li span {
+  font-weight: bold;
+}
+.adminUserList .delBtn {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.adminUserList li.deleted-user {
+  background-color: #ddd;
+}
+
+.adminUserList .deleted {
+  color: rgb(225, 37, 37);
+}

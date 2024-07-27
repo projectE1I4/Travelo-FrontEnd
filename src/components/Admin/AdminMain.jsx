@@ -28,7 +28,10 @@ const AdminMain = () => {
   return (
     <div>
       <h1>Admin Main Page</h1>
-      <p>전체 회원 : {data['user count']}</p>
+      <Link to="/admin/users">
+        <button>전체 회원 : {data['user count']}</button>
+      </Link>
+      <br />
       <Link to="/admin/groups">
         <button>전체 그룹 : {data['group count']}</button>
       </Link>

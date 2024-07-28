@@ -11,14 +11,14 @@ export const reviewsList = async (page = 0, sortBy = 'latest') => {
         Authorization: sessionStorage.getItem('token'),
       },
     });
-    return response.data; // API 응답 데이터를 반환합니다.
+    return response.data;
   } catch (error) {
     console.error('Error fetching reviews:', error);
+    throw error;
   }
 };
 
 // 리뷰 수정
-
 export const updateReview = async (reviewSeq, content) => {
   try {
     const response = await axiosInstance.post(
@@ -30,7 +30,7 @@ export const updateReview = async (reviewSeq, content) => {
         },
       }
     );
-    return response.data; // API 응답 데이터를 반환합니다.
+    return response.data;
   } catch (error) {
     console.error('리뷰 수정 실패:', error);
     throw error;
@@ -46,6 +46,7 @@ export const deleteReview = async (reviewSeq) => {
       {
         headers: {
           'Content-Type': 'application/json',
+          Authorization: sessionStorage.getItem('token'),
         },
       }
     );

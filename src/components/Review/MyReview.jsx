@@ -35,7 +35,7 @@ const ReviewList = () => {
 
   useEffect(() => {
     loadReviews();
-  }, [loadReviews]);
+  }, [loadReviews, sortBy]);
 
   // username ** 처리
   const maskUsername = (username) => {
@@ -112,6 +112,10 @@ const ReviewList = () => {
         <MyPageSidebar />
         <div className="myReviews">
           <h1>나의 후기</h1>
+          <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+            <option value="latest">최신순</option>
+            <option value="popularity">추천순</option>
+          </select>
           {reviews.length === 0 ? (
             <p>리뷰가 없습니다.</p>
           ) : (

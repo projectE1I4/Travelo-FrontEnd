@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCourse } from '../../contexts/CourseContext';
 import CourseMiniCard from './CourseMiniCard';
 import CourseMap from './CourseMap';
@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../styles/components/courseCustom/CourseSidebar.module.css';
 
-const CourseSidebar = () => {
+const CourseSidebar = ({ setIsModalOpen }) => {
   const {
     selectedRegion,
     regions,
@@ -20,6 +20,13 @@ const CourseSidebar = () => {
   } = useCourse();
   const [selectedType, setSelectedType] = useState('');
   const [keyword, setKeyword] = useState('');
+
+  useEffect(() => {
+    const storedRegion = sessionStorage.getItem('selectedRegion');
+    if (storedRegion) {
+      updateFilters({ area: storedRegion });
+    }
+  }, []);
 
   const regionName =
     regions.find((region) => region.code === selectedRegion)?.name || '전체';
@@ -40,6 +47,11 @@ const CourseSidebar = () => {
     resetFilters({ area: selectedRegion }); // 필터 초기화 시 지역 필터 유지
   };
 
+  const handleRegionReset = () => {
+    sessionStorage.removeItem('selectedRegion');
+    setIsModalOpen(true);
+  };
+
   const loadMore = () => {
     if (currentPage < totalPages - 1) {
       setCurrentPage((prevPage) => prevPage + 1);
@@ -52,16 +64,19 @@ const CourseSidebar = () => {
 
   return (
     <div className={styles.sidebar}>
+      <div>
+        <button onClick={handleRegionReset}>지역 다시 선택하기</button>
+      </div>
+      {/* 지도 부분 */}
+      <div className={styles['map-container']}>
+        <CourseMap />
+      </div>
       <div className={styles.heading}>
         <h2>선택 지역: {regionName}</h2>
         <button onClick={handleReset} className={styles.resetButton}>
           <FontAwesomeIcon icon={faRotateRight} />
           초기화
         </button>
-      </div>
-      {/* 지도 부분 */}
-      <div className={styles['map-container']}>
-        <CourseMap />
       </div>
       <div className={styles.searchField}>
         <input

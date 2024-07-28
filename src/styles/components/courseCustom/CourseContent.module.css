@@ -13,8 +13,12 @@
   margin-bottom: 20px;
 }
 
-.list-content-wrap {
+.course-content-wrap {
   padding: 32px;
   background-color: var(--point-color2);
   border-radius: 10px;
+  text-align: center;
+}
+.course-content-wrap p {
+  font-weight: 700;
 }

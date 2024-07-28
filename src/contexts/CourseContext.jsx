@@ -22,7 +22,9 @@ export const CourseProvider = ({ children }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
   const [dropdownTitle, setDropdownTitle] = useState('인기순');
-  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedRegion, setSelectedRegion] = useState(() => {
+    return sessionStorage.getItem('selectedRegion') || null;
+  });
   const [selectedPlaces, setSelectedPlaces] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
 
@@ -124,11 +126,16 @@ export const CourseProvider = ({ children }) => {
     );
   };
 
+  const resetSelectedPlaces = () => {
+    setSelectedPlaces([]);
+  };
+
   const handleRegionSelect = (regionCode) => {
     const region = regions.find((r) => r.code === regionCode);
     setSelectedRegion(regionCode);
     setSelectedPlaces([]);
     setMapCenter({ lat: region.lat, lng: region.lng });
+    sessionStorage.setItem('selectedRegion', regionCode);
     resetFilters({ area: regionCode });
   };
 
@@ -151,6 +158,7 @@ export const CourseProvider = ({ children }) => {
         selectedPlaces,
         addPlaceToCourse,
         removePlaceFromCourse,
+        resetSelectedPlaces,
         mapCenter,
         setMapCenter,
         handleRegionSelect,

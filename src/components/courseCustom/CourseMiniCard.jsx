@@ -22,6 +22,7 @@ const CourseMiniCard = ({ place }) => {
         bookmarks: place.bookmarks || 0,
         latitude: place.latitude,
         longitude: place.longitude,
+        fromDetail: true,
       },
     });
   };

@@ -34,6 +34,7 @@ import ModifyUserKakaoPage from './pages/users/ModifyUserKakaoPage.jsx';
 import CourseGroupList from './components/courseGroup/CourseGroupList.jsx';
 import CourseGroupListPage from './pages/courseGroup/CourseGroupListPage.jsx';
 import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
+import AdminUserDetail from './components/Admin/AdminUserDetail.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -59,6 +60,10 @@ const App = () => {
           <Route path="admin/users" element={<AdminUserPage />} />
           <Route path="/admin/groups" element={<AdminGroupPage />} />
           <Route path="/admin/reviews" element={<AdminReviewPage />} />
+          <Route
+            path="/admin/userDetail/:userSeq"
+            element={<AdminUserDetail />}
+          />
           <Route
             path="/admin/blindReviews"
             element={<AdminBlindReviewPage />}

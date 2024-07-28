@@ -5,6 +5,7 @@ import {
   deleteUsers,
 } from '../../services/adminService';
 import { formatDate } from '../common/formatDate';
+import { useNavigate } from 'react-router-dom';
 import '../../css/Admin/AdminUser.css';
 
 const AdminUserList = () => {
@@ -16,6 +17,7 @@ const AdminUserList = () => {
   const [deletedCount, setDeletedCount] = useState(0);
   const [filter, setFilter] = useState('all');
   const [selectedUsers, setSelectedUsers] = useState([]); //회원 선택
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -130,34 +132,42 @@ const AdminUserList = () => {
       <button onClick={selectDelete}>선택된 회원 탈퇴</button>
       <ul>
         {filterUsers.map((user) => (
-          <li
-            key={user.userSeq}
-            className={user.delYn === 'Y' ? 'deleted-user' : ''}
-          >
+          <div className="userItem" key={user.userSeq}>
             <input
               type="checkbox"
-              onChange={() => toggleSelectUser(user.userSeq)}
+              onChange={(e) => {
+                e.stopPropagation();
+                toggleSelectUser(user.userSeq);
+              }}
               checked={selectedUsers.includes(user.userSeq)}
             />
-            순차번호: {user.userSeq}
-            <br />
-            이메일: {user.username}
-            <br />
-            로그인 타입: {getLoginType(user.oauthType)}
-            <br />
-            가입일: {formatDate(user.registerDate)}
-            <br />
-            {user.delYn === 'Y' ? (
-              <span className="deleted">탈퇴 회원</span>
-            ) : (
-              <button
-                className="delBtn btn_type_1"
-                onClick={() => userDelete(user.userSeq, user.username)}
-              >
-                탈퇴
-              </button>
-            )}
-          </li>
+            <li
+              className={user.delYn === 'Y' ? 'deleted-user' : ''}
+              onClick={() => navigate(`/admin/userDetail/${user.userSeq}`)}
+            >
+              순차번호: {user.userSeq}
+              <br />
+              이메일: {user.username}
+              <br />
+              로그인 타입: {getLoginType(user.oauthType)}
+              <br />
+              가입일: {formatDate(user.registerDate)}
+              <br />
+              {user.delYn === 'Y' ? (
+                <span className="deleted">탈퇴 회원</span>
+              ) : (
+                <button
+                  className="delBtn btn_type_1"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    userDelete(user.userSeq, user.username);
+                  }}
+                >
+                  탈퇴
+                </button>
+              )}
+            </li>
+          </div>
         ))}
       </ul>
     </div>

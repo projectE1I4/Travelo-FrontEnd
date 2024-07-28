@@ -58,13 +58,14 @@
 
 .adminUserList ul {
   list-style: none;
+  border-top: 1px solid black;
+  margin-top: 10px;
   padding: 0;
 }
 
 .adminUserList li {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
-  display: flex;
   align-items: center;
 }
 
@@ -96,9 +97,29 @@
   color: rgb(225, 37, 37);
 }
 
+/* 체크박스 기본 스타일 */
 .adminUserList input[type='checkbox'] {
   margin-right: 10px;
   width: 20px;
   height: 20px;
-  border: 1px solid red;
+  border: 1px solid blue;
+  cursor: pointer;
+}
+
+/* 체크된 체크박스 스타일 */
+.adminUserList input[type='checkbox']:checked {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+}
+
+.adminUserList .userItem {
+  display: flex;
+  align-items: center;
+}
+
+.adminUserList li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  flex-grow: 1;
+  cursor: pointer;
 }

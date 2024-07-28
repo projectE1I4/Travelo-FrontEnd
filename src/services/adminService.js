@@ -67,6 +67,74 @@ export const deleteUsers = async (userSeqs) => {
   }
 };
 
+// 회원 상세보기
+export const getUserDetail = async (userSeq) => {
+  try {
+    const response = await axiosInstance.get(`/admin/userDetail/${userSeq}`, {
+      headers: {
+        Authorization: sessionStorage.getItem('accessToken'),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user detail:', error);
+    throw error;
+  }
+};
+
+// 회원이 만든 코스 목록
+export const getUserCourses = async (userSeq, sortBy = 'latest') => {
+  try {
+    const response = await axiosInstance.get(`/admin/courses/${userSeq}`, {
+      params: {
+        sortBy: sortBy,
+      },
+      headers: {
+        Authorization: sessionStorage.getItem('accessToken'),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user courses:', error);
+    throw error;
+  }
+};
+
+// 회원이 쓴 후기 목록
+export const getUserReviews = async (userSeq, sortBy = 'latest') => {
+  try {
+    const response = await axiosInstance.get(`/admin/reviews/${userSeq}`, {
+      params: {
+        sortBy: sortBy,
+      },
+      headers: {
+        Authorization: sessionStorage.getItem('accessToken'),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user reviews:', error);
+    throw error;
+  }
+};
+
+//회원이 만든 그룹 목록
+// 회원 그룹 목록 불러오기
+export const getUserGroups = async (userSeq, sortBy = 'latest') => {
+  try {
+    const response = await axiosInstance.get(`/admin/groups/${userSeq}`, {
+      params: { sortBy },
+      headers: {
+        Authorization: sessionStorage.getItem('accessToken'),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user groups:', error);
+    throw error;
+  }
+};
+
 //전체 그룹 목록
 export const getGroupList = async (page = 0, sortBy = 'latest') => {
   try {

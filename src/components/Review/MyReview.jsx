@@ -5,6 +5,7 @@ import {
   updateReview,
   deleteReview,
 } from '../../services/myReviewService';
+import MyPageSidebar from '../common/MyPageSidebar';
 import { formatDate } from '../common/formatDate';
 import '../../css/myReviewList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -106,92 +107,101 @@ const ReviewList = () => {
   if (error) return <p>Error loading reviews: {error.message}</p>;
 
   return (
-    <div className="myReviews">
-      <h1>나의 후기</h1>
-      {reviews.length === 0 ? (
-        <p>리뷰가 없습니다.</p>
-      ) : (
-        <ul className="myReviewList">
-          {reviews.map((item) => (
-            <li key={item.review.reviewSeq} className="listItem">
-              <div className="userInfo">
-                <div className="left">
-                  <p className="name">
-                    {maskUsername(item.review.user.username)}
-                  </p>
-                  <p className="date">{formatDate(item.review.createDate)}</p>
-                  {item.review.modified && <p>(수정됨)</p>}
-                </div>
-                <div className="right">
-                  <FontAwesomeIcon icon={faThumbsUp} />
-                  <p className="recommend">{item.review.recommendCount}</p>
-                </div>
-              </div>
-              <h2>
-                <Link to={`/course/${item.courseSeq}`}>{item.courseTitle}</Link>
-              </h2>
-              {editReviewId === item.review.reviewSeq ? (
-                <div>
-                  <textarea
-                    value={editContent}
-                    onChange={(e) => setEditContent(e.target.value)}
-                  />
-                  <div className="btn_wrap">
-                    <button
-                      className="cancleBtn btn_type_2"
-                      onClick={() => setEditReviewId(null)}
-                    >
-                      취소
-                    </button>
-                    <button
-                      className="reviewSave btn_type_2"
-                      onClick={() => editSave(item.review.reviewSeq)}
-                    >
-                      저장
-                    </button>
+    <div className="container">
+      <div className="grid-container">
+        <MyPageSidebar />
+        <div className="myReviews">
+          <h1>나의 후기</h1>
+          {reviews.length === 0 ? (
+            <p>리뷰가 없습니다.</p>
+          ) : (
+            <ul className="myReviewList">
+              {reviews.map((item) => (
+                <li key={item.review.reviewSeq} className="listItem">
+                  <div className="userInfo">
+                    <div className="left">
+                      <p className="name">
+                        {maskUsername(item.review.user.username)}
+                      </p>
+                      <p className="date">
+                        {formatDate(item.review.createDate)}
+                      </p>
+                      {item.review.modified && <p>(수정됨)</p>}
+                    </div>
+                    <div className="right">
+                      <FontAwesomeIcon icon={faThumbsUp} />
+                      <p className="recommend">{item.review.recommendCount}</p>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <>
-                  <p className="content">
-                    {expandedReviews.includes(item.review.reviewSeq) ? (
-                      item.review.content
-                    ) : (
-                      <>
-                        {item.review.content.length > 280
-                          ? item.review.content.substring(0, 280) + '...'
-                          : item.review.content}
-                        {item.review.content.length > 280 && (
-                          <button
-                            className="show_btn"
-                            onClick={() => showMore(item.review.reviewSeq)}
-                          >
-                            더보기
-                          </button>
+                  <h2>
+                    <Link to={`/course/${item.courseSeq}`}>
+                      {item.courseTitle}
+                    </Link>
+                  </h2>
+                  {editReviewId === item.review.reviewSeq ? (
+                    <div>
+                      <textarea
+                        value={editContent}
+                        onChange={(e) => setEditContent(e.target.value)}
+                      />
+                      <div className="btn_wrap">
+                        <button
+                          className="cancleBtn btn_type_2"
+                          onClick={() => setEditReviewId(null)}
+                        >
+                          취소
+                        </button>
+                        <button
+                          className="reviewSave btn_type_2"
+                          onClick={() => editSave(item.review.reviewSeq)}
+                        >
+                          저장
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="content">
+                        {expandedReviews.includes(item.review.reviewSeq) ? (
+                          item.review.content
+                        ) : (
+                          <>
+                            {item.review.content.length > 280
+                              ? item.review.content.substring(0, 280) + '...'
+                              : item.review.content}
+                            {item.review.content.length > 280 && (
+                              <button
+                                className="show_btn"
+                                onClick={() => showMore(item.review.reviewSeq)}
+                              >
+                                더보기
+                              </button>
+                            )}
+                          </>
                         )}
-                      </>
-                    )}
-                  </p>
-                  <div className="btn_wrap">
-                    <button
-                      className="reviewEdit btn_type_1"
-                      onClick={() => reviewEdit(item.review.reviewSeq)}
-                    >
-                      수정
-                    </button>
-                    <button
-                      className="reviewDelete btn_type_1"
-                      onClick={() => deleteItem(item.review.reviewSeq)}
-                    >
-                      삭제
-                    </button>
-                  </div>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+                      </p>
+                      <div className="btn_wrap">
+                        <button
+                          className="reviewEdit btn_type_1"
+                          onClick={() => reviewEdit(item.review.reviewSeq)}
+                        >
+                          수정
+                        </button>
+                        <button
+                          className="reviewDelete btn_type_1"
+                          onClick={() => deleteItem(item.review.reviewSeq)}
+                        >
+                          삭제
+                        </button>
+                      </div>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -26,7 +26,14 @@ const App = () => {
         <Routes>
           <Route path="/places" element={<PlacesListPage />} />
           <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
-          <Route path="/course-custom" element={<CourseCustomPage />} />
+          <Route
+            path="/course-custom"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <CourseCustomPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/users/login" element={<LoginPage />} />

@@ -118,8 +118,8 @@ const CourseSidebar = () => {
         </button>
       </div>
       <div className={styles.miniCardContainer}>
-        {filteredCourses.map((course, index) => (
-          <CourseMiniCard key={`${course.placeSeq}-${index}`} place={course} />
+        {filteredCourses.map((course) => (
+          <CourseMiniCard key={course.placeSeq} place={course} />
         ))}
       </div>
       {currentPage < totalPages - 1 && (

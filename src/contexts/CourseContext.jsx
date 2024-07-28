@@ -23,6 +23,8 @@ export const CourseProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [dropdownTitle, setDropdownTitle] = useState('인기순');
   const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedPlaces, setSelectedPlaces] = useState([]);
+  const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
 
   const regions = [
     { name: '서울', code: '1', lat: 37.5665, lng: 126.978 }, // 서울특별시청
@@ -110,6 +112,26 @@ export const CourseProvider = ({ children }) => {
     fetchCourses(initialFilters);
   };
 
+  const addPlaceToCourse = (place) => {
+    if (!selectedPlaces.some((p) => p.placeSeq === place.placeSeq)) {
+      setSelectedPlaces((prevPlaces) => [...prevPlaces, place]);
+    }
+  };
+
+  const removePlaceFromCourse = (placeSeq) => {
+    setSelectedPlaces((prevPlaces) =>
+      prevPlaces.filter((place) => place.placeSeq !== placeSeq)
+    );
+  };
+
+  const handleRegionSelect = (regionCode) => {
+    const region = regions.find((r) => r.code === regionCode);
+    setSelectedRegion(regionCode);
+    setSelectedPlaces([]);
+    setMapCenter({ lat: region.lat, lng: region.lng });
+    resetFilters({ area: regionCode });
+  };
+
   return (
     <CourseContext.Provider
       value={{
@@ -126,6 +148,12 @@ export const CourseProvider = ({ children }) => {
         selectedRegion,
         setSelectedRegion,
         regions,
+        selectedPlaces,
+        addPlaceToCourse,
+        removePlaceFromCourse,
+        mapCenter,
+        setMapCenter,
+        handleRegionSelect,
       }}
     >
       {children}

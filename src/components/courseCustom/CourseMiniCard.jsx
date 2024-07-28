@@ -1,14 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/components/courseCustom/CourseMiniCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useCourse } from '../../contexts/CourseContext';
 
 const CourseMiniCard = ({ place }) => {
-  return (
-    <Link
-      to={`/places/${place.placeSeq}`}
-      state={{
+  const navigate = useNavigate();
+  const { addPlaceToCourse } = useCourse();
+
+  const handleCardClick = () => {
+    navigate(`/places/${place.placeSeq}`, {
+      state: {
         type: place.type,
         contentId: place.contentId,
         image: place.imageFile1,
@@ -19,10 +22,17 @@ const CourseMiniCard = ({ place }) => {
         bookmarks: place.bookmarks || 0,
         latitude: place.latitude,
         longitude: place.longitude,
-        fromCoursePage: true,
-      }}
-      className={styles.card}
-    >
+      },
+    });
+  };
+
+  const handleAddClick = (e) => {
+    e.stopPropagation();
+    addPlaceToCourse(place);
+  };
+
+  return (
+    <div className={styles.card} onClick={handleCardClick}>
       {place.imageFile1 ? (
         <img
           src={place.imageFile1}
@@ -39,18 +49,12 @@ const CourseMiniCard = ({ place }) => {
           <span className={styles.likes}>
             <FontAwesomeIcon icon={faHeart} /> {place.likeCount}
           </span>
-          <button
-            className={styles.addButton}
-            onClick={(e) => {
-              e.stopPropagation();
-              alert('추가 기능을 구현하세요');
-            }}
-          >
-            +
+          <button className={styles.addButton} onClick={handleAddClick}>
+            <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

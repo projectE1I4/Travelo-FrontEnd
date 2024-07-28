@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import { formatDate } from '../common/formatDate';
 import '../../css/myCourseList.css';
+import MyPageSidebar from '../common/MyPageSidebar';
 
 const MyCourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -56,6 +57,7 @@ const MyCourseList = () => {
   return (
     <div className="container">
       <div className="grid-container">
+        <MyPageSidebar />
         <h1>나의 코스</h1>
         <div className="courselist">
           <ul className="courseItem">

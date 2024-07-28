@@ -4,7 +4,10 @@ import axiosInstance from '../utils/axiosInstance.js';
 
 export const useAuth = () => {
   // 인증 상태관리
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    // 세션 스토리지에서 토큰이 존재하는지 확인하여 초기 상태 설정
+    return !!sessionStorage.getItem('accessToken');
+  });
 
   // 토큰 관리
   useEffect(() => {

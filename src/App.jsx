@@ -18,8 +18,6 @@ import CourseCustomPage from './pages/courseCustom/CourseCustomPage.jsx';
 import BrowseCoursesPage from './pages/browseCourses/BrowseCoursesPage.jsx';
 
 const App = () => {
-  const { isAuthenticated } = useAuth();
-
   return (
     <div>
       <Header />
@@ -30,12 +28,19 @@ const App = () => {
           <Route
             path="/course-custom"
             element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ProtectedRoute>
                 <CourseCustomPage />
               </ProtectedRoute>
             }
           />
-          <Route path="/browse-courses" element={<BrowseCoursesPage />} />
+          <Route
+            path="/browse-courses"
+            element={
+              <ProtectedRoute>
+                <BrowseCoursesPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/users/login" element={<LoginPage />} />
@@ -52,7 +57,7 @@ const App = () => {
           <Route
             path="/protected"
             element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <ProtectedRoute>
                 <HomePage />
               </ProtectedRoute>
             }

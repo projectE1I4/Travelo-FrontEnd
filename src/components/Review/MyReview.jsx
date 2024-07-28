@@ -9,7 +9,7 @@ import MyPageSidebar from '../common/MyPageSidebar';
 import { formatDate } from '../common/formatDate';
 import '../../css/myReviewList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
@@ -166,15 +166,16 @@ const ReviewList = () => {
                           item.review.content
                         ) : (
                           <>
-                            {item.review.content.length > 280
-                              ? item.review.content.substring(0, 280) + '...'
+                            {item.review.content.length > 360
+                              ? item.review.content.substring(0, 360) + '...'
                               : item.review.content}
-                            {item.review.content.length > 280 && (
+                            {item.review.content.length > 360 && (
                               <button
                                 className="show_btn"
                                 onClick={() => showMore(item.review.reviewSeq)}
                               >
-                                더보기
+                                <span>더보기</span>
+                                <FontAwesomeIcon icon={faAngleDown} />
                               </button>
                             )}
                           </>

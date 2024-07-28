@@ -1,6 +1,7 @@
 .myReviews {
   margin: 0 auto;
   grid-column: 4 / span 12;
+  width: 100%;
 }
 
 .myReviews h1 {
@@ -40,6 +41,8 @@
   margin-bottom: 20px;
   height: 150px;
   word-break: break-all;
+  font-size: 12px;
+  border-radius: 10px;
 }
 
 .myReviews .myReviewList .listItem {
@@ -60,7 +63,11 @@
 }
 
 .myReviews .myReviewList .listItem .content .show_btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 46px;
+  font-size: 12px;
 }
 
 .myReviews .myReviewList .listItem .userInfo {

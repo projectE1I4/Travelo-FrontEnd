@@ -1,4 +1,4 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import usePlaceDetails from '../../hooks/usePlaceDetails';
 import LoadingError from '../../components/common/LoadingError';
 import PlaceDetailInfo from '../../components/PlaceDetailInfo';
@@ -19,6 +19,7 @@ const typeMap = {
 const PlacesDetailPage = () => {
   const { placeSeq } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const {
     type,
     contentId,
@@ -42,6 +43,9 @@ const PlacesDetailPage = () => {
 
   return (
     <div className="grid-container">
+      <button onClick={() => navigate(-1)} style={{ marginBottom: '10px' }}>
+        뒤로가기
+      </button>
       <div className={styles['place-detail']}>
         <section className={styles['image-map-section']}>
           <div className={styles['map-container']}>

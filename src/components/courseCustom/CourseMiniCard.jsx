@@ -19,9 +19,9 @@ const CourseMiniCard = ({ place }) => {
         bookmarks: place.bookmarks || 0,
         latitude: place.latitude,
         longitude: place.longitude,
+        fromCoursePage: true,
       }}
       className={styles.card}
-      style={{ textDecoration: 'none', color: 'inherit' }}
     >
       {place.imageFile1 ? (
         <img

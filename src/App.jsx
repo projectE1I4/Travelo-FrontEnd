@@ -10,7 +10,7 @@ import ResetPasswordPage from './pages/users/ResetPasswordPage.jsx';
 import Header from './components/common/Header';
 import PlacesListPage from './pages/Place/PlacesListPage.jsx';
 import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
-import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
+import GoogleCallback from './components/socialAuth/GoogleCallback.jsx';
 import MyReviewPage from './pages/MyReviewPage';
 import CourseDetail from './course/CourseDetail';
 import MyCoursePage from './pages/MyCoursePage';

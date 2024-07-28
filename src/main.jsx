@@ -3,13 +3,16 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import { PlaceProvider } from './contexts/PlaceContext';
-import { CourseProvider } from './contexts/CourseContext'; // CourseProvider import 추가
+import { CourseProvider } from './contexts/CourseContext';
+import { BrowseProvider } from './contexts/BrowseContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <PlaceProvider>
       <CourseProvider>
-        <App />
+        <BrowseProvider>
+          <App />
+        </BrowseProvider>
       </CourseProvider>
     </PlaceProvider>
   </BrowserRouter>

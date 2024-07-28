@@ -15,6 +15,7 @@ import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
 import KakaoCallback from './components/SocialAuth/KakaoCallback.jsx';
 import NaverCallback from './components/SocialAuth/NaverCallback.jsx';
 import CourseCustomPage from './pages/courseCustom/CourseCustomPage.jsx';
+import BrowseCoursesPage from './pages/browseCourses/BrowseCoursesPage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -34,6 +35,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route path="/browse-courses" element={<BrowseCoursesPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/users/login" element={<LoginPage />} />

@@ -26,6 +26,7 @@ axiosInstance.interceptors.request.use(
   async (config) => {
     const excludedUrls = [
       '/travelo/place/list',
+      '/user/course/list',
       '/travelo/join',
       '/travelo/mailConfirm',
       '/travelo/verifyCode',

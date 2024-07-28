@@ -1,4 +1,3 @@
-/* CourseSaveModal.module.css */
 .modal {
   position: fixed;
   top: 0;
@@ -9,6 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden; /* 추가 */
 }
 
 .modalContent {

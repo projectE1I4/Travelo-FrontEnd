@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCourse } from '../../contexts/CourseContext';
 import axiosInstance from '../../utils/axiosInstance';
 import styles from '../../styles/components/courseCustom/CourseSaveModal.module.css';
@@ -10,6 +10,16 @@ const CourseSaveModal = ({ onClose }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [privateYn, setPrivateYn] = useState('N'); // 기본값을 비공개로 설정
+
+  useEffect(() => {
+    // 모달이 열릴 때 body에 overflow: hidden; 스타일을 추가
+    document.body.style.overflow = 'hidden';
+
+    // 모달이 닫힐 때 overflow: hidden; 스타일을 제거
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   const handleSave = async () => {
     const placeSeqs = selectedPlaces.map((place) => place.placeSeq);

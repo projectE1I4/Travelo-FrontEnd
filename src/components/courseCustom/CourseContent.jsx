@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import { useCourse } from '../../contexts/CourseContext';
 import CourseCard from './CourseCard';
-import CourseSaveModal from './CourseSaveModal';
+import CourseSaveModal from './CourseSaveModal'; // CourseSaveModal을 import 합니다.
 import styles from '../../styles/components/courseCustom/CourseContent.module.css';
 
 const CourseContent = () => {
   const { selectedPlaces, resetSelectedPlaces } = useCourse();
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // 모달 상태 추가
 
-  const handleSaveClick = () => {
+  const handleSaveButtonClick = () => {
     setIsSaveModalOpen(true);
+    document.body.style.overflow = 'hidden'; // 모달이 열리면 스크롤 막기
   };
 
-  const handleModalClose = () => {
+  const handleCloseSaveModal = () => {
     setIsSaveModalOpen(false);
+    document.body.style.overflow = 'auto'; // 모달이 닫히면 스크롤 허용
   };
+
+  const isSaveButtonEnabled = selectedPlaces.length >= 4;
 
   return (
     <div className={styles['course-content']}>
@@ -31,15 +35,17 @@ const CourseContent = () => {
           ))
         )}
       </div>
-      <div>
-        <button
-          onClick={handleSaveClick}
-          disabled={selectedPlaces.length < 4} // 4개 미만일 때 비활성화
-        >
-          저장
-        </button>
-      </div>
-      {isSaveModalOpen && <CourseSaveModal onClose={handleModalClose} />}
+      <button
+        onClick={handleSaveButtonClick}
+        disabled={!isSaveButtonEnabled}
+        className={`${styles['save-button']} ${
+          isSaveButtonEnabled ? styles['enabled'] : styles['disabled']
+        }`}
+      >
+        저장버튼
+      </button>
+
+      {isSaveModalOpen && <CourseSaveModal onClose={handleCloseSaveModal} />}
     </div>
   );
 };

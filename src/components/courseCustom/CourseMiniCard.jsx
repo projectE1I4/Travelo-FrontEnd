@@ -7,9 +7,10 @@ import { useCourse } from '../../contexts/CourseContext';
 
 const CourseMiniCard = ({ place }) => {
   const navigate = useNavigate();
-  const { addPlaceToCourse } = useCourse();
+  const { addPlaceToCourse, selectedRegion } = useCourse();
 
   const handleCardClick = () => {
+    sessionStorage.setItem('selectedRegion', selectedRegion);
     navigate(`/places/${place.placeSeq}`, {
       state: {
         type: place.type,
@@ -22,7 +23,6 @@ const CourseMiniCard = ({ place }) => {
         bookmarks: place.bookmarks || 0,
         latitude: place.latitude,
         longitude: place.longitude,
-        fromDetail: true,
       },
     });
   };

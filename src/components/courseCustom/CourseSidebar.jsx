@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useCourse } from '../../contexts/CourseContext';
 import CourseMiniCard from './CourseMiniCard';
 import CourseMap from './CourseMap';
@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../styles/components/courseCustom/CourseSidebar.module.css';
 
-const CourseSidebar = ({ setIsModalOpen }) => {
+const CourseSidebar = () => {
   const {
     selectedRegion,
     regions,
@@ -17,16 +17,10 @@ const CourseSidebar = ({ setIsModalOpen }) => {
     setCurrentPage,
     totalPages,
     loading,
+    resetSelectedRegion,
   } = useCourse();
   const [selectedType, setSelectedType] = useState('');
   const [keyword, setKeyword] = useState('');
-
-  useEffect(() => {
-    const storedRegion = sessionStorage.getItem('selectedRegion');
-    if (storedRegion) {
-      updateFilters({ area: storedRegion });
-    }
-  }, []);
 
   const regionName =
     regions.find((region) => region.code === selectedRegion)?.name || '전체';
@@ -44,12 +38,7 @@ const CourseSidebar = ({ setIsModalOpen }) => {
   const handleReset = () => {
     setSelectedType('');
     setKeyword('');
-    resetFilters({ area: selectedRegion }); // 필터 초기화 시 지역 필터 유지
-  };
-
-  const handleRegionReset = () => {
-    sessionStorage.removeItem('selectedRegion');
-    setIsModalOpen(true);
+    resetFilters({ area: selectedRegion });
   };
 
   const loadMore = () => {
@@ -65,9 +54,8 @@ const CourseSidebar = ({ setIsModalOpen }) => {
   return (
     <div className={styles.sidebar}>
       <div>
-        <button onClick={handleRegionReset}>지역 다시 선택하기</button>
+        <button onClick={resetSelectedRegion}>지역 다시 선택하기</button>
       </div>
-      {/* 지도 부분 */}
       <div className={styles['map-container']}>
         <CourseMap />
       </div>
@@ -133,8 +121,8 @@ const CourseSidebar = ({ setIsModalOpen }) => {
         </button>
       </div>
       <div className={styles.miniCardContainer}>
-        {filteredCourses.map((course) => (
-          <CourseMiniCard key={course.placeSeq} place={course} />
+        {filteredCourses.map((course, index) => (
+          <CourseMiniCard key={`${course.placeSeq}-${index}`} place={course} />
         ))}
       </div>
       {currentPage < totalPages - 1 && (

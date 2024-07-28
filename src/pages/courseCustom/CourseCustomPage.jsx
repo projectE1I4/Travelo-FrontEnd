@@ -1,12 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useCourse } from '../../contexts/CourseContext';
 import RegionSelectModal from '../../components/courseCustom/RegionSelectModal';
 import CourseSidebar from '../../components/courseCustom/CourseSidebar';
 import CourseContent from '../../components/courseCustom/CourseContent';
 
 const CourseCustomPage = () => {
-  const { updateFilters, selectedRegion, handleRegionSelect } = useCourse();
-  const [isModalOpen, setIsModalOpen] = useState(() => !selectedRegion);
+  const {
+    updateFilters,
+    selectedRegion,
+    handleRegionSelect,
+    isModalOpen,
+    setIsModalOpen,
+  } = useCourse();
 
   useEffect(() => {
     if (selectedRegion) {
@@ -16,7 +21,6 @@ const CourseCustomPage = () => {
 
   const onRegionSelect = (regionCode) => {
     handleRegionSelect(regionCode);
-    setIsModalOpen(false);
   };
 
   return (
@@ -24,7 +28,7 @@ const CourseCustomPage = () => {
       {isModalOpen && <RegionSelectModal onSelect={onRegionSelect} />}
       {!isModalOpen && (
         <>
-          <CourseSidebar setIsModalOpen={setIsModalOpen} />
+          <CourseSidebar />
           <CourseContent />
         </>
       )}

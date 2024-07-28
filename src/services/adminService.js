@@ -48,6 +48,25 @@ export const deleteUser = async (userSeq) => {
   }
 };
 
+// 여러 회원 선택 탈퇴
+export const deleteUsers = async (userSeqs) => {
+  try {
+    const response = await axiosInstance.post(
+      '/admin/deleteUsers',
+      { userSeqs },
+      {
+        headers: {
+          Authorization: sessionStorage.getItem('accessToken'),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('여러 회원을 탈퇴시키는데 문제가 발생했습니다. :', error);
+    throw error;
+  }
+};
+
 //전체 그룹 목록
 export const getGroupList = async (page = 0, sortBy = 'latest') => {
   try {

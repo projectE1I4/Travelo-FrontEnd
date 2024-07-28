@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getUserList, deleteUser } from '../../services/adminService';
+import {
+  getUserList,
+  deleteUser,
+  deleteUsers,
+} from '../../services/adminService';
 import { formatDate } from '../common/formatDate';
 import '../../css/Admin/AdminUser.css';
 
@@ -10,6 +14,8 @@ const AdminUserList = () => {
   const [sortBy, setSortBy] = useState('latest');
   const [totalCount, setTotalCount] = useState(0);
   const [deletedCount, setDeletedCount] = useState(0);
+  const [filter, setFilter] = useState('all');
+  const [selectedUsers, setSelectedUsers] = useState([]); //회원 선택
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -62,6 +68,47 @@ const AdminUserList = () => {
     }
   };
 
+  // 선택된 회원 탈퇴
+  const selectDelete = async () => {
+    if (selectedUsers.length === 0) {
+      alert('탈퇴시킬 회원을 선택해주세요.');
+      return;
+    }
+
+    const confirmDelete = window.confirm(
+      `${selectedUsers.length}명의 회원을 탈퇴시키겠습니까?`
+    );
+    if (confirmDelete) {
+      try {
+        await deleteUsers(selectedUsers);
+        alert('선택된 회원들을 탈퇴시켰습니다.');
+        setUsers(users.filter((user) => !selectedUsers.includes(user.userSeq)));
+        setSelectedUsers([]); // 선택 목록 초기화
+
+        // 탈퇴 회원 수 업데이트
+        setDeletedCount(deletedCount + selectedUsers.length);
+      } catch (error) {
+        alert('회원 탈퇴에 실패하였습니다.');
+        console.error('Error deleting users:', error);
+      }
+    }
+  };
+
+  // 선택된 회원 변경
+  const toggleSelectUser = (userSeq) => {
+    setSelectedUsers((prevSelected) =>
+      prevSelected.includes(userSeq)
+        ? prevSelected.filter((seq) => seq !== userSeq)
+        : [...prevSelected, userSeq]
+    );
+  };
+
+  // 필터링된 사용자 목록
+  const filterUsers = users.filter((user) => {
+    if (filter === 'all') return true;
+    return filter === 'deleted' ? user.delYn === 'Y' : user.delYn === 'N';
+  });
+
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -71,14 +118,27 @@ const AdminUserList = () => {
         <button onClick={() => setSortBy('latest')}>최신순</button>
         <button onClick={() => setSortBy('oldest')}>오래된 순</button>
       </div>
-      <p>전체 회원 수: {totalCount - deletedCount}</p>
+      <div className="filter">
+        <button onClick={() => setFilter('all')}>전체 </button>
+        <button onClick={() => setFilter('active')}>활성 회원 </button>
+        <button onClick={() => setFilter('deleted')}>탈퇴 회원</button>
+      </div>
+      <p>전체 회원 수: {totalCount}</p>
+      <p>활성 회원 수: {totalCount - deletedCount}</p>
       <p>탈퇴 회원 수: {deletedCount}</p>
+      <p>선택된 회원: {selectedUsers.length}</p>
+      <button onClick={selectDelete}>선택된 회원 탈퇴</button>
       <ul>
-        {users.map((user) => (
+        {filterUsers.map((user) => (
           <li
             key={user.userSeq}
             className={user.delYn === 'Y' ? 'deleted-user' : ''}
           >
+            <input
+              type="checkbox"
+              onChange={() => toggleSelectUser(user.userSeq)}
+              checked={selectedUsers.includes(user.userSeq)}
+            />
             순차번호: {user.userSeq}
             <br />
             이메일: {user.username}
@@ -91,7 +151,7 @@ const AdminUserList = () => {
               <span className="deleted">탈퇴 회원</span>
             ) : (
               <button
-                className="delBtn"
+                className="delBtn btn_type_1"
                 onClick={() => userDelete(user.userSeq, user.username)}
               >
                 탈퇴
@@ -100,12 +160,6 @@ const AdminUserList = () => {
           </li>
         ))}
       </ul>
-      {/* <div>
-        <button onClick={() => setPage((prev) => Math.max(prev - 1, 0))}>
-          이전 페이지
-        </button>
-        <button onClick={() => setPage((prev) => prev + 1)}>다음 페이지</button>
-      </div> */}
     </div>
   );
 };

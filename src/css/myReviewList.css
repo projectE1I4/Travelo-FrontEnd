@@ -4,10 +4,11 @@
   width: 100%;
 }
 
-.myReviews h1 {
+.container .myReviews h1 {
   margin-top: 38px;
   font-weight: 700;
   font-size: 32px;
+  position: static;
 }
 
 .myReviews .myReviewList h2 a {

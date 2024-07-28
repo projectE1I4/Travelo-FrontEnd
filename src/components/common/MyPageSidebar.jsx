@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../../styles/components/MypageSidebar.module.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 const MyPageSidebar = () => {
@@ -19,8 +19,12 @@ const MyPageSidebar = () => {
     // url 따라서 active 주기
   };
 
-  const isActive = (path) => {
-    return location.pathname === path ? styles.MSactive : '';
+  const isActive = (paths) => {
+    return paths.some((path) =>
+      matchPath({ path, end: false }, location.pathname)
+    )
+      ? styles.MSactive
+      : '';
   };
 
   const openBookmark = (e) => {
@@ -37,6 +41,7 @@ const MyPageSidebar = () => {
       } else if (user.oauthType === 'naver') {
         return '/mypage/modifyprofileNaver';
       }
+      return '/mypage/modifyprofile';
     }
     return '/mypage/modifyprofile';
   };
@@ -50,9 +55,9 @@ const MyPageSidebar = () => {
         <ul>
           <li
             onClick={(e) => {}}
-            className={`${styles['MS-item']} ${isActive(profileLink)}`}
+            className={`${styles['MS-item']} ${isActive([profileLink])}`}
           >
-            <Link to={getProfileLink}>
+            <Link to={profileLink}>
               <p>회원 정보 수정</p>
             </Link>
           </li>
@@ -78,7 +83,7 @@ const MyPageSidebar = () => {
             </li>
           )}
           <li
-            className={`${styles['MS-item']} ${isActive('/mypage/courseGroup' || '/mypage/myCourses')}`}
+            className={`${styles['MS-item']} ${isActive(['/mypage/courseGroup', '/mypage/myCourses', '/mypage/courseGroupDetail', '/courseGroup/create'])}`}
           >
             {/* <Link to="/mypage/myCourses"> */}
             <Link to="/mypage/courseGroup">

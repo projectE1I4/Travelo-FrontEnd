@@ -1,17 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { CourseGroupContext } from '../../contexts/CourseGroupContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from '../../styles/pages/CourseGroup/CourseGroupList.module.css';
+import styles from '../../styles/pages/courseGroup/CourseGroupList.module.css';
 import {
   faMapLocationDot,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
 import Pagination from '../common/Pagination';
 import GroupPagination from '../common/GroupPagination';
+import { Link, useNavigate } from 'react-router-dom';
 
 const CourseGroupList = () => {
   const { courseGroups, loading, error } = useContext(CourseGroupContext);
-
+  const navigate = useNavigate();
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -37,11 +38,15 @@ const CourseGroupList = () => {
     return `${year}.${month}.${day}`;
   };
 
+  const handleCardClick = (courseGroupSeq) => {
+    navigate(`/mypage/courseGroupDetail/${courseGroupSeq}`);
+  };
+
   return (
     <div className={styles['group-box']}>
       <div className={styles['group-btn-wrap']}>
         <button type="button" className={styles['group-btn']}>
-          그룹 생성
+          <Link to="/courseGroup/create">그룹 생성</Link>
         </button>
         <button type="button" className={styles['group-btn']}>
           선택 삭제
@@ -49,7 +54,11 @@ const CourseGroupList = () => {
       </div>
       <div className={styles['group-content-box']}>
         {courseGroups.map((group) => (
-          <div key={group.courseGroupSeq} className={styles['group-card']}>
+          <div
+            key={group.courseGroupSeq}
+            className={styles['group-card']}
+            onClick={() => handleCardClick(group.courseGroupSeq)}
+          >
             <div className={styles['group-date-wrap']}>
               <p>{formatDate(group.createDate)}</p>
             </div>

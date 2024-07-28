@@ -51,7 +51,7 @@ export const useAuth = () => {
       return success;
     } catch (error) {
       console.error('로그인 요청 중 오류 발생: ', error);
-      return false;
+      return { status: error.response?.status, data: error.response?.data };
     }
   };
 

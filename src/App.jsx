@@ -26,6 +26,8 @@ import ModifyUserKakaoPage from './pages/users/ModifyUserKakaoPage.jsx';
 import CourseGroupList from './components/courseGroup/CourseGroupList.jsx';
 import CourseGroupListPage from './pages/courseGroup/CourseGroupListPage.jsx';
 import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
+import CourseGroupDetailPage from './pages/courseGroup/CourseGroupDetailPage.jsx';
+import CourseGroupCreatePage from './pages/courseGroup/CourseGroupCreatePage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -81,6 +83,14 @@ const App = () => {
             element={<ModifyUserKakaoPage />}
           />
           <Route path="mypage/courseGroup" element={<CourseGroupListPage />} />
+          <Route
+            path="mypage/courseGroupDetail/:id"
+            element={<CourseGroupDetailPage />}
+          />
+          <Route
+            path="courseGroup/create"
+            element={<CourseGroupCreatePage />}
+          />
           <Route
             path="/protected"
             element={

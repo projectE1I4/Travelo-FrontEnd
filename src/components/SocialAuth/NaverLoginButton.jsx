@@ -9,7 +9,7 @@ const NaverLoginButton = () => {
   const [provider, setProvider] = useState(false);
 
   const handleLogin = () => {
-    const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&state=STATE_STRING&redirect_uri=http://localhost:8080/travelo/naverCallback`;
+    const naverLoginUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&state=STATE_STRING&redirect_uri=http://localhost:5173/travelo/naverCallback`;
     console.log('naverLoginUrl', naverLoginUrl);
     window.location.href = naverLoginUrl;
   };
@@ -56,6 +56,8 @@ const NaverLoginButton = () => {
             setUsername(username);
             setShowForm(true);
           } else {
+            sessionStorage.setItem('accessToken', accessToken);
+            sessionStorage.setItem('refreshToken', refreshToken);
             window.location.href = '/home';
           }
         } catch (error) {
@@ -66,48 +68,12 @@ const NaverLoginButton = () => {
     }
   }, []);
 
-  const handleintergration = async (e, provider) => {
-    e.preventDefault();
-    try {
-      const response = await axiosInstance.post(
-        `/travelo/intergrated${provider}`,
-        {
-          username,
-        }
-      );
-
-      if (response.status === 200) {
-        window.location.href = '/home';
-      } else {
-        console.error('통합 실패');
-      }
-    } catch (error) {
-      console.error('통합 도중 오류 발생', error);
-    }
-  };
-
   return (
     <div>
       <button
         onClick={handleLogin}
         className={styles['naver-login-btn']}
       ></button>
-      {showForm && (
-        <>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, provider)}>
-              <button type="submit">
-                ${transProvider(provider)}로 계정 통합
-              </button>
-            </form>
-          </div>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, 'Naver')}>
-              <button type="submit">네이버로 계정 통합</button>
-            </form>
-          </div>
-        </>
-      )}
     </div>
   );
 };

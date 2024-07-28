@@ -1,10 +1,10 @@
-import CheckUser from '../../components/Auth/CheckUser';
+import CheckUser from '../../components/auth/CheckUser';
 import authService from '../../services/authService';
 
 const CheckUserPage = () => {
   const checkUserName = async (username) => {
     try {
-      const response = await authService.checkUser(username);
+      const response = await authService.onCheckUser(username);
       console.log('checkuserpage:', response);
       return response;
     } catch (error) {

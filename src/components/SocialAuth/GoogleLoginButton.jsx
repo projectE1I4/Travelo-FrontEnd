@@ -4,7 +4,7 @@ import styles from '../../styles/Auth.module.css';
 
 const GoogleLoginButton = () => {
   const googleClientId = import.meta.env.VITE_API_GOOGLE_CLIENT_ID;
-  const redirectUri = 'http://localhost:8080/travelo/googleCallback';
+  const redirectUri = 'http://localhost:5173/travelo/googleCallback';
   const scope =
     'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile';
   const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ const GoogleLoginButton = () => {
   const [provider, setProvider] = useState(false);
 
   const handleLogin = () => {
-    const googleLoginUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=${encodeURIComponent(scope)}`;
+    const googleLoginUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${redirectUri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile`;
     window.location.href = googleLoginUrl;
   };
 
@@ -59,6 +59,8 @@ const GoogleLoginButton = () => {
             setShowForm(true);
           } else {
             window.location.href = '/home';
+            sessionStorage.setItem('accessToken', accessToken);
+            sessionStorage.setItem('refreshToken', refreshToken);
           }
         } catch (error) {
           console.error('Error fetching user info:', error);
@@ -68,48 +70,12 @@ const GoogleLoginButton = () => {
     }
   }, []);
 
-  const handleintergration = async (e, provider) => {
-    e.preventDefault();
-    try {
-      const response = await axiosInstance.post(
-        `/travelo/intergrated${provider.toLowerCase()}`,
-        {
-          username,
-        }
-      );
-
-      if (response.status === 200) {
-        window.location.href = '/home';
-      } else {
-        console.error('통합 실패');
-      }
-    } catch (error) {
-      console.error('통합 도중 오류 발생', error);
-    }
-  };
-
   return (
     <div>
       <button
         onClick={handleLogin}
         className={styles['google-login-btn']}
       ></button>
-      {showForm && (
-        <>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, provider)}>
-              <button type="submit">
-                ${transProvider(provider)}로 계정 통합
-              </button>
-            </form>
-          </div>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, 'Google')}>
-              <button type="submit">구글로 계정 통합</button>
-            </form>
-          </div>
-        </>
-      )}
     </div>
   );
 };

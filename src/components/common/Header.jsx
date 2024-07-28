@@ -6,8 +6,11 @@ import {
   faSignsPost,
   faLightbulb,
 } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../hooks/useAuth';
 
 function Header() {
+  const { isAuthenticated, user } = useAuth();
+
   return (
     <header className={styles['header']}>
       <nav className={`navbar ${styles['navbar-custom']}`}>
@@ -42,10 +45,31 @@ function Header() {
             </li>
           </ul>
         </div>
-        <button className={styles['btn-custom']} type="button">
-          {' '}
-          <Link to="/users/login">로그인 / 회원가입</Link>
-        </button>
+        {isAuthenticated && user ? (
+          <button type="button" className={styles['btn-custom']}>
+            {user.role === 'ADMIN' ? (
+              <Link to="/admin">어드민 페이지</Link>
+            ) : (
+              <Link
+                to={
+                  user.oauthType === 'google'
+                    ? '/mypage/modifyprofileGoogle'
+                    : user.oauthType === 'kakao'
+                      ? '/mypage/modifyprofileKakao'
+                      : user.oauthType === 'naver'
+                        ? '/mypage/modifyprofileNaver'
+                        : '/mypage/modifyprofile'
+                }
+              >
+                마이 페이지
+              </Link>
+            )}
+          </button>
+        ) : (
+          <button type="button" className={styles['btn-custom']}>
+            <Link to="/users/login">로그인 / 회원가입</Link>
+          </button>
+        )}
       </nav>
     </header>
   );

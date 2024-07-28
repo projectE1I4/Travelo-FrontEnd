@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styles from '../../styles/Auth.module.css';
 import { useNavigate } from 'react-router-dom';
-import KakaoLoginButton from '../SocialAuth/KakaoLoginButton';
-import GoogleLoginButton from '../SocialAuth/GoogleLoginButton';
-import NaverLoginButton from '../SocialAuth/NaverLoginButton';
+import KakaoLoginButton from '../socialAuth/KakaoLoginButton';
+import GoogleLoginButton from '../socialAuth/GoogleLoginButton';
+import NaverLoginButton from '../socialAuth/NaverLoginButton';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [failLogin, setFailLogin] = useState('');
 
   const navigate = useNavigate();
 
@@ -18,6 +19,8 @@ const Login = ({ onLogin }) => {
     console.log(success);
     if (success) {
       navigate('/home');
+    } else {
+      setFailLogin('이메일 혹은 비밀번호가 일치하지 않습니다.');
     }
   };
 
@@ -39,19 +42,28 @@ const Login = ({ onLogin }) => {
         </div>
         <div className={styles['input-area']}>
           <div className={styles['input-wrap']}>
-            <label
-              htmlFor="username"
-              className={styles['input-label-required']}
-            >
-              이메일
-            </label>
+            <div className={styles['input-wrap-inline']}>
+              <label
+                htmlFor="username"
+                className={styles['input-label-required']}
+              >
+                이메일
+              </label>
+              {failLogin ? (
+                <span className={styles['error-message']}>{failLogin}</span>
+              ) : (
+                <span></span>
+              )}
+            </div>
             <input
               type="email"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
-              className={styles['input-box']}
+              className={[styles['input-box'], styles['input-box-inline']].join(
+                ' '
+              )}
               placeholder="이메일을 입력해 주세요."
             />
           </div>

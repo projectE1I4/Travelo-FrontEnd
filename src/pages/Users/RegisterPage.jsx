@@ -1,5 +1,5 @@
 import React from 'react';
-import Register from '../../components/Auth/Register';
+import Register from '../../components/auth/Register';
 import authService from '../../services/authService';
 import mailCheckService from '../../services/mailCheckService';
 

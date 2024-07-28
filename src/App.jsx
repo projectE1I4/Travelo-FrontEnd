@@ -1,12 +1,12 @@
 import { useAuth } from './hooks/useAuth';
 import { Route, Routes } from 'react-router-dom';
-import LoginPage from './pages/Users/LoginPage';
+import LoginPage from './pages/users/LoginPage.jsx';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
-import RegisterPage from './pages/Users/RegisterPage';
-import ProtectedRoute from './components/Auth/ProtectedRoute';
-import CheckUserPage from './pages/Users/CheckUserPage';
-import ResetPasswordPage from './pages/Users/ResetPasswordPage';
+import RegisterPage from './pages/users/RegisterPage.jsx';
+import ProtectedRoute from './components/auth/ProtectedRoute.jsx';
+import CheckUserPage from './pages/users/CheckUserPage.jsx';
+import ResetPasswordPage from './pages/users/ResetPasswordPage.jsx';
 import Header from './components/common/Header';
 import PlacesListPage from './pages/Place/PlacesListPage.jsx';
 import PlaceDetailPage from './pages/Place/PlaceDetailPage.jsx';
@@ -21,6 +21,21 @@ import AdminUserPage from './pages/Admin/AdminUserPage';
 import AdminGroupPage from './pages/Admin/AdminGroupPage.jsx';
 import AdminReviewPage from './pages/Admin/AdminReviewPage.jsx';
 import AdminBlindReviewPage from './pages/Admin/AdminBlindReviewPage';
+import AccountIntergrationPage from './pages/users/AccountIntegrationPage.jsx';
+import KakaoCallback from './components/socialAuth/KakaoCallback.jsx';
+import NaverCallback from './components/socialAuth/NaverCallback.jsx';
+import AccountIntergration from './components/socialAuth/AccountIntegration.jsx';
+import AccountIntergrationKakao from './components/socialAuth/AccountIntegrationKakao.jsx';
+import ModifyuserPage from './pages/users/ModifyUserPage.jsx';
+import ModifyUserPage from './pages/users/ModifyUserPage.jsx';
+import ModifyUserGooglePage from './pages/users/ModifyUserGooglePage.jsx';
+import AccountIntergrationGoogle from './components/socialAuth/AccountIntegrationGoogle.jsx';
+import AccountIntergrationNaver from './components/socialAuth/AccountIntegrationNaver.jsx';
+import ModifyUserNaverPage from './pages/users/ModifyUserNaverPage.jsx';
+import ModifyUserKakaoPage from './pages/users/ModifyUserKakaoPage.jsx';
+import CourseGroupList from './components/courseGroup/CourseGroupList.jsx';
+import CourseGroupListPage from './pages/courseGroup/CourseGroupListPage.jsx';
+import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -55,6 +70,37 @@ const App = () => {
             path="/social/integrate"
             element={<AccountIntergrationPage />}
           />
+          <Route
+            path="/social/integratedComplete"
+            element={<AccountIntergration />}
+          />
+          <Route
+            path="/travelo/integratedKakao"
+            element={<AccountIntergrationKakao />}
+          />
+          <Route
+            path="/travelo/integratedGoogle"
+            element={<AccountIntergrationGoogle />}
+          />
+          <Route
+            path="/travelo/integratedNaver"
+            element={<AccountIntergrationNaver />}
+          />
+
+          <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
+          <Route
+            path="mypage/modifyprofileGoogle"
+            element={<ModifyUserGooglePage />}
+          />
+          <Route
+            path="mypage/modifyprofileNaver"
+            element={<ModifyUserNaverPage />}
+          />
+          <Route
+            path="mypage/modifyprofileKakao"
+            element={<ModifyUserKakaoPage />}
+          />
+          <Route path="mypage/courseGroup" element={<CourseGroupListPage />} />
           <Route
             path="/protected"
             element={

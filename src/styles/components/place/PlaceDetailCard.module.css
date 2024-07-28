@@ -15,7 +15,7 @@
   background-color: #f9f9f9;
   border: 1px solid var(--point-color2);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-  grid-column: span 2;
+  grid-column: span 3;
   height: 180px;
   justify-content: center;
 }

@@ -1,10 +1,12 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useCallback } from 'react';
 import axiosInstance from '../utils/axiosInstance';
+import { fetchBookmarks } from '../services/bookmarkService';
 
 const PlaceContext = createContext();
 
 const PlaceProvider = ({ children }) => {
   const [places, setPlaces] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dropdownTitle, setDropdownTitle] = useState('인기순');
@@ -36,6 +38,15 @@ const PlaceProvider = ({ children }) => {
       setLoading(false);
     }
   };
+
+  const fetchUserBookmarks = useCallback(async (accessToken) => {
+    try {
+      const bookmarks = await fetchBookmarks(accessToken);
+      setBookmarks(bookmarks);
+    } catch (error) {
+      console.error('북마크 목록 가져오기 실패', error);
+    }
+  }, []);
 
   useEffect(() => {
     fetchPlaces(filters);
@@ -78,10 +89,21 @@ const PlaceProvider = ({ children }) => {
     fetchPlaces(initialFilters);
   };
 
+  const updatePlaceLikes = (placeSeq, liked) => {
+    setPlaces((prevPlaces) =>
+      prevPlaces.map((place) =>
+        place.placeSeq === placeSeq
+          ? { ...place, likeCount: place.likeCount + (liked ? 1 : -1) }
+          : place
+      )
+    );
+  };
+
   return (
     <PlaceContext.Provider
       value={{
         places,
+        bookmarks,
         loading,
         error,
         dropdownTitle,
@@ -91,6 +113,8 @@ const PlaceProvider = ({ children }) => {
         totalPages,
         currentPage,
         setCurrentPage,
+        updatePlaceLikes,
+        fetchUserBookmarks, // 북마크를 불러오는 함수 추가
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const KakaoLoginButton = () => {
   const kakaoKey = import.meta.env.VITE_API_KAKAO_KEY;
-  const redirectUri = 'http://localhost:8080/travelo/kakaoCallback';
+  const redirectUri = 'http://localhost:5173/travelo/kakaoCallback';
   const [username, setUsername] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [provider, setProvider] = useState(false);
@@ -49,6 +49,7 @@ const KakaoLoginButton = () => {
               },
             }
           );
+          console.log('Check response:', response.data);
           const { error, username } = response.data;
 
           if (error) {
@@ -58,6 +59,8 @@ const KakaoLoginButton = () => {
             setShowForm(true);
           } else {
             window.location.href = '/home';
+            sessionStorage.setItem('accessToken', accessToken);
+            sessionStorage.setItem('refreshToken', refreshToken);
           }
         } catch (error) {
           console.error('Error fetching user info:', error);
@@ -67,48 +70,12 @@ const KakaoLoginButton = () => {
     }
   }, []);
 
-  const handleintergration = async (e, provider) => {
-    e.preventDefault();
-    try {
-      const response = await axiosInstance.post(
-        `/travelo/intergrated${provider}`,
-        {
-          username,
-        }
-      );
-
-      if (response.status === 200) {
-        window.location.href = '/home';
-      } else {
-        console.error('통합 실패');
-      }
-    } catch (error) {
-      console.error('통합 도중 오류 발생', error);
-    }
-  };
-
   return (
     <div>
       <button
         onClick={handleLogin}
         className={styles['kakao-login-btn']}
       ></button>
-      {showForm && (
-        <>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, provider)}>
-              <button type="submit">
-                ${transProvider(provider)}로 계정 통합
-              </button>
-            </form>
-          </div>
-          <div>
-            <form onSubmit={(e) => handleintergration(e, 'Kakao')}>
-              <button type="submit">카카오로 계정 통합</button>
-            </form>
-          </div>
-        </>
-      )}
     </div>
   );
 };

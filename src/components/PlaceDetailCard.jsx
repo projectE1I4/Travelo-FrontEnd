@@ -21,7 +21,6 @@ import {
   faChild,
   faUtensils,
   faSmokingBan,
-  faBowlFood,
 } from '@fortawesome/free-solid-svg-icons';
 
 const iconMap = {
@@ -29,7 +28,6 @@ const iconMap = {
   유모차대여: faBabyCarriage,
   '반려동물 동반': faPaw,
   '신용카드 결제': faCreditCard,
-  객실내취사: faBowlFood,
   픽업서비스: faTruckPickup,
   바비큐장: faFire,
   뷰티시설: faEye,
@@ -114,7 +112,6 @@ const PlaceDetailCard = ({ details, type }) => {
       )}
       {type === '32' && (
         <>
-          {renderCardItem('객실내취사', details.chkcooking)}
           {renderCardItem('픽업서비스', details.pickup)}
           {renderCardItem('바비큐장', details.barbecue)}
           {renderCardItem('뷰티시설', details.beauty)}

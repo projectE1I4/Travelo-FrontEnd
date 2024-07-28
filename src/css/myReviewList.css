@@ -1,3 +1,9 @@
+._MS-item_8otlz_27:nth-child(4) {
+  background-color: #fff;
+  color: var(--point-color1);
+  font-weight: 700;
+}
+
 .myReviews {
   margin: 0 auto;
   grid-column: 4 / span 12;

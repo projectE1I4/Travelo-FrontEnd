@@ -1,4 +1,3 @@
-// userAuth hook
 import { useEffect, useState } from 'react';
 import authService from '../services/authService.js';
 import axiosInstance from '../utils/axiosInstance.js';
@@ -15,16 +14,15 @@ export const useAuth = () => {
     };
 
     checkAuth();
+    const interval = setInterval(checkAuth, 1000); // 주기적으로 토큰 상태 확인
+    return () => clearInterval(interval); // 컴포넌트 언마운트 시 interval 정리
   }, []);
 
   const login = async (email, password) => {
     try {
       const success = await authService.login(email, password);
-      // console.log('success', success);
       if (success) {
         setIsAuthenticated(true);
-        // console.log(success);
-        // console.log(success.data);
       }
       return success;
     } catch (error) {
@@ -53,12 +51,8 @@ export const useAuth = () => {
       localStorage.removeItem('token');
       sessionStorage.removeItem('refreshToken');
       sessionStorage.removeItem('token');
+      sessionStorage.removeItem('selectedRegion');
       setIsAuthenticated(false);
-
-      console.log('토큰 지워짐');
-      if (!sessionStorage.getItem('refreshToken')) {
-        console.log('토큰 지워짐');
-      }
 
       window.location.href = '/users/login';
     } catch (error) {

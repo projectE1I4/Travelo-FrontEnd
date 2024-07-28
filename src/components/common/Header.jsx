@@ -27,7 +27,7 @@ function Header() {
             <li className={`nav-item ${styles['nav-item']}`}>
               <Link
                 className={`nav-link ${styles['nav-link']} ${styles['nav-link-icon']}`}
-                to="/custom-course"
+                to="/course-custom"
               >
                 <FontAwesomeIcon icon={faSignsPost} /> 코스 커스텀
               </Link>

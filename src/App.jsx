@@ -14,6 +14,7 @@ import AccountIntergrationPage from './pages/Users/AccountIntergrationPage.jsx';
 import GoogleCallback from './components/SocialAuth/GoogleCallback.jsx';
 import KakaoCallback from './components/SocialAuth/KakaoCallback.jsx';
 import NaverCallback from './components/SocialAuth/NaverCallback.jsx';
+import CourseCustomPage from './pages/courseCustom/CourseCustomPage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -25,6 +26,14 @@ const App = () => {
         <Routes>
           <Route path="/places" element={<PlacesListPage />} />
           <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
+          <Route
+            path="/course-custom"
+            element={
+              <ProtectedRoute isAuthenticated={isAuthenticated}>
+                <CourseCustomPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/users/login" element={<LoginPage />} />

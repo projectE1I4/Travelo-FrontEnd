@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import axios from 'axios';
 
-const KakaoCallback = () => {
+const KakaoCallback = ({ onLogin }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const code = new URLSearchParams(location.search).get('code');
@@ -19,6 +19,10 @@ const KakaoCallback = () => {
             params: { code },
           }
         );
+        onLogin(response.data);
+        console.log(response);
+        // API 성공 후 처리
+        console.log(response.data);
 
         if (response.status === 200) {
           const { accessToken, refreshToken } = response.data;

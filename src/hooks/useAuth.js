@@ -42,12 +42,12 @@ export const useAuth = () => {
   const login = async (email, password) => {
     try {
       const success = await authService.login(email, password);
-      // console.log('success', success);
       if (success) {
         setIsAuthenticated(true);
-        // console.log(success);
-        // console.log(success.data);
       }
+      console.log('access"');
+      sessionStorage.setItem('token', token);
+      setIsAuthenticated(true);
       return success;
     } catch (error) {
       console.error('로그인 요청 중 오류 발생: ', error);

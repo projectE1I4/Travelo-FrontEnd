@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
 import axios from 'axios';
 
-const GoogleCallback = () => {
+const GoogleCallback = ({ onLogin }) => {
   const location = useLocation();
   const code = new URLSearchParams(location.search).get('code');
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const GoogleCallback = () => {
             params: { code },
           }
         );
+        onLogin(response.data);
         console.log(response);
         // API 성공 후 처리
         console.log(response.data);

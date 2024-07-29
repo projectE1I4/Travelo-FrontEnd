@@ -11,11 +11,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <PlaceProvider>
       <CourseProvider>
-        <CourseGroupProvider>
-          <BrowseProvider>
+        <BrowseProvider>
+          <CourseGroupProvider>
             <App />
-          </BrowseProvider>
-        </CourseGroupProvider>
+          </CourseGroupProvider>
+        </BrowseProvider>
       </CourseProvider>
     </PlaceProvider>
   </BrowserRouter>

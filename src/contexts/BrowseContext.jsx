@@ -1,14 +1,14 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect, useCallback } from 'react';
 import axiosInstance from '../utils/axiosInstance';
+import { fetchCourseBookmarks } from '../services/bookmarkService';
+import { useNavigate } from 'react-router-dom';
+import { likeCourse } from '../services/likeService';
 
 const BrowseContext = createContext();
 
-export const useBrowse = () => {
-  return useContext(BrowseContext);
-};
-
 const BrowseProvider = ({ children }) => {
   const [courses, setCourses] = useState([]);
+  const [courseDetail, setCourseDetail] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [dropdownTitle, setDropdownTitle] = useState('인기순');
@@ -20,67 +20,99 @@ const BrowseProvider = ({ children }) => {
   });
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
+  const [courseBookmarks, setCourseBookmarks] = useState([]);
+  const [accessToken, setAccessToken] = useState(null);
 
-  const fetchCourses = async (updatedFilters = {}) => {
-    setLoading(true);
-    const accessToken = sessionStorage.getItem('accessToken');
-    if (!accessToken) {
-      console.error('No access token found');
-      setError('No access token found');
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axiosInstance.get('/user/course/list', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        params: {
-          ...filters,
-          ...updatedFilters,
-        },
-      });
-
-      const courses = response.data.paging.content;
-      console.log('Fetched courses:', courses);
-
-      const filteredCourses = courses.filter((course) => {
-        const matchesAreaCode = filters.areaCode
-          ? course.courseList.some(
-              (item) => item.place.areaCode === filters.areaCode
-            )
-          : true;
-        const matchesType = filters.type
-          ? course.courseList.some((item) => item.place.type === filters.type)
-          : true;
-
-        console.log(
-          `Course ${course.courseSeq} matchesAreaCode: ${matchesAreaCode}, matchesType: ${matchesType}`
-        );
-
-        return matchesAreaCode && matchesType;
-      });
-
-      console.log('Filtered courses:', filteredCourses);
-
-      setCourses(filteredCourses);
-      setTotalPages(response.data.paging.totalPages);
-    } catch (error) {
-      setError(error);
-      console.error('Error fetching courses:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    const token = sessionStorage.getItem('accessToken');
+    if (token) {
+      setAccessToken(token);
+    } else {
+      navigate('/users/login');
+    }
+  }, [navigate]);
+
+  const fetchCourses = useCallback(
+    async (updatedFilters = {}) => {
+      if (!accessToken) return;
+
+      setLoading(true);
+      try {
+        const response = await axiosInstance.get('/user/course/list', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            ...filters,
+            ...updatedFilters,
+          },
+        });
+
+        const courses = response.data.paging.content;
+        setCourses(courses);
+        setTotalPages(response.data.paging.totalPages);
+      } catch (error) {
+        setError(error);
+        console.error('Error fetching courses:', error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [filters, accessToken]
+  );
+
+  const fetchCourseDetail = useCallback(
+    async (courseSeq) => {
+      if (!accessToken) return;
+
+      setLoading(true);
+      try {
+        const response = await axiosInstance.get(
+          `/user/course/detail/${courseSeq}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            params: {
+              page: 0,
+              sortBy: 'popularity',
+            },
+          }
+        );
+        setCourseDetail(response.data);
+      } catch (error) {
+        setError(error);
+        console.error('Error fetching course detail:', error);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [accessToken]
+  );
+
+  const fetchUserBookmarks = useCallback(async () => {
+    if (!accessToken) return;
+
+    try {
+      const response = await fetchCourseBookmarks(accessToken);
+      setCourseBookmarks(response.bookmarks);
+    } catch (error) {
+      console.error('북마크 목록 가져오기 실패', error);
+    }
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchUserBookmarks();
+      fetchCourses();
+    }
+  }, [accessToken, fetchCourses, fetchUserBookmarks]);
 
   useEffect(() => {
     fetchCourses({ page: currentPage });
-  }, [currentPage]);
+  }, [currentPage, fetchCourses]);
 
   const handleDropdownClick = (title) => {
     setDropdownTitle(title);
@@ -120,6 +152,16 @@ const BrowseProvider = ({ children }) => {
     fetchCourses(initialFilters);
   };
 
+  const updateCourseLikes = (courseSeq, liked) => {
+    setCourses((prevCourses) =>
+      prevCourses.map((course) =>
+        course.courseSeq === courseSeq
+          ? { ...course, likeCount: course.likeCount + (liked ? 1 : -1) }
+          : course
+      )
+    );
+  };
+
   return (
     <BrowseContext.Provider
       value={{
@@ -133,6 +175,11 @@ const BrowseProvider = ({ children }) => {
         totalPages,
         currentPage,
         setCurrentPage,
+        courseBookmarks,
+        fetchUserBookmarks,
+        fetchCourseDetail,
+        courseDetail,
+        updateCourseLikes,
       }}
     >
       {children}

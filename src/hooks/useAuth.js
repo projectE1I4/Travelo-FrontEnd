@@ -1,15 +1,12 @@
+// userAuth hook
 import { useEffect, useState } from 'react';
 import authService from '../services/authService.js';
 import axiosInstance from '../utils/axiosInstance.js';
 
 export const useAuth = () => {
   // 인증 상태관리
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    // 세션 스토리지에서 토큰이 존재하는지 확인하여 초기 상태 설정
-    return !!sessionStorage.getItem('accessToken');
-  });
 
   // 토큰 관리
   useEffect(() => {
@@ -40,8 +37,6 @@ export const useAuth = () => {
     };
 
     checkAuth();
-    const interval = setInterval(checkAuth, 1000); // 주기적으로 토큰 상태 확인
-    return () => clearInterval(interval); // 컴포넌트 언마운트 시 interval 정리
   }, []);
 
   const login = async (email, password) => {
@@ -50,6 +45,9 @@ export const useAuth = () => {
       if (success) {
         setIsAuthenticated(true);
       }
+      console.log('access"');
+      sessionStorage.setItem('token', token);
+      setIsAuthenticated(true);
       return success;
     } catch (error) {
       console.error('로그인 요청 중 오류 발생: ', error);
@@ -77,8 +75,12 @@ export const useAuth = () => {
       localStorage.removeItem('token');
       sessionStorage.removeItem('refreshToken');
       sessionStorage.removeItem('token');
-      sessionStorage.removeItem('selectedRegion');
       setIsAuthenticated(false);
+
+      console.log('토큰 지워짐');
+      if (!sessionStorage.getItem('refreshToken')) {
+        console.log('토큰 지워짐');
+      }
 
       window.location.href = '/users/login';
     } catch (error) {

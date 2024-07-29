@@ -79,7 +79,24 @@
   color: #777;
 }
 
-.heart-icon.active,
+.heart-icon {
+  color: #ff4e4e;
+  transition: transform 0.2s;
+}
+
+.heart-icon.active {
+  transform: scale(1.2);
+}
+
+.heart-icon.inactive {
+  transform: scale(1);
+}
+
+.icons .bookmark-icon {
+  color: var(--txt-color-400);
+  transition: color 0.1s;
+}
+
 .bookmark-icon.active {
-  color: red;
+  color: var(--accent-color);
 }

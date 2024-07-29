@@ -42,10 +42,58 @@ export const fetchBookmarks = async (accessToken) => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    // console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('북마크 목록 가져오기 실패', error);
+    throw error;
+  }
+};
+
+export const addCourseBookmark = async (courseSeq, accessToken) => {
+  try {
+    const response = await axiosInstance.post(
+      `/user/course/bookmark/${courseSeq}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('코스 북마크 추가 실패', error);
+    throw error;
+  }
+};
+
+export const removeCourseBookmark = async (courseBookmarkSeq, accessToken) => {
+  try {
+    const response = await axiosInstance.post(
+      `/user/course/removeBookmark/${courseBookmarkSeq}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('코스 북마크 삭제 실패', error);
+    throw error;
+  }
+};
+
+export const fetchCourseBookmarks = async (accessToken) => {
+  try {
+    const response = await axiosInstance.get('/user/courseBookmarks', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('코스 북마크 목록 가져오기 실패', error);
     throw error;
   }
 };

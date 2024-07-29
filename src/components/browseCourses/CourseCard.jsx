@@ -1,40 +1,129 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from '../../styles/components/browseCourses/CourseCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faImage } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEye,
+  faBookmark,
+  faImage,
+  faHeart,
+} from '@fortawesome/free-solid-svg-icons';
 import { BrowseContext } from '../../contexts/BrowseContext';
+import {
+  addCourseBookmark,
+  removeCourseBookmark,
+} from '../../services/bookmarkService';
+import { likeCourse } from '../../services/likeService';
 
 const CourseCard = ({
   courseSeq,
-  image,
   title,
   description,
   viewCount,
   likeCount,
-  bookmarks,
-  contentId,
-  longitude,
-  latitude,
+  createDate,
+  areaCode,
+  image,
 }) => {
+  const [isBookmarked, setIsBookmarked] = useState(false);
   const [currentLikes, setCurrentLikes] = useState(likeCount);
+  const [liked, setLiked] = useState(false);
   const [animate, setAnimate] = useState(false);
+  const [loadingBookmark, setLoadingBookmark] = useState(false);
+  const navigate = useNavigate();
+  const { courseBookmarks, fetchUserBookmarks, updateCourseLikes } =
+    useContext(BrowseContext);
+
+  useEffect(() => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (accessToken) {
+      fetchUserBookmarks(accessToken);
+    }
+  }, [fetchUserBookmarks]);
+
+  useEffect(() => {
+    const isBookmarked = courseBookmarks.some(
+      (bookmark) => bookmark.course.courseSeq === courseSeq
+    );
+    setIsBookmarked(isBookmarked);
+  }, [courseBookmarks, courseSeq]);
+
+  const handleLike = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const accessToken = sessionStorage.getItem('accessToken');
+
+    if (!accessToken) {
+      navigate('/users/login');
+      return;
+    }
+
+    try {
+      const updatedLikeYn = await likeCourse(courseSeq, accessToken);
+
+      if (updatedLikeYn === 'Y') {
+        setCurrentLikes((prevLikes) => prevLikes + 1);
+        setLiked(true);
+        updateCourseLikes(courseSeq, true);
+      } else if (updatedLikeYn === 'N') {
+        setCurrentLikes((prevLikes) => prevLikes - 1);
+        setLiked(false);
+        updateCourseLikes(courseSeq, false);
+      }
+
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 200);
+    } catch (error) {
+      console.error('Error updating like status: ', error);
+    }
+  };
+
+  const handleBookmark = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const accessToken = sessionStorage.getItem('accessToken');
+
+    if (!accessToken) {
+      navigate('/users/login');
+      return;
+    }
+
+    setLoadingBookmark(true);
+
+    try {
+      if (isBookmarked) {
+        const bookmark = courseBookmarks.find(
+          (bookmark) => bookmark.course.courseSeq === courseSeq
+        );
+        if (bookmark) {
+          await removeCourseBookmark(bookmark.courseBookmarkSeq, accessToken);
+          setIsBookmarked(false);
+        }
+      } else {
+        await addCourseBookmark(courseSeq, accessToken);
+        setIsBookmarked(true);
+      }
+      fetchUserBookmarks(accessToken);
+    } catch (error) {
+      console.error('Error updating bookmark status:', error);
+    } finally {
+      setLoadingBookmark(false);
+    }
+  };
 
   return (
     <Link
-      to={`/courses/${courseSeq}`}
+      to={`/course/${courseSeq}`}
       className={styles.card}
       state={{
         courseSeq,
-        contentId,
-        image,
         title,
         description,
         viewCount,
         likeCount,
-        bookmarks,
-        longitude,
-        latitude,
+        createDate,
+        areaCode,
+        image,
       }}
       style={{ textDecoration: 'none', color: 'inherit' }}
     >
@@ -59,6 +148,28 @@ const CourseCard = ({
           <div className={styles.wrap}>
             <span>
               <FontAwesomeIcon icon={faEye} /> {viewCount}
+            </span>
+            <span
+              onClick={handleLike}
+              className={`${styles['heart-icon']} ${
+                animate ? styles.active : styles.inactive
+              }`}
+              style={{ cursor: 'pointer' }}
+            >
+              <FontAwesomeIcon
+                icon={faHeart}
+                className={styles['heart-icon']}
+              />{' '}
+              {currentLikes}
+            </span>
+            <span
+              onClick={handleBookmark}
+              className={`${styles['bookmark-icon']} ${
+                isBookmarked ? styles.active : ''
+              } ${loadingBookmark ? styles.loading : ''}`}
+              style={{ cursor: 'pointer' }}
+            >
+              <FontAwesomeIcon icon={faBookmark} />
             </span>
           </div>
         </div>

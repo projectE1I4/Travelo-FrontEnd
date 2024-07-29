@@ -35,21 +35,19 @@ const ListContent = () => {
       </div>
       <div className={styles['list-content-wrap']}>
         {courses.length > 0 ? (
-          <>
-            {courses.map((course) => (
-              <CourseCard
-                key={course.courseSeq}
-                courseSeq={course.courseSeq}
-                title={course.title}
-                description={course.description}
-                viewCount={course.viewCount}
-                likeCount={course.likeCount}
-                createDate={course.createDate}
-                areaCode={course.areaCode}
-                image={course.courseList[0]?.place.imageFile1}
-              />
-            ))}
-          </>
+          courses.map((course) => (
+            <CourseCard
+              key={course.courseSeq}
+              courseSeq={course.courseSeq}
+              title={course.title}
+              description={course.description}
+              viewCount={course.viewCount}
+              likeCount={course.likeCount}
+              createDate={course.createDate}
+              areaCode={course.areaCode}
+              image={course.courseList[0]?.place.imageFile1}
+            />
+          ))
         ) : (
           <p>코스가 없습니다.</p>
         )}

@@ -83,7 +83,7 @@ const MyPageSidebar = () => {
             </li>
           )}
           <li
-            className={`${styles['MS-item']} ${isActive(['/mypage/courseGroup', '/mypage/myCourses', '/mypage/courseGroupDetail', '/courseGroup/create'])}`}
+            className={`${styles['MS-item']} ${isActive(['/mypage/courseGroup', '/mypage/myCourses', '/mypage/courseGroupDetail', '/courseGroup/create', '/courseGroup/modify'])}`}
           >
             {/* <Link to="/mypage/myCourses"> */}
             <Link to="/mypage/courseGroup">

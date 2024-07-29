@@ -122,7 +122,9 @@ const CourseGroupDetail = () => {
         </div>
         <div className={styles['detail-group-card']}>
           <div className={styles['detail-modify-btn-wrap']}>
-            <button type="button">수정</button>
+            <button type="button">
+              <Link to={`/courseGroup/modify/${id}`}>수정</Link>
+            </button>
           </div>
           <div
             className={`${styles['numberSlider']} ${styles.Dactive}`}
@@ -162,10 +164,10 @@ const CourseGroupDetail = () => {
           </div>
           {selectedCourse && (
             <div className={styles['detail-course-content-wrap']}>
-              <div
+              {/* <div
                 ref={triangleRef}
                 className={styles['select-course-triangle']}
-              ></div>
+              ></div> */}
               <div className={styles['select-course-content-box']}>
                 <h3>{selectedCourse.title}</h3>
                 <ul className={styles['select-course-titles']}>

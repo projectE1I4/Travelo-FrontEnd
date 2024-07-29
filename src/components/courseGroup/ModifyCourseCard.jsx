@@ -1,18 +1,9 @@
-// CourseCard.jsx
-import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMap, faPlus } from '@fortawesome/free-solid-svg-icons';
+// ModifyCourseCard.jsx
+import React from 'react';
 import styles from '../../styles/pages/courseGroup/CourseGroupCard.module.css';
-import axiosInstance from '../../utils/axiosInstance';
 
-const CourseGroupCard = ({ index, course }) => {
+const ModifyCourseCard = ({ course }) => {
   const defaultImage = '/free-sticker-van-13719277.png'; // 대체 이미지 경로 설정
-
-  console.log('Course:', course);
-
-  useEffect(() => {
-    console.log('Course updated:', course);
-  }, [course]);
 
   const renderImages = () => {
     if (!course || !course.courseList || course.courseList.length === 0) {
@@ -82,9 +73,8 @@ const CourseGroupCard = ({ index, course }) => {
   };
 
   return (
-    <div className={styles['course-card']}>
-      <div className={styles['card-number']}>{index + 1}</div>
-      <div className={styles['card-content']}>
+    <div>
+      <div>
         {course ? (
           <div className={styles['filled']}>
             <div className={styles['card-image-wrap']}>{renderImages()}</div>
@@ -95,14 +85,7 @@ const CourseGroupCard = ({ index, course }) => {
           </div>
         ) : (
           <div className={styles['unfilled']}>
-            <FontAwesomeIcon
-              icon={faMap}
-              className={styles['unfilled-icon1']}
-            />
-            <FontAwesomeIcon
-              icon={faPlus}
-              className={styles['unfilled-icon2']}
-            />
+            <p>No data available</p>
           </div>
         )}
       </div>
@@ -110,4 +93,4 @@ const CourseGroupCard = ({ index, course }) => {
   );
 };
 
-export default CourseGroupCard;
+export default ModifyCourseCard;

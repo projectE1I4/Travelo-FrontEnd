@@ -28,6 +28,7 @@ import CourseGroupListPage from './pages/courseGroup/CourseGroupListPage.jsx';
 import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
 import CourseGroupDetailPage from './pages/courseGroup/CourseGroupDetailPage.jsx';
 import CourseGroupCreatePage from './pages/courseGroup/CourseGroupCreatePage.jsx';
+import CourseGroupModifyPage from './pages/courseGroup/CourseGroupCreateModalPage.jsx';
 
 const App = () => {
   const { isAuthenticated } = useAuth();
@@ -86,6 +87,14 @@ const App = () => {
           <Route
             path="mypage/courseGroupDetail/:id"
             element={<CourseGroupDetailPage />}
+          />
+          <Route
+            path="courseGroup/create"
+            element={<CourseGroupCreatePage />}
+          />
+          <Route
+            path="courseGroup/modify/:id"
+            element={<CourseGroupModifyPage />}
           />
           <Route
             path="courseGroup/create"

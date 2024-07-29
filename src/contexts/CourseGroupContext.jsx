@@ -17,9 +17,14 @@ const CourseGroupProvider = ({ children }) => {
     try {
       const response = await axiosInstance.get('/user/group/list');
       const allCourseGroups = response.data.courseGroup;
-      setCourseGroups(allCourseGroups);
+      // 데이터 정렬
+      const sortedGroups = [...allCourseGroups].sort(
+        (a, b) => new Date(b.createDate) - new Date(a.createDate)
+      );
+
+      setCourseGroups(sortedGroups);
       setLoading(false);
-      setTotalPages(Math.ceil(allCourseGroups.length / pageSize));
+      setTotalPages(Math.ceil(sortedGroups.length / pageSize));
     } catch (error) {
       setError(error.response.data);
       setLoading(false);
@@ -63,6 +68,7 @@ const CourseGroupProvider = ({ children }) => {
         setCurrentPage,
         courseGroup,
         fetchCourseGroupDetail,
+        fetchCourseGroups,
       }}
     >
       {children}

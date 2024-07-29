@@ -35,7 +35,7 @@
 
 .group-content-box {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto auto auto;
   grid-column-gap: 58px;
   grid-row-gap: 70px;
@@ -104,4 +104,15 @@
 .group-card:hover .group-delete-wrap {
   opacity: 1;
   visibility: visible;
+}
+
+.delete-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--accent-color);
+}
+
+.group-card.selected {
+  border: 2px solid var(--accent-color); /* 선택된 카드의 테두리를 빨간색으로 표시 */
+  color: var(--accent-color);
 }

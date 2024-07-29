@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import axiosInstance from '../../utils/axiosInstance';
 
-const NaverCallback = () => {
+const NaverCallback = ({ onLogin }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const code = new URLSearchParams(location.search).get('code');
@@ -21,11 +21,17 @@ const NaverCallback = () => {
             },
           }
         );
+        onLogin(response.data);
+        console.log(response);
+        // API 성공 후 처리
+        console.log(response.data);
 
         if (response.status === 200) {
           const { accessToken, refreshToken } = response.data;
           sessionStorage.setItem('accessToken', accessToken);
           sessionStorage.setItem('refreshToken', refreshToken);
+          sessionStorage.setItem('token', response);
+          console.log(sessionStorage.getItem('token'));
           navigate('/home');
         } else if (response.status === 400) {
           const { error, username } = response.data;

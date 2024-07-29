@@ -59,6 +59,7 @@ const GoogleLoginButton = () => {
             setShowForm(true);
           } else {
             window.location.href = '/home';
+            sessionStorage.setItem('token', token);
             sessionStorage.setItem('accessToken', accessToken);
             sessionStorage.setItem('refreshToken', refreshToken);
           }

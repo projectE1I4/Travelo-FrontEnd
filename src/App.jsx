@@ -36,10 +36,21 @@ import CourseGroupList from './components/courseGroup/CourseGroupList.jsx';
 import CourseGroupListPage from './pages/courseGroup/CourseGroupListPage.jsx';
 import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
 import AdminUserDetail from './components/Admin/AdminUserDetail.jsx';
+import CourseGroupDetailPage from './pages/courseGroup/CourseGroupDetailPage.jsx';
+import CourseGroupCreatePage from './pages/courseGroup/CourseGroupCreatePage.jsx';
+import CourseGroupModifyPage from './pages/courseGroup/CourseGroupCreateModalPage.jsx';
+import { useEffect, useState } from 'react';
 
 const App = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, login } = useAuth();
 
+  const handleLogin = (token) => {
+    sessionStorage.setItem('accessToken', token);
+    login();
+  };
+
+  console.log('이즈어쎈', isAuthenticated);
+  console.log('로그인', login);
   return (
     <div>
       <Header />
@@ -53,7 +64,7 @@ const App = () => {
           <Route path="/course/:courseSeq" element={<CourseDetail />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/users/login" element={<LoginPage />} />
+          <Route path="/users/login" element={<LoginPage onLogin={login} />} />
           <Route path="/users/register" element={<RegisterPage />} />
           <Route path="/users/checkUser" element={<CheckUserPage />} />
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
@@ -72,6 +83,18 @@ const App = () => {
             element={<AdminBlindReviewPage />}
           />
           <Route path="/googleCallback" element={GoogleCallback} />
+          <Route
+            path="/travelo/naverCallback"
+            element={<NaverCallback onLogin={handleLogin} />}
+          />
+          <Route
+            path="/travelo/googleCallback"
+            element={<GoogleCallback onLogin={handleLogin} />}
+          />
+          <Route
+            path="/travelo/kakaoCallback"
+            element={<KakaoCallback onLogin={handleLogin} />}
+          />
           <Route
             path="/social/integrate"
             element={<AccountIntergrationPage />}
@@ -93,28 +116,41 @@ const App = () => {
             element={<AccountIntergrationNaver />}
           />
 
-          <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
-          <Route
-            path="mypage/modifyprofileGoogle"
-            element={<ModifyUserGooglePage />}
-          />
-          <Route
-            path="mypage/modifyprofileNaver"
-            element={<ModifyUserNaverPage />}
-          />
-          <Route
-            path="mypage/modifyprofileKakao"
-            element={<ModifyUserKakaoPage />}
-          />
-          <Route path="mypage/courseGroup" element={<CourseGroupListPage />} />
-          <Route
-            path="/protected"
-            element={
-              <ProtectedRoute isAuthenticated={isAuthenticated}>
-                <HomePage />
-              </ProtectedRoute>
-            }
-          />
+          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+            <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
+            <Route
+              path="mypage/modifyprofileGoogle"
+              element={<ModifyUserGooglePage />}
+            />
+            <Route
+              path="mypage/modifyprofileNaver"
+              element={<ModifyUserNaverPage />}
+            />
+            <Route
+              path="mypage/modifyprofileKakao"
+              element={<ModifyUserKakaoPage />}
+            />
+            <Route
+              path="mypage/courseGroup"
+              element={<CourseGroupListPage />}
+            />
+            <Route
+              path="mypage/courseGroupDetail/:id"
+              element={<CourseGroupDetailPage />}
+            />
+            <Route
+              path="courseGroup/create"
+              element={<CourseGroupCreatePage />}
+            />
+            <Route
+              path="courseGroup/modify/:id"
+              element={<CourseGroupModifyPage />}
+            />
+            <Route
+              path="courseGroup/create"
+              element={<CourseGroupCreatePage />}
+            />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

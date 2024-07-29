@@ -15,12 +15,31 @@ const Login = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const success = await onLogin(username, password);
-    console.log(success);
-    if (success) {
-      navigate('/home');
+    try {
+      const success = await onLogin(username, password);
+      console.log(success);
+
+      if (success.status === 200 && success) {
+        navigate('/home');
+      } else {
+        handleLoginError(success);
+      }
+    } catch (error) {
+      handleLoginError(error.response);
+    }
+  };
+
+  const handleLoginError = (response) => {
+    if (response && response.data) {
+      const errorMessage = response.data;
+
+      if (errorMessage.includes('탈퇴')) {
+        setFailLogin('탈퇴한 회원입니다.');
+      } else {
+        setFailLogin('이메일 혹은 비밀번호가 일치하지 않습니다.');
+      }
     } else {
-      setFailLogin('이메일 혹은 비밀번호가 일치하지 않습니다.');
+      setFailLogin('탈퇴한 회원이거나 로그인 중 문제가 발생했습니다.');
     }
   };
 
@@ -110,9 +129,9 @@ const Login = ({ onLogin }) => {
         </div>
         <div className={styles['line-wrap']}>소셜 로그인</div>
         <div className={styles['social-wrap']}>
-          <KakaoLoginButton />
-          <GoogleLoginButton />
-          <NaverLoginButton />
+          <KakaoLoginButton onClick={() => handleSocialLogin('kakao')} />
+          <GoogleLoginButton onClick={() => handleSocialLogin('google')} />
+          <NaverLoginButton onClick={() => handleSocialLogin('naver')} />
         </div>
       </form>
     </div>

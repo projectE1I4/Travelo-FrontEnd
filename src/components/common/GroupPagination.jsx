@@ -17,14 +17,12 @@ const GroupPagination = () => {
   };
 
   const handlePrevClick = () => {
-    const startPage = Math.floor(currentPage / 5) * 5;
     if (startPage > 0) {
       setCurrentPage(startPage - 1);
     }
   };
 
   const handleNextClick = () => {
-    const startPage = Math.floor(currentPage / 5) * 5;
     if (startPage + 5 < totalPages) {
       setCurrentPage(startPage + 5);
     }

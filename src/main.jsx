@@ -10,7 +10,6 @@ import { BrowseProvider } from './contexts/BrowseContext';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <PlaceProvider>
-      <App />
       <CourseProvider>
         <CourseGroupProvider>
           <BrowseProvider>

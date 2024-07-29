@@ -9,14 +9,19 @@ import MyPageSidebar from '../common/MyPageSidebar';
 import { formatDate } from '../common/formatDate';
 import '../../css/myReviewList.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faThumbsUp,
+  faAngleDown,
+  faChevronDown,
+} from '@fortawesome/free-solid-svg-icons';
+import Dropdown from './Dropdown.jsx';
 
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(0);
-  const [sortBy, setSortBy] = useState('latest');
+  const [sortBy, setSortBy] = useState('latest'); // 기본값을 'latest'로 설정
   const [editReviewId, setEditReviewId] = useState(null);
   const [editContent, setEditContent] = useState('');
   const [expandedReviews, setExpandedReviews] = useState([]); // 내용 더보기
@@ -104,15 +109,6 @@ const ReviewList = () => {
     ]);
   };
 
-  const toggleDropdown = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
-  const handleDropdownClick = (sortOption) => {
-    setSortBy(sortOption === '인기순' ? 'popularity' : 'latest');
-    setDropdownOpen(false);
-  };
-
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading reviews: {error.message}</p>;
 
@@ -122,17 +118,7 @@ const ReviewList = () => {
         <MyPageSidebar />
         <div className="myReviews">
           <h1>나의 후기</h1>
-          <div className="dropdown">
-            <button onClick={toggleDropdown} className="dropbtn">
-              정렬 기준
-            </button>
-            {dropdownOpen && (
-              <div className="dropdown-content">
-                <a onClick={() => handleDropdownClick('인기순')}>인기순</a>
-                <a onClick={() => handleDropdownClick('최신순')}>최신순</a>
-              </div>
-            )}
-          </div>
+          <Dropdown sortBy={sortBy} setSortBy={setSortBy} />
           {reviews.length === 0 ? (
             <p>리뷰가 없습니다.</p>
           ) : (

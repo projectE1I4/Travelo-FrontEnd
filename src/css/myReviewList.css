@@ -9,6 +9,75 @@
   position: static;
 }
 
+.dropdown-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  /* margin-bottom: 20px; */
+  cursor: pointer;
+}
+
+.dropdown-btn {
+  background-color: #fff;
+  color: var(--txt-color-600);
+  padding: 8px 16px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 120px;
+  transition: all 0.5s;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: var(--txt-color-600);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.5s;
+}
+
+.dropdown-content a:hover,
+a:active {
+  background-color: var(--point-color2);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropdown-btn {
+  color: var(--point-color1);
+}
+
+.dropdown-btn svg {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-btn svg {
+  transform: rotate(180deg);
+}
+
 .myReviews .myReviewList h2 a {
   font-size: 16px;
   font-weight: 500;

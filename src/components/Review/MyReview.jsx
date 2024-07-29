@@ -20,6 +20,7 @@ const ReviewList = () => {
   const [editReviewId, setEditReviewId] = useState(null);
   const [editContent, setEditContent] = useState('');
   const [expandedReviews, setExpandedReviews] = useState([]); // 내용 더보기
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // useCallback: 중복 호출 방지
   const loadReviews = useCallback(async () => {
@@ -103,6 +104,15 @@ const ReviewList = () => {
     ]);
   };
 
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleDropdownClick = (sortOption) => {
+    setSortBy(sortOption === '인기순' ? 'popularity' : 'latest');
+    setDropdownOpen(false);
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading reviews: {error.message}</p>;
 
@@ -112,10 +122,17 @@ const ReviewList = () => {
         <MyPageSidebar />
         <div className="myReviews">
           <h1>나의 후기</h1>
-          <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
-            <option value="latest">최신순</option>
-            <option value="popularity">추천순</option>
-          </select>
+          <div className="dropdown">
+            <button onClick={toggleDropdown} className="dropbtn">
+              정렬 기준
+            </button>
+            {dropdownOpen && (
+              <div className="dropdown-content">
+                <a onClick={() => handleDropdownClick('인기순')}>인기순</a>
+                <a onClick={() => handleDropdownClick('최신순')}>최신순</a>
+              </div>
+            )}
+          </div>
           {reviews.length === 0 ? (
             <p>리뷰가 없습니다.</p>
           ) : (

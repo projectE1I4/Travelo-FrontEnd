@@ -29,6 +29,9 @@ import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
 import CourseGroupDetailPage from './pages/courseGroup/CourseGroupDetailPage.jsx';
 import CourseGroupCreatePage from './pages/courseGroup/CourseGroupCreatePage.jsx';
 import CourseGroupModifyPage from './pages/courseGroup/CourseGroupCreateModalPage.jsx';
+import CourseCustomPage from './pages/courseCustom/CourseCustomPage.jsx';
+import BrowseCoursesPage from './pages/browseCourses/BrowseCoursesPage.jsx';
+import BrowseCourseDetailPage from './pages/browseCourses/BrowseCourseDetailPage.jsx';
 import { useEffect, useState } from 'react';
 
 const App = () => {
@@ -83,6 +86,12 @@ const App = () => {
 
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
             <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
+            <Route path="/course-custom" element={<CourseCustomPage />} />
+            <Route path="/browse-courses" element={<BrowseCoursesPage />} />
+            <Route
+              path="/course/:courseSeq"
+              element={<BrowseCourseDetailPage />}
+            />
             <Route
               path="mypage/modifyprofileGoogle"
               element={<ModifyUserGooglePage />}

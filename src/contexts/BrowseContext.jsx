@@ -23,19 +23,10 @@ const BrowseProvider = ({ children }) => {
   const [courseBookmarks, setCourseBookmarks] = useState([]);
   const [accessToken, setAccessToken] = useState(null);
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('accessToken');
-    if (token) {
-      setAccessToken(token);
-    } else {
-      navigate('/users/login');
-    }
-  }, [navigate]);
-
   const fetchCourses = useCallback(
     async (updatedFilters = {}) => {
+      const token = sessionStorage.getItem('accessToken');
+      setAccessToken(token);
       if (!accessToken) return;
 
       setLoading(true);
@@ -65,6 +56,8 @@ const BrowseProvider = ({ children }) => {
 
   const fetchCourseDetail = useCallback(
     async (courseSeq) => {
+      const token = sessionStorage.getItem('accessToken');
+      setAccessToken(token);
       if (!accessToken) return;
 
       setLoading(true);

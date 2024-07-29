@@ -1,0 +1,118 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.group-box {
+  width: 100%;
+}
+
+.group-btn-wrap {
+  padding: 23px 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 20px;
+  justify-items: end;
+}
+
+.group-btn {
+  width: 100px;
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid var(--txt-color-500);
+  transition: all 0.3s;
+}
+.group-btn:hover {
+  color: var(--accent-color);
+}
+
+.group-content-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto;
+  grid-column-gap: 58px;
+  grid-row-gap: 70px;
+}
+.group-card {
+  background: var(--button-bg-color);
+  border-radius: 10px;
+  width: 100%;
+  height: 263px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  position: relative;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.group-card:hover {
+  color: var(--accent-color);
+}
+.group-date-wrap {
+  display: grid;
+  justify-items: end;
+}
+
+.group-title-wrap {
+  display: grid;
+  grid-template-columns: 1.2rem auto;
+  grid-gap: 10px;
+  align-items: center;
+  padding: 14px 9px 0 9px;
+}
+.group-title-icon {
+  font-size: 1.2rem;
+}
+.group-title-wrap h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.group-course-title-wrap {
+  display: grid;
+  padding: 23px 9px 0px 30px;
+}
+.group-course-title-wrap li {
+  list-style: disc;
+  padding-bottom: 20px;
+}
+.group-course-title-wrap li h4 {
+  font-size: 1.1rem;
+}
+
+.group-card .group-delete-wrap {
+  position: absolute;
+  right: 19px;
+  bottom: 10px;
+  font-size: 1.3rem;
+  opacity: 0;
+  visibility: hidden;
+  color: var(--accent-color);
+  transition:
+    opacity 0.5s ease,
+    visibility 0.5s ease;
+}
+.group-card:hover .group-delete-wrap {
+  opacity: 1;
+  visibility: visible;
+}
+
+.delete-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--accent-color);
+}
+
+.group-card.selected {
+  border: 2px solid var(--accent-color); /* 선택된 카드의 테두리를 빨간색으로 표시 */
+  color: var(--accent-color);
+}

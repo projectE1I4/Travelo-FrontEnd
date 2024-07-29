@@ -188,7 +188,6 @@ strong {
 /* -webkit- 크롬, 사파리, 다른브라우저에서 사용하기도함 */
 a {
   text-decoration: none;
-  color: var(--txt-color-500);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
 }
 

@@ -85,7 +85,7 @@ const logout = async () => {
 };
 
 const isAuthenticated = () => {
-  const token = localStorage.getItem('token');
+  const token = sessionStorage.getItem('accessToken');
   return token !== null;
 };
 

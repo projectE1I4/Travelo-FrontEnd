@@ -1,0 +1,210 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+  --active-width: 0%;
+}
+
+.group-box {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.group-detail-title {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 42px;
+}
+
+.detail-group-title-wrap {
+  margin-bottom: 20px;
+}
+
+.detail-group-title-wrap h2 {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.detail-group-card {
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  padding: 31px 15px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.15);
+}
+
+.detail-modify-btn-wrap {
+  margin-bottom: 40px;
+  text-align: end;
+}
+
+.detail-modify-btn-wrap button {
+  font-size: 18px;
+  border: 1px solid var(--txt-color-400);
+  height: 30px;
+  width: 66px;
+  border-radius: 10px;
+}
+
+.numberSlider {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 40px;
+  position: relative;
+  margin: 0 20px 30px 20px;
+}
+.numberSlider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 0;
+  border: 2px dashed var(--txt-color-500);
+  z-index: -1;
+}
+
+.numberSlider::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 0;
+  width: var(--active-width);
+  border: 2px solid var(--accent-color);
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+
+.numberSlider .numberItem {
+  position: relative;
+  font-size: 1.8rem;
+  border: 2px solid var(--txt-color-500);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  text-align: center;
+  line-height: 38px;
+  background: var(--button-bg-color);
+  color: var(--txt-color-500);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.numberSlider.Dactive::after {
+  width: var(--active-width); /* active-index 변수 사용 */
+}
+
+.numberSlider .numberItem.Dactive {
+  color: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: 0 1px 4px 0 rgba(100, 189, 171, 0.5);
+}
+
+.imageSlider {
+  display: flex;
+  gap: 10px;
+  justify-content: space-around;
+  height: 150px;
+  margin: 0 30px;
+}
+.imageItem {
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  width: 150px;
+  border-radius: 10px;
+  max-height: 150px;
+  max-width: 150px;
+  background: var(--point-color2);
+  cursor: pointer;
+  position: relative;
+}
+.imageItem::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: attr(data-title);
+  color: var(--button-txt-color1);
+  text-align: center;
+  line-height: 130px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  background: rgba(33, 33, 33, 0.4);
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+}
+.imageItem.Dactive::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.imageItem img {
+  width: 100%;
+  height: 100%;
+  max-width: 150px;
+  max-height: 150px;
+  object-fit: cover;
+}
+
+.detail-course-content-wrap {
+  width: 670px;
+  height: 405px;
+  position: relative;
+  padding-top: 30px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.select-course-triangle {
+  width: 0px;
+  height: 0px;
+  border-bottom: 50px solid var(--point-color2);
+  border-top: 50px solid transparent;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  position: absolute;
+  top: -50px;
+  left: 40px;
+}
+
+.select-course-content-box {
+  width: 100%;
+  height: 350px;
+  background: var(--point-color2);
+  margin-top: 6px;
+  padding: 30px 60px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.select-course-content-box h3 {
+  font-weight: 700;
+}
+
+.select-course-titles {
+  list-style: disc;
+  padding: 40px;
+}
+
+.select-course-titles li {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.select-course-titles li:hover {
+  color: var(--point-color1);
+  font-weight: 700;
+}

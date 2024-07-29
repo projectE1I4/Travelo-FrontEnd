@@ -1,0 +1,116 @@
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.leave-modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.leave-modalContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.leave-question-box {
+}
+
+.leave-title {
+  font-weight: 500;
+  height: 50px;
+  line-height: 47px;
+  text-align: center;
+}
+
+.leave-alert-box {
+  background: var(--point-color2);
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.leave-input-box {
+  border: 1px solid var(--txt-color-400);
+  margin: 5px 0px 0px;
+  border-radius: 6px;
+  padding: 10px;
+  height: 50px;
+}
+
+.leave-alert-warning {
+  color: var(--icon-color-red);
+}
+.leave-alert-point {
+  color: var(--point-color1);
+}
+
+.leave-btn-wrap {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+}
+
+.leave-user-btn {
+  width: 100%;
+  background: var(--button-bg-color);
+  color: var(--txt-color-500);
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--txt-color-400);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.leave-user-btn:hover {
+  color: var(--icon-color-red);
+}
+
+.leave-btn {
+  width: 100%;
+  background: var(--button-bg-color);
+  color: var(--txt-color-500);
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--txt-color-400);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.leave-btn:hover {
+  color: var(--accent-color);
+}
+
+.leave-btn-text {
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--txt-color-500);
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+}

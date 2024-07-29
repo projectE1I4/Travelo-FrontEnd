@@ -224,7 +224,7 @@ export const getVisibleCourseList = async (
 // 코스 삭제
 export const deleteCourse = async (courseSeq) => {
   try {
-    const response = await axiosInstance.delete(
+    const response = await axiosInstance.post(
       `/admin/deleteCourse/${courseSeq}`,
       {
         headers: { Authorization: sessionStorage.getItem('accessToken') },

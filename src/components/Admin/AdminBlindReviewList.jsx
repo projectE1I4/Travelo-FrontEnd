@@ -12,6 +12,8 @@ const AdminBlindReviewList = () => {
   const [error, setError] = useState(null);
   const [totalReportedCount, setTotalReportedCount] = useState(0);
   const [blindCount, setBlindCount] = useState(0);
+  const [page, setPage] = useState(0); // 페이지 상태 추가
+  const [totalPages, setTotalPages] = useState(0);
 
   const fetchReviews = async () => {
     try {
@@ -106,6 +108,17 @@ const AdminBlindReviewList = () => {
             )
         )}
       </ul>
+      <div className="pagination">
+        <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
+          이전
+        </button>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page >= totalPages - 1}
+        >
+          다음
+        </button>
+      </div>
     </div>
   );
 };

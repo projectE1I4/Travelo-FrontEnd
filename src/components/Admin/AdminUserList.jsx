@@ -12,6 +12,7 @@ const AdminUserList = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState(null);
   const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [sortBy, setSortBy] = useState('latest');
   const [totalCount, setTotalCount] = useState(0);
   const [deletedCount, setDeletedCount] = useState(0);
@@ -170,6 +171,17 @@ const AdminUserList = () => {
           </div>
         ))}
       </ul>
+      <div className="pagination">
+        <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
+          이전
+        </button>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page >= totalPages - 1}
+        >
+          다음
+        </button>
+      </div>
     </div>
   );
 };

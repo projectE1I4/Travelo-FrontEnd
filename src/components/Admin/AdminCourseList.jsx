@@ -35,13 +35,16 @@ const AdminCourseList = () => {
     fetchCourses();
   }, [page, sortBy, filter]);
 
-  const handleDeleteCourse = async (courseSeq) => {
+  const deleteCourseBtn = async (courseSeq) => {
     if (window.confirm('정말로 이 코스를 삭제하시겠습니까?')) {
       try {
+        console.log('dddddddddddddddddd');
         await deleteCourse(courseSeq);
+        console.log('여기도 안들어오니?', courseSeq);
         setCourses(courses.filter((course) => course.courseSeq !== courseSeq));
         alert('코스가 성공적으로 삭제되었습니다.');
       } catch (err) {
+        console.error('Error deleting course:', err);
         setError(err);
         alert('코스 삭제에 실패했습니다.');
       }
@@ -111,14 +114,22 @@ const AdminCourseList = () => {
                 : '수정된 적 없음'}
             </p>
             <p>공개 여부: {course.privateYn === 'Y' ? '비공개' : '공개'}</p>
+            <button onClick={() => deleteCourseBtn(course.courseSeq)}>
+              삭제
+            </button>
           </li>
         ))}
       </ul>
       <div className="pagination">
-        {page > 0 && <button onClick={() => setPage(page - 1)}>이전</button>}
-        {page < totalPages - 1 && (
-          <button onClick={() => setPage(page + 1)}>다음</button>
-        )}
+        <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
+          이전
+        </button>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page >= totalPages - 1}
+        >
+          다음
+        </button>
       </div>
     </div>
   );

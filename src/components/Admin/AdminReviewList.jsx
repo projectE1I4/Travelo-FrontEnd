@@ -14,10 +14,12 @@ const AdminReviewList = () => {
   const [error, setError] = useState(null);
   const [sortBy, setSortBy] = useState('latest'); // 기본 정렬값 설정
   const [filter, setFilter] = useState('all'); // 필터링 조건
+  const [page, setPage] = useState(0); // 페이지 상태 추가
+  const [totalPages, setTotalPages] = useState(0);
 
-  const fetchReviews = async (sortOrder) => {
+  const fetchReviews = async (page, sortOrder) => {
     try {
-      const data = await getAllReviews(sortOrder);
+      const data = await getAllReviews(page, sortOrder);
       console.log('Fetched reviews:', data);
       setReviews(data);
       setLoading(false);
@@ -28,8 +30,8 @@ const AdminReviewList = () => {
   };
 
   useEffect(() => {
-    fetchReviews(sortBy);
-  }, [sortBy]);
+    fetchReviews(page, sortBy);
+  }, [page, sortBy]);
 
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -140,6 +142,17 @@ const AdminReviewList = () => {
           </li>
         ))}
       </ul>
+      <div className="pagination">
+        <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
+          이전
+        </button>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page >= totalPages - 1}
+        >
+          다음
+        </button>
+      </div>
     </div>
   );
 };

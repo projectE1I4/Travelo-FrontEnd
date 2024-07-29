@@ -12,12 +12,15 @@ const AdminGroupList = () => {
   const [selectedGroups, setSelectedGroups] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(0); // 페이지 상태 추가
+  const [totalPages, setTotalPages] = useState(0); // 총 페이지 수 상태 추가
   const [sortBy, setSortBy] = useState('latest'); // 기본 정렬값 설정
 
-  const fetchGroups = async (sortOrder) => {
+  const fetchGroups = async (page, sortOrder) => {
     try {
-      const data = await getGroupList(0, sortOrder);
+      const data = await getGroupList(page, sortOrder);
       setGroups(data.content);
+      setTotalPages(data.totalPages);
       setLoading(false);
     } catch (error) {
       setError(error);
@@ -26,8 +29,8 @@ const AdminGroupList = () => {
   };
 
   useEffect(() => {
-    fetchGroups(sortBy);
-  }, [sortBy]);
+    fetchGroups(page, sortBy);
+  }, [page, sortBy]);
 
   //그룹 삭제
   const groupDelete = async (courseGroupSeq) => {
@@ -36,7 +39,7 @@ const AdminGroupList = () => {
       try {
         await deleteGroup(courseGroupSeq);
         alert('그룹이 성공적으로 삭제되었습니다.');
-        fetchGroups(sortBy); // 삭제 후 그룹 목록 다시 불러오기
+        fetchGroups(page, sortBy); // 삭제 후 그룹 목록 다시 불러오기
       } catch (error) {
         console.error('Error deleting group:', error);
         setError(error);
@@ -55,7 +58,7 @@ const AdminGroupList = () => {
       try {
         await deleteGroups(selectedGroups);
         alert('선택한 그룹이 성공적으로 삭제되었습니다.');
-        fetchGroups(sortBy); // 삭제 후 그룹 목록 다시 불러오기
+        fetchGroups(page, sortBy); // 삭제 후 그룹 목록 다시 불러오기
         setSelectedGroups([]);
       } catch (error) {
         console.error('Error deleting groups:', error);
@@ -100,6 +103,17 @@ const AdminGroupList = () => {
           </li>
         ))}
       </ul>
+      <div className="pagination">
+        <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
+          이전
+        </button>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page >= totalPages - 1}
+        >
+          다음
+        </button>
+      </div>
     </div>
   );
 };

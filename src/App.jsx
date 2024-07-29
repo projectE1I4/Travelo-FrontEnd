@@ -18,6 +18,7 @@ import MyCourseEditPage from './pages/MyCourseEditPage';
 import AdminMainPage from './pages/Admin/AdminMainPage.jsx';
 import AdminUserPage from './pages/Admin/AdminUserPage';
 import AdminGroupPage from './pages/Admin/AdminGroupPage.jsx';
+import AdminCoursePage from './pages/Admin/AdminCoursePage.jsx';
 import AdminReviewPage from './pages/Admin/AdminReviewPage.jsx';
 import AdminBlindReviewPage from './pages/Admin/AdminBlindReviewPage';
 import AccountIntergrationPage from './pages/users/AccountIntegrationPage.jsx';
@@ -58,12 +59,14 @@ const App = () => {
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
           <Route path="/admin" element={<AdminMainPage />} />
           <Route path="admin/users" element={<AdminUserPage />} />
-          <Route path="/admin/groups" element={<AdminGroupPage />} />
-          <Route path="/admin/reviews" element={<AdminReviewPage />} />
           <Route
             path="/admin/userDetail/:userSeq"
             element={<AdminUserDetail />}
           />
+          <Route path="/admin/groups" element={<AdminGroupPage />} />
+          <Route path="/admin/courses" element={<AdminCoursePage />} />
+          <Route path="/admin/reviews" element={<AdminReviewPage />} />
+
           <Route
             path="/admin/blindReviews"
             element={<AdminBlindReviewPage />}

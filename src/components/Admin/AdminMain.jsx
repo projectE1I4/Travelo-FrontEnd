@@ -35,7 +35,11 @@ const AdminMain = () => {
       <Link to="/admin/groups">
         <button>전체 그룹 : {data['group count']}</button>
       </Link>
-      <p>전체 코스 : {data['course count']}</p>
+      <br />
+      <Link to="/admin/courses">
+        <button>전체 코스 : {data['course count']}</button>
+      </Link>
+      <br />
       <Link to="/admin/reviews">
         <button>전체 리뷰 : {data['review count']}</button>
       </Link>

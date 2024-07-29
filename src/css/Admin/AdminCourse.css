@@ -1,0 +1,93 @@
+.adminCourseList {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.adminCourseList h1 {
+  margin-bottom: 20px;
+}
+
+.adminCourseList .filters,
+.adminCourseList .sort {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.adminCourseList .filters button,
+.adminCourseList .sort button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminCourseList .filters button:hover,
+.adminCourseList .sort button:hover {
+  background-color: #0056b3;
+}
+
+.adminCourseList ul {
+  list-style: none;
+  border-top: 1px solid black;
+  margin-top: 10px;
+  padding: 0;
+}
+
+.adminCourseList li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.adminCourseList li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.adminCourseList li p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.adminCourseList input[type='checkbox'] {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.adminCourseList input[type='checkbox']:checked {
+  background-color: #007bff;
+  border: 2px solid #0056b3;
+}
+
+.adminCourseList .pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.adminCourseList .pagination button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminCourseList .pagination button:hover {
+  background-color: #0056b3;
+}

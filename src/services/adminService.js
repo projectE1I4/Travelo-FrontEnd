@@ -119,7 +119,6 @@ export const getUserReviews = async (userSeq, sortBy = 'latest') => {
 };
 
 //회원이 만든 그룹 목록
-// 회원 그룹 목록 불러오기
 export const getUserGroups = async (userSeq, sortBy = 'latest') => {
   try {
     const response = await axiosInstance.get(`/admin/groups/${userSeq}`, {
@@ -170,6 +169,93 @@ export const deleteGroup = async (courseGroupSeq) => {
   }
 };
 
+// 여러 그룹 삭제
+export const deleteGroups = async (courseGroupSeqs) => {
+  try {
+    const response = await axiosInstance.post(
+      '/user/group/deleteGroups',
+      { courseGroupSeqs },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: sessionStorage.getItem('accessToken'),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('여러 그룹을 삭제하는데 실패했습니다:', error);
+    throw error;
+  }
+};
+
+// 전체 코스 목록
+export const getCourseList = async (page = 0, sortBy = 'latest') => {
+  try {
+    const response = await axiosInstance.get('/admin/courses', {
+      params: { page, sortBy },
+      headers: { Authorization: sessionStorage.getItem('accessToken') },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching courses:', error);
+    throw error;
+  }
+};
+
+// 공개 및 비공개 코스 목록
+export const getVisibleCourseList = async (
+  page = 0,
+  sortBy = 'latest',
+  privateYn = 'N'
+) => {
+  try {
+    const response = await axiosInstance.get('/admin/getVisibleCourses', {
+      params: { page, sortBy, privateYn },
+      headers: { Authorization: sessionStorage.getItem('accessToken') },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching visible courses:', error);
+    throw error;
+  }
+};
+
+// 코스 삭제
+export const deleteCourse = async (courseSeq) => {
+  try {
+    const response = await axiosInstance.delete(
+      `/admin/deleteCourse/${courseSeq}`,
+      {
+        headers: { Authorization: sessionStorage.getItem('accessToken') },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting course:', error);
+    throw error;
+  }
+};
+
+// 여러 코스 삭제
+export const deleteCourses = async (courseSeqs) => {
+  try {
+    const response = await axiosInstance.post(
+      '/user/deleteCourses',
+      {
+        courseSeqs,
+      },
+      {
+        headers: { Authorization: sessionStorage.getItem('accessToken') },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting courses:', error);
+    throw error;
+  }
+};
+
 // 전체 리뷰 목록
 export const getReviewList = async (page = 0, sortBy = 'latest') => {
   try {
@@ -207,6 +293,45 @@ export const getAllReviews = async (sortBy = 'latest') => {
     return allReviews;
   } catch (error) {
     console.error('Error fetching all reviews:', error);
+    throw error;
+  }
+};
+
+// 회원 리뷰 삭제
+export const deleteReview = async (reviewSeq) => {
+  try {
+    const response = await axiosInstance.post(
+      `/user/review/delete/${reviewSeq}`,
+      {},
+      {
+        headers: {
+          Authorization: sessionStorage.getItem('accessToken'),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('리뷰를 삭제하는데 실패했습니다:', error);
+    throw error;
+  }
+};
+
+// 여러 리뷰 삭제
+export const deleteReviews = async (reviewSeqs) => {
+  try {
+    const response = await axiosInstance.post(
+      '/admin/deleteReviews',
+      { reviewSeqs },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: sessionStorage.getItem('accessToken'),
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('여러 리뷰를 삭제하는데 실패했습니다:', error);
     throw error;
   }
 };

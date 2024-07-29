@@ -19,6 +19,9 @@ const BrowseCourseDetailPage = () => {
   const {
     createReview,
     modifyReview,
+    deleteReview,
+    recommendReview,
+    reportReview,
     loading: reviewLoading,
     error: reviewError,
   } = useReviewService();
@@ -48,7 +51,7 @@ const BrowseCourseDetailPage = () => {
         newReview,
         accessToken
       );
-      console.log('New Review Data:', newReviewData); // 디버그 로그 추가
+      console.log('New Review Data:', newReviewData);
       setNewReview('');
       const loginUser = courseDetail.loginUser;
       setReviews((prevReviews) => [
@@ -69,17 +72,89 @@ const BrowseCourseDetailPage = () => {
 
     try {
       const updatedReview = await modifyReview(reviewSeq, content, accessToken);
-      console.log('Updated Review:', updatedReview); // 디버그 로그 추가
+      console.log('Updated Review:', updatedReview);
       setReviews((prevReviews) =>
         prevReviews.map((review) =>
-          review.reviewSeq === reviewSeq
-            ? { ...review, content: updatedReview.content }
-            : review
+          review.reviewSeq === reviewSeq ? { ...review, content } : review
         )
       );
     } catch (error) {
       console.error('댓글 수정 실패:', error);
       alert(`댓글 수정 실패: ${error.message}`);
+    }
+  };
+
+  const handleDeleteReview = async (reviewSeq) => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    try {
+      await deleteReview(reviewSeq, accessToken);
+      setReviews((prevReviews) =>
+        prevReviews.filter((review) => review.reviewSeq !== reviewSeq)
+      );
+    } catch (error) {
+      console.error('댓글 삭제 실패:', error);
+      alert(`댓글 삭제 실패: ${error.message}`);
+    }
+  };
+
+  const handleRecommendReview = async (reviewSeq) => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    try {
+      const updatedRecommendYn = await recommendReview(reviewSeq, accessToken);
+      setReviews((prevReviews) =>
+        prevReviews.map((review) =>
+          review.reviewSeq === reviewSeq
+            ? {
+                ...review,
+                recommendYn: updatedRecommendYn,
+                recommendCount:
+                  updatedRecommendYn === 'Y'
+                    ? review.recommendCount + 1
+                    : review.recommendCount - 1,
+              }
+            : review
+        )
+      );
+    } catch (error) {
+      console.error('댓글 추천 실패:', error);
+      alert(`댓글 추천 실패: ${error.message}`);
+    }
+  };
+
+  const handleReportReview = async (reviewSeq) => {
+    const accessToken = sessionStorage.getItem('accessToken');
+    if (!accessToken) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    try {
+      const response = await reportReview(reviewSeq, accessToken);
+      if (response === '이미 신고한 리뷰입니다.') {
+        alert('이미 신고한 리뷰입니다.');
+      } else {
+        setReviews((prevReviews) =>
+          prevReviews.map((review) =>
+            review.reviewSeq === reviewSeq
+              ? { ...review, reportYn: 'Y' }
+              : review
+          )
+        );
+        alert('신고되었습니다.');
+      }
+    } catch (error) {
+      console.error('댓글 신고 실패:', error);
+      alert(`댓글 신고 실패: ${error.message}`);
     }
   };
 
@@ -149,6 +224,9 @@ const BrowseCourseDetailPage = () => {
                   isEditing={editingReviewSeq === review.reviewSeq}
                   setEditingReviewSeq={setEditingReviewSeq}
                   onEdit={handleEditReview}
+                  onDelete={handleDeleteReview}
+                  onRecommend={handleRecommendReview}
+                  onReport={handleReportReview}
                 />
               ))}
             </div>

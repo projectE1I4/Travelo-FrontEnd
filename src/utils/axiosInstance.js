@@ -11,15 +11,15 @@ const axiosInstance = axios.create({
 });
 
 let isRefreshing = false;
-let refreshSubsrcibers = [];
+let refreshSubscribers = [];
 
 const subscribeTokenRefresh = (cb) => {
-  refreshSubsrcibers.push(cb);
+  refreshSubscribers.push(cb);
 };
 
 const onRefreshed = (token) => {
-  refreshSubsrcibers.forEach((cb) => cb(token));
-  refreshSubsrcibers = [];
+  refreshSubscribers.forEach((cb) => cb(token));
+  refreshSubscribers = [];
 };
 
 axiosInstance.interceptors.request.use(
@@ -58,7 +58,6 @@ axiosInstance.interceptors.request.use(
             }
           );
           accessToken = response.data.accessToken;
-          localStorage.setItem('accessToken', accessToken);
           sessionStorage.setItem('accessToken', accessToken);
 
           isRefreshing = false;
@@ -67,6 +66,7 @@ axiosInstance.interceptors.request.use(
           console.log('Fail to refresh token', error);
           isRefreshing = false;
           useAuth.logout();
+          return Promise.reject(error);
         }
       }
 

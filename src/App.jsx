@@ -41,7 +41,8 @@ import CourseCustomPage from './pages/courseCustom/CourseCustomPage.jsx';
 import BrowseCoursesPage from './pages/browseCourses/BrowseCoursesPage.jsx';
 import BrowseCourseDetailPage from './pages/browseCourses/BrowseCourseDetailPage.jsx';
 import { useAuth } from './contexts/AuthContext';
-import SocialLoginIntermediate from './pages/users/SocialLoginIntermediate.jsx';
+import MyPlaceBookmarkPage from './pages/bookmarks/MyPlaceBookmarkPage.jsx';
+import MyCourseBookmarkPage from './pages/bookmarks/MyCourseBookmarkPage.jsx';
 
 const App = () => {
   const { isAuthenticated, login } = useAuth();
@@ -81,10 +82,6 @@ const App = () => {
           <Route
             path="/travelo/kakaoCallback"
             element={<KakaoCallback onLogin={handleLogin} />}
-          />
-          <Route
-            path="/social/integrate"
-            element={<SocialLoginIntermediate />}
           />
 
           {/* 비밀번호 찾기 */}
@@ -138,8 +135,17 @@ const App = () => {
               element={<ModifyUserKakaoPage />}
             />
 
+            <Route
+              path="mypage/placeBookmark"
+              element={<MyPlaceBookmarkPage />}
+            />
+            <Route
+              path="mypage/courseBookmark"
+              element={<MyCourseBookmarkPage />}
+            />
+
             {/* 코스 */}
-            <Route path="/course/:courseSeq" element={<CourseDetail />} />
+            {/* <Route path="/course/:courseSeq" element={<CourseDetail />} /> */}
             <Route path="/course-custom" element={<CourseCustomPage />} />
             <Route path="/browse-courses" element={<BrowseCoursesPage />} />
             <Route

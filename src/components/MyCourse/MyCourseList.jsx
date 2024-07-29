@@ -6,10 +6,13 @@ import { formatDate } from '../common/formatDate';
 import '../../css/myCourseList.css';
 import MyPageSidebar from '../common/MyPageSidebar';
 import CourseGroupTapBar from '../common/CourseGroupTapBar';
+import MyCoursePagination from '../common/pagenation/MyCoursePagination';
 
 const MyCourseList = () => {
   const [courses, setCourses] = useState([]);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 12; // 페이지 당 항목 수
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -113,6 +116,11 @@ const MyCourseList = () => {
             );
           })}
         </ul>
+        <MyCoursePagination
+          totalPages={Math.ceil(courses.length / itemsPerPage)}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );

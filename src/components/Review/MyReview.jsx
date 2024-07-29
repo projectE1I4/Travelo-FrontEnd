@@ -15,6 +15,7 @@ import {
   faChevronDown,
 } from '@fortawesome/free-solid-svg-icons';
 import Dropdown from './Dropdown.jsx';
+import MyCoursePagination from '../common/pagenation/MyCoursePagination.jsx';
 
 const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
@@ -26,6 +27,8 @@ const ReviewList = () => {
   const [editContent, setEditContent] = useState('');
   const [expandedReviews, setExpandedReviews] = useState([]); // 내용 더보기
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 10; // 페이지 당 항목 수
 
   // useCallback: 중복 호출 방지
   const loadReviews = useCallback(async () => {
@@ -208,6 +211,11 @@ const ReviewList = () => {
               ))}
             </ul>
           )}
+          <MyCoursePagination
+            totalPages={Math.ceil(reviews.length / itemsPerPage)}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>

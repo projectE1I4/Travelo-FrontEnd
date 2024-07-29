@@ -1,0 +1,49 @@
+/* src/NotFoundPage.css */
+
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.not-found-container {
+  grid-column: 2 / span 10;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.not-found-container .image-wrap {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.not-found-container h2 {
+  font-weight: 600;
+  font-size: 25px;
+  margin: 10px 0;
+}
+
+.not-found-container p {
+  padding: 10px;
+  background: var(--point-color2);
+  width: 350px;
+  margin: 0 auto 30px;
+  border-radius: 10px;
+  line-height: 30px;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.not-found-container a {
+  padding: 10px;
+  background: var(--accent-color);
+  color: var(--button-bg-color);
+  border-radius: 10px;
+}

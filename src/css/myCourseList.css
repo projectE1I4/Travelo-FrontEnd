@@ -1,34 +1,31 @@
 .grid-container {
-  margin-top: 70px;
   position: relative;
 }
 
-.grid-container h1 {
-  position: absolute;
-  left: 330px;
-  top: 35px;
+.courselist {
+  grid-column: 4 / span 9;
+  padding-top: 33px;
+  padding-left: 16px;
+}
+.courselist h1 {
   font-size: 30px;
   font-weight: 700;
-}
-
-.courselist {
-  grid-column: 4 / span 12;
 }
 
 .courseItem {
   list-style-type: none;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 16px;
-  padding: 0;
-  margin-top: 90px;
+  grid-column-gap: 48px;
+  grid-row-gap: 32px;
+  margin-top: 20px;
 }
 
 .course {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--txt-color-400);
-  width: 240px;
+  width: 100%;
   height: auto;
   border-radius: 10px;
   overflow: hidden;
@@ -44,13 +41,15 @@
   border: 1px solid var(--accent-color);
 }
 
-.image {
+.courselist .image {
   display: grid;
   width: 200px;
   height: 200px;
   margin: 20px auto 20px;
   padding: 0;
   position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .image-item {

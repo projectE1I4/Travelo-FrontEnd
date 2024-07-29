@@ -85,12 +85,13 @@ const MyPageSidebar = () => {
           <li
             className={`${styles['MS-item']} ${isActive(['/mypage/courseGroup', '/mypage/myCourses', '/mypage/courseGroupDetail', '/courseGroup/create', '/courseGroup/modify'])}`}
           >
-            {/* <Link to="/mypage/myCourses"> */}
-            <Link to="/mypage/courseGroup">
+            <Link to="/mypage/myCourses">
               <p>나의 코스</p>
             </Link>
           </li>
-          <li className={styles['MS-item']}>
+          <li
+            className={`${styles['MS-item']} ${isActive(['/mypage/myReviews'])}`}
+          >
             <Link to="/mypage/myReviews">
               <p>나의 후기</p>
             </Link>

@@ -53,14 +53,16 @@ const App = () => {
       <Header />
       <div className="container">
         <Routes>
+          {/* 비로그인 사용자 접근 가능 */}
+          <Route path="/" element={<HomePage />} />
           <Route path="/places" element={<PlacesListPage />} />
           <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/users/login" element={<LoginPage onLogin={login} />} />
+
+          {/* 로그인 관련 페이지 */}
           <Route path="/users/register" element={<RegisterPage />} />
-          <Route path="/users/checkUser" element={<CheckUserPage />} />
-          <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
-          <Route path="/googleCallback" element={GoogleCallback} />
+          <Route path="/users/login" element={<LoginPage onLogin={login} />} />
+
+          {/* 소셜 로그인 */}
           <Route
             path="/travelo/naverCallback"
             element={<NaverCallback onLogin={handleLogin} />}
@@ -73,14 +75,12 @@ const App = () => {
             path="/travelo/kakaoCallback"
             element={<KakaoCallback onLogin={handleLogin} />}
           />
-          <Route
-            path="/social/integrate"
-            element={<AccountIntergrationPage />}
-          />
-          <Route
-            path="/social/integratedComplete"
-            element={<AccountIntergration />}
-          />
+
+          {/* 비밀번호 찾기 */}
+          <Route path="/users/checkUser" element={<CheckUserPage />} />
+          <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
+
+          {/* 소셜 통합 */}
           <Route
             path="/travelo/integratedKakao"
             element={<AccountIntergrationKakao />}
@@ -93,29 +93,26 @@ const App = () => {
             path="/travelo/integratedNaver"
             element={<AccountIntergrationNaver />}
           />
+          <Route
+            path="/social/integrate"
+            element={<AccountIntergrationPage />}
+          />
+          <Route
+            path="/social/integratedComplete"
+            element={<AccountIntergration />}
+          />
 
+          {/* 로그인 사용자 */}
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-            <Route path="/admin" element={<AdminMainPage />} />
-            <Route path="admin/users" element={<AdminUserPage />} />
-            <Route
-              path="/admin/userDetail/:userSeq"
-              element={<AdminUserDetail />}
-            />
-            <Route path="/admin/groups" element={<AdminGroupPage />} />
-            <Route path="/admin/courses" element={<AdminCoursePage />} />
-            <Route path="/admin/reviews" element={<AdminReviewPage />} />
-
-            <Route
-              path="/admin/blindReviews"
-              element={<AdminBlindReviewPage />}
-            />
-            <Route path="mypage/myReviews" element={<MyReviewPage />} />
+            {/* 마이페이지 - 코스 */}
             <Route path="mypage/myCourses" element={<MyCoursePage />} />
             <Route
               path="/courseEdit/:courseSeq"
               element={<MyCourseEditPage />}
             />
-            <Route path="/course/:courseSeq" element={<CourseDetail />} />
+            {/* 마이페이지 - 리뷰 */}
+            <Route path="mypage/myReviews" element={<MyReviewPage />} />
+            {/* 마이페이지 - 유저 에딧 */}
             <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
             <Route
               path="mypage/modifyprofileGoogle"
@@ -129,6 +126,11 @@ const App = () => {
               path="mypage/modifyprofileKakao"
               element={<ModifyUserKakaoPage />}
             />
+
+            {/* 코스 */}
+            <Route path="/course/:courseSeq" element={<CourseDetail />} />
+
+            {/* 코스 그룹 */}
             <Route
               path="mypage/courseGroup"
               element={<CourseGroupListPage />}
@@ -145,9 +147,20 @@ const App = () => {
               path="courseGroup/modify/:id"
               element={<CourseGroupModifyPage />}
             />
+
+            {/* 관리자 페이지 */}
+            <Route path="/admin" element={<AdminMainPage />} />
+            <Route path="admin/users" element={<AdminUserPage />} />
             <Route
-              path="courseGroup/create"
-              element={<CourseGroupCreatePage />}
+              path="/admin/userDetail/:userSeq"
+              element={<AdminUserDetail />}
+            />
+            <Route path="/admin/groups" element={<AdminGroupPage />} />
+            <Route path="/admin/courses" element={<AdminCoursePage />} />
+            <Route path="/admin/reviews" element={<AdminReviewPage />} />
+            <Route
+              path="/admin/blindReviews"
+              element={<AdminBlindReviewPage />}
             />
           </Route>
           <Route path="*" element={<NotFoundPage />} />

@@ -5,6 +5,7 @@ import { RiDeleteBin6Line, RiEdit2Line } from 'react-icons/ri';
 import { formatDate } from '../common/formatDate';
 import '../../css/myCourseList.css';
 import MyPageSidebar from '../common/MyPageSidebar';
+import CourseGroupTapBar from '../common/CourseGroupTapBar';
 
 const MyCourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -55,61 +56,63 @@ const MyCourseList = () => {
     return <div>코스를 불러오는 중 오류가 발생했습니다: {error.message}</div>;
 
   return (
-    <div className="container">
-      <div className="grid-container">
-        <MyPageSidebar />
-        <h1>나의 코스</h1>
-        <div className="courselist">
-          <ul className="courseItem">
-            {courses.map((course) => {
-              const placeCount = course.courseList.length;
-              let placeClass = '';
-              if (placeCount === 1) placeClass = 'one';
-              else if (placeCount === 2) placeClass = 'two';
-              else if (placeCount === 3) placeClass = 'three';
-              else if (placeCount >= 4) placeClass = 'four';
+    <div className="grid-container">
+      <MyPageSidebar />
+      <div className="courselist">
+        <CourseGroupTapBar />
+        <ul className="courseItem">
+          {courses.map((course) => {
+            const placeCount = course.courseList.length;
+            let placeClass = '';
+            if (placeCount === 1) placeClass = 'one';
+            else if (placeCount === 2) placeClass = 'two';
+            else if (placeCount === 3) placeClass = 'three';
+            else if (placeCount >= 4) placeClass = 'four';
 
-              return (
-                <div key={course.courseSeq} className={`course ${placeClass}`}>
-                  <ul className="image">
-                    {course.courseList.slice(0, 4).map(
-                      (
-                        item,
-                        index // 최대 4개의 이미지까지만 표시
-                      ) => (
-                        <li
-                          key={item.courseListSeq}
-                          className={`image-item image-item-${index + 1}`}
-                        >
-                          <img
-                            src={item.place.imageFile1}
-                            alt={item.place.title}
-                          />
-                        </li>
-                      )
-                    )}
-                  </ul>
-                  <p className="courseTitle" title={course.title}>
-                    {titleLength(course.title)}
-                  </p>
-                  <p className="courseDate">{formatDate(course.createDate)}</p>
-                  <button
-                    className="editBtn"
-                    onClick={() => editBtn(course.courseSeq)}
-                  >
-                    <RiEdit2Line />
-                  </button>
-                  <button
-                    className="deleteBtn"
-                    onClick={() => deleteBtn(course.courseSeq)}
-                  >
-                    <RiDeleteBin6Line />
-                  </button>
-                </div>
-              );
-            })}
-          </ul>
-        </div>
+            return (
+              <div key={course.courseSeq} className={`course ${placeClass}`}>
+                <ul className="image">
+                  {course.courseList.slice(0, 4).map(
+                    (
+                      item,
+                      index // 최대 4개의 이미지까지만 표시
+                    ) => (
+                      <li
+                        key={item.courseListSeq}
+                        className={`image-item image-item-${index + 1}`}
+                      >
+                        <img
+                          src={`${
+                            item.place.imageFile1 !== null &&
+                            (item.place.imageFile1 ||
+                              '/free-sticker-van-13719277.png')
+                          }`}
+                          alt={item.place.title}
+                        />
+                      </li>
+                    )
+                  )}
+                </ul>
+                <p className="courseTitle" title={course.title}>
+                  {titleLength(course.title)}
+                </p>
+                <p className="courseDate">{formatDate(course.createDate)}</p>
+                <button
+                  className="editBtn"
+                  onClick={() => editBtn(course.courseSeq)}
+                >
+                  <RiEdit2Line />
+                </button>
+                <button
+                  className="deleteBtn"
+                  onClick={() => deleteBtn(course.courseSeq)}
+                >
+                  <RiDeleteBin6Line />
+                </button>
+              </div>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

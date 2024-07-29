@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../../styles/components/Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,10 +7,14 @@ import {
   faSignsPost,
   faLightbulb,
 } from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 
 function Header() {
   const { isAuthenticated, user } = useAuth();
+
+  useEffect(() => {
+    console.log('Header re-rendered with isAuthenticated:', isAuthenticated);
+  }, [isAuthenticated, user]);
 
   return (
     <header className={styles['header']}>
@@ -30,7 +35,7 @@ function Header() {
             <li className={`nav-item ${styles['nav-item']}`}>
               <Link
                 className={`nav-link ${styles['nav-link']} ${styles['nav-link-icon']}`}
-                to="/custom-course"
+                to="/course-custom"
               >
                 <FontAwesomeIcon icon={faSignsPost} /> 코스 커스텀
               </Link>

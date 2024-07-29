@@ -1,0 +1,68 @@
+.card {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-right: 1px solid #ccc;
+}
+
+.noImage {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  color: #aaa;
+  border-right: 1px solid #ccc;
+}
+
+.details {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.address {
+  font-size: 14px;
+  color: #777;
+  margin: 5px 0;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.likes {
+  font-size: 14px;
+  color: #ff0000;
+}
+
+.addButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  background-color: #0056b3;
+}

@@ -46,7 +46,7 @@ export const useAuth = () => {
         setIsAuthenticated(true);
       }
       console.log('access"');
-      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('token', success);
       setIsAuthenticated(true);
       return success;
     } catch (error) {
@@ -90,3 +90,5 @@ export const useAuth = () => {
 
   return { isAuthenticated, user, login, logout };
 };
+
+export default useAuth;

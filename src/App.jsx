@@ -1,4 +1,4 @@
-import { useAuth } from './hooks/useAuth';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/users/LoginPage.jsx';
 import HomePage from './pages/HomePage';
@@ -37,6 +37,11 @@ import AdminUserDetail from './components/Admin/AdminUserDetail.jsx';
 import CourseGroupDetailPage from './pages/courseGroup/CourseGroupDetailPage.jsx';
 import CourseGroupCreatePage from './pages/courseGroup/CourseGroupCreatePage.jsx';
 import CourseGroupModifyPage from './pages/courseGroup/CourseGroupCreateModalPage.jsx';
+import CourseCustomPage from './pages/courseCustom/CourseCustomPage.jsx';
+import BrowseCoursesPage from './pages/browseCourses/BrowseCoursesPage.jsx';
+import BrowseCourseDetailPage from './pages/browseCourses/BrowseCourseDetailPage.jsx';
+import { useAuth } from './contexts/AuthContext';
+import SocialLoginIntermediate from './pages/users/SocialLoginIntermediate.jsx';
 
 const App = () => {
   const { isAuthenticated, login } = useAuth();
@@ -49,7 +54,7 @@ const App = () => {
   console.log('이즈어쎈', isAuthenticated);
   console.log('로그인', login);
   return (
-    <div>
+    <>
       <Header />
       <div className="container">
         <Routes>
@@ -59,8 +64,10 @@ const App = () => {
           <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
 
           {/* 로그인 관련 페이지 */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/users/login" element={<LoginPage />} />
           <Route path="/users/register" element={<RegisterPage />} />
-          <Route path="/users/login" element={<LoginPage onLogin={login} />} />
 
           {/* 소셜 로그인 */}
           <Route
@@ -74,6 +81,10 @@ const App = () => {
           <Route
             path="/travelo/kakaoCallback"
             element={<KakaoCallback onLogin={handleLogin} />}
+          />
+          <Route
+            path="/social/integrate"
+            element={<SocialLoginIntermediate />}
           />
 
           {/* 비밀번호 찾기 */}
@@ -103,7 +114,7 @@ const App = () => {
           />
 
           {/* 로그인 사용자 */}
-          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+          <Route element={<ProtectedRoute />}>
             {/* 마이페이지 - 코스 */}
             <Route path="mypage/myCourses" element={<MyCoursePage />} />
             <Route
@@ -129,6 +140,12 @@ const App = () => {
 
             {/* 코스 */}
             <Route path="/course/:courseSeq" element={<CourseDetail />} />
+            <Route path="/course-custom" element={<CourseCustomPage />} />
+            <Route path="/browse-courses" element={<BrowseCoursesPage />} />
+            <Route
+              path="/course/:courseSeq"
+              element={<BrowseCourseDetailPage />}
+            />
 
             {/* 코스 그룹 */}
             <Route
@@ -166,7 +183,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
-    </div>
+    </>
   );
 };
 

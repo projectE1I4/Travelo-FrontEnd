@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Login from '../../components/auth/Login';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 import { useLocation } from 'react-router-dom';
 import LoginErrorModal from './LoginErrorModal';
 

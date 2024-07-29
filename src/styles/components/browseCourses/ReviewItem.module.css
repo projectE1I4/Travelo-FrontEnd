@@ -1,0 +1,10 @@
+.review {
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.button-wrap {
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: flex-end;
+}

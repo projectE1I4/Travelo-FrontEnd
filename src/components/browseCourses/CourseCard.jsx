@@ -1,68 +1,56 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from '../styles/components/place/PlaceCard.module.css';
+import styles from '../../styles/components/browseCourses/CourseCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEye,
-  faHeart,
   faBookmark,
   faImage,
+  faHeart,
 } from '@fortawesome/free-solid-svg-icons';
-import { PlaceContext } from '../contexts/PlaceContext';
-import { likePlace } from '../services/likeService';
-import { addBookmark, removeBookmark } from '../services/bookmarkService';
+import { BrowseContext } from '../../contexts/BrowseContext';
+import {
+  addCourseBookmark,
+  removeCourseBookmark,
+} from '../../services/bookmarkService';
+import { likeCourse } from '../../services/likeService';
 
-const typeMap = {
-  12: '관광지',
-  14: '문화시설',
-  28: '레저 스포츠',
-  32: '숙박',
-  38: '쇼핑',
-  39: '음식점',
-};
-
-const PlaceCard = ({
-  placeSeq,
-  image,
-  type,
+const CourseCard = ({
+  courseSeq,
   title,
-  address,
-  views,
-  likes,
-  bookmarks,
-  contentId,
-  longitude,
-  latitude,
+  description,
+  viewCount,
+  likeCount,
+  createDate,
+  areaCode,
+  image,
 }) => {
-  const [currentLikes, setCurrentLikes] = useState(likes);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [currentLikes, setCurrentLikes] = useState(likeCount);
   const [liked, setLiked] = useState(false);
-  const [bookmarked, setBookmarked] = useState(false);
   const [animate, setAnimate] = useState(false);
+  const [loadingBookmark, setLoadingBookmark] = useState(false);
   const navigate = useNavigate();
-  const {
-    updatePlaceLikes,
-    bookmarks: userBookmarks,
-    fetchUserBookmarks,
-  } = useContext(PlaceContext);
+  const { courseBookmarks, fetchUserBookmarks, updateCourseLikes } =
+    useContext(BrowseContext);
 
   useEffect(() => {
     const accessToken = sessionStorage.getItem('accessToken');
-
     if (accessToken) {
       fetchUserBookmarks(accessToken);
     }
   }, [fetchUserBookmarks]);
 
   useEffect(() => {
-    const isBookmarked = userBookmarks.some(
-      (bookmark) => bookmark.place.placeSeq === placeSeq
+    const isBookmarked = courseBookmarks.some(
+      (bookmark) => bookmark.course.courseSeq === courseSeq
     );
-    setBookmarked(isBookmarked);
-  }, [userBookmarks, placeSeq]);
+    setIsBookmarked(isBookmarked);
+  }, [courseBookmarks, courseSeq]);
 
   const handleLike = async (e) => {
     e.preventDefault();
-    e.stopPropagation(); // 이벤트 전파 막기
+    e.stopPropagation();
     const accessToken = sessionStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -71,16 +59,16 @@ const PlaceCard = ({
     }
 
     try {
-      const updatedLikeYn = await likePlace(placeSeq, accessToken);
+      const updatedLikeYn = await likeCourse(courseSeq, accessToken);
 
       if (updatedLikeYn === 'Y') {
         setCurrentLikes((prevLikes) => prevLikes + 1);
         setLiked(true);
-        updatePlaceLikes(placeSeq, true);
+        updateCourseLikes(courseSeq, true);
       } else if (updatedLikeYn === 'N') {
         setCurrentLikes((prevLikes) => prevLikes - 1);
         setLiked(false);
-        updatePlaceLikes(placeSeq, false);
+        updateCourseLikes(courseSeq, false);
       }
 
       setAnimate(true);
@@ -92,7 +80,7 @@ const PlaceCard = ({
 
   const handleBookmark = async (e) => {
     e.preventDefault();
-    e.stopPropagation(); // 이벤트 전파 막기
+    e.stopPropagation();
     const accessToken = sessionStorage.getItem('accessToken');
 
     if (!accessToken) {
@@ -100,41 +88,42 @@ const PlaceCard = ({
       return;
     }
 
+    setLoadingBookmark(true);
+
     try {
-      if (bookmarked) {
-        await removeBookmark(placeSeq, accessToken);
-        setBookmarked(false);
+      if (isBookmarked) {
+        const bookmark = courseBookmarks.find(
+          (bookmark) => bookmark.course.courseSeq === courseSeq
+        );
+        if (bookmark) {
+          await removeCourseBookmark(bookmark.courseBookmarkSeq, accessToken);
+          setIsBookmarked(false);
+        }
       } else {
-        await addBookmark(placeSeq, accessToken);
-        setBookmarked(true);
+        await addCourseBookmark(courseSeq, accessToken);
+        setIsBookmarked(true);
       }
-      // 북마크 상태 변경 후 새로고침을 통해 최신 상태를 반영
       fetchUserBookmarks(accessToken);
     } catch (error) {
-      console.error('Error updating bookmark status: ', error);
+      console.error('Error updating bookmark status:', error);
+    } finally {
+      setLoadingBookmark(false);
     }
   };
 
-  const typeText = typeMap[type] || '기타';
-
   return (
     <Link
-      to={`/places/${placeSeq}`}
+      to={`/course/${courseSeq}`}
       className={styles.card}
       state={{
-        placeSeq,
-        type,
-        contentId,
-        image,
+        courseSeq,
         title,
-        address,
-        views,
-        likes,
-        bookmarks,
-        typeText,
-        typeMap,
-        longitude,
-        latitude,
+        description,
+        viewCount,
+        likeCount,
+        createDate,
+        areaCode,
+        image,
       }}
       style={{ textDecoration: 'none', color: 'inherit' }}
     >
@@ -149,16 +138,16 @@ const PlaceCard = ({
       </div>
       <div className={styles.content}>
         <div>
-          <div className={styles.tag}>{typeText}</div>
           <div className={styles.details}>
             <h3>{title}</h3>
-            <p>{address}</p>
+            <p>{description}</p>
+            <p>{courseSeq}</p>
           </div>
         </div>
         <div className={styles.icons}>
           <div className={styles.wrap}>
             <span>
-              <FontAwesomeIcon icon={faEye} /> {views}
+              <FontAwesomeIcon icon={faEye} /> {viewCount}
             </span>
             <span
               onClick={handleLike}
@@ -176,8 +165,8 @@ const PlaceCard = ({
             <span
               onClick={handleBookmark}
               className={`${styles['bookmark-icon']} ${
-                bookmarked ? styles.active : ''
-              }`}
+                isBookmarked ? styles.active : ''
+              } ${loadingBookmark ? styles.loading : ''}`}
               style={{ cursor: 'pointer' }}
             >
               <FontAwesomeIcon icon={faBookmark} />
@@ -189,4 +178,4 @@ const PlaceCard = ({
   );
 };
 
-export default PlaceCard;
+export default CourseCard;

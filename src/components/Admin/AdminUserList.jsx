@@ -17,7 +17,7 @@ const AdminUserList = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [deletedCount, setDeletedCount] = useState(0);
   const [filter, setFilter] = useState('all');
-  const [selectedUsers, setSelectedUsers] = useState([]); //회원 선택
+  const [selectedUsers, setSelectedUsers] = useState([]); // 회원 선택
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const AdminUserList = () => {
     fetchUsers();
   }, [page, sortBy]);
 
-  //로그인 타입 null 데이터 '이메일'로 변경
+  // 로그인 타입 null 데이터 '이메일'로 변경
   const getLoginType = (oauthType) => {
     switch (oauthType) {
       case 'google':
@@ -117,14 +117,18 @@ const AdminUserList = () => {
   return (
     <div className="adminUserList">
       <h1>전체 회원 목록</h1>
-      <div className="sort">
-        <button onClick={() => setSortBy('latest')}>최신순</button>
-        <button onClick={() => setSortBy('oldest')}>오래된 순</button>
-      </div>
-      <div className="filter">
-        <button onClick={() => setFilter('all')}>전체 </button>
-        <button onClick={() => setFilter('active')}>활성 회원 </button>
-        <button onClick={() => setFilter('deleted')}>탈퇴 회원</button>
+      <div className="filtering">
+        <div className="filter">
+          <button onClick={() => setFilter('all')}>전체</button>
+          <button onClick={() => setFilter('active')}>활성 회원</button>
+          <button onClick={() => setFilter('deleted')}>탈퇴 회원</button>
+        </div>
+        <div className="sort">
+          <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+            <option value="latest">최신순</option>
+            <option value="oldest">오래된 순</option>
+          </select>
+        </div>
       </div>
       <p>전체 회원 수: {totalCount}</p>
       <p>활성 회원 수: {totalCount - deletedCount}</p>

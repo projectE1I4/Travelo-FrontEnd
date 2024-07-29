@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   getUserList,
   deleteUser,
@@ -7,6 +7,8 @@ import {
 import { formatDate } from '../common/formatDate';
 import { useNavigate } from 'react-router-dom';
 import '../../css/Admin/AdminUser.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const AdminUserList = () => {
   const [users, setUsers] = useState([]);
@@ -18,7 +20,10 @@ const AdminUserList = () => {
   const [deletedCount, setDeletedCount] = useState(0);
   const [filter, setFilter] = useState('all');
   const [selectedUsers, setSelectedUsers] = useState([]); // 회원 선택
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('최신순');
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -112,6 +117,29 @@ const AdminUserList = () => {
     return filter === 'deleted' ? user.delYn === 'Y' : user.delYn === 'N';
   });
 
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleDropdownClick = (option) => {
+    setSelectedOption(option);
+    setSortBy(option === '최신순' ? 'latest' : 'oldest');
+    setDropdownOpen(false);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   if (error) return <div>Error: {error.message}</div>;
 
   return (
@@ -119,22 +147,34 @@ const AdminUserList = () => {
       <h1>전체 회원 목록</h1>
       <div className="filtering">
         <div className="filter">
-          <button onClick={() => setFilter('all')}>전체</button>
-          <button onClick={() => setFilter('active')}>활성 회원</button>
-          <button onClick={() => setFilter('deleted')}>탈퇴 회원</button>
+          <button onClick={() => setFilter('all')}>전체 : {totalCount}</button>
+          <button onClick={() => setFilter('active')}>
+            회원 : {totalCount - deletedCount}
+          </button>
+          <button onClick={() => setFilter('deleted')}>
+            탈퇴 회원 : {deletedCount}
+          </button>
         </div>
-        <div className="sort">
-          <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
-            <option value="latest">최신순</option>
-            <option value="oldest">오래된 순</option>
-          </select>
+
+        <div className="sort" ref={dropdownRef}>
+          <button onClick={toggleDropdown} className="dropDownBtn">
+            <div className="text">{selectedOption}</div>
+            <FontAwesomeIcon
+              icon={dropdownOpen ? faChevronUp : faChevronDown}
+            />
+          </button>
+          {dropdownOpen && (
+            <div className={`dropdownContent ${dropdownOpen ? 'show' : ''}`}>
+              <a onClick={() => handleDropdownClick('최신순')}>최신순</a>
+              <a onClick={() => handleDropdownClick('오래된순')}>오래된순</a>
+            </div>
+          )}
         </div>
       </div>
-      <p>전체 회원 수: {totalCount}</p>
-      <p>활성 회원 수: {totalCount - deletedCount}</p>
-      <p>탈퇴 회원 수: {deletedCount}</p>
-      <p>선택된 회원: {selectedUsers.length}</p>
-      <button onClick={selectDelete}>선택된 회원 탈퇴</button>
+      <div className="select">
+        <p>선택된 회원 : {selectedUsers.length}</p>
+        <button onClick={selectDelete}>선택 회원 탈퇴</button>
+      </div>
       <ul>
         {filterUsers.map((user) => (
           <div className="userItem" key={user.userSeq}>

@@ -1,15 +1,24 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useCallback,
+} from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import authService from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [accessToken, setAccessToken] = useState(
+    sessionStorage.getItem('accessToken') || null
+  );
 
   const checkAuth = async () => {
-    const accessToken = sessionStorage.getItem('accessToken');
     if (!accessToken) {
       setIsAuthenticated(false);
       setUser(null);
@@ -33,7 +42,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [accessToken]);
 
   const login = async (email, password) => {
     try {
@@ -42,9 +51,9 @@ export const AuthProvider = ({ children }) => {
 
       sessionStorage.setItem('accessToken', token.accessToken);
       sessionStorage.setItem('refreshToken', token.refreshToken);
+      setAccessToken(token.accessToken);
       setIsAuthenticated(true);
       setUser(token.user);
-      await checkAuth();
       return response;
     } catch (error) {
       console.error('로그인 요청 중 오류 발생: ', error);
@@ -53,7 +62,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    const accessToken = sessionStorage.getItem('accessToken');
     if (accessToken) {
       await axiosInstance.post(
         '/user/logout',
@@ -67,13 +75,16 @@ export const AuthProvider = ({ children }) => {
     }
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('refreshToken');
+    setAccessToken(null);
     setIsAuthenticated(false);
     setUser(null);
     window.location.href = '/users/login';
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, user, login, logout, accessToken }}
+    >
       {children}
     </AuthContext.Provider>
   );

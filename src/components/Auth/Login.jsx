@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import KakaoLoginButton from '../socialAuth/KakaoLoginButton';
 import GoogleLoginButton from '../socialAuth/GoogleLoginButton';
 import NaverLoginButton from '../socialAuth/NaverLoginButton';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -11,15 +12,16 @@ const Login = ({ onLogin }) => {
   const [failLogin, setFailLogin] = useState('');
 
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const success = await onLogin(username, password);
-      console.log(success);
+      const success = await login(username, password);
+      console.log('로그인 성공:', success);
 
-      if (success.status === 200 && success) {
+      if (success.status === 200) {
         navigate('/home');
       } else {
         handleLoginError(success);
@@ -113,7 +115,7 @@ const Login = ({ onLogin }) => {
           <button
             type="button"
             className={styles['btn-line']}
-            onClick={(e) => goToRegister(e)}
+            onClick={goToRegister}
           >
             회원가입
           </button>
@@ -122,7 +124,7 @@ const Login = ({ onLogin }) => {
           <button
             type="button"
             className={styles['btn-text']}
-            onClick={(e) => goToCheckUser(e)}
+            onClick={goToCheckUser}
           >
             비밀번호를 잊어버리셨나요?
           </button>

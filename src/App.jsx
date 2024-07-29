@@ -32,14 +32,11 @@ import AccountIntergrationGoogle from './components/socialAuth/AccountIntegratio
 import AccountIntergrationNaver from './components/socialAuth/AccountIntegrationNaver.jsx';
 import ModifyUserNaverPage from './pages/users/ModifyUserNaverPage.jsx';
 import ModifyUserKakaoPage from './pages/users/ModifyUserKakaoPage.jsx';
-import CourseGroupList from './components/courseGroup/CourseGroupList.jsx';
 import CourseGroupListPage from './pages/courseGroup/CourseGroupListPage.jsx';
-import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
 import AdminUserDetail from './components/Admin/AdminUserDetail.jsx';
 import CourseGroupDetailPage from './pages/courseGroup/CourseGroupDetailPage.jsx';
 import CourseGroupCreatePage from './pages/courseGroup/CourseGroupCreatePage.jsx';
 import CourseGroupModifyPage from './pages/courseGroup/CourseGroupCreateModalPage.jsx';
-import { useEffect, useState } from 'react';
 
 const App = () => {
   const { isAuthenticated, login } = useAuth();
@@ -58,30 +55,11 @@ const App = () => {
         <Routes>
           <Route path="/places" element={<PlacesListPage />} />
           <Route path="/places/:placeSeq" element={<PlaceDetailPage />} />
-          <Route path="mypage/myReviews" element={<MyReviewPage />} />
-          <Route path="mypage/myCourses" element={<MyCoursePage />} />
-          <Route path="/courseEdit/:courseSeq" element={<MyCourseEditPage />} />
-          <Route path="/course/:courseSeq" element={<CourseDetail />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/home" element={<HomePage />} />
           <Route path="/users/login" element={<LoginPage onLogin={login} />} />
           <Route path="/users/register" element={<RegisterPage />} />
           <Route path="/users/checkUser" element={<CheckUserPage />} />
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />
-          <Route path="/admin" element={<AdminMainPage />} />
-          <Route path="admin/users" element={<AdminUserPage />} />
-          <Route
-            path="/admin/userDetail/:userSeq"
-            element={<AdminUserDetail />}
-          />
-          <Route path="/admin/groups" element={<AdminGroupPage />} />
-          <Route path="/admin/courses" element={<AdminCoursePage />} />
-          <Route path="/admin/reviews" element={<AdminReviewPage />} />
-
-          <Route
-            path="/admin/blindReviews"
-            element={<AdminBlindReviewPage />}
-          />
           <Route path="/googleCallback" element={GoogleCallback} />
           <Route
             path="/travelo/naverCallback"
@@ -117,6 +95,27 @@ const App = () => {
           />
 
           <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+            <Route path="/admin" element={<AdminMainPage />} />
+            <Route path="admin/users" element={<AdminUserPage />} />
+            <Route
+              path="/admin/userDetail/:userSeq"
+              element={<AdminUserDetail />}
+            />
+            <Route path="/admin/groups" element={<AdminGroupPage />} />
+            <Route path="/admin/courses" element={<AdminCoursePage />} />
+            <Route path="/admin/reviews" element={<AdminReviewPage />} />
+
+            <Route
+              path="/admin/blindReviews"
+              element={<AdminBlindReviewPage />}
+            />
+            <Route path="mypage/myReviews" element={<MyReviewPage />} />
+            <Route path="mypage/myCourses" element={<MyCoursePage />} />
+            <Route
+              path="/courseEdit/:courseSeq"
+              element={<MyCourseEditPage />}
+            />
+            <Route path="/course/:courseSeq" element={<CourseDetail />} />
             <Route path="mypage/modifyprofile" element={<ModifyUserPage />} />
             <Route
               path="mypage/modifyprofileGoogle"

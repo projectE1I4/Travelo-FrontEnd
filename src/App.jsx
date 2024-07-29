@@ -27,10 +27,25 @@ import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
 import CourseGroupDetailPage from './pages/courseGroup/CourseGroupDetailPage.jsx';
 import CourseGroupCreatePage from './pages/courseGroup/CourseGroupCreatePage.jsx';
 import CourseGroupModifyPage from './pages/courseGroup/CourseGroupCreateModalPage.jsx';
+import { useEffect, useState } from 'react';
 import CourseCustomPage from './pages/courseCustom/CourseCustomPage.jsx';
 import BrowseCoursesPage from './pages/browseCourses/BrowseCoursesPage.jsx';
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // 초기 인증 상태를 확인합니다. 예를 들어, 세션 스토리지에서 토큰을 확인.
+    const token = sessionStorage.getItem('accessToken');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handleLogin = (token) => {
+    sessionStorage.setItem('accessToken', token);
+    setIsAuthenticated(true);
+  };
   return (
     <div>
       <Header />
@@ -56,7 +71,10 @@ const App = () => {
           />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/users/login" element={<LoginPage />} />
+          <Route
+            path="/users/login"
+            element={<LoginPage onLogin={handleLogin} />}
+          />
           <Route path="/users/register" element={<RegisterPage />} />
           <Route path="/users/checkUser" element={<CheckUserPage />} />
           <Route path="/users/resetPassword" element={<ResetPasswordPage />} />

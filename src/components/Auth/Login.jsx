@@ -129,9 +129,9 @@ const Login = ({ onLogin }) => {
         </div>
         <div className={styles['line-wrap']}>소셜 로그인</div>
         <div className={styles['social-wrap']}>
-          <KakaoLoginButton />
-          <GoogleLoginButton />
-          <NaverLoginButton />
+          <KakaoLoginButton onClick={() => handleSocialLogin('kakao')} />
+          <GoogleLoginButton onClick={() => handleSocialLogin('google')} />
+          <NaverLoginButton onClick={() => handleSocialLogin('naver')} />
         </div>
       </form>
     </div>

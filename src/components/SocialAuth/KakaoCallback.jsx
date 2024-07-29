@@ -24,6 +24,8 @@ const KakaoCallback = () => {
           const { accessToken, refreshToken } = response.data;
           sessionStorage.setItem('accessToken', accessToken);
           sessionStorage.setItem('refreshToken', refreshToken);
+          sessionStorage.setItem('token', response);
+          console.log(sessionStorage.getItem('token'));
           navigate('/home');
         } else if (response.status === 400) {
           const { error, username } = response.data;

@@ -6,19 +6,59 @@
 
 .heading {
   display: flex;
-  background-color: pink;
+  /* background-color: pink; */
   justify-content: space-between;
-  padding: 10px;
-  border: 1px solid #000;
+  /* padding: 10px; */
+  /* border: 1px solid #000; */
   margin-bottom: 20px;
+  align-items: center;
 }
 
+.heading h2 {
+  font-weight: 700;
+}
+.heading span {
+  color: var(--txt-color-500);
+}
+
+.heading > div {
+  color: var(--txt-color-400);
+  transition: all 0.2s;
+}
+.heading > div:hover {
+  color: #ff4e4e;
+  text-decoration: underline;
+}
 .course-content-wrap {
   padding: 32px;
   background-color: var(--point-color2);
   border-radius: 10px;
   text-align: center;
 }
-.course-content-wrap p {
-  font-weight: 700;
+.course-content-wrap .place {
+  /* font-weight: 700; */
+  color: var(--txt-color-500);
+}
+.btn-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.save-button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.save-button.disabled {
+  color: var(--txt-color-400);
+  background-color: var(--point-color2);
+}
+
+.save-button.enabled {
+  color: #fff;
+  background-color: var(--point-color1);
+  transition: all 0.3s;
 }

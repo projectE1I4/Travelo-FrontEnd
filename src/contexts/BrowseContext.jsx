@@ -1,12 +1,18 @@
-import { createContext, useState, useEffect, useCallback } from 'react';
+import {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from 'react';
 import axiosInstance from '../utils/axiosInstance';
 import { fetchCourseBookmarks } from '../services/bookmarkService';
-import { useNavigate } from 'react-router-dom';
-import { likeCourse } from '../services/likeService';
+import { useAuth } from '../contexts/AuthContext';
 
 const BrowseContext = createContext();
 
 const BrowseProvider = ({ children }) => {
+  const { accessToken } = useAuth();
   const [courses, setCourses] = useState([]);
   const [courseDetail, setCourseDetail] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,16 +27,13 @@ const BrowseProvider = ({ children }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
   const [courseBookmarks, setCourseBookmarks] = useState([]);
-  const [accessToken, setAccessToken] = useState(null);
 
   const fetchCourses = useCallback(
     async (updatedFilters = {}) => {
-      const token = sessionStorage.getItem('accessToken');
-      setAccessToken(token);
       if (!accessToken) return;
-
       setLoading(true);
       try {
+        console.log('fetchCourses 호출됨');
         const response = await axiosInstance.get('/user/course/list', {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -56,8 +59,6 @@ const BrowseProvider = ({ children }) => {
 
   const fetchCourseDetail = useCallback(
     async (courseSeq) => {
-      const token = sessionStorage.getItem('accessToken');
-      setAccessToken(token);
       if (!accessToken) return;
 
       setLoading(true);

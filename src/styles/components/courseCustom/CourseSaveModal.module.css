@@ -8,27 +8,147 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* 추가 */
+  overflow: hidden;
 }
 
-.modalContent {
+.modal-content {
+  width: 600px;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
+  padding: 50px 80px;
+  border-radius: 8px;
+  text-align: center;
+}
+.modal-content h2 {
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.label {
+  text-align: left;
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.input,
+.textarea {
   width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #bbb;
+}
+
+.textarea {
+  height: 100px;
+  resize: none;
 }
 
 .toggle-container {
   display: flex;
   align-items: center;
-  cursor: pointer;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 5px;
 }
 
 .toggle-label {
-  margin-right: 10px;
+  font-size: 14px;
+  color: var(--txt-color-500);
 }
 
-.toggle-icon {
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
   cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: var(--point-color1);
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+
+.btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.save-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--point-color1);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.save-button:hover {
+  background-color: #08417e;
+}
+
+.cancel-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--txt-color-400);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+.cancel-button:hover {
+  background-color: var(--txt-color-500);
 }

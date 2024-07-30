@@ -2,19 +2,39 @@
   position: sticky;
   top: 80px; /* header의 높이만큼 설정 */
   padding-top: 32px;
+  padding-bottom: 32px;
   grid-column: 1 / span 4;
-  border: 1px solid black;
   background-color: #fff; /* 백그라운드 컬러 설정 */
 }
 
+.reset-button-region {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: var(--point-color1);
+  border: 1px solid var(--point-color1);
+  border-radius: 4px;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+.reset-button-region:hover {
+  color: var(--point-color1);
+  background-color: var(--point-color2);
+  border: 1px solid var(--txt-color-400);
+  text-decoration: underline;
+}
+
+.reset-button {
+  color: var(--txt-color-400);
+}
+
 .map-container {
-  /* border-radius: 10px; */
-  border: 1px solid #000;
+  border-radius: 10px;
   overflow: hidden;
   position: relative;
   width: 100%;
   height: 300px;
-  /* padding-top: 56.25%; */
+  margin-top: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .map {
@@ -29,17 +49,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin: 20px 0;
 }
 
-.resetButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #007bff;
+.heading h3 {
+  font-weight: 700;
 }
 
-.searchField {
+.region-name {
+  color: var(--point-color1);
+  font-weight: 700;
+}
+
+.reset-button svg {
+  margin-right: 5px;
+}
+
+.search-field {
   display: flex;
   align-items: center;
   border: 1px solid var(--txt-color-400);
@@ -51,7 +77,7 @@
   margin-bottom: 10px;
 }
 
-.searchInput {
+.search-input {
   border: none;
   outline: none;
   flex-grow: 1;
@@ -60,45 +86,63 @@
   color: var(--txt-color-500);
 }
 
-.searchInput::placeholder {
+.search-input::placeholder {
   color: var(--txt-color-400);
 }
 
-.searchIcon {
+.search-icon {
   color: var(--point-color1);
   margin: 0 10px;
 }
 
-.typeFilter {
-  display: flex;
-  gap: 5px;
-  margin-bottom: 10px;
+.type-filter-container {
+  overflow: hidden;
+  position: relative;
+  margin: 20px 0;
 }
 
-.typeFilter button {
+.type-filter {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  scroll-snap-type: x mandatory;
+}
+
+.type-filter button {
   border: none;
   background: none;
   cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  border: 1px solid var(--txt-color-400);
+  color: var(--txt-color-500);
+  font-size: 14px;
 }
 
-.typeFilter .selected {
-  background-color: #007bff;
+.type-filter .selected {
+  background-color: var(--point-color1);
+  border: 1px solid var(--point-color1);
   color: #fff;
+  font-weight: 500;
 }
 
-.miniCardContainer {
+.mini-card-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.loadMoreButton {
+.load-more-button {
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: #007bff;
+  background-color: var(--txt-color-500);
   color: #fff;
   border-radius: 5px;
   cursor: pointer;

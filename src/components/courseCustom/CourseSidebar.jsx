@@ -53,74 +53,84 @@ const CourseSidebar = () => {
 
   return (
     <div className={styles.sidebar}>
-      <div>
-        <button onClick={resetSelectedRegion}>지역 다시 선택하기</button>
+      <div className={styles.button}>
+        <button
+          onClick={resetSelectedRegion}
+          className={styles['reset-button-region']}
+        >
+          지역 다시 선택하기
+        </button>
       </div>
       <div className={styles['map-container']}>
         <CourseMap />
       </div>
       <div className={styles.heading}>
-        <h2>선택 지역: {regionName}</h2>
-        <button onClick={handleReset} className={styles.resetButton}>
+        <h3>
+          선택 지역 ·{' '}
+          <span className={styles['region-name']}>{regionName}</span>
+        </h3>
+        <button onClick={handleReset} className={styles['reset-button']}>
           <FontAwesomeIcon icon={faRotateRight} />
           초기화
         </button>
       </div>
-      <div className={styles.searchField}>
+      <div className={styles['search-field']}>
         <input
           type="text"
           placeholder="키워드를 입력해주세요"
-          className={styles.searchInput}
+          className={styles['search-input']}
           value={keyword}
           onChange={handleKeywordInputChange}
         />
-        <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
+        <FontAwesomeIcon icon={faSearch} className={styles['search-icon']} />
       </div>
-      <div className={styles.typeFilter}>
-        <button
-          onClick={() => handleTypeClick('')}
-          className={selectedType === '' ? styles.selected : ''}
-        >
-          전체
-        </button>
-        <button
-          onClick={() => handleTypeClick('12')}
-          className={selectedType === '12' ? styles.selected : ''}
-        >
-          관광지
-        </button>
-        <button
-          onClick={() => handleTypeClick('14')}
-          className={selectedType === '14' ? styles.selected : ''}
-        >
-          문화시설
-        </button>
-        <button
-          onClick={() => handleTypeClick('28')}
-          className={selectedType === '28' ? styles.selected : ''}
-        >
-          레저 스포츠
-        </button>
-        <button
-          onClick={() => handleTypeClick('32')}
-          className={selectedType === '32' ? styles.selected : ''}
-        >
-          숙박
-        </button>
-        <button
-          onClick={() => handleTypeClick('38')}
-          className={selectedType === '38' ? styles.selected : ''}
-        >
-          쇼핑
-        </button>
-        <button
-          onClick={() => handleTypeClick('39')}
-          className={selectedType === '39' ? styles.selected : ''}
-        >
-          음식점
-        </button>
+      <div className={styles['type-filter-container']}>
+        <div className={styles['type-filter']}>
+          <button
+            onClick={() => handleTypeClick('')}
+            className={selectedType === '' ? styles.selected : ''}
+          >
+            전체
+          </button>
+          <button
+            onClick={() => handleTypeClick('12')}
+            className={selectedType === '12' ? styles.selected : ''}
+          >
+            관광지
+          </button>
+          <button
+            onClick={() => handleTypeClick('14')}
+            className={selectedType === '14' ? styles.selected : ''}
+          >
+            문화시설
+          </button>
+          <button
+            onClick={() => handleTypeClick('28')}
+            className={selectedType === '28' ? styles.selected : ''}
+          >
+            레저 스포츠
+          </button>
+          <button
+            onClick={() => handleTypeClick('32')}
+            className={selectedType === '32' ? styles.selected : ''}
+          >
+            숙박
+          </button>
+          <button
+            onClick={() => handleTypeClick('38')}
+            className={selectedType === '38' ? styles.selected : ''}
+          >
+            쇼핑
+          </button>
+          <button
+            onClick={() => handleTypeClick('39')}
+            className={selectedType === '39' ? styles.selected : ''}
+          >
+            음식점
+          </button>
+        </div>
       </div>
-      <div className={styles.miniCardContainer}>
+      <div className={styles['mini-card-container']}>
         {filteredCourses.map((course, index) => (
           <CourseMiniCard key={`${course.placeSeq}-${index}`} place={course} />
         ))}
@@ -128,7 +138,7 @@ const CourseSidebar = () => {
       {currentPage < totalPages - 1 && (
         <button
           onClick={loadMore}
-          className={styles.loadMoreButton}
+          className={styles['load-more-button']}
           disabled={loading}
         >
           더보기

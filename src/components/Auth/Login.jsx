@@ -5,11 +5,13 @@ import KakaoLoginButton from '../socialAuth/KakaoLoginButton';
 import GoogleLoginButton from '../socialAuth/GoogleLoginButton';
 import NaverLoginButton from '../socialAuth/NaverLoginButton';
 import { useAuth } from '../../contexts/AuthContext';
+import LoginWorseUserModal from '../../pages/users/LoginWorseUserModal';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [failLogin, setFailLogin] = useState('');
+  const [showWorseModal, setShowWorseModal] = useState(false);
 
   const navigate = useNavigate();
   const { login, user } = useAuth();
@@ -36,8 +38,10 @@ const Login = ({ onLogin }) => {
     if (response && response.data) {
       const errorMessage = response.data;
 
-      if (errorMessage.includes('탈퇴')) {
+      if (errorMessage.includes('탈퇴한')) {
         setFailLogin('탈퇴한 회원입니다.');
+      } else if (errorMessage.includes('악성')) {
+        setShowWorseModal(true);
       } else {
         setFailLogin('이메일 혹은 비밀번호가 일치하지 않습니다.');
       }
@@ -155,6 +159,11 @@ const Login = ({ onLogin }) => {
           />
         </div>
       </form>
+      <LoginWorseUserModal
+        onShow={showWorseModal}
+        onClose={() => setShowWorseModal(false)}
+        username={username}
+      />
     </div>
   );
 };

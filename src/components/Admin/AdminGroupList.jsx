@@ -5,7 +5,7 @@ import {
   deleteGroups,
 } from '../../services/adminService';
 import { formatDate } from '../common/formatDate.jsx';
-import '../../css/Admin/AdminGroup.css';
+import '../../css/Admin/AdminUser.css'; // 관리자 스타일 CSS 파일
 
 const AdminGroupList = () => {
   const [groups, setGroups] = useState([]);
@@ -32,7 +32,7 @@ const AdminGroupList = () => {
     fetchGroups(page, sortBy);
   }, [page, sortBy]);
 
-  //그룹 삭제
+  // 그룹 삭제
   const groupDelete = async (courseGroupSeq) => {
     const confirmDelete = window.confirm('그룹을 삭제하시겠습니까?');
     if (confirmDelete) {
@@ -79,30 +79,56 @@ const AdminGroupList = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="adminGroupList">
+    <div className="adminUserList">
       <h1>전체 그룹</h1>
-      <div className="sort">
-        <button onClick={() => setSortBy('latest')}>최신순</button>
-        <button onClick={() => setSortBy('oldest')}>오래된 순</button>
+      <div className="filtering">
+        <div className="filter">
+          <button onClick={() => setSortBy('latest')}>최신순</button>
+          <button onClick={() => setSortBy('oldest')}>오래된 순</button>
+        </div>
       </div>
-      <button onClick={deleteSelectedGroups}>선택한 그룹 삭제</button>
-      <ul>
-        {groups.map((group) => (
-          <li key={group.courseGroupSeq}>
-            <input
-              type="checkbox"
-              onChange={() => toggleSelectGroup(group.courseGroupSeq)}
-              checked={selectedGroups.includes(group.courseGroupSeq)}
-            />
-            <span>그룹 번호 : {group.courseGroupSeq}</span>
-            <span>그룹 제목: {group.title}</span>
-            <span>그룹 생성 일자 : {formatDate(group.createDate)}</span>
-            <button onClick={() => groupDelete(group.courseGroupSeq)}>
-              삭제
-            </button>
-          </li>
-        ))}
-      </ul>
+      <div className="userSelect">
+        <button onClick={deleteSelectedGroups}>선택한 그룹 삭제</button>
+        <p>선택된 그룹: {selectedGroups.length}</p>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style={{ width: '10%' }}>선택</th>
+            <th style={{ width: '15%' }}>번호</th>
+            <th style={{ width: '22%' }}>제목</th>
+            <th style={{ width: '23%' }}>생성 일자</th>
+            <th style={{ width: '15%' }}>삭제</th>
+          </tr>
+        </thead>
+        <tbody>
+          {groups.map((group) => (
+            <tr key={group.courseGroupSeq}>
+              <td>
+                <input
+                  type="checkbox"
+                  className="styled-checkbox"
+                  id={`checkbox-${group.courseGroupSeq}`}
+                  onChange={() => toggleSelectGroup(group.courseGroupSeq)}
+                  checked={selectedGroups.includes(group.courseGroupSeq)}
+                />
+                <label htmlFor={`checkbox-${group.courseGroupSeq}`}></label>
+              </td>
+              <td>{group.courseGroupSeq}</td>
+              <td className="left-align">{group.title}</td>
+              <td>{formatDate(group.createDate)}</td>
+              <td>
+                <button
+                  className="delBtn btn_type_1"
+                  onClick={() => groupDelete(group.courseGroupSeq)}
+                >
+                  삭제
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <div className="pagination">
         <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
           이전

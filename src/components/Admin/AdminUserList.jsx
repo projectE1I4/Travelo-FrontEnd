@@ -171,50 +171,77 @@ const AdminUserList = () => {
           )}
         </div>
       </div>
-      <div className="select">
-        <p>선택된 회원 : {selectedUsers.length}</p>
+      <div className="userSelect">
         <button onClick={selectDelete}>선택 회원 탈퇴</button>
+        <p>선택된 회원 : {selectedUsers.length}</p>
       </div>
-      <ul>
-        {filterUsers.map((user) => (
-          <div className="userItem" key={user.userSeq}>
-            <input
-              type="checkbox"
-              onChange={(e) => {
-                e.stopPropagation();
-                toggleSelectUser(user.userSeq);
-              }}
-              checked={selectedUsers.includes(user.userSeq)}
-            />
-            <li
+      <table>
+        <thead>
+          <tr>
+            <th style={{ width: '8%' }}>선택</th>
+            <th style={{ width: '10%' }}>순차번호</th>
+            <th style={{ width: '22%' }}>이메일</th>
+            <th style={{ width: '15%' }}>로그인 타입</th>
+            <th style={{ width: '18%' }}>가입일</th>
+            <th style={{ width: '12%' }}>탈퇴 여부</th>
+            <th style={{ width: '10%' }}>탈퇴</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filterUsers.map((user) => (
+            <tr
+              key={user.userSeq}
               className={user.delYn === 'Y' ? 'deleted-user' : ''}
-              onClick={() => navigate(`/admin/userDetail/${user.userSeq}`)}
             >
-              순차번호: {user.userSeq}
-              <br />
-              이메일: {user.username}
-              <br />
-              로그인 타입: {getLoginType(user.oauthType)}
-              <br />
-              가입일: {formatDate(user.registerDate)}
-              <br />
-              {user.delYn === 'Y' ? (
-                <span className="deleted">탈퇴 회원</span>
-              ) : (
-                <button
-                  className="delBtn btn_type_1"
-                  onClick={(e) => {
+              <td>
+                <input
+                  type="checkbox"
+                  className="styled-checkbox"
+                  id={`checkbox-${user.userSeq}`}
+                  onChange={(e) => {
                     e.stopPropagation();
-                    userDelete(user.userSeq, user.username);
+                    toggleSelectUser(user.userSeq);
                   }}
-                >
-                  탈퇴
-                </button>
-              )}
-            </li>
-          </div>
-        ))}
-      </ul>
+                  checked={selectedUsers.includes(user.userSeq)}
+                />
+                <label htmlFor={`checkbox-${user.userSeq}`}></label>
+              </td>
+              <td onClick={() => navigate(`/admin/userDetail/${user.userSeq}`)}>
+                {user.userSeq}
+              </td>
+              <td onClick={() => navigate(`/admin/userDetail/${user.userSeq}`)}>
+                {user.username}
+              </td>
+              <td onClick={() => navigate(`/admin/userDetail/${user.userSeq}`)}>
+                {getLoginType(user.oauthType)}
+              </td>
+              <td onClick={() => navigate(`/admin/userDetail/${user.userSeq}`)}>
+                {formatDate(user.registerDate)}
+              </td>
+              <td onClick={() => navigate(`/admin/userDetail/${user.userSeq}`)}>
+                {user.delYn === 'Y' ? (
+                  <span className="deleted">탈퇴 회원</span>
+                ) : (
+                  '활동 중'
+                )}
+              </td>
+              <td>
+                {user.delYn !== 'Y' && (
+                  <button
+                    className="delBtn btn_type_1"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      userDelete(user.userSeq, user.username);
+                    }}
+                  >
+                    탈퇴
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
       <div className="pagination">
         <button onClick={() => setPage(page - 1)} disabled={page <= 0}>
           이전

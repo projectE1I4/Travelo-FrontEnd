@@ -104,9 +104,7 @@ export const getUserCourses = async (userSeq, sortBy = 'latest') => {
 export const getUserReviews = async (userSeq, sortBy = 'latest') => {
   try {
     const response = await axiosInstance.get(`/admin/reviews/${userSeq}`, {
-      params: {
-        sortBy: sortBy,
-      },
+      params: { sortBy },
       headers: {
         Authorization: sessionStorage.getItem('accessToken'),
       },
@@ -118,7 +116,7 @@ export const getUserReviews = async (userSeq, sortBy = 'latest') => {
   }
 };
 
-//회원이 만든 그룹 목록
+// 회원이 만든 그룹 목록
 export const getUserGroups = async (userSeq, sortBy = 'latest') => {
   try {
     const response = await axiosInstance.get(`/admin/groups/${userSeq}`, {

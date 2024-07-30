@@ -13,6 +13,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import MyCoursePagination from '../common/pagenation/MyCoursePagination';
 
+const typeMap = {
+  12: '관광지',
+  14: '문화시설',
+  28: '레저 스포츠',
+  32: '숙박',
+  38: '쇼핑',
+  39: '음식점',
+};
+
 const MyPlaceBookmark = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,10 +59,13 @@ const MyPlaceBookmark = () => {
             placeSeq,
             title,
             address,
+            type,
             imageFile1: image,
             viewCount: views,
             likeCount: likes,
           } = bookmark.place;
+
+          const typeText = typeMap[type] || '기타';
 
           return (
             <li key={bookmark.placeBookmarkSeq} className={styles.bookmarkItem}>
@@ -80,6 +92,7 @@ const MyPlaceBookmark = () => {
                 </div>
                 <div className={styles.content}>
                   <div>
+                    <div className={styles.types}>{typeText}</div>
                     <h3>{title}</h3>
                     <p>{address}</p>
                   </div>

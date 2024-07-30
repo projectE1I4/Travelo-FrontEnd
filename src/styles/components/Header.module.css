@@ -53,6 +53,8 @@
   flex: 1;
 }
 .navbar-ul {
+  /* 임시로 쓰느라 풀어둠 */
+  /* display: flex; */
   flex-direction: row;
 }
 

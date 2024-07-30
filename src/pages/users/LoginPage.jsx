@@ -3,6 +3,7 @@ import Login from '../../components/auth/Login';
 import { useAuth } from '../../contexts/AuthContext';
 import { useLocation } from 'react-router-dom';
 import LoginErrorModal from './LoginErrorModal';
+import LoginWorseUserModal from './LoginWorseUserModal';
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -17,10 +18,6 @@ const LoginPage = () => {
       setShowModal(true);
     }
   }, [show]);
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
 
   return (
     <div className="grid-container">

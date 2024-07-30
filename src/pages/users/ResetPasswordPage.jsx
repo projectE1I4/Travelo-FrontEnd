@@ -1,5 +1,5 @@
 import React from 'react';
-import ResetPassword from '../../components/Auth/ResetPassword';
+import ResetPassword from '../../components/auth/ResetPassword';
 import authService from '../../services/authService';
 import mailCheckService from '../../services/mailCheckService';
 

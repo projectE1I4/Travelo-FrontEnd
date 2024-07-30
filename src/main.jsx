@@ -2,15 +2,21 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import { PlaceProvider } from './contexts/PlaceContext';
-import { CourseProvider } from './contexts/CourseContext'; // CourseProvider import 추가
+import { CourseGroupProvider } from './contexts/CourseGroupContext.jsx';
+import { CourseProvider } from './contexts/CourseContext';
+import { BrowseProvider } from './contexts/BrowseContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <PlaceProvider>
+    <AuthProvider>
       <CourseProvider>
-        <App />
+        <BrowseProvider>
+          <CourseGroupProvider>
+            <App />
+          </CourseGroupProvider>
+        </BrowseProvider>
       </CourseProvider>
-    </PlaceProvider>
+    </AuthProvider>
   </BrowserRouter>
 );

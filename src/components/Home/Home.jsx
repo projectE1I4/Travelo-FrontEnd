@@ -1,5 +1,5 @@
 import React from 'react';
-import useLogout from '../Auth/Logout';
+import useLogout from '../auth/Logout';
 
 const Home = () => {
   const logout = useLogout();

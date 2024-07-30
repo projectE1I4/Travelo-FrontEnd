@@ -1,0 +1,135 @@
+/* CourseGroupCreateModal.module.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-header {
+  display: grid;
+  grid-template-columns: auto auto;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 41px;
+  line-height: 41px;
+  text-align: center;
+  box-shadow: 0 -1px 4px 0 rgba(0, 0, 0, 0.15);
+  margin: 20px 10px;
+}
+
+.modal-header .tab-button {
+  font-weight: 600;
+  font-size: 16px;
+  background: var(--point-color2);
+  color: var(--txt-color-500);
+}
+
+.modal-header .tab-button.active {
+  background: var(--button-bg-color);
+  color: var(--point-color1);
+}
+
+.open-modal-button {
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+.modal-inner-content {
+  padding: 20px 10px;
+  max-height: 700px; /* 원하는 최대 높이 값으로 설정 */
+  overflow-y: auto; /* 세로 스크롤을 추가 */
+  scrollbar-width: thin; /* Firefox를 위한 설정 */
+  scrollbar-color: #888 #f1f1f1; /* Firefox를 위한 설정 */
+}
+
+/* WebKit 기반 브라우저를 위한 설정 */
+.modal-inner-content::-webkit-scrollbar {
+  width: 8px; /* 스크롤바 너비 */
+}
+
+.modal-inner-content::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 스크롤바 트랙 배경 */
+}
+
+.modal-inner-content::-webkit-scrollbar-thumb {
+  background-color: #888; /* 스크롤바 색상 */
+  border-radius: 10px; /* 스크롤바 끝 모서리 둥글게 */
+  border: 2px solid #f1f1f1; /* 스크롤바 내부에 경계 추가 */
+}
+
+.modal-inner-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* 스크롤바에 마우스를 올렸을 때 색상 */
+}
+
+.modal-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.course-item {
+  border-bottom: 1px solid var(--txt-color-400);
+  border-top: 1px solid var(--txt-color-400);
+  padding: 10px;
+}
+
+.course-item h3 {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.course-item-description {
+  background: var(--point-color1);
+  color: var(--button-bg-color);
+  width: 100px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.course-item-under-wrap {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 30px;
+}
+
+.course-item p {
+  color: var(--txt-color-500);
+  font-size: 14px;
+}
+
+.course-item div {
+  align-self: self-end;
+}

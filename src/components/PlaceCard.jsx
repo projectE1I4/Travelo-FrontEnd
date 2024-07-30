@@ -9,7 +9,7 @@ import {
   faImage,
 } from '@fortawesome/free-solid-svg-icons';
 import { PlaceContext } from '../contexts/PlaceContext';
-import likePlace from '../services/likeService';
+import { likePlace } from '../services/likeService';
 import { addBookmark, removeBookmark } from '../services/bookmarkService';
 
 const typeMap = {

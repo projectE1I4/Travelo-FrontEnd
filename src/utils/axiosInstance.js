@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
 
 const axiosInstance = axios.create({

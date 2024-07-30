@@ -1,4 +1,4 @@
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 import styles from '../../styles/components/user/LeaveUserModal.module.css';
 const LeaveSocialUserModal = ({ show, onClose, onConfirm }) => {
   if (!show) {

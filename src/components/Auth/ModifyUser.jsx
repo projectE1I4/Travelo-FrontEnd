@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 import styles from '../../styles/pages/ModifyUser.module.css';
 import useValidation from '../../hooks/useValidation';
 import axiosInstance from '../../utils/axiosInstance';

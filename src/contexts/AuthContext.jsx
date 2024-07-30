@@ -14,13 +14,14 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
-  const [accessToken, setAccessToken] = useState('');
-  const [refreshToken, setRefreshToken] = useState('');
+  // const [accessToken, setAccessToken] = useState('');
+  // const [refreshToken, setRefreshToken] = useState('');
 
   const [loading, setLoading] = useState(true);
 
   const checkAuth = useCallback(async () => {
     const accessToken = sessionStorage.getItem('accessToken');
+    console.log('Stored accessToken: ', accessToken);
 
     if (!accessToken) {
       setIsAuthenticated(false);
@@ -35,6 +36,7 @@ export const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log('User data: ', response.data);
       setIsAuthenticated(true);
       setUser(response.data);
     } catch (error) {
@@ -55,14 +57,15 @@ export const AuthProvider = ({ children }) => {
       const response = await authService.login(email, password);
       const token = response.data;
 
+      console.log('token::', response);
       console.log('token', token);
 
       sessionStorage.setItem('accessToken', token.accessToken);
       sessionStorage.setItem('refreshToken', token.refreshToken);
 
-      console.log(sessionStorage.getItem('accessToken'));
-      setAccessToken(token.accessToken);
-      setRefreshToken(token.refreshToken);
+      console.log('엑토', sessionStorage.getItem('accessToken'));
+      // setAccessToken(token.accessToken);
+      // setRefreshToken(token.refreshToken);
       setIsAuthenticated(true);
       setUser(token.user);
       return response;
@@ -88,7 +91,7 @@ export const AuthProvider = ({ children }) => {
     console.log(sessionStorage.getItem('accessToken'));
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('refreshToken');
-    setAccessToken(null);
+    // setAccessToken(null);
     setIsAuthenticated(false);
     setUser(null);
     window.location.href = '/users/login';

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../../styles/components/MypageSidebar.module.css';
 import { Link, matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 
 const MyPageSidebar = () => {
   const [userEdit, setUserEdit] = useState('false');

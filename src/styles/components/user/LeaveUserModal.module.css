@@ -68,7 +68,7 @@
 .leave-btn-wrap {
   margin-top: 15px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
 }
 
@@ -113,4 +113,9 @@
   text-align: center;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.warning-user-box {
+  padding-bottom: 10px;
+  color: var(--txt-color-500);
 }

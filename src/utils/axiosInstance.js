@@ -26,6 +26,7 @@ const onRefreshed = (token) => {
 axiosInstance.interceptors.request.use(
   async (config) => {
     const excludedUrls = [
+      '/travelo/main',
       '/travelo/place/list',
       '/travelo/join',
       '/travelo/mailConfirm',

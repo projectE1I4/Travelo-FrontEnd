@@ -24,7 +24,7 @@ const MapComponent = ({ latitude, longitude }) => {
     <Map
       center={{ lat: latitude, lng: longitude }}
       style={{ width: '100%', height: '100%' }}
-      level={13}
+      level={1}
       ref={mapRef}
     >
       <MapMarker position={{ lat: latitude, lng: longitude }} />

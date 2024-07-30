@@ -26,7 +26,7 @@ const CourseMap = () => {
     <Map
       center={{ lat: mapCenter.lat, lng: mapCenter.lng }}
       style={{ width: '100%', height: '100%' }}
-      level={7}
+      level={8}
       ref={mapRef}
     >
       {selectedPlaces.map((place, index) => (

@@ -19,14 +19,14 @@
 }
 
 .topButton {
-  padding: 15px;
+  padding: 15px 22px;
   font-size: 14px;
   background-color: var(--txt-color-400);
   color: var(--button-txt-color1);
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
   transition: background-color 0.3s;
 }
 

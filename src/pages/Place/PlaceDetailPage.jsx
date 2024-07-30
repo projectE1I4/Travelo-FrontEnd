@@ -43,9 +43,9 @@ const PlacesDetailPage = () => {
 
   return (
     <div className="grid-container">
-      <button onClick={() => navigate(-1)} style={{ marginBottom: '10px' }}>
+      {/* <button onClick={() => navigate(-1)} style={{ marginBottom: '10px' }}>
         뒤로가기
-      </button>
+      </button> */}
       <div className={styles['place-detail']}>
         <section className={styles['image-map-section']}>
           <div className={styles['map-container']}>

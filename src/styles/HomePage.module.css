@@ -9,54 +9,238 @@
   margin-bottom: 40px;
 }
 
-.slideContent {
+/* 메인 비주얼 슬라이드 */
+.mainVisualSlide {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
+  height: 300px;
+  color: white;
+  border-radius: 10px;
 }
 
-.slideContent img {
+.mainVisualSlideBlue {
+  background: linear-gradient(135deg, #4d76b3 0%, #8aacc8 100%);
+}
+
+.mainVisualSlideRed {
+  background: linear-gradient(135deg, #ff4040 0%, #ff7f7f 100%);
+}
+
+.mainTitle {
+  font-size: 3rem;
+  font-family: 'Odor', sans-serif;
+}
+
+.subTitle {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+h2 {
+  display: flex;
+  font-weight: 700 !important;
+  margin-bottom: 20px !important;
+}
+h2 > p {
+  display: block;
+  margin-right: 10px;
+}
+
+/* 인기 장소 슬라이드 */
+.placeSlide {
   width: 100%;
-  height: auto;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.gridContainer {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 16px;
+.placeImageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.gridItem {
-  grid-column: span 2;
+.placeImage {
+  width: 100%;
+  height: 100%;
+  object-fit: none;
+  border-radius: 10px;
+  filter: brightness(60%);
+}
+
+.placeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 10px;
+}
+
+.info {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.placeType {
+  background-color: var(--point-color1);
+  padding: 5px 15px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.placeTitle {
+  font-size: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+.imagePlaceholder h3 {
+  position: absolute;
+  bottom: 10px;
+  color: #333;
+  text-align: center;
+}
+
+/* 인기 코스 슬라이드 */
+.courseSlide {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  height: 100px;
+  /* height: 300px; */
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.courseSlide .image-container {
+  flex: 0 0 100px;
+  margin-bottom: 14px;
+}
+
+.courseSlide .image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.courseSlide .image-item {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.courseSlide .image-item:nth-child(1) {
+  border-radius: 8px 0 0 0;
+}
+.courseSlide .image-item:nth-child(2) {
+  border-radius: 0 8px 0 0;
+}
+.courseSlide .image-item:nth-child(3) {
+  border-radius: 0 0 0 8px;
+}
+.courseSlide .image-item:nth-child(4) {
+  border-radius: 0 0 8px 0;
+}
+
+.courseSlide .image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.courseSlide .image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   background-color: #f0f0f0;
 }
 
-.gridItem:nth-child(1) {
-  background-color: #ffdddd;
+.courseSlide .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }
 
-.gridItem:nth-child(2) {
-  background-color: #ddffdd;
+.courseSlide .details {
+  flex: 1;
 }
 
-.gridItem:nth-child(3) {
-  background-color: #ddddff;
+.courseSlide .details h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.gridItem:nth-child(4) {
-  background-color: #ffffdd;
+.courseSlide .details p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: var(--txt-color-500);
 }
 
-.gridItem:nth-child(5) {
-  background-color: #ddffff;
+.courseSlide .icons {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  justify-content: flex-end;
 }
 
-.gridItem:nth-child(6) {
-  background-color: #ffddff;
+.courseSlide .icons svg {
+  margin-right: 4px;
+}
+
+.courseSlide .icons .wrap {
+  display: flex;
+  gap: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--point-color2);
+}
+
+.courseSlide .icons span {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--txt-color-500);
+}
+
+.courseSlide .heart-icon {
+  color: #ff4e4e;
+}
+
+.hc {
+  margin-top: 100px;
 }

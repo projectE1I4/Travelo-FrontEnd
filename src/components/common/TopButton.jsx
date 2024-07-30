@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/components/TopButton.module.css'; // CSS 파일 import
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpLong } from '@fortawesome/free-solid-svg-icons';
 
 const TopButton = () => {
   const [showButton, setShowButton] = useState(false);
@@ -40,7 +42,7 @@ const TopButton = () => {
             onClick={scrollToTop}
             type="button"
           >
-            Top
+            <FontAwesomeIcon icon={faUpLong} />
           </button>
         </div>
       )}

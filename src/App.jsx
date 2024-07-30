@@ -43,6 +43,7 @@ import BrowseCourseDetailPage from './pages/browseCourses/BrowseCourseDetailPage
 import { useAuth } from './contexts/AuthContext';
 import MyPlaceBookmarkPage from './pages/bookmarks/MyPlaceBookmarkPage.jsx';
 import MyCourseBookmarkPage from './pages/bookmarks/MyCourseBookmarkPage.jsx';
+import Footer from './components/common/Footer.jsx';
 import TopButton from './components/common/TopButton.jsx';
 
 const App = () => {
@@ -195,6 +196,7 @@ const App = () => {
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <Footer />
       </div>
     </>
   );

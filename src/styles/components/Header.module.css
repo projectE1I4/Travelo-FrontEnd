@@ -95,18 +95,19 @@
 }
 
 .btn-custom {
-  padding: 0;
+  padding: 0 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  width: 130px;
+  /* width: 130px; */
   height: 38px;
   line-height: 38px;
   font-size: 14px;
   color: var(--txt-color-500);
   border: 1px solid var(--txt-color-400);
   margin-left: 5px;
+  transition: all 0.2s;
 }
 
 .btn-custom:hover {

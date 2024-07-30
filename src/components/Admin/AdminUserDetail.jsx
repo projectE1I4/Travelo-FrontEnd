@@ -97,33 +97,46 @@ const AdminUserDetail = () => {
   return (
     <div className="adminUserDetail">
       <h1>회원 상세 정보</h1>
-      {user.delYn === 'Y' && (
-        <p className="dropUser">탈퇴 : {formatDate(user.resignDate)}</p>
-      )}
-      {user.delYn === 'N' ? (
-        <button className="deleteUserBtn" onClick={deleteUserBtn}>
-          회원 탈퇴
-        </button>
-      ) : (
-        <button className="drop" disabled>
-          탈퇴 회원
-        </button>
-      )}
+
       <div className="sectionButtons">
-        <button onClick={() => setActiveSection('courses')}>코스</button>
-        <button onClick={() => setActiveSection('reviews')}>후기</button>
-        <button onClick={() => setActiveSection('groups')}>그룹</button>
+        <button
+          className={activeSection === 'courses' ? 'active' : ''}
+          onClick={() => setActiveSection('courses')}
+        >
+          코스
+        </button>
+        <button
+          className={activeSection === 'reviews' ? 'active' : ''}
+          onClick={() => setActiveSection('reviews')}
+        >
+          후기
+        </button>
+        <button
+          className={activeSection === 'groups' ? 'active' : ''}
+          onClick={() => setActiveSection('groups')}
+        >
+          그룹
+        </button>
       </div>
       {user ? (
         <>
-          <p>순차번호: {user.userSeq}</p>
-          <p>이메일: {user.username}</p>
-          <p>전화번호: {user.tel}</p>
-          <p>가입일자: {formatDate(user.registerDate)}</p>
-          <p>정보 수정일자: {formatDate(user.modifyDate)}</p>
-          <p>로그인 타입: {getLoginType(user.oauthType)}</p>
-          <p>탈퇴여부: {user.delYn === 'Y' ? '탈퇴 회원' : '활성 회원'}</p>
-
+          <p>회원 번호 : {user.userSeq}</p>
+          <p>이메일 : {user.username}</p>
+          <p>전화번호 : {user.tel}</p>
+          <p>가입일자 : {formatDate(user.registerDate)}</p>
+          <p>정보 수정일자 : {formatDate(user.modifyDate)}</p>
+          <p>로그인 타입 : {getLoginType(user.oauthType)}</p>
+          <p className={user.delYn === 'Y' ? 'dropStatus' : ''}>
+            탈퇴 여부 :{' '}
+            {user.delYn === 'Y'
+              ? `탈퇴 ${formatDate(user.resignDate)}`
+              : '활성 회원'}
+          </p>
+          {user.delYn === 'N' && (
+            <button className="deleteUserBtn" onClick={deleteUserBtn}>
+              회원 탈퇴
+            </button>
+          )}
           {activeSection === 'courses' && (
             <>
               <h2>회원이 만든 코스 목록</h2>
@@ -135,14 +148,18 @@ const AdminUserDetail = () => {
                   오래된 순
                 </button>
               </div>
-              <ul>
-                {courses.map((course) => (
-                  <li key={course.courseSeq}>
-                    <h3>{course.title}</h3>
-                    <p>{formatDate(course.createDate)}</p>
-                  </li>
-                ))}
-              </ul>
+              {courses.length > 0 ? (
+                <ul>
+                  {courses.map((course) => (
+                    <li key={course.courseSeq}>
+                      <h3>{course.title}</h3>
+                      <p>{formatDate(course.createDate)}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>항목이 존재하지 않습니다.</p>
+              )}
             </>
           )}
 
@@ -157,15 +174,20 @@ const AdminUserDetail = () => {
                   오래된 순
                 </button>
               </div>
-              <ul>
-                {reviews.map((review) => (
-                  <li key={review.reviewSeq}>
-                    <h3>{review.courseTitle}</h3>
-                    <p>{review.content}</p>
-                    <p>{formatDate(review.createDate)}</p>
-                  </li>
-                ))}
-              </ul>
+              {reviews.length > 0 ? (
+                <ul>
+                  {reviews.map((review) => (
+                    <li key={review.reviewSeq} className="reviewItem">
+                      <p>{review.content}</p>
+                      <p className="reviewDate">
+                        {formatDate(review.createDate)}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>항목이 존재하지 않습니다.</p>
+              )}
             </>
           )}
 
@@ -178,14 +200,18 @@ const AdminUserDetail = () => {
                   오래된 순
                 </button>
               </div>
-              <ul>
-                {groups.map((group) => (
-                  <li key={group.groupSeq}>
-                    <h3>{group.title}</h3>
-                    <p>{formatDate(group.createDate)}</p>
-                  </li>
-                ))}
-              </ul>
+              {courses.length > 0 ? (
+                <ul>
+                  {groups.map((group) => (
+                    <li key={group.courseGroupSeq} className="userContent">
+                      <h3>{group.title}</h3>
+                      <p>{formatDate(group.createDate)}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>항목이 존재하지 않습니다.</p>
+              )}
             </>
           )}
         </>

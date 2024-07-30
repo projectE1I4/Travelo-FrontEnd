@@ -29,7 +29,7 @@ const register = async (username, password, passwordCheck, tel) => {
       return false;
     }
   } else {
-    console.error('인증 실패 : ', error);
+    console.error('인증 실패 :  verifyCodeCheck 실패', error);
     return false;
   }
 };
@@ -46,15 +46,14 @@ const login = async (username, password) => {
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('accessToken', token.accessToken);
     sessionStorage.setItem('refreshToken', token.refreshToken);
-    localStorage.setItem('token', token);
 
     console.log(sessionStorage.getItem('accessToken'));
     if (sessionStorage.getItem('token')) {
       console.log('로그인 성공');
       return response;
-    } else if (localStorage.getItem('token')) {
-      console.log('로그인 성공 (로컬 스토리지)');
-      return response;
+    } else {
+      console.log('로그인 실패');
+      return null;
     }
   } catch (error) {
     console.error('로그인 실패: ', error);
@@ -64,23 +63,31 @@ const login = async (username, password) => {
 
 const logout = async () => {
   const accessToken = sessionStorage.getItem('accessToken');
-  const response = await axiosInstance.post(
-    '/user/logout',
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    }
-  );
-  const navigate = useNavigate();
-  localStorage.removeItem('token');
-  sessionStorage.removeItem('token');
 
-  console.log('로그아웃 시도');
-  if (response) {
-    console.log('로그아웃 성공');
-    navigate('/');
+  if (accessToken) {
+    try {
+      const response = await axiosInstance.post(
+        '/user/logout',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
+
+      console.log('로그아웃 시도');
+      if (response) {
+        window.location.href = '/';
+      }
+    } catch (error) {
+      console.error('로그아웃 실패: ', error);
+    }
+  } else {
+    console.log('액세스 토큰이 존재하지 않습니다.');
   }
 };
 
@@ -116,8 +123,6 @@ const onCheckUser = async (username) => {
 };
 
 const resetPassword = async (newPassword, confirmPassword, username) => {
-  console.log(newPassword, confirmPassword);
-  console.log(sessionStorage.getItem('username'));
   sessionStorage.setItem('username', username);
   try {
     const resetPasswordResponse = await axiosInstance.post(

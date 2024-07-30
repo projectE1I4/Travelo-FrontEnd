@@ -1,0 +1,198 @@
+.adminUserList {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.adminUserList h1 {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.adminUserList .filtering {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.adminUserList .filter {
+  text-align: left;
+}
+
+.adminUserList .filter button {
+  margin-right: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+}
+
+.adminUserList .filter button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserList .sort {
+  position: relative;
+  display: inline-block;
+}
+
+.adminUserList .sort .dropDownBtn {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminUserList .sort .dropDownBtn .text {
+  margin-right: 10px; /* 텍스트와 화살표 사이의 간격 */
+}
+
+.adminUserList .sort .arrow {
+  margin-left: 10px;
+}
+
+.adminUserList .sort .dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.adminUserList .sort .dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.adminUserList .sort .dropdownContent a:hover {
+  background-color: #ddd;
+}
+
+.adminUserList .sort .dropdownContent.show {
+  display: block;
+}
+
+.adminUserList p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.adminUserList .select {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.adminUserList .select p {
+  margin-right: 20px;
+  font-size: 16px;
+}
+
+.adminUserList .select button {
+  font-size: 16px;
+}
+
+.adminUserList .select button:hover {
+  color: red;
+}
+
+.adminUserList ul {
+  list-style: none;
+  border-top: 1px solid black;
+  margin-top: 10px;
+  padding: 0;
+}
+
+.adminUserList li {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.adminUserList li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.adminUserList li p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.adminUserList li span {
+  font-weight: bold;
+}
+
+.adminUserList .delBtn {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  margin-right: 30px;
+}
+
+.adminUserList li.deleted-user {
+  background-color: var(--point-color2);
+}
+
+.adminUserList .deleted {
+  color: rgb(225, 37, 37);
+  margin-right: 30px;
+}
+
+.adminUserList input[type='checkbox'] {
+  margin-right: 20px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--txt-color-400);
+  cursor: pointer;
+}
+
+.adminUserList input[type='checkbox']:checked {
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.adminUserList .userItem {
+  display: flex;
+  align-items: center;
+}
+
+.adminUserList li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.adminUserList .pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.adminUserList .pagination button {
+  margin-right: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+}
+
+.adminUserList .pagination button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}

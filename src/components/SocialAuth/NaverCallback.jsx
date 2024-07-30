@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import axiosInstance from '../../utils/axiosInstance';
+import useAuth from '../../hooks/useAuth';
 
-const NaverCallback = () => {
+const NaverCallback = ({ onLogin }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const code = new URLSearchParams(location.search).get('code');
   const state = new URLSearchParams(location.search).get('stateString');
+  const { login } = useAuth();
 
   useEffect(() => {
     const fetchAuthResponse = async () => {
@@ -21,6 +22,10 @@ const NaverCallback = () => {
             },
           }
         );
+        onLogin(response.data);
+        console.log(response);
+        // API 성공 후 처리
+        console.log(response.data);
 
         if (response.status === 200) {
           const { accessToken, refreshToken } = response.data;
@@ -29,6 +34,7 @@ const NaverCallback = () => {
           sessionStorage.setItem('token', response);
           console.log(sessionStorage.getItem('token'));
           navigate('/home');
+          window.location.reload();
         } else if (response.status === 400) {
           const { error, username } = response.data;
           navigate('/social/integrate', {
@@ -63,10 +69,8 @@ const NaverCallback = () => {
       }
     };
 
-    if (code) {
-      fetchAuthResponse();
-    }
-  }, [code, state, navigate]);
+    fetchAuthResponse();
+  }, [login, code, state, navigate]);
 
   return <div>로그인 중...</div>;
 };

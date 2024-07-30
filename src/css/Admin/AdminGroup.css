@@ -1,0 +1,94 @@
+.adminGroupList {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.adminGroupList h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.adminGroupList .filters,
+.adminGroupList .sort {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.adminGroupList .filters button,
+.adminGroupList .sort button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminGroupList .filters button:hover,
+.adminGroupList .sort button:hover {
+  background-color: #0056b3;
+}
+
+.adminGroupList ul {
+  list-style: none;
+  border-top: 1px solid black;
+  margin-top: 10px;
+  padding: 0;
+}
+
+.adminGroupList li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminGroupList li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.adminGroupList li p {
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.adminGroupList input[type='checkbox'] {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+.adminGroupList input[type='checkbox']:checked {
+  background-color: #007bff;
+  border: 2px solid #0056b3;
+}
+
+.adminGroupList .pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.adminGroupList .pagination button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminGroupList .pagination button:hover {
+  background-color: #0056b3;
+}

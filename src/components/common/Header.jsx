@@ -10,7 +10,7 @@ import {
 import { useAuth } from '../../contexts/AuthContext';
 
 function Header() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
 
   useEffect(() => {
     console.log('Header re-rendered with isAuthenticated:', isAuthenticated);
@@ -51,25 +51,38 @@ function Header() {
           </ul>
         </div>
         {isAuthenticated && user ? (
-          <button type="button" className={styles['btn-custom']}>
+          <div className={styles['btn-custom-wrap']}>
             {user.role === 'ADMIN' ? (
-              <Link to="/admin">어드민 페이지</Link>
+              <>
+                <Link to="/admin" className={styles['btn-custom']}>
+                  어드민 페이지
+                </Link>
+                <button onClick={logout} className={styles['btn-custom']}>
+                  로그아웃
+                </button>
+              </>
             ) : (
-              <Link
-                to={
-                  user.oauthType === 'google'
-                    ? '/mypage/modifyprofileGoogle'
-                    : user.oauthType === 'kakao'
-                      ? '/mypage/modifyprofileKakao'
-                      : user.oauthType === 'naver'
-                        ? '/mypage/modifyprofileNaver'
-                        : '/mypage/modifyprofile'
-                }
-              >
-                마이 페이지
-              </Link>
+              <>
+                <Link
+                  to={
+                    user.oauthType === 'google'
+                      ? '/mypage/modifyprofileGoogle'
+                      : user.oauthType === 'kakao'
+                        ? '/mypage/modifyprofileKakao'
+                        : user.oauthType === 'naver'
+                          ? '/mypage/modifyprofileNaver'
+                          : '/mypage/modifyprofile'
+                  }
+                  className={styles['btn-custom']}
+                >
+                  마이 페이지
+                </Link>
+                <button onClick={logout} className={styles['btn-custom']}>
+                  로그아웃
+                </button>
+              </>
             )}
-          </button>
+          </div>
         ) : (
           <button type="button" className={styles['btn-custom']}>
             <Link to="/users/login">로그인 / 회원가입</Link>

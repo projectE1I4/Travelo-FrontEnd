@@ -12,7 +12,7 @@ const Login = ({ onLogin }) => {
   const [failLogin, setFailLogin] = useState('');
 
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -131,9 +131,27 @@ const Login = ({ onLogin }) => {
         </div>
         <div className={styles['line-wrap']}>소셜 로그인</div>
         <div className={styles['social-wrap']}>
-          <KakaoLoginButton onClick={() => handleSocialLogin('kakao')} />
-          <GoogleLoginButton onClick={() => handleSocialLogin('google')} />
-          <NaverLoginButton onClick={() => handleSocialLogin('naver')} />
+          <KakaoLoginButton
+            type="button"
+            onClick={(e) => {
+              handleSocialLogin('kakao');
+              e.preventDefault();
+            }}
+          />
+          <GoogleLoginButton
+            type="button"
+            onClick={(e) => {
+              handleSocialLogin('google');
+              e.preventDefault();
+            }}
+          />
+          <NaverLoginButton
+            type="button"
+            onClick={(e) => {
+              handleSocialLogin('naver');
+              e.preventDefault();
+            }}
+          />
         </div>
       </form>
     </div>

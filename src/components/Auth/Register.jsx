@@ -3,6 +3,9 @@ import styles from '../../styles/Auth.module.css';
 import { useNavigate } from 'react-router-dom';
 import useMailCheck from '../../hooks/useMailCheck';
 import useValidation from '../../hooks/useValidation';
+import authService from '../../services/authService';
+
+const { onCheckUser } = authService;
 
 const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const [username, setUsername] = useState('');
@@ -24,6 +27,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
   const [mailCheckSuccess, handleMailCheck] = useMailCheck(onMailCheck);
   const [verifyCodeCheckSuccess, setVerifyCodeCheckSuccess] = useState(null);
   const [verifyCodeError, setVerifyCodeError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [mailChecked, setMailChecked] = useState(false);
 
@@ -38,8 +42,11 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
     }
   };
 
-  const handleChecked = () => {
+  const handleChecked = (username) => {
     setMailChecked(true);
+    if (onCheckUser(username)) {
+      setErrorMessage('이미 가입한 이메일입니다.');
+    }
     return 'disable = true';
   };
 
@@ -75,8 +82,9 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
     if (verifyCodeCheckSuccess) {
       const response = await onRegister(username, password, passwordCheck, tel);
       setVerifyCodeError('');
-      console.log('success', verifyCodeCheckSuccess);
-      if (response) {
+      console.log('코드체크: success', verifyCodeCheckSuccess);
+
+      if (response.status === 200 && response) {
         navigate('/users/login');
       } else {
         console.log('회원가입 실패');
@@ -119,14 +127,18 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
                 이메일
               </label>
               {usernameError ? (
-                <span className={styles['error-message']}>{usernameError}</span>
+                <span className={styles['error-message']}>
+                  {usernameError || errorMessage}
+                </span>
+              ) : <span></span> || errorMessage ? (
+                <span className={styles['error-message']}>{errorMessage}</span>
               ) : (
                 <span></span>
               )}
               <button
                 onClick={(e) => {
                   handleMailCheck(username, e);
-                  handleChecked;
+                  handleChecked(username);
                 }}
                 className={`${mailChecked ? styles['btn-checked'] : styles['btn-small']}`}
                 disabled={'' || mailChecked}

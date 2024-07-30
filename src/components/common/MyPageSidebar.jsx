@@ -61,36 +61,24 @@ const MyPageSidebar = () => {
               <p>회원 정보 수정</p>
             </Link>
           </li>
-          <li onClick={openBookmark} className={styles['MS-item']}>
-            <Link to="/mypage/">
+          <li
+            onClick={openBookmark}
+            className={`${styles['MS-item']} ${isActive(['/mypage/placeBookmark', '/mypage/courseBookmark'])}`}
+          >
+            <Link to="/mypage/placeBookmark">
               <p>북마크</p>
             </Link>
           </li>
-          {bookMark === true && (
-            <li className={styles['MS-bookmark-box']}>
-              <ul>
-                <li className={styles['MS-item']}>
-                  <Link to="/mypage/">
-                    <p>장소</p>
-                  </Link>
-                </li>
-                <li className={styles['MS-item']}>
-                  <Link to="/mypage/">
-                    <p>코스</p>
-                  </Link>
-                </li>
-              </ul>
-            </li>
-          )}
           <li
             className={`${styles['MS-item']} ${isActive(['/mypage/courseGroup', '/mypage/myCourses', '/mypage/courseGroupDetail', '/courseGroup/create', '/courseGroup/modify'])}`}
           >
-            {/* <Link to="/mypage/myCourses"> */}
-            <Link to="/mypage/courseGroup">
+            <Link to="/mypage/myCourses">
               <p>나의 코스</p>
             </Link>
           </li>
-          <li className={styles['MS-item']}>
+          <li
+            className={`${styles['MS-item']} ${isActive(['/mypage/myReviews'])}`}
+          >
             <Link to="/mypage/myReviews">
               <p>나의 후기</p>
             </Link>

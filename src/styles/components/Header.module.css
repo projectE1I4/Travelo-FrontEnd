@@ -85,6 +85,10 @@
   color: #ffb800;
 }
 
+.btn-custom-wrap {
+  display: flex;
+}
+
 .btn-custom {
   padding: 0;
   display: flex;
@@ -97,6 +101,7 @@
   font-size: 14px;
   color: var(--txt-color-500);
   border: 1px solid var(--txt-color-400);
+  margin-left: 5px;
 }
 
 .btn-custom:hover {

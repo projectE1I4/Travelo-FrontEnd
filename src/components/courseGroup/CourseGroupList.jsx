@@ -40,14 +40,6 @@ const CourseGroupList = () => {
     return <p>Loading...</p>;
   }
 
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (!courseGroups || courseGroups.length === 0) {
-    return <p>No course groups found.</p>;
-  }
-
   const formatDate = (dateString) => {
     // 날짜 문자열을 Date 객체로 변환
     const date = new Date(dateString);

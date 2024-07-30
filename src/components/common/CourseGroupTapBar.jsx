@@ -11,12 +11,12 @@ const CourseGroupTapBar = () => {
   return (
     <div className={styles['tapbar-container']}>
       <ul className={styles['tap-wrap']}>
-        <li className={isActive('/mypage/myCourses')}>
-          <Link to="/mypage/myCourses">커스텀 코스</Link>
-        </li>
-        <li className={isActive('/mypage/courseGroup')}>
-          <Link to="/mypage/courseGroup">그룹</Link>
-        </li>
+        <Link to="/mypage/myCourses">
+          <li className={isActive('/mypage/myCourses')}>커스텀 코스</li>
+        </Link>
+        <Link to="/mypage/courseGroup">
+          <li className={isActive('/mypage/courseGroup')}>그룹</li>
+        </Link>
       </ul>
     </div>
   );

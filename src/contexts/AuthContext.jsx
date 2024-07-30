@@ -1,8 +1,9 @@
-import {
+
+import React, {
   createContext,
+  useContext,
   useState,
   useEffect,
-  useContext,
   useCallback,
 } from 'react';
 import axiosInstance from '../utils/axiosInstance';
@@ -14,14 +15,17 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
-  const [accessToken, setAccessToken] = useState(
-    sessionStorage.getItem('accessToken') || null
-  );
 
-  const checkAuth = async () => {
+  const [loading, setLoading] = useState(true);
+
+  const checkAuth = useCallback(async () => {
+    const accessToken = sessionStorage.getItem('accessToken');
+
+
     if (!accessToken) {
       setIsAuthenticated(false);
       setUser(null);
+      setLoading(false);
       return;
     }
 
@@ -37,12 +41,16 @@ export const AuthProvider = ({ children }) => {
       console.error('사용자 정보를 가져오는 중 오류 발생 : ', error);
       setIsAuthenticated(false);
       setUser(null);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     checkAuth();
-  }, [accessToken]);
+
+  }, [checkAuth]);
+
 
   const login = async (email, password) => {
     try {
@@ -83,7 +91,9 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, user, login, logout, accessToken }}
+
+      value={{ isAuthenticated, user, login, logout, checkAuth, loading }}
+
     >
       {children}
     </AuthContext.Provider>

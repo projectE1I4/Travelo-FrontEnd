@@ -8,6 +8,7 @@ import {
   getUserGroups,
 } from '../../services/adminService';
 import { formatDate } from '../common/formatDate';
+import '../../css/Admin/AdminUserDetail.css';
 
 const AdminUserDetail = () => {
   const { userSeq } = useParams();
@@ -19,6 +20,7 @@ const AdminUserDetail = () => {
   const [courseSortBy, setCourseSortBy] = useState('latest');
   const [reviewSortBy, setReviewSortBy] = useState('latest');
   const [groupSortBy, setGroupSortBy] = useState('latest');
+  const [activeSection, setActiveSection] = useState('courses'); // Default active section
 
   useEffect(() => {
     const fetchUserDetail = async () => {
@@ -95,6 +97,23 @@ const AdminUserDetail = () => {
   return (
     <div className="adminUserDetail">
       <h1>회원 상세 정보</h1>
+      {user.delYn === 'Y' && (
+        <p className="dropUser">탈퇴 : {formatDate(user.resignDate)}</p>
+      )}
+      {user.delYn === 'N' ? (
+        <button className="deleteUserBtn" onClick={deleteUserBtn}>
+          회원 탈퇴
+        </button>
+      ) : (
+        <button className="drop" disabled>
+          탈퇴 회원
+        </button>
+      )}
+      <div className="sectionButtons">
+        <button onClick={() => setActiveSection('courses')}>코스</button>
+        <button onClick={() => setActiveSection('reviews')}>후기</button>
+        <button onClick={() => setActiveSection('groups')}>그룹</button>
+      </div>
       {user ? (
         <>
           <p>순차번호: {user.userSeq}</p>
@@ -104,55 +123,71 @@ const AdminUserDetail = () => {
           <p>정보 수정일자: {formatDate(user.modifyDate)}</p>
           <p>로그인 타입: {getLoginType(user.oauthType)}</p>
           <p>탈퇴여부: {user.delYn === 'Y' ? '탈퇴 회원' : '활성 회원'}</p>
-          {user.delYn === 'Y' && <p>탈퇴일자: {formatDate(user.resignDate)}</p>}
-          {user.delYn === 'N' ? (
-            <button onClick={deleteUserBtn}>회원 탈퇴</button>
-          ) : (
-            <button disabled>탈퇴 회원</button>
+
+          {activeSection === 'courses' && (
+            <>
+              <h2>회원이 만든 코스 목록</h2>
+              <div className="sort">
+                <button onClick={() => setCourseSortBy('latest')}>
+                  최신순
+                </button>
+                <button onClick={() => setCourseSortBy('oldest')}>
+                  오래된 순
+                </button>
+              </div>
+              <ul>
+                {courses.map((course) => (
+                  <li key={course.courseSeq}>
+                    <h3>{course.title}</h3>
+                    <p>{formatDate(course.createDate)}</p>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
 
-          <h2>회원이 만든 코스 목록</h2>
-          <div className="sort">
-            <button onClick={() => setCourseSortBy('latest')}>최신순</button>
-            <button onClick={() => setCourseSortBy('oldest')}>오래된 순</button>
-          </div>
-          <ul>
-            {courses.map((course) => (
-              <li key={course.courseSeq}>
-                <h3>{course.title}</h3>
-                <p>{formatDate(course.createDate)}</p>
-              </li>
-            ))}
-          </ul>
+          {activeSection === 'reviews' && (
+            <>
+              <h2>회원이 작성한 후기 목록</h2>
+              <div className="sort">
+                <button onClick={() => setReviewSortBy('latest')}>
+                  최신순
+                </button>
+                <button onClick={() => setReviewSortBy('oldest')}>
+                  오래된 순
+                </button>
+              </div>
+              <ul>
+                {reviews.map((review) => (
+                  <li key={review.reviewSeq}>
+                    <h3>{review.courseTitle}</h3>
+                    <p>{review.content}</p>
+                    <p>{formatDate(review.createDate)}</p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
 
-          <h2>회원이 작성한 후기 목록</h2>
-          <div className="sort">
-            <button onClick={() => setReviewSortBy('latest')}>최신순</button>
-            <button onClick={() => setReviewSortBy('oldest')}>오래된 순</button>
-          </div>
-          <ul>
-            {reviews.map((review) => (
-              <li key={review.reviewSeq}>
-                <h3>{review.courseTitle}</h3>
-                <p>{review.content}</p>
-                <p>{formatDate(review.createDate)}</p>
-              </li>
-            ))}
-          </ul>
-
-          <h2>회원이 가입한 그룹 목록</h2>
-          <div className="sort">
-            <button onClick={() => setGroupSortBy('latest')}>최신순</button>
-            <button onClick={() => setGroupSortBy('oldest')}>오래된 순</button>
-          </div>
-          <ul>
-            {groups.map((group) => (
-              <li key={group.groupSeq}>
-                <h3>{group.title}</h3>
-                <p>{formatDate(group.createDate)}</p>
-              </li>
-            ))}
-          </ul>
+          {activeSection === 'groups' && (
+            <>
+              <h2>회원이 가입한 그룹 목록</h2>
+              <div className="sort">
+                <button onClick={() => setGroupSortBy('latest')}>최신순</button>
+                <button onClick={() => setGroupSortBy('oldest')}>
+                  오래된 순
+                </button>
+              </div>
+              <ul>
+                {groups.map((group) => (
+                  <li key={group.groupSeq}>
+                    <h3>{group.title}</h3>
+                    <p>{formatDate(group.createDate)}</p>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </>
       ) : (
         <p>Loading...</p>

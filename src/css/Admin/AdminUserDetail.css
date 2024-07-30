@@ -1,0 +1,122 @@
+.adminUserDetail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.adminUserDetail h1 {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.adminUserDetail .dropUser {
+  color: rgb(183, 9, 9);
+}
+
+.adminUserDetail .deleteUserBtn {
+  display: inline-block;
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--txt-color-600);
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  float: right;
+}
+
+.adminUserDetail .drop {
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  color: var(--txt-color-600);
+  font-weight: 600;
+  cursor: pointer;
+  float: right;
+}
+
+.adminUserDetail .deleteUserBtn:hover {
+  color: red;
+  background-color: none;
+}
+
+.adminUserDetail p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.adminUserDetail .sort {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.adminUserDetail .sort button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid var(--point-color1);
+  background-color: white;
+  color: var(--point-color1);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminUserDetail .sort button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserDetail ul {
+  list-style: none;
+  padding: 0;
+}
+
+.adminUserDetail li {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.adminUserDetail li h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.adminUserDetail li p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.adminUserDetail button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  background-color: white;
+  color: var(--txt-color-600);
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 50px;
+  font-weight: 500;
+}
+
+.adminUserDetail button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserDetail h2 {
+  margin-top: 30px;
+}

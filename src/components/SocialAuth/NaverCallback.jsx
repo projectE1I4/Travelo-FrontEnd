@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import useAuth from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 
 const NaverCallback = ({ onLogin }) => {
   const location = useLocation();

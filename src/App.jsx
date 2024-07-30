@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import LoginPage from './pages/users/LoginPage.jsx';
 import HomePage from './pages/HomePage';
@@ -45,7 +45,7 @@ import MyPlaceBookmarkPage from './pages/bookmarks/MyPlaceBookmarkPage.jsx';
 import MyCourseBookmarkPage from './pages/bookmarks/MyCourseBookmarkPage.jsx';
 
 const App = () => {
-  const { isAuthenticated, checkAuth, loading } = useAuth();
+  const { isAuthenticated, checkAuth, loading, login } = useAuth();
 
   useEffect(() => {
     checkAuth();
@@ -53,7 +53,7 @@ const App = () => {
 
   const handleLogin = (token) => {
     sessionStorage.setItem('accessToken', token);
-    checkAuth();
+    login();
   };
 
   if (loading) {

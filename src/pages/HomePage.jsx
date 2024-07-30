@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from '../components/home/Home';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../contexts/AuthContext';
 
 const HomePage = () => {
   const { logout, user, isAuthenticated } = useAuth();

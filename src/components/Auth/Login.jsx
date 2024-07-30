@@ -23,6 +23,7 @@ const Login = ({ onLogin }) => {
 
       if (success.status === 200) {
         navigate('/home');
+        window.location.reload();
       } else {
         handleLoginError(success);
       }

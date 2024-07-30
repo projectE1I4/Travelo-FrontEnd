@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../contexts/AuthContext';
 import styles from '../../styles/components/user/LeaveUserModal.module.css';
 
 const LoginErrorModal = ({ show, onClose, username }) => {

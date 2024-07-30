@@ -45,16 +45,20 @@ import MyPlaceBookmarkPage from './pages/bookmarks/MyPlaceBookmarkPage.jsx';
 import MyCourseBookmarkPage from './pages/bookmarks/MyCourseBookmarkPage.jsx';
 
 const App = () => {
-  const { isAuthenticated, login } = useAuth();
-  const navigate = useNavigate();
+  const { isAuthenticated, checkAuth, loading } = useAuth();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
 
   const handleLogin = (token) => {
     sessionStorage.setItem('accessToken', token);
-    login();
+    checkAuth();
   };
 
-  console.log('이즈어쎈', isAuthenticated);
-  console.log('로그인', login);
+  if (loading) {
+    return <div>Loading...</div>; // 로딩 중일 때 로딩 메시지 표시
+  }
   return (
     <>
       <Header />

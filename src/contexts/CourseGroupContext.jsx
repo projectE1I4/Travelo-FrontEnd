@@ -34,7 +34,6 @@ const CourseGroupProvider = ({ children }) => {
   const [courseGroup, setCourseGroup] = useState(null);
 
   const fetchCourseGroupDetail = useCallback(async (id) => {
-    console.log(id);
     try {
       setLoading(true);
       const response = await axiosInstance.get(`/user/group/detail/${id}`);

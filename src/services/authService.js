@@ -29,7 +29,7 @@ const register = async (username, password, passwordCheck, tel) => {
       return false;
     }
   } else {
-    console.error('인증 실패 : ', error);
+    console.error('인증 실패 :  verifyCodeCheck 실패', error);
     return false;
   }
 };
@@ -62,7 +62,6 @@ const login = async (username, password) => {
 };
 
 const logout = async () => {
-  const navigate = useNavigate();
   const accessToken = sessionStorage.getItem('accessToken');
 
   if (accessToken) {
@@ -82,8 +81,7 @@ const logout = async () => {
 
       console.log('로그아웃 시도');
       if (response) {
-        console.log('로그아웃 성공');
-        navigate('/');
+        window.location.href = '/';
       }
     } catch (error) {
       console.error('로그아웃 실패: ', error);
@@ -125,8 +123,6 @@ const onCheckUser = async (username) => {
 };
 
 const resetPassword = async (newPassword, confirmPassword, username) => {
-  console.log(newPassword, confirmPassword);
-  console.log(sessionStorage.getItem('username'));
   sessionStorage.setItem('username', username);
   try {
     const resetPasswordResponse = await axiosInstance.post(

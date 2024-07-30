@@ -5,8 +5,6 @@ import { useAuth } from '../hooks/useAuth';
 const HomePage = () => {
   const { logout, user, isAuthenticated } = useAuth();
 
-  console.log('user', user);
-  console.log('isAuten', isAuthenticated);
   return (
     <div>
       <Home onLogout={logout} />

@@ -88,7 +88,7 @@ const HomePage = () => {
           spaceBetween={50}
           slidesPerView={1}
           effect="fade"
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 8000 }}
           modules={[Autoplay, EffectFade]}
           className={styles.swiper}
         >
@@ -117,7 +117,7 @@ const HomePage = () => {
         <Swiper
           spaceBetween={10}
           slidesPerView={3}
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 5000 }}
           modules={[Autoplay]}
           className={styles.swiper}
         >

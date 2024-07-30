@@ -115,3 +115,6 @@
   border: 1px solid var(--point-color1);
   color: var(--button-txt-color1);
 }
+.btn-custom a:active {
+  background: transparent;
+}

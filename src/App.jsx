@@ -43,6 +43,7 @@ import BrowseCourseDetailPage from './pages/browseCourses/BrowseCourseDetailPage
 import { useAuth } from './contexts/AuthContext';
 import MyPlaceBookmarkPage from './pages/bookmarks/MyPlaceBookmarkPage.jsx';
 import MyCourseBookmarkPage from './pages/bookmarks/MyCourseBookmarkPage.jsx';
+import TopButton from './components/common/TopButton.jsx';
 
 const App = () => {
   const { isAuthenticated, checkAuth, loading, login } = useAuth();
@@ -62,6 +63,7 @@ const App = () => {
   return (
     <>
       <Header />
+      <TopButton />
       <div className="container">
         <Routes>
           {/* 비로그인 사용자 접근 가능 */}

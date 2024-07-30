@@ -1,6 +1,6 @@
 .wrap {
   grid-column: span 12;
-  padding: 20px;
+  padding-top: 32px;
 }
 
 .swiper {

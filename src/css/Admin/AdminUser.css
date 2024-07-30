@@ -84,6 +84,8 @@
 
 .adminUserList .sort .dropdownContent.show {
   display: block;
+  border-radius: 10px;
+  background-color: var(--point-color2);
 }
 
 .adminUserList p {

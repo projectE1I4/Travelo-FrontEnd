@@ -1,34 +1,49 @@
 .card {
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 10px;
   background-color: #fff;
+  cursor: pointer;
 }
 
-.image {
+.image-container {
+  position: relative;
   width: 80px;
   height: 80px;
-  object-fit: cover;
-  border-right: 1px solid #ccc;
-}
-
-.noImage {
-  width: 80px;
-  height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f0f0f0;
-  color: #aaa;
-  border-right: 1px solid #ccc;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .details {
   flex-grow: 1;
   padding: 10px;
+  position: relative;
+  width: 100px;
 }
 
 .name {
@@ -39,7 +54,7 @@
 
 .address {
   font-size: 14px;
-  color: #777;
+  color: var(--txt-color-500);
   margin: 5px 0;
 }
 
@@ -50,19 +65,26 @@
 }
 
 .likes {
+  color: var(--txt-color-500);
+  font-weight: 700;
   font-size: 14px;
-  color: #ff0000;
+}
+
+.likes svg {
+  font-size: 14px;
+  color: #ff4e4e;
 }
 
 .addButton {
-  background-color: #007bff;
+  background-color: var(--txt-color-400);
   color: #fff;
   border: none;
   border-radius: 4px;
   padding: 5px 10px;
   cursor: pointer;
+  transition: all 0.2s;
 }
 
 .addButton:hover {
-  background-color: #0056b3;
+  background-color: var(--txt-color-500);
 }

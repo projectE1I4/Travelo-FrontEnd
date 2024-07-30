@@ -134,7 +134,7 @@ input:checked + .slider:before {
 }
 
 .save-button:hover {
-  background-color: #08417e;
+  background-color: #355483;
 }
 
 .cancel-button {

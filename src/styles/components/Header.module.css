@@ -54,7 +54,7 @@
 }
 .navbar-ul {
   /* 임시로 쓰느라 풀어둠 */
-  /* display: flex; */
+  display: flex;
   flex-direction: row;
 }
 
@@ -66,6 +66,9 @@
   font-size: 15px;
   font-weight: 700;
   color: var(--txt-color-600);
+}
+.nav-link:active {
+  background-color: transparent;
 }
 
 .nav-link-icon {

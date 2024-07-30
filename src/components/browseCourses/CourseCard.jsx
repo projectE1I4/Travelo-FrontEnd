@@ -23,7 +23,7 @@ const CourseCard = ({
   likeCount,
   createDate,
   areaCode,
-  image,
+  images = [],
 }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [currentLikes, setCurrentLikes] = useState(likeCount);
@@ -123,16 +123,32 @@ const CourseCard = ({
         likeCount,
         createDate,
         areaCode,
-        image,
+        images,
       }}
       style={{ textDecoration: 'none', color: 'inherit' }}
     >
       <div className={styles['image-container']}>
-        {image ? (
-          <img src={image} alt={title} className={styles.image} />
+        {images.length > 0 ? (
+          <div className={styles['image-grid']}>
+            {images.map((src, index) => (
+              <div key={index} className={styles['image-item']}>
+                {src ? (
+                  <img
+                    src={src}
+                    alt={`course-img-${index}`}
+                    className={styles.image}
+                  />
+                ) : (
+                  <div className={styles['image-placeholder']}>
+                    <FontAwesomeIcon icon={faImage} size="1x" color="#ccc" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         ) : (
           <div className={styles['image-placeholder']}>
-            <FontAwesomeIcon icon={faImage} size="6x" color="#ccc" />
+            <FontAwesomeIcon icon={faImage} size="3x" color="#ccc" />
           </div>
         )}
       </div>
@@ -141,7 +157,7 @@ const CourseCard = ({
           <div className={styles.details}>
             <h3>{title}</h3>
             <p>{description}</p>
-            <p>{courseSeq}</p>
+            {/* <p>{courseSeq}</p> */}
           </div>
         </div>
         <div className={styles.icons}>

@@ -1,6 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faPen,
+  faTrashCan,
+  faThumbsUp,
+  faTriangleExclamation,
+} from '@fortawesome/free-solid-svg-icons';
 import styles from '../../styles/components/browseCourses/ReviewItem.module.css';
+
+const obfuscateEmail = (email) => {
+  const [username] = email.split('@');
+  const obfuscatedUsername =
+    username.slice(0, 3) + '*'.repeat(username.length - 3);
+  return obfuscatedUsername;
+};
 
 const ReviewItem = ({
   review,
@@ -65,30 +80,43 @@ const ReviewItem = ({
 
   return (
     <div className={styles.review}>
-      <p>
-        <strong>{review.user?.username || 'Unknown User'}</strong>
-      </p>
+      <div className={styles['review-info']}>
+        <span>
+          <FontAwesomeIcon icon={faUser} />
+          {review.user?.username
+            ? obfuscateEmail(review.user.username)
+            : 'Unknown User'}
+        </span>
+        {user && review.user?.userSeq === user.userSeq && (
+          <div className={styles['button-md-wrap']}>
+            <button onClick={handleEditClick}>수정</button>
+            <button onClick={handleDeleteClick}>삭제</button>
+          </div>
+        )}
+      </div>
       {isEditing ? (
-        <div>
+        <div className={styles['review-md']}>
           <textarea
             value={editContent}
             onChange={(e) => setEditContent(e.target.value)}
           />
-          <button onClick={handleSaveClick}>저장</button>
-          <button onClick={handleCancelClick}>취소</button>
+          <div className={styles['button-md-wrap']}>
+            <button onClick={handleSaveClick}>수정내용 저장</button>
+            <button onClick={handleCancelClick}>취소</button>
+          </div>
         </div>
       ) : (
         <p>{review.content}</p>
       )}
-      {user && review.user?.userSeq === user.userSeq && (
-        <div className={styles['button-wrap']}>
-          <button onClick={handleEditClick}>수정</button>
-          <button onClick={handleDeleteClick}>삭제</button>
-        </div>
-      )}
       <div className={styles['button-wrap']}>
-        <button onClick={handleRecommendClick}>추천 {recommendCount}</button>
-        <button onClick={handleReportClick}>신고</button>
+        <button onClick={handleRecommendClick}>
+          <FontAwesomeIcon icon={faThumbsUp} /> 추천 {recommendCount}
+        </button>
+        {user && review.user?.userSeq !== user.userSeq && (
+          <button onClick={handleReportClick} className={styles['report']}>
+            <FontAwesomeIcon icon={faTriangleExclamation} /> 신고
+          </button>
+        )}
       </div>
     </div>
   );

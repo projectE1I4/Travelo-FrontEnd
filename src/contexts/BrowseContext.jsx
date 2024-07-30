@@ -30,8 +30,6 @@ const BrowseProvider = ({ children }) => {
 
   const fetchCourses = useCallback(
     async (updatedFilters = {}) => {
-      if (!accessToken) return;
-      setLoading(true);
       try {
         console.log('fetchCourses 호출됨');
         const response = await axiosInstance.get('/user/course/list', {
@@ -59,9 +57,6 @@ const BrowseProvider = ({ children }) => {
 
   const fetchCourseDetail = useCallback(
     async (courseSeq) => {
-      if (!accessToken) return;
-
-      setLoading(true);
       try {
         const response = await axiosInstance.get(
           `/user/course/detail/${courseSeq}`,
@@ -87,8 +82,6 @@ const BrowseProvider = ({ children }) => {
   );
 
   const fetchUserBookmarks = useCallback(async () => {
-    if (!accessToken) return;
-
     try {
       const response = await fetchCourseBookmarks(accessToken);
       setCourseBookmarks(response.bookmarks);
@@ -160,6 +153,7 @@ const BrowseProvider = ({ children }) => {
     <BrowseContext.Provider
       value={{
         courses,
+        accessToken,
         loading,
         error,
         dropdownTitle,

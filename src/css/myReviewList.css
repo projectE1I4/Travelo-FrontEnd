@@ -1,9 +1,10 @@
 .myReviews {
   grid-column: 4 / span 9;
+  padding-left: 16px;
 }
 
 .container .myReviews h1 {
-  margin-top: 38px;
+  margin-top: 32px;
   font-weight: 700;
   font-size: 32px;
   position: static;

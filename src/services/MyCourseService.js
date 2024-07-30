@@ -13,16 +13,9 @@ export const myCourses = async () => {
 // 코스 삭제
 export const deleteCourse = async (courseSeq) => {
   try {
-    const response = await axiosInstance.post(
-      'user/custom/delete',
-      { courseSeq },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: sessionStorage.getItem('accessToken'),
-        },
-      }
-    );
+    const response = await axiosInstance.post('user/custom/delete', {
+      courseSeq,
+    });
     return response.data; // 성공 시 메시지 반환
   } catch (error) {
     console.error('코스 삭제 실패:', error);

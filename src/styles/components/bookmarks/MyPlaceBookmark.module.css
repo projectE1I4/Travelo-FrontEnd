@@ -44,12 +44,10 @@
   justify-content: start;
 }
 
-.bookmarkItem .content h3 {
+.bookmarkItem .content .types {
+  color: var(--button-txt-color1);
   background: var(--point-color1);
-  color: var(--button-bg-color);
-  padding: 5px 10px;
-  display: inline-block;
   border-radius: 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
+  padding: 2px 10px;
+  display: inline-block;
 }

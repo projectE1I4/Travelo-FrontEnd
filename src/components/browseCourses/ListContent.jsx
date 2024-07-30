@@ -34,19 +34,24 @@ const ListContent = () => {
         </div>
       </div>
       <div className={styles['list-content-wrap']}>
-        {courses.map((course) => (
-          <CourseCard
-            key={course.courseSeq}
-            courseSeq={course.courseSeq}
-            title={course.title}
-            description={course.description}
-            viewCount={course.viewCount}
-            likeCount={course.likeCount}
-            createDate={course.createDate}
-            areaCode={course.areaCode}
-            image={course.courseList[0]?.place.imageFile1}
-          />
-        ))}
+        {courses.map((course) => {
+          const images = course.courseList
+            .slice(0, 4)
+            .map((item) => item.place.imageFile1 || '');
+          return (
+            <CourseCard
+              key={course.courseSeq}
+              courseSeq={course.courseSeq}
+              title={course.title}
+              description={course.description}
+              viewCount={course.viewCount}
+              likeCount={course.likeCount}
+              createDate={course.createDate}
+              areaCode={course.areaCode}
+              images={images}
+            />
+          );
+        })}
       </div>
       {courses.length > 0 && <Pagination totalPages={totalPages} />}
     </div>

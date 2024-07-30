@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faImage } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../styles/components/courseCustom/CourseCard.module.css';
 import { useCourse } from '../../contexts/CourseContext';
 
@@ -59,7 +59,7 @@ const CourseCard = ({ place }) => {
         }}
         className={styles.deleteButton}
       >
-        <FontAwesomeIcon icon={faTrash} />
+        <FontAwesomeIcon icon={faTrashCan} />
       </button>
     </div>
   );

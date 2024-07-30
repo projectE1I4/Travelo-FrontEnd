@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import LoginPage from './pages/users/LoginPage.jsx';
 import HomePage from './pages/HomePage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -46,6 +46,7 @@ import MyCourseBookmarkPage from './pages/bookmarks/MyCourseBookmarkPage.jsx';
 
 const App = () => {
   const { isAuthenticated, login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = (token) => {
     sessionStorage.setItem('accessToken', token);

@@ -29,7 +29,7 @@ const AdminMain = () => {
   return (
     <div className="container">
       <h1>관리자 페이지</h1>
-      <div className="inner">
+      <div className="admin-inner">
         <div className="card">
           <Link to="/admin/users">
             <div className="card-content">

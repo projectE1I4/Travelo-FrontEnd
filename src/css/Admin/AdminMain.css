@@ -3,7 +3,7 @@
   gap: 20px;
 }
 
-.inner {
+.admin-inner {
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
@@ -27,6 +27,7 @@
 
 .card-content {
   text-align: center;
+  text-decoration: none;
 }
 
 .card-content h3 {
@@ -34,7 +35,9 @@
   font-size: 25px;
   font-weight: 500;
 }
-
+.card-content a {
+  text-decoration: none;
+}
 .card-content p {
   font-size: 20px;
   color: var(--txt-color-600);

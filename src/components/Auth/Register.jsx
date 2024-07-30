@@ -42,8 +42,11 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
     }
   };
 
-  const handleChecked = () => {
+  const handleChecked = (username) => {
     setMailChecked(true);
+    if (onCheckUser(username)) {
+      setErrorMessage('이미 가입한 이메일입니다.');
+    }
     return 'disable = true';
   };
 
@@ -80,10 +83,6 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
       const response = await onRegister(username, password, passwordCheck, tel);
       setVerifyCodeError('');
       console.log('코드체크: success', verifyCodeCheckSuccess);
-
-      if (onCheckUser(username)) {
-        setErrorMessage('이미 가입한 이메일입니다.');
-      }
 
       if (response.status === 200 && response) {
         navigate('/users/login');
@@ -139,7 +138,7 @@ const Register = ({ onRegister, onMailCheck, onVerifyCodeCheck }) => {
               <button
                 onClick={(e) => {
                   handleMailCheck(username, e);
-                  handleChecked;
+                  handleChecked(username);
                 }}
                 className={`${mailChecked ? styles['btn-checked'] : styles['btn-small']}`}
                 disabled={'' || mailChecked}

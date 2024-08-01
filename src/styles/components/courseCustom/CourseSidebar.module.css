@@ -1,0 +1,150 @@
+.sidebar {
+  position: sticky;
+  top: 80px; /* header의 높이만큼 설정 */
+  padding-top: 32px;
+  padding-bottom: 32px;
+  grid-column: 1 / span 4;
+  background-color: #fff; /* 백그라운드 컬러 설정 */
+}
+
+.reset-button-region {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: var(--point-color1);
+  border: 1px solid var(--point-color1);
+  border-radius: 4px;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+.reset-button-region:hover {
+  color: var(--point-color1);
+  background-color: var(--point-color2);
+  border: 1px solid var(--txt-color-400);
+  text-decoration: underline;
+}
+
+.reset-button {
+  color: var(--txt-color-400);
+}
+
+.map-container {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin-top: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.heading h3 {
+  font-weight: 700;
+}
+
+.region-name {
+  color: var(--point-color1);
+  font-weight: 700;
+}
+
+.reset-button svg {
+  margin-right: 5px;
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  padding: 0.5rem;
+  font-size: 14px;
+  color: var(--txt-color-500);
+}
+
+.search-input::placeholder {
+  color: var(--txt-color-400);
+}
+
+.search-icon {
+  color: var(--point-color1);
+  margin: 0 10px;
+}
+
+.type-filter-container {
+  overflow: hidden;
+  position: relative;
+  margin: 20px 0;
+}
+
+.type-filter {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  scroll-snap-type: x mandatory;
+}
+
+.type-filter button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  border: 1px solid var(--txt-color-400);
+  color: var(--txt-color-500);
+  font-size: 14px;
+}
+
+.type-filter .selected {
+  background-color: var(--point-color1);
+  border: 1px solid var(--point-color1);
+  color: #fff;
+  font-weight: 500;
+}
+
+.mini-card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.load-more-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: var(--txt-color-500);
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}

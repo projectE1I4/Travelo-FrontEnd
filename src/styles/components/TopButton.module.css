@@ -1,0 +1,35 @@
+/* TopButton.module.css */
+:root {
+  --point-color1: #4d76b3;
+  --point-color2: #f6f6f6;
+  --accent-color: #64bdab;
+  --txt-color-400: #ccc;
+  --txt-color-500: #666;
+  --txt-color-600: #222;
+  --button-txt-color1: #fff;
+  --button-bg-color: #fff;
+  --icon-color-red: #ff4040;
+}
+
+.topButtonContainer {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+}
+
+.topButton {
+  padding: 15px 22px;
+  font-size: 14px;
+  background-color: var(--txt-color-400);
+  color: var(--button-txt-color1);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  transition: background-color 0.3s;
+}
+
+.topButton:hover {
+  background-color: var(--point-color1);
+}

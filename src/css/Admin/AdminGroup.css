@@ -1,0 +1,139 @@
+.adminUserList {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.adminUserList h1 {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.adminUserList .filtering {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.adminUserList .filter {
+  text-align: left;
+}
+
+.adminUserList .filter button {
+  margin-right: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+}
+
+.adminUserList .filter button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserList .userSelect {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬로 변경 */
+  align-items: center;
+}
+
+.adminUserList .userSelect p {
+  margin-left: 20px; /* 선택된 그룹 정보 왼쪽으로 이동 */
+  font-size: 16px;
+}
+
+.adminUserList .userSelect button {
+  font-size: 16px;
+}
+
+.adminUserList .userSelect button:hover {
+  color: red;
+}
+
+.adminUserList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.adminUserList th,
+.adminUserList td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.adminUserList th {
+  background-color: #f4f4f4;
+}
+
+.adminUserList td button {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  margin: 0;
+  margin-right: 0 !important;
+}
+
+.adminUserList tr.deleted-user {
+  background-color: var(--point-color2);
+}
+
+.adminUserList .deleted {
+  color: rgb(225, 37, 37);
+}
+
+.adminUserList .pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.adminUserList .pagination button {
+  margin-right: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+}
+
+.adminUserList .pagination button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox {
+  display: none;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox + label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-color: white;
+  position: relative; /* 위치 지정 추가 */
+  vertical-align: middle;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox + label::before {
+  content: ''; /* 선택된 표시 추가 */
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox:checked + label::before {
+  background-color: var(--accent-color); /* 선택된 색상 */
+  border: 1px solid var(--accent-color);
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox:checked + label::after {
+  display: none; /* 선택된 상태일 때 기존 겹치는 표시 제거 */
+}

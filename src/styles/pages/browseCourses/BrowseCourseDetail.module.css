@@ -1,0 +1,239 @@
+.course-sidebar {
+  grid-column: 1 / span 4;
+  padding-top: 32px;
+  /* border: 1px solid #000; */
+  /* background: #000; */
+}
+
+.course-sidebar h2 {
+  font-weight: 700;
+  border-bottom: 1px solid var(--txt-color-400);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.content-container {
+  padding-top: 32px;
+  padding-left: 16px;
+  grid-column: span 8;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  /* border: 1px solid #000; */
+}
+.image-container {
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.course-stats {
+  display: flex;
+  gap: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: var(--point-color2);
+}
+.course-stats span {
+  display: flex;
+  align-items: center;
+  color: var(--txt-color-500);
+  font-size: 14px;
+  font-weight: 700;
+}
+.course-stats span svg {
+  margin-right: 4px;
+}
+
+.course-stats span:nth-child(2) svg {
+  color: #ff4e4e;
+}
+
+.course-stats span:nth-child(3) svg {
+  color: var(--accent-color);
+}
+.course-detail {
+  grid-column: 2 / span 1;
+}
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.course-info span {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--txt-color-500);
+}
+.course-info span svg {
+  margin-right: 5px;
+  color: var(--point-color1);
+}
+
+.course-desc {
+  display: block;
+  /* padding: 20px; */
+  border-radius: 8px;
+  /* background-color: var(--point-color2); */
+  font-size: 16px;
+  color: var(--txt-color-500);
+}
+
+.course-detail h1 {
+  font-weight: 700;
+}
+
+.dropdown-wrap {
+  display: flex;
+  justify-content: flex-end;
+  grid-column: span 3;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.dropdown-btn {
+  background-color: #fff;
+  color: var(--txt-color-600);
+  padding: 8px 10px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100px;
+  transition: all 0.5s;
+}
+
+.dropdown-content {
+  font-size: 14px;
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.dropdown-content a {
+  color: var(--txt-color-600);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  transition: all 0.5s;
+}
+
+.dropdown-content a:hover,
+a:active {
+  background-color: var(--point-color2);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropdown-btn {
+  color: var(--point-color1);
+}
+
+.dropdown-btn svg {
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown:hover .dropdown-btn svg {
+  transform: rotate(180deg);
+}
+
+.reviews-section {
+  margin-top: 40px;
+}
+
+.reviews-section h2 {
+  padding: 20px;
+  background: var(--point-color1);
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  transition: all 0.3s;
+}
+.reviews-section h2:hover {
+  background: #355483;
+}
+
+.reviews-list {
+  margin-top: 20px;
+}
+
+.review-form textarea {
+  border: 1px solid var(--txt-color-400);
+  border-radius: 4px;
+  height: 100px;
+  color: var(--txt-color-500);
+}
+
+.review-form .btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.btn-wrap button {
+  padding: 5px 20px;
+  color: #fff;
+  background-color: var(--txt-color-600);
+  border: 1px solid #fff;
+  border-radius: 4px;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.reviews-list .rw > div {
+  border-top: 1px solid var(--txt-color-400);
+  border-bottom: 1px solid var(--txt-color-400);
+  padding: 20px 10px;
+}
+
+.reviews-list .rw > div:not(:first-child) {
+  border-top: none;
+}

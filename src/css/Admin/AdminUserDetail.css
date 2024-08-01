@@ -1,0 +1,151 @@
+.adminUserDetail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.adminUserDetail .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.adminUserDetail .dropStatus {
+  color: rgb(183, 9, 9);
+}
+
+.adminUserDetail h1 {
+  display: inline-block;
+  margin: 0;
+  font-weight: 700;
+}
+
+.adminUserDetail .dropUser {
+  color: rgb(183, 9, 9);
+}
+
+.adminUserDetail .deleteUserBtn {
+  display: block;
+  height: 35px;
+  padding: 5px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--txt-color-500);
+  font-weight: 600;
+  border-radius: 10px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.adminUserDetail .deleteUserBtn:hover {
+  color: rgb(193, 27, 27);
+  border: 1px solid rgb(193, 27, 27);
+  background-color: none;
+}
+
+.adminUserDetail p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.adminUserDetail .sectionButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.adminUserDetail .sectionButtons button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  background-color: white;
+  color: var(--point-color1);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminUserDetail .sectionButtons button:hover,
+.adminUserDetail .sectionButtons button.active {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserDetail .sort {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.adminUserDetail h2 {
+  margin-bottom: 20px;
+}
+
+.adminUserDetail .sort button {
+  margin-right: 15px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid var(--point-color1);
+  background-color: white;
+  color: var(--point-color1);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.adminUserDetail .sort button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserDetail li {
+  border-bottom: 1px solid var(--txt-color-400);
+  padding: 15px 20px;
+  align-items: center;
+  background-color: var(--point-color2);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: block; /* 요소들이 쌓이도록 수정 */
+}
+
+.adminUserDetail li h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.adminUserDetail .reviewItem h3 {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: normal; /* 제목이 여러 줄로 표시될 수 있도록 수정 */
+}
+
+.adminUserDetail .reviewItem .reviewContent {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden; /* 넘치는 내용 숨김 */
+  text-overflow: ellipsis; /* 말줄임 표시 */
+  max-width: 100%; /* 최대 너비 설정 */
+}
+
+.adminUserDetail .reviewItem .reviewDate {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.adminUserDetail li p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.adminUserDetail h2 {
+  margin-top: 30px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  font-weight: 600;
+}

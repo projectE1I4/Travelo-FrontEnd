@@ -1,0 +1,219 @@
+.adminReviewList {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.adminReviewList h1 {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.adminReviewList .filtering {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.adminReviewList .filter {
+  display: flex;
+  gap: 10px;
+}
+
+.adminReviewList .filter button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+  background-color: white;
+}
+
+.adminReviewList .filter button:hover,
+.adminReviewList .filter button.active {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminReviewList .sort,
+.adminReviewList .blindSort {
+  position: relative;
+  display: inline-block;
+}
+
+.adminReviewList .sort .dropDownBtn,
+.adminReviewList .blindSort .dropDownBtn {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminReviewList .sort .dropDownBtn .text,
+.adminReviewList .blindSort .dropDownBtn .text {
+  margin-right: 10px;
+}
+
+.adminReviewList .sort .arrow,
+.adminReviewList .blindSort .arrow {
+  margin-left: 10px;
+}
+
+.adminReviewList .sort .dropdownContent,
+.adminReviewList .blindSort .dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.adminReviewList .sort .dropdownContent a,
+.adminReviewList .blindSort .dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.adminReviewList .sort .dropdownContent a:hover,
+.adminReviewList .blindSort .dropdownContent a:hover {
+  background-color: #ddd;
+}
+
+.adminReviewList .sort .dropdownContent.show,
+.adminReviewList .blindSort .dropdownContent.show {
+  display: block;
+  border-radius: 10px;
+  background-color: var(--point-color2);
+}
+
+.adminReviewList p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.adminReviewList .userSelect {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.adminReviewList .userSelect p {
+  margin-left: 20px;
+  font-size: 16px;
+}
+
+.adminReviewList .userSelect button {
+  font-size: 16px;
+}
+
+.adminReviewList .userSelect button:hover {
+  color: red;
+}
+
+.adminReviewList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.adminReviewList th,
+.adminReviewList td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.adminReviewList th {
+  background-color: #f4f4f4;
+}
+
+.adminReviewList td button {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  margin: 0;
+  margin-right: 0 !important;
+}
+
+.adminReviewList tr.deleted-user {
+  background-color: var(--point-color2);
+}
+
+.adminReviewList .deleted {
+  color: rgb(225, 37, 37);
+}
+
+.adminReviewList .pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.adminReviewList .pagination button {
+  margin-right: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+}
+
+.adminReviewList .pagination button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminReviewList input[type='checkbox'].styled-checkbox {
+  display: none;
+}
+
+.adminReviewList input[type='checkbox'].styled-checkbox + label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-color: white;
+  position: relative;
+  vertical-align: middle;
+}
+
+.adminReviewList input[type='checkbox'].styled-checkbox + label::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+}
+
+.adminReviewList
+  input[type='checkbox'].styled-checkbox:checked
+  + label::before {
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.adminReviewList input[type='checkbox'].styled-checkbox:checked + label::after {
+  display: none;
+}
+
+/* 말줄임 처리 및 줄바꿈 처리 추가 */
+.adminReviewList .reviewContent {
+  max-width: 200px; /* 적절한 너비 설정 */
+  white-space: nowrap; /* 줄바꿈 금지 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 말줄임 표시 */
+  vertical-align: middle; /* 세로 정렬 중간으로 설정 */
+}

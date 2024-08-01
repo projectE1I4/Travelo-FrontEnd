@@ -1,0 +1,199 @@
+.adminUserList {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.adminUserList h1 {
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.adminUserList .filtering {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.adminUserList .filter {
+  text-align: left;
+}
+
+.adminUserList .filter button {
+  margin-right: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+  background-color: white; /* 기본 배경색 추가 */
+}
+
+.adminUserList .filter button:hover,
+.adminUserList .filter button.active {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserList .sort {
+  position: relative;
+  display: inline-block;
+}
+
+.adminUserList .sort .dropDownBtn {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.adminUserList .sort .dropDownBtn .text {
+  margin-right: 10px; /* 텍스트와 화살표 사이의 간격 */
+}
+
+.adminUserList .sort .arrow {
+  margin-left: 10px;
+}
+
+.adminUserList .sort .dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.adminUserList .sort .dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.adminUserList .sort .dropdownContent a:hover {
+  background-color: #ddd;
+}
+
+.adminUserList .sort .dropdownContent.show {
+  display: block;
+  border-radius: 10px;
+  background-color: var(--point-color2);
+}
+
+.adminUserList p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.adminUserList .userSelect {
+  display: flex;
+  justify-content: flex-start; /* 왼쪽 정렬로 변경 */
+  align-items: center;
+}
+
+.adminUserList .userSelect p {
+  margin-left: 20px; /* 선택된 정보 왼쪽으로 이동 */
+  font-size: 16px;
+}
+
+.adminUserList .userSelect button {
+  font-size: 16px;
+}
+
+.adminUserList .userSelect button:hover {
+  color: red;
+}
+
+.adminUserList table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.adminUserList th,
+.adminUserList td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.adminUserList th {
+  background-color: #f4f4f4;
+}
+
+.adminUserList td button {
+  width: 50px;
+  height: 30px;
+  border-radius: 10px;
+  margin: 0;
+  margin-right: 0 !important;
+}
+
+.adminUserList tr.deleted-user {
+  background-color: var(--point-color2);
+}
+
+.adminUserList .deleted {
+  color: rgb(225, 37, 37);
+}
+
+.adminUserList .pagination {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.adminUserList .pagination button {
+  margin-right: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid var(--point-color1);
+  color: var(--point-color1);
+  border-radius: 10px;
+}
+
+.adminUserList .pagination button:hover {
+  background-color: var(--point-color1);
+  color: white;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox {
+  display: none;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox + label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-color: white;
+  position: relative;
+  vertical-align: middle;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox + label::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--txt-color-400);
+  border-radius: 5px;
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox:checked + label::before {
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+
+.adminUserList input[type='checkbox'].styled-checkbox:checked + label::after {
+  display: none;
+}
